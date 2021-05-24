@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>All Students</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<div th:replace="../views/header :: header"></div>
+
+<div class="container">
+    <h2 class="text-danger">All Students:</h2>
+    <table class="table">
+        <table class="table">
+            <thead>
+            <th>Surname</th>
+            <th>Name</th>
+            <th>Patronymic</th>
+            <th>Faculty</th>
+            <th>Username</th>
+            </thead>
+            <tbody>
+            <tr th:each="student:${students}">
+                <td th:text="${student.surname}">
+                </td>
+                <td th:text="${student.name}">
+                </td>
+                <td th:text="${student.patronymic}">
+                </td>
+                <td th:text="${student.faculty.name}">
+                </td>
+                <td th:text="${student.username}">
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </table>
+</div>
+</body>
+</html>

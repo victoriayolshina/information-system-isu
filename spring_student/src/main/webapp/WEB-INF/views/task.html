@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>All Students</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    <script th:src="@{/resources/globalbtn.js}"></script>
+    <script th:src="@{/resources/task.js}"></script>
+    <script th:inline="javascript">
+        /*<![CDATA[*/
+        var root = /*[[@{/}]]*/ 'default';
+        console.log(root);
+        /*]]>*/
+    </script>
+</head>
+<body>
+
+<div th:replace="../views/header :: header"></div>
+
+<div class="container">
+    <button id="add-task-btn" type="button"
+            class="btn-default" data-toggle="modal">
+            <span class="glyphicon glyphicon-plus"></span> add
+    </button>
+    <h2 class="text-danger"></h2>
+    <table class="table">
+        <table class="table">
+            <thead>
+            <th>Date</th>
+            <th>Task</th>
+            <th>Description</th>
+            </thead>
+            <tbody id="taskstbody">
+            <tr th:each="tasks:${task}" th:id="'taskRow' + ${tasks.getId()}">
+                <td th:text="${tasks.getData()}">
+                </td>
+                <td th:text="${tasks.getTask()} " maxlength="225">
+                </td>
+                <td th:text="${tasks.getDescription()}" maxlength="225">
+                </td>
+                <td>
+                    <button type="button" id="edit-button" data-toggle="modal" class="btn-default"
+                            th:value="${tasks.getId()}" th:onclick="'editTask(\'' + ${tasks.getId()} + '\');'">
+                    <span class="glyphicon glyphicon-pencil"></span> edit
+                    </button>
+                    <button type="button" id="delete-button" data-toggle="modal" class="btn-default"
+                            th:value="${tasks.getId()}" th:onclick="'deleteTask(\'' + ${tasks.getId()} + '\');'">
+                        <span class="glyphicon glyphicon-trash"></span> delete
+                    </button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </table>
+</div>
+</body>
+</html>

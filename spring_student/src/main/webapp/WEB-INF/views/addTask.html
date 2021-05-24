@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>LibraryMain</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/resources/header.css}">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    <script th:src="@{/resources/global.js}"></script>
+    <script th:inline="javascript">
+        /*<![CDATA[*/
+        var root = /*[[@{/}]]*/ 'default';
+        console.log(root);
+        /*]]>*/
+    </script>
+</head>
+<body>
+<div th:replace="../views/header :: header"></div>
+<!-- Таблица, в которой необходимо заполнить строки для добавления записи -->
+<div class="container">
+    <div class="row">
+        <table id="book-table" class="table">
+            <form id="add-task-form" th:action="@{/tasks/{practicId}/addTask/save(practicId=${practiceId})}" method="POST">
+                <thead>
+                <tr>
+                    <label for="Data">Date</label>
+                    <input id="Data" name="Data"  class="form-control" type="date" />
+                </tr>
+                <tr>
+                    <label for="Task">Task</label>
+                    <input id="Task" name="Task"  class="form-control" type="text"/>
+                </tr>
+                <tr>
+                    <label for="Description">Description</label>
+                    <input id="Description" name="Description"  class="form-control"  type="text"/>
+                </tr>
+            <p>
+                <button type="submit"  id="btn-add" class="btn btn-primary">Save</button>
+            </p>
+                </thead>
+            </form>
+        </table>
+    </div>
+</div>
+
+</body>
+</html>
