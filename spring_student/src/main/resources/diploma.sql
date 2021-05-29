@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1
--- Время создания: Май 20 2021 г., 04:53
+-- Время создания: Май 29 2021 г., 19:35
 -- Версия сервера: 10.4.18-MariaDB
--- Версия PHP: 8.0.3
+-- Версия PHP: 7.3.28
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -41,7 +41,8 @@ CREATE TABLE `faculty` (
 
 INSERT INTO `faculty` (`id`, `name`, `direction`, `year`, `code`) VALUES
 (1, 'Прикладная Информатика', 'ИИ', 2017, '09.03.03'),
-(2, 'Фундаментальная Информатика', 'ИИ', 2018, '03.03.03');
+(2, 'Фундаментальная Информатика', 'ИИ', 2018, '03.03.03'),
+(3, 'КРАСАВЧИК', 'Группа просмотра КРАСАВЧИКА', 2021, '2009-2014');
 
 -- --------------------------------------------------------
 
@@ -84,8 +85,8 @@ CREATE TABLE `student` (
 --
 
 INSERT INTO `student` (`id`, `surname`, `name`, `patronymic`, `faculty`, `username`) VALUES
-(1, 'Ёлшина', 'Виктория', 'Евгеньевна', 1, 'yolshina2017'),
-(2, 'Кислянников ', 'Марк', 'Александрович', 2, 'kislyannikov2018');
+(1, 'Ёлшина', 'Виктория', 'Евгеньевна', 3, 'yolshina2017'),
+(2, 'Кислянников ', 'Марк', 'Александрович', 3, 'kislyannikov2018');
 
 -- --------------------------------------------------------
 
@@ -108,8 +109,6 @@ CREATE TABLE `tasks` (
 INSERT INTO `tasks` (`id`, `data`, `task`, `description`, `practice`) VALUES
 (1, '2021-02-24', 'Заполнение дневника практики.', 'По инструкции ручками заполнили дневник.', 1),
 (2, '2021-05-15', 'ghhh', 'aaaa', 1),
-(3, '2021-05-07', 'cfsadfvs', 'sd', 1),
-(4, '2021-05-05', 'ghhh', 'bvrhjk rbknkfjdb fdbdjkfnbkjfdnb dfbdjfnbkjfb b erber brbgfbnjf bfkbjnf bjbnbnb fbnsk;b bsfbnjkfnbkjr fvdfbnj bvrhjk rbknkfjdb fdbdjkfnbkjfdnb dfbdjfnbkjfb b erber brbgfbnjf bfkbjnf bjbnbnb fbnsk;b vksdn dsjvsd fsfsfs fsdssdd', 1),
 (5, '2021-05-13', '', 'aaaa', 1),
 (6, '2021-04-23', 'ghhh', 'sd', 1),
 (7, '2021-05-08', 'cfsadfvs', 'aaaa', 1),
@@ -151,7 +150,7 @@ ALTER TABLE `tasks`
 -- AUTO_INCREMENT для таблицы `faculty`
 --
 ALTER TABLE `faculty`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT для таблицы `practice`
