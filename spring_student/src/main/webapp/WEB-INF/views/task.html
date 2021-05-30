@@ -31,15 +31,12 @@
             <thead>
             <th>Date</th>
             <th>Task</th>
-            <th>Description</th>
             </thead>
             <tbody id="taskstbody">
             <tr th:each="tasks:${task}" th:id="'taskRow' + ${tasks.getId()}">
                 <td th:text="${tasks.getData()}">
                 </td>
                 <td th:text="${tasks.getTask()} " maxlength="225">
-                </td>
-                <td th:text="${tasks.getDescription()}" maxlength="225">
                 </td>
                 <td>
                     <button type="button" id="edit-button" data-toggle="modal" class="btn-default"

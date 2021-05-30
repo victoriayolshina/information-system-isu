@@ -42,7 +42,7 @@
             <label for="faculty">Faculty</label>
             <select id="faculty" name="faculty" class="form-control">
                 <option th:field="*{faculty}" th:each="elements: ${faculty}"
-                        th:text="${elements.getCode()+ ' ' + elements.getName()}"
+                        th:text="${elements.getName()}"
                         th:value="${elements.getId()}"></option>
             </select>
         </div>

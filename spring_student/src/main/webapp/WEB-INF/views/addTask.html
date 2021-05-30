@@ -10,6 +10,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
     <script th:src="@{/resources/global.js}"></script>
+    <script th:src="@{/resources/style.css}"></script>
     <script th:inline="javascript">
         /*<![CDATA[*/
         var root = /*[[@{/}]]*/ 'default';
@@ -35,7 +36,8 @@
                 </tr>
                 <tr>
                     <label for="Description">Description</label>
-                    <input id="Description" name="Description"  class="form-control"  type="text"/>
+                    <p><textarea id="Description" rows="10" cols="45" name="Description"></textarea></p>
+                    <!--<input id="Description" name="Description"  class="form-control"  type="text"/>-->
                 </tr>
             <p>
                 <button type="submit"  id="btn-add" class="btn btn-primary">Save</button>

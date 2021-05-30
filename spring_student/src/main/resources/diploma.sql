@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1
--- Время создания: Май 29 2021 г., 19:35
+-- Время создания: Май 30 2021 г., 14:51
 -- Версия сервера: 10.4.18-MariaDB
--- Версия PHP: 7.3.28
+-- Версия PHP: 8.0.3
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -24,25 +24,45 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Структура таблицы `direction`
+--
+
+CREATE TABLE `direction` (
+  `id` int(11) NOT NULL,
+  `name` varchar(225) NOT NULL,
+  `code` varchar(225) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Дамп данных таблицы `direction`
+--
+
+INSERT INTO `direction` (`id`, `name`, `code`) VALUES
+(1, 'Прикладная Информатика', '09.03.03'),
+(2, 'Фундаментальная Информатика', '03.03.03'),
+(3, 'КРАСАВЧИК', '03.09.02');
+
+-- --------------------------------------------------------
+
+--
 -- Структура таблицы `faculty`
 --
 
 CREATE TABLE `faculty` (
   `id` int(11) NOT NULL,
   `name` varchar(225) NOT NULL,
-  `direction` varchar(225) NOT NULL,
-  `year` int(4) NOT NULL,
-  `code` varchar(225) NOT NULL
+  `direction` int(225) NOT NULL,
+  `year` int(4) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `faculty`
 --
 
-INSERT INTO `faculty` (`id`, `name`, `direction`, `year`, `code`) VALUES
-(1, 'Прикладная Информатика', 'ИИ', 2017, '09.03.03'),
-(2, 'Фундаментальная Информатика', 'ИИ', 2018, '03.03.03'),
-(3, 'КРАСАВЧИК', 'Группа просмотра КРАСАВЧИКА', 2021, '2009-2014');
+INSERT INTO `faculty` (`id`, `name`, `direction`, `year`) VALUES
+(1, '2461', 1, 2017),
+(2, '2471', 2, 2018),
+(3, 'КРАСАВЧИКGROUP', 3, 2021);
 
 -- --------------------------------------------------------
 
@@ -85,7 +105,7 @@ CREATE TABLE `student` (
 --
 
 INSERT INTO `student` (`id`, `surname`, `name`, `patronymic`, `faculty`, `username`) VALUES
-(1, 'Ёлшина', 'Виктория', 'Евгеньевна', 3, 'yolshina2017'),
+(1, 'Ёлшина', 'Виктория', 'Евгеньевна', 1, 'yolshina2017'),
 (2, 'Кислянников ', 'Марк', 'Александрович', 3, 'kislyannikov2018');
 
 -- --------------------------------------------------------
@@ -108,15 +128,17 @@ CREATE TABLE `tasks` (
 
 INSERT INTO `tasks` (`id`, `data`, `task`, `description`, `practice`) VALUES
 (1, '2021-02-24', 'Заполнение дневника практики.', 'По инструкции ручками заполнили дневник.', 1),
-(2, '2021-05-15', 'ghhh', 'aaaa', 1),
-(5, '2021-05-13', '', 'aaaa', 1),
-(6, '2021-04-23', 'ghhh', 'sd', 1),
-(7, '2021-05-08', 'cfsadfvs', 'aaaa', 1),
-(8, '2021-05-09', 'Изучение Spring', 'Изучение Spring', 1);
+(9, '2021-05-08', 'Изучение Spring', '', 1);
 
 --
 -- Индексы сохранённых таблиц
 --
+
+--
+-- Индексы таблицы `direction`
+--
+ALTER TABLE `direction`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Индексы таблицы `faculty`
@@ -147,6 +169,12 @@ ALTER TABLE `tasks`
 --
 
 --
+-- AUTO_INCREMENT для таблицы `direction`
+--
+ALTER TABLE `direction`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
 -- AUTO_INCREMENT для таблицы `faculty`
 --
 ALTER TABLE `faculty`
@@ -168,7 +196,7 @@ ALTER TABLE `student`
 -- AUTO_INCREMENT для таблицы `tasks`
 --
 ALTER TABLE `tasks`
-  MODIFY `id` bigint(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` bigint(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
