@@ -23,11 +23,14 @@ function deleteTask(taskId){
 }
 
 function setMinDateInDateInput(){
+
     var dateStart = document.getElementById("Datastart")
     var dateEnd = document.getElementById("Dataend")
-    dateEnd.min = dateStart.value;
-    if(new Date(dateStart.value)> new Date(dateEnd.value)) {
-        dateEnd.value = dateStart.value
+    if(dateStart.value!=null) {
+        dateEnd.min = dateStart.value;
+        if (new Date(dateStart.value) > new Date(dateEnd.value)) {
+            dateEnd.value = dateStart.value
+        }
     }
 }
 
