@@ -10,6 +10,8 @@ import ru.isu.repository.PracticeRepository;
 import ru.isu.repository.StudentRepository;
 import ru.isu.repository.TaskRepository;
 
+import java.sql.Date;
+
 @Controller
 @RequestMapping("/tasks")
 public class TaskController {
@@ -37,10 +39,8 @@ public class TaskController {
     //Переход на добавление записи
     @RequestMapping(value = "/{practiceId}/addTask")
     public String getTaskAdd(Model model, @PathVariable("practiceId") int practiceId){
-        //model.addAttribute("data", task.getData());
-        //model.addAttribute("task", task.getTask());
-        //model.addAttribute("description", task.getDescription());
-        model.addAttribute("practiceId", practiceId);
+        Practice practice = practiceRepository.findPracticeById(practiceId);
+        model.addAttribute("practice", practice);
         return "addTask";
     }
 

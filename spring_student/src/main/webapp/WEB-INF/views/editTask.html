@@ -9,6 +9,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
     <script th:src="@{/resources/global.js}"></script>
+    <script th:src="@{/resources/task.js}"></script>
     <script th:src="@{/resources/style.css}"></script>
     <script th:inline="javascript">
         /*<![CDATA[*/
@@ -27,11 +28,20 @@
                 <thead>
                 <tr>
                     <label for="Datastart">Дата начала</label>
-                    <input id="Datastart" name="Datastart"  class="form-control" type="date" th:value="${task.getDatastart()}" />
+                    <input id="Datastart" name="Datastart"  class="form-control" type="date"
+                           th:min="${task.getPractice().getStarttime()}"
+                           th:max="${task.getPractice().getEndtime()}"
+                           th:value="${task.getDatastart()}"
+                           th:onchange="'setMinDateInDateInput()'"
+                    />
                 </tr>
                 <tr>
                     <label for="Dataend">Дата конца</label>
-                    <input id="Dataend" name="Dataend"  class="form-control" type="date" th:value="${task.getDataend()}" />
+                    <input id="Dataend" name="Dataend"  class="form-control" type="date"
+                           th:min="${task.getPractice().getStarttime()}"
+                           th:max="${task.getPractice().getEndtime()}"
+                           th:value="${task.getDataend()}"
+                    />
                 </tr>
                 <tr>
                     <label for="Task">Задание</label>
