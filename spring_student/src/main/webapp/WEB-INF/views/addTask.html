@@ -26,8 +26,12 @@
             <form id="add-task-form" th:action="@{/tasks/{practicId}/addTask/save(practicId=${practiceId})}" method="POST">
                 <thead>
                 <tr>
-                    <label for="Data">Дата</label>
-                    <input id="Data" name="Data"  class="form-control" type="date" />
+                    <label for="Datastart">Дата начала</label>
+                    <input id="Datastart" name="Datastart"  class="form-control" type="date" />
+                </tr>
+                <tr>
+                    <label for="Dataend">Дата конца</label>
+                    <input id="Dataend" name="Dataend"  class="form-control" type="date" />
                 </tr>
                 <tr>
                     <label for="Task">Задание</label>

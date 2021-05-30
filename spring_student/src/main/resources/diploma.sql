@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1
--- Время создания: Май 30 2021 г., 14:51
+-- Время создания: Май 30 2021 г., 16:53
 -- Версия сервера: 10.4.18-MariaDB
 -- Версия PHP: 8.0.3
 
@@ -106,7 +106,9 @@ CREATE TABLE `student` (
 
 INSERT INTO `student` (`id`, `surname`, `name`, `patronymic`, `faculty`, `username`) VALUES
 (1, 'Ёлшина', 'Виктория', 'Евгеньевна', 1, 'yolshina2017'),
-(2, 'Кислянников ', 'Марк', 'Александрович', 3, 'kislyannikov2018');
+(2, 'Кислянников ', 'Марк', 'Александрович', 3, 'kislyannikov2018'),
+(9, 'Иванов', 'Иван', 'Иванович', 3, 'ivanivanovich2014'),
+(10, 'Ёлшина', 'Виктория', 'Евгеньевна', 1, 'victoria__yolshina');
 
 -- --------------------------------------------------------
 
@@ -116,7 +118,8 @@ INSERT INTO `student` (`id`, `surname`, `name`, `patronymic`, `faculty`, `userna
 
 CREATE TABLE `tasks` (
   `id` bigint(11) NOT NULL,
-  `data` date NOT NULL,
+  `datastart` date NOT NULL,
+  `dataend` date NOT NULL,
   `task` varchar(225) NOT NULL,
   `description` varchar(225) NOT NULL,
   `practice` int(11) NOT NULL
@@ -126,9 +129,9 @@ CREATE TABLE `tasks` (
 -- Дамп данных таблицы `tasks`
 --
 
-INSERT INTO `tasks` (`id`, `data`, `task`, `description`, `practice`) VALUES
-(1, '2021-02-24', 'Заполнение дневника практики.', 'По инструкции ручками заполнили дневник.', 1),
-(9, '2021-05-08', 'Изучение Spring', '', 1);
+INSERT INTO `tasks` (`id`, `datastart`, `dataend`, `task`, `description`, `practice`) VALUES
+(1, '2021-02-24', '2021-02-28', 'Заполнение дневника практики.', 'По инструкции ручками заполнили дневник.', 1),
+(10, '2021-05-08', '2021-05-30', 'Изучение Spring.', '', 1);
 
 --
 -- Индексы сохранённых таблиц
@@ -190,13 +193,13 @@ ALTER TABLE `practice`
 -- AUTO_INCREMENT для таблицы `student`
 --
 ALTER TABLE `student`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT для таблицы `tasks`
 --
 ALTER TABLE `tasks`
-  MODIFY `id` bigint(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` bigint(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -16,7 +16,8 @@ public class Task {
     @JoinColumn(name = "practice")
     private Practice practice;
 
-    private Date data;
+    private Date datastart;
+    private Date dataend;
     private String task;
     private String description;
 }

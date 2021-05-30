@@ -26,8 +26,12 @@
             <form id="edit-task-form" action="editTask" th:action="@{/tasks/{practicId}/editTask/{taskId}/save(practicId = ${practiceId}, taskId = ${taskId})}" method="POST">
                 <thead>
                 <tr>
-                    <label for="Data">Дата</label>
-                    <input id="Data" name="Data"  class="form-control" type="date" th:value="${task.getData()}"/>
+                    <label for="Datastart">Дата начала</label>
+                    <input id="Datastart" name="Datastart"  class="form-control" type="date" th:value="${task.getDatastart()}" />
+                </tr>
+                <tr>
+                    <label for="Dataend">Дата конца</label>
+                    <input id="Dataend" name="Dataend"  class="form-control" type="date" th:value="${task.getDataend()}" />
                 </tr>
                 <tr>
                     <label for="Task">Задание</label>
@@ -35,7 +39,7 @@
                 </tr>
                 <tr>
                     <label for="Description">Описание</label>
-                    <input id="Description" name="Description"  class="form-control"  type="text" th:value="${task.getDescription()}"/>
+                    <p><textarea id="Description" rows="10" cols="45" name="Description" th:text="${task.getDescription()}"></textarea></p>
                 </tr>
                 <p>
                     <button type="submit"  id="btn-edit" class="btn btn-primary">Сохранить</button>

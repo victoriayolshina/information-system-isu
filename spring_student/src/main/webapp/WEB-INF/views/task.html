@@ -30,12 +30,15 @@
     <table class="table">
         <table class="table">
             <thead>
-            <th>Дата</th>
+            <th>Дата начала</th>
+            <th>Дата конца</th>
             <th>Задание</th>
             </thead>
             <tbody id="taskstbody">
             <tr th:each="tasks:${task}" th:id="'taskRow' + ${tasks.getId()}">
-                <td th:text="${tasks.getData()}">
+                <td th:text="${tasks.getDatastart()}">
+                </td>
+                <td th:text="${tasks.getDataend()}">
                 </td>
                 <td th:text="${tasks.getTask()} " maxlength="225">
                 </td>
