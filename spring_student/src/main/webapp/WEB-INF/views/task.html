@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>All Students</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=cp1251">
+    <title>Задания</title>
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
@@ -21,16 +21,17 @@
 <div th:replace="../views/header :: header"></div>
 
 <div class="container">
+    <h2 class="text-danger">Все задания на практику:</h2>
     <button id="add-task-btn" type="button"
             class="btn-default" data-toggle="modal">
-            <span class="glyphicon glyphicon-plus"></span> add
+            <span class="glyphicon glyphicon-plus"></span> Добавить
     </button>
     <h2 class="text-danger"></h2>
     <table class="table">
         <table class="table">
             <thead>
-            <th>Date</th>
-            <th>Task</th>
+            <th>Дата</th>
+            <th>Задание</th>
             </thead>
             <tbody id="taskstbody">
             <tr th:each="tasks:${task}" th:id="'taskRow' + ${tasks.getId()}">
@@ -41,11 +42,11 @@
                 <td>
                     <button type="button" id="edit-button" data-toggle="modal" class="btn-default"
                             th:value="${tasks.getId()}" th:onclick="'editTask(\'' + ${tasks.getId()} + '\');'">
-                    <span class="glyphicon glyphicon-pencil"></span> edit
+                    <span class="glyphicon glyphicon-pencil"></span> Редактировать
                     </button>
                     <button type="button" id="delete-button" data-toggle="modal" class="btn-default"
                             th:value="${tasks.getId()}" th:onclick="'deleteTask(\'' + ${tasks.getId()} + '\');'">
-                        <span class="glyphicon glyphicon-trash"></span> delete
+                        <span class="glyphicon glyphicon-trash"></span> Удалить
                     </button>
                 </td>
             </tr>

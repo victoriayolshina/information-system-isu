@@ -1,29 +1,29 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xml:lang="ru" xmlns:th="http://www.thymeleaf.org" lang="ru">
 <head>
-
+    <meta http-equiv="Content-Type" content="text/html; charset=cp1251">
 </head>
 
 <body>
 <nav class="navbar navbar-default" th:fragment="header">
     <div class="container-fluid">
         <div class="navbar-header">
-            <a class="navbar-brand" href="#">Student</a>
+            <a class="navbar-brand" href="#">IMIT system</a>
         </div>
         <ul class="nav navbar-nav">
-            <li><a th:href="@{/}">Home</a></li>
+            <li><a th:href="@{/}">Домашняя страница</a></li>
             <li class="dropdown">
                 <a href="#" class="dropdown-toggle"
                    data-toggle="dropdown" role="button"
-                   aria-expanded="false">Students <span class="caret"></span></a>
+                   aria-expanded="false">Студенты <span class="caret"></span></a>
                 <ul class="dropdown-menu" role="menu">
-                    <li><a th:href="@{/students/add}">Add</a></li>
-                    <li><a th:href="@{/students/students}">Find All</a></li>
+                    <li><a th:href="@{/students/add}">Добавить студента</a></li>
+                    <li><a th:href="@{/students/students}">Все студенты</a></li>
                     <!--<li><a th:href="@{/practice/1}">Practice</a></li>
                     <li><a th:href="@{/tasks/1}">Task</a></li>-->
                 </ul>
-                <li><a  th:href="@{/practice/1}">Practice</a></li>
-                <li><a  th:href="@{/tasks/1}">Tasks</a></li>
+                <li><a  th:href="@{/practice/1}">Практика</a></li>
+                <li><a  th:href="@{/tasks/1}">Задания</a></li>
             </li>
         </ul>
     </div>

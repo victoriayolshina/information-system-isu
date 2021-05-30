@@ -1,10 +1,9 @@
 <!DOCTYPE html>
-<html lang="en"
+<html lang="ru"
       xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
-    <meta charset="UTF-8">
-    <title>LibraryMain</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=cp1251">
     <link rel="stylesheet" type="text/css" th:href="@{/resources/header.css}">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
@@ -20,26 +19,26 @@
 </head>
 <body>
 <div th:replace="../views/header :: header"></div>
-<!-- РўР°Р±Р»РёС†Р°, РІ РєРѕС‚РѕСЂРѕР№ РЅРµРѕР±С…РѕРґРёРјРѕ Р·Р°РїРѕР»РЅРёС‚СЊ СЃС‚СЂРѕРєРё РґР»СЏ РґРѕР±Р°РІР»РµРЅРёСЏ Р·Р°РїРёСЃРё -->
+<!-- Таблица, в которой необходимо заполнить строки для добавления записи -->
 <div class="container">
     <div class="row">
         <table id="book-table" class="table">
             <form id="edit-task-form" action="editTask" th:action="@{/tasks/{practicId}/editTask/{taskId}/save(practicId = ${practiceId}, taskId = ${taskId})}" method="POST">
                 <thead>
                 <tr>
-                    <label for="Data">Date</label>
+                    <label for="Data">Дата</label>
                     <input id="Data" name="Data"  class="form-control" type="date" th:value="${task.getData()}"/>
                 </tr>
                 <tr>
-                    <label for="Task">Task</label>
+                    <label for="Task">Задание</label>
                     <input id="Task" name="Task"  class="form-control" type="text" th:value="${task.getTask()}"/>
                 </tr>
                 <tr>
-                    <label for="Description">Description</label>
+                    <label for="Description">Описание</label>
                     <input id="Description" name="Description"  class="form-control"  type="text" th:value="${task.getDescription()}"/>
                 </tr>
                 <p>
-                    <button type="submit"  id="btn-edit" class="btn btn-primary">Save</button>
+                    <button type="submit"  id="btn-edit" class="btn btn-primary">Сохранить</button>
                 </p>
                 </thead>
             </form>

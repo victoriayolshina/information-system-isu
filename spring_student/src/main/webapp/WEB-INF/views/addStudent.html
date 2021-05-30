@@ -1,9 +1,8 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=cp1251">
     <title>All Students</title>
-
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
@@ -15,31 +14,31 @@
 <div th:replace="../views/header :: header"></div>
 
 <div class="container">
-    <h2 class="text-danger">Add student</h2>
+    <h2 class="text-danger">Добавление студента</h2>
     <form action="savestudent" th:action="@{/students/add}" method="post" th:object="${customsStudent}">
         <div class="form-group">
-            <label for="student-surname">Surname</label>
+            <label for="student-surname">Фамилия</label>
             <input id="student-surname" class="form-control"
                    th:field="*{surname}"/>
             <span th:if="${#fields.hasErrors('surname')}"
                   th:errors="${student.surname}" class="text-danger"></span>
         </div>
         <div class="form-group">
-            <label for="student-name">Name</label>
+            <label for="student-name">Имя</label>
             <input id="student-name" class="form-control"
                    th:field="*{name}"/>
             <span th:if="${#fields.hasErrors('name')}"
                   th:errors="${student.name}" class="text-danger"></span>
         </div>
         <div class="form-group">
-            <label for="student-patronymic">Patronymic</label>
+            <label for="student-patronymic">Отчество</label>
             <input id="student-patronymic" class="form-control"
                    th:field="*{patronymic}"/>
             <span th:if="${#fields.hasErrors('patronymic')}"
                   th:errors="${student.patronymic}" class="text-danger"></span>
         </div>
         <div class="form-group">
-            <label for="faculty">Faculty</label>
+            <label for="faculty">Группа</label>
             <select id="faculty" name="faculty" class="form-control">
                 <option th:field="*{faculty}" th:each="elements: ${faculty}"
                         th:text="${elements.getName()}"
@@ -47,13 +46,13 @@
             </select>
         </div>
         <div class="form-group">
-            <label for="student-year">Username</label>
+            <label for="student-year">Имя пользователя</label>
             <input id="student-year" class="form-control"
                    th:field="*{username}"/>
             <span th:if="${#fields.hasErrors('username')}"
                   th:errors="${student.username}" class="badge badge-danger"></span>
         </div>
-        <button type="submit" id = "btnsavestudents">Submit</button>
+        <button type="submit" id = "btnsavestudents">Сохранить</button>
     </form>
 </div>
 </body>

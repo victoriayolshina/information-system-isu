@@ -1,9 +1,8 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>All Students</title>
-
+    <meta http-equiv="Content-Type" content="text/html; charset=cp1251">
+    <title>Все студенты</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
@@ -13,15 +12,15 @@
 <div th:replace="../views/header :: header"></div>
 
 <div class="container">
-    <h2 class="text-danger">All Students:</h2>
+    <h2 class="text-danger">Все студенты:</h2>
     <table class="table">
         <table class="table">
             <thead>
-            <th>Surname</th>
-            <th>Name</th>
-            <th>Patronymic</th>
-            <th>Faculty</th>
-            <th>Username</th>
+            <th>Фамилия</th>
+            <th>Имя</th>
+            <th>Отчество</th>
+            <th>Группа</th>
+            <th>Имя пользователя</th>
             </thead>
             <tbody>
             <tr th:each="student:${students}">
