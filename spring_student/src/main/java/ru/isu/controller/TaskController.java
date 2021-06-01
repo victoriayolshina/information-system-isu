@@ -10,7 +10,7 @@ import ru.isu.repository.PracticeRepository;
 import ru.isu.repository.StudentRepository;
 import ru.isu.repository.TaskRepository;
 
-import java.sql.Date;
+
 
 @Controller
 @RequestMapping("/tasks")
@@ -23,10 +23,6 @@ public class TaskController {
 
     @Autowired
     TaskRepository taskRepository;
-
-//    public class TaskMappinng {
-//
-//    }
 
     @RequestMapping("/{practiceId}")
     public String all(Model model, @PathVariable("practiceId") int practiceId){
@@ -75,19 +71,11 @@ public class TaskController {
         return "redirect:/tasks/{practiceId}";
     }
 
-//    @RequestMapping(value = "/{practiceId}/task", method = RequestMethod.DELETE, produces = "application/json")
-//    public String deleteTask(@RequestBody IdCustom idCustom){
-//        System.out.println(idCustom);
-//        return "redirect:/tasks/{practiceId}";
-//    }
-
     //Удаление записи из общего списка
     @RequestMapping(value = "/{page}/{taskId}", method = RequestMethod.DELETE)
     @ResponseBody
     public String deleteTask(@PathVariable("taskId") long taskId){
-        //System.out.println(taskId);
         taskRepository.delete(taskId);
-
         return "redirect:/tasks/{practiceId}/task";
     }
 }
