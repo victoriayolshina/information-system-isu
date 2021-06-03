@@ -10,7 +10,7 @@ import java.util.Date;
 @AllArgsConstructor
 public class GantCustomClass {
 
-    public String name;
+    //public String name;
 
     public String desg;
 
