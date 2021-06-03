@@ -80,4 +80,11 @@ public class TaskController {
         taskRepository.delete(taskId);
         return "redirect:/tasks/{practiceId}/task";
     }
+
+//    @RequestMapping(value = "/{practiceId}/editTask/{taskId}/save", method = RequestMethod.POST)
+//    @ResponseBody
+//    public  gantDiagramm(){
+//
+//        return
+//    }
 }

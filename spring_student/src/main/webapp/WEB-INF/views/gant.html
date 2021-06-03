@@ -3,7 +3,6 @@
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=cp1251">
-
 <!--    <title>Title</title>-->
 <!--    <script src="../../resourses/gant/js/jquery.fn.gantt.min.js"></script>-->
 <!--    <script src="../../resourses/gant/js/jquery.min.js"></script>-->
@@ -17,74 +16,9 @@
     <script th:src="@{/resourses/bootstrap.min.js}"></script>
     <link rel="stylesheet" type="text/css" th:href="@{/resourses/style.css}">
     <link rel="stylesheet" type="text/css" th:href="@{/resourses/bootstrap.min.css}">
-
 </head>
+
 <body>
     <div class="gantt"></div>
-    <script>
-        $(function() {
-            var faa = $(".gantt").gantt();
-            "use strict";
-            $(".gantt")
-
-            var demoSource = [{
-                name: "Практика",
-                desc: "Инструктаж",
-                values: [{
-                    from: new Date(2021,0,18),
-                    to: new Date(2021,0,18),
-                    label: "Инструктаж по технике безопасности. Знакомство со структурой организации",
-                    customClass: "ganttGreen"
-                }]
-            },{
-                desc: "Проектирование",
-                values: [{
-                    from: new Date(2021,0,19),
-                    to: new Date(2021,0,21),
-                    label: "Проектирование приложения, написание технического задания"
-                }]
-            },{
-                desc: "Сервер",
-                values: [{
-                    from: new Date(2021,0,21),
-                    to: new Date(2021,0,25),
-                    label: "Реализация сервера, основных сервисов, контроллеров и моделей"
-                }]
-            }];
-
-
-            $(".gantt").gantt({
-                source: demoSource,
-                navigate: "scroll",
-                scale: "days",
-                maxScale: "months",
-                minScale: "hours",
-                months: ["Январь", "Февраль", "Март", "Апрель", "Май", "Июнь", "Июль", "Август", "Сентябрь", "Октябрь", "Ноябрь", "Декабрь"],
-                dow: ["Вс", "Пн", "Вт", "Ср", "Чт", "Пт", "Сб"],
-                customClass: "ganttRed",
-                itemsPerPage: 10,
-                scrollToToday: false,
-                useCookie: true,
-                onItemClick: function(data) {
-                    console.log(data);
-                },
-                onRender: function() {
-                    if (window.console && typeof console.log === "function") {
-                        console.log("chart rendered");
-                    }
-                }
-            });
-
-            $(".gantt").popover({
-                selector: ".bar",
-                title: function _getItemText() {
-                    return this.textContent;
-                },
-                container: '.gantt',
-                trigger: "hover",
-                placement: "auto right"
-            });
-        });
-    </script>
 </body>
 </html>
