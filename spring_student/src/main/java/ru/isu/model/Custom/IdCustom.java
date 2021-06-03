@@ -9,6 +9,4 @@ import lombok.NoArgsConstructor;
 @Data
 public class IdCustom {
     private int id;
-
-
 }

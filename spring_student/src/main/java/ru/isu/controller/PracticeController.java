@@ -24,9 +24,14 @@ public class PracticeController {
     TaskRepository taskRepository;
 
     @RequestMapping("/{studentId}")
-    public String all(Model model, @PathVariable("studentId") int studentId){
+    public String all(Model model, @PathVariable("studentId") int studentId) {
         Student student = studentRepository.findStudentById(studentId);
         model.addAttribute("practice", practiceRepository.findPracticeByIdStudent(student));
         return "practice";
+    }
+
+    @RequestMapping("/gant")
+    public String gant(){
+        return "gant";
     }
 }

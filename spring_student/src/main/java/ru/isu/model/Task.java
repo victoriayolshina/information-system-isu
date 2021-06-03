@@ -1,6 +1,7 @@
 package ru.isu.model;
 
 import lombok.Data;
+
 import javax.persistence.*;
 import java.sql.Date;
 

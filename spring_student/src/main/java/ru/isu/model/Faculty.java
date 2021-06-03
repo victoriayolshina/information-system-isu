@@ -1,4 +1,4 @@
-package  ru.isu.model;
+package ru.isu.model;
 
 import lombok.Data;
 import lombok.Getter;

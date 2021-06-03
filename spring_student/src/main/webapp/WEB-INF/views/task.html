@@ -36,9 +36,9 @@
             </thead>
             <tbody id="taskstbody">
             <tr th:each="tasks:${task}" th:id="'taskRow' + ${tasks.getId()}">
-                <td th:text="${tasks.getDatastart()}">
+                <td th:text="${#dates.format(tasks.getDatastart(), 'dd.MM.yyyy')}">
                 </td>
-                <td th:text="${tasks.getDataend()}">
+                <td th:text="${#dates.format(tasks.getDataend(), 'dd.MM.yyyy')}">
                 </td>
                 <td th:text="${tasks.getTask()} " maxlength="225">
                 </td>

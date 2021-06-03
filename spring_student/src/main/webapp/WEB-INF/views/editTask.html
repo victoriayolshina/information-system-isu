@@ -24,11 +24,13 @@
 <div class="container">
     <div class="row">
         <table id="book-table" class="table">
-            <form id="edit-task-form" action="editTask" th:action="@{/tasks/{practicId}/editTask/{taskId}/save(practicId = ${practiceId}, taskId = ${taskId})}" method="POST">
+            <form id="edit-task-form" action="editTask"
+                  th:action="@{/tasks/{practicId}/editTask/{taskId}/save(practicId = ${practiceId}, taskId = ${taskId})}"
+                  method="POST">
                 <thead>
                 <tr>
                     <label for="Datastart">Дата начала</label>
-                    <input id="Datastart" name="Datastart"  class="form-control" type="date"
+                    <input id="Datastart" name="Datastart" class="form-control" type="date"
                            th:min="${task.getPractice().getStarttime()}"
                            th:max="${task.getPractice().getEndtime()}"
                            th:value="${task.getDatastart()}"
@@ -37,7 +39,7 @@
                 </tr>
                 <tr>
                     <label for="Dataend">Дата конца</label>
-                    <input id="Dataend" name="Dataend"  class="form-control" type="date"
+                    <input id="Dataend" name="Dataend" class="form-control" type="date"
                            th:min="${task.getPractice().getStarttime()}"
                            th:max="${task.getPractice().getEndtime()}"
                            th:value="${task.getDataend()}"
@@ -45,14 +47,15 @@
                 </tr>
                 <tr>
                     <label for="Task">Задание</label>
-                    <input id="Task" name="Task"  class="form-control" type="text" th:value="${task.getTask()}"/>
+                    <input id="Task" name="Task" class="form-control" type="text" th:value="${task.getTask()}"/>
                 </tr>
                 <tr>
                     <label for="Description">Описание</label>
-                    <p><textarea id="Description" rows="10" cols="45" name="Description" th:text="${task.getDescription()}"></textarea></p>
+                    <p><textarea id="Description" rows="10" cols="45" name="Description"
+                                 th:text="${task.getDescription()}"></textarea></p>
                 </tr>
                 <p>
-                    <button type="submit"  id="btn-edit" class="btn btn-primary">Сохранить</button>
+                    <button type="submit" id="btn-edit" class="btn btn-primary">Сохранить</button>
                 </p>
                 </thead>
             </form>

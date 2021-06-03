@@ -50,13 +50,13 @@ public class StudentController {
 //    }
 
     @RequestMapping("/students")
-    public String all(Model model){
+    public String all(Model model) {
         model.addAttribute("students", studentRepository.findAll());
         return "students";
     }
 
     @RequestMapping(value = "/add")
-    public String addStudent(Model model){
+    public String addStudent(Model model) {
         Student student = new Student();
         CustomClass customClass = new CustomClass();
         List<Faculty> faculties = facultyRepository.findAll();
@@ -68,7 +68,7 @@ public class StudentController {
     }
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
-    public String saveStudent(@ModelAttribute CustomClass customClassStudent){
+    public String saveStudent(@ModelAttribute CustomClass customClassStudent) {
         Student student = new Student();
         student.setUsername(customClassStudent.getUsername());
         student.setSurname(customClassStudent.getSurname());

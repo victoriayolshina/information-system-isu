@@ -4,12 +4,12 @@ window.onload = function () {
 }
 
 
-function deleteTask(taskId){
+function deleteTask(taskId) {
     //console.log(taskId)
     //var json = {id: taskId} JSON.stringify(json)
 
     $.ajax({
-        type : "DELETE",
+        type: "DELETE",
         url: window.location.pathname + "\/" + taskId,
         success: function (result) {
             var tbody = document.getElementById("taskstbody")
@@ -22,16 +22,14 @@ function deleteTask(taskId){
     })
 }
 
-function setMinDateInDateInput(){
+function setMinDateInDateInput() {
     var dateStart = document.getElementById("Datastart")
     var dateEnd = document.getElementById("Dataend")
     dateEnd.min = dateStart.value;
-    if(new Date(dateStart.value)> new Date(dateEnd.value)) {
+    if (new Date(dateStart.value) > new Date(dateEnd.value)) {
         dateEnd.value = dateStart.value
     }
 }
-
-
 
 
 function editTask(taskId) {
