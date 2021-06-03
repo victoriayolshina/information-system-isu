@@ -33,9 +33,48 @@ var myData = [{
     }]
 }];
 
-$(document).ready(function () {
+
     $(".gantt").gantt({
         // or 'data/data.json'
         source: myData
     });
+
+    $(".gantt").gantt({
+
+        // holidays
+        holidays: [],
+
+        // how many items per page
+        itemsPerPage: 7,
+
+        // localisation
+        dow: ["S", "M", "T", "W", "T", "F", "S"],
+        months: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
+        waitText: "Please wait...",
+
+        // navigation type
+        // or 'scroll'
+        navigate: "buttons",
+
+        // auto scrolls to today
+        scrollToToday: true,
+
+        // uses cookie to save the current state
+        // requires jquery-cookie plugin: https://github.com/carhartl/jquery-cookie
+        useCookie: false,
+        cookieKey: "jquery.fn.gantt",
+
+        // scale parameters
+        scale: "days",
+        maxScale: "months",
+        minScale: "hours",
+    });
+
+    $(".gantt").gantt({
+
+        onItemClick: function (data) { return; },
+        onAddClick: function (dt, rowId) { return; },
+        onRender: $.noop
+
+
 });

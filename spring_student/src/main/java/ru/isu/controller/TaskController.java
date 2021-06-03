@@ -1,5 +1,4 @@
 package ru.isu.controller;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -9,7 +8,6 @@ import ru.isu.model.Task;
 import ru.isu.repository.PracticeRepository;
 import ru.isu.repository.StudentRepository;
 import ru.isu.repository.TaskRepository;
-
 
 
 @Controller
