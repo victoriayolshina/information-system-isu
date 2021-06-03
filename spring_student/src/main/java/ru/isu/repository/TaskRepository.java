@@ -11,7 +11,7 @@ import java.sql.Date;
 import java.util.List;
 
 public interface TaskRepository extends JpaRepository<Task, Long> {
-    @Query("SELECT t FROM Task t WHERE t.practice= ?1")
+    @Query("SELECT t FROM Task t WHERE t.practice= ?1 ORDER BY t.datastart")
     List<Task> findTasksByIdPractice(Practice practice);
 
 //    @Modifying(clearAutomatically = true)

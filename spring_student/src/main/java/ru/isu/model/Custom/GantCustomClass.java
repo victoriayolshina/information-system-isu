@@ -12,9 +12,12 @@ public class GantCustomClass {
 
     //public String name;
 
-    public String desg;
+    private String desc;
 
-    public Date date;
+    private Values[] values;
 
-    public Values[] values;
+    public void setValues(Values _values) {
+        this.values = new Values[1];
+        this.values[0] = _values;
+    }
 }

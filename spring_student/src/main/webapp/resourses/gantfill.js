@@ -35,7 +35,6 @@ var myData = [{
 }];
 
 var demoSource = [{
-    name: "Практика",
     desc: "Инструктаж",
     values: [{
         from: new Date(2021, 0, 18),
@@ -60,6 +59,7 @@ var demoSource = [{
 }];
 
     $(function () {
+        //Написать Ajax запрос на получение данных и из обработку
 
 
     $(".gantt").gantt({

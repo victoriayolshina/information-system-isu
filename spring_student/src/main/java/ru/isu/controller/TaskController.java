@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import ru.isu.model.Custom.GantCustomClass;
+import ru.isu.model.Custom.Values;
 import ru.isu.model.Practice;
 import ru.isu.model.Task;
 import ru.isu.repository.PracticeRepository;
@@ -86,16 +87,35 @@ public class TaskController {
         return "redirect:/tasks/{practiceId}/task";
     }
 
-    @RequestMapping(value = "/{practiceId}/tasks/gant", method = RequestMethod.POST)
-    @ResponseBody
+    @RequestMapping(value = "/{practiceId}/gant", method = RequestMethod.GET)
+    //@ResponseBody
     public String gantDiagramm(@PathVariable("practiceId") int practiceId) {
         Practice practice = practiceRepository.findPracticeById(practiceId);
         List<Task> arrayList = taskRepository.findTasksByIdPractice(practice);
-        GantCustomClass gantCustomClass[];
-        for (int i = 0; i <= arrayList.size(); i++){
-            gantCustomClass[i];
+        ArrayList<GantCustomClass> gantCustomClassArrayList = new ArrayList<>();
+        System.out.println(arrayList);
+
+        for (int i = 0; i < arrayList.size(); i++) {
+            GantCustomClass gantCustomClass = new GantCustomClass();
+            Values values = new Values();
+            Task task = arrayList.get(i);
+
+            values.setFrom(task.getDatastart());
+            values.setTo(task.getDataend());
+            values.setLabel(task.getTask());
+            System.out.println(values);
+
+            gantCustomClass.setDesc(task.getTask());
+            //System.out.println(gantCustomClass);
+            gantCustomClass.setValues(values);
+            //System.out.println(gantCustomClass);
+
+
+            gantCustomClassArrayList.add(gantCustomClass);
         }
-        System.out.println(gantCustomClass);
-            return;
+        System.out.println(gantCustomClassArrayList.toString());
+        //Сделать из него JSON
+        //Передать в ретёрн
+        return "home";
     }
 }

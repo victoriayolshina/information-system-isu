@@ -9,9 +9,10 @@ function deleteTask(taskId){
     //var json = {id: taskId} JSON.stringify(json)
 
     $.ajax({
-        type : "DELETE",
+        type : "POST",
         url: window.location.pathname + "\/" + taskId,
         success: function (result) {
+            console.log(result)
             var tbody = document.getElementById("taskstbody")
             var row = document.getElementById("taskRow" + taskId)
             tbody.removeChild(row)
