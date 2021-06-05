@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import ru.isu.model.Custom.DataResponseGant;
 import ru.isu.model.Custom.GantCustomClass;
 import ru.isu.model.Custom.Values;
 import ru.isu.model.Practice;
@@ -88,8 +89,13 @@ public class TaskController {
     }
 
     @RequestMapping(value = "/{practiceId}/gant", method = RequestMethod.GET)
-    //@ResponseBody
-    public String gantDiagramm(@PathVariable("practiceId") int practiceId) {
+    public String gantDiagramm(){
+        return "gant";
+    }
+
+
+    @PostMapping("/{practiceId}/gant/{if}")
+    public DataResponseGant gantDiagrammGetData(@PathVariable("practiceId") int practiceId) {
         Practice practice = practiceRepository.findPracticeById(practiceId);
         List<Task> arrayList = taskRepository.findTasksByIdPractice(practice);
         ArrayList<GantCustomClass> gantCustomClassArrayList = new ArrayList<>();
@@ -110,12 +116,12 @@ public class TaskController {
             gantCustomClass.setValues(values);
             //System.out.println(gantCustomClass);
 
-
             gantCustomClassArrayList.add(gantCustomClass);
         }
         System.out.println(gantCustomClassArrayList.toString());
+        DataResponseGant dataResponseGant = new DataResponseGant(gantCustomClassArrayList.size(), gantCustomClassArrayList);
         //Сделать из него JSON
         //Передать в ретёрн
-        return "home";
+        return dataResponseGant;
     }
 }

@@ -49,7 +49,7 @@ var demoSource = [{
         to: new Date(2021, 0, 21),
         label: "Проектирование приложения, написание технического задания"
     }]
-},  {
+}, {
     desc: "Сервер",
     values: [{
         from: new Date(2021, 1, 21),
@@ -58,8 +58,20 @@ var demoSource = [{
     }]
 }];
 
-    $(function () {
-        //Написать Ajax запрос на получение данных и из обработку
+$(function () {
+    var jsonParams;
+    $.ajax({
+        type: "POST",
+        url: window.location.pathname+"\/1",
+        success: function (result){
+            console.log(result)
+            jsonParams = result;
+
+        },
+        error: function (e) {
+            console.log(e);
+        }
+    })
 
 
     $(".gantt").gantt({

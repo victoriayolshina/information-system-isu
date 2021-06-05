@@ -12,6 +12,12 @@ $(document).ready(function () {
         //console.log(window.location.pathname);
     });
 
+    $("#getGant").click(function (e) {
+        //$(location).attr('href');
+        location.href = window.location.pathname + "/gant";
+        //console.log(window.location.pathname);
+    });
+
     $("#edit-btn").click(function (e) {
         //$(location).attr('href');
         location.href = window.location.pathname + "/editTask";
