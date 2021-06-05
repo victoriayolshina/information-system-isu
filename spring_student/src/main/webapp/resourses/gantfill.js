@@ -60,13 +60,13 @@ var demoSource = [{
 
 $(function () {
     var jsonParams;
+
     $.ajax({
         type: "POST",
         url: window.location.pathname+"\/1",
         success: function (result){
             console.log(result)
             jsonParams = result;
-
         },
         error: function (e) {
             console.log(e);

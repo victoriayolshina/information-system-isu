@@ -6,21 +6,23 @@ window.onload = function () {
 
 function deleteTask(taskId){
     //console.log(taskId)
-    //var json = {id: taskId} JSON.stringify(json)
+    //var json = {id: taskId} JSON.stringify
 
-    $.ajax({
-        type : "POST",
-        url: window.location.pathname + "\/" + taskId,
-        success: function (result) {
-            console.log(result)
-            var tbody = document.getElementById("taskstbody")
-            var row = document.getElementById("taskRow" + taskId)
-            tbody.removeChild(row)
-        },
-        error: function (e) {
-            console.log(e);
-        }
-    })
+
+
+    // $.ajax({
+    //     type : "POST",
+    //     url: window.location.pathname + "\/" + taskId,
+    //     success: function (result) {
+    //         console.log(result)
+    //         var tbody = document.getElementById("taskstbody")
+    //         var row = document.getElementById("taskRow" + taskId)
+    //         tbody.removeChild(row)
+    //     },
+    //     error: function (e) {
+    //         console.log(e);
+    //     }
+    // })
 }
 
 function setMinDateInDateInput(){
