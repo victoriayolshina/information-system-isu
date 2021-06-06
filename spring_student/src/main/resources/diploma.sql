@@ -118,14 +118,14 @@ CREATE TABLE `placeofpractice` (
   `id` int(11) NOT NULL,
   `name` varchar(225) NOT NULL,
   `location` varchar(225) NOT NULL,
-  `direction` int(11) NOT NULL
+  `typeofdirection` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `placeofpractice`
 --
 
-INSERT INTO `placeofpractice` (`id`, `name`, `location`, `direction`) VALUES
+INSERT INTO `placeofpractice` (`id`, `name`, `location`, `typeofdirection`) VALUES
 (1, 'ZEON', 'Партизанская, 65', 2);
 
 -- --------------------------------------------------------

@@ -24,6 +24,7 @@ public class PlaceOfPractice {
     private String name;
 
     @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "typeofdirection")
     private TypeOfDirection typeOfDirection;
 
     private String location;

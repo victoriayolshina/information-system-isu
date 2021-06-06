@@ -9,7 +9,7 @@ import org.hibernate.validator.constraints.NotBlank;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "supervisor")
+@Table(name = "supervisior")
 @Getter
 @Setter
 @ToString

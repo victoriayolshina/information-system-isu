@@ -23,5 +23,6 @@ public class TypeOfPractice {
     private String name;
 
     @OneToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "curator")
     private Curator curator;
 }
