@@ -24,12 +24,16 @@
     <h2 class="text-danger">Все задания на практику:</h2>
     <button id="add-task-btn" type="button"
             class="btn-default" data-toggle="modal">
-            <span class="glyphicon glyphicon-plus"></span> Добавить
+        <span class="glyphicon glyphicon-plus"></span> Добавить
     </button>
     <button id="getGant" type="button"
             class="btn-default" data-toggle="modal">
         <span class="glyphicon glyphicon"></span> Диаграмма Ганта
     </button>
+    <form action="https://www.overleaf.com/docs" method="post" target="_blank">
+        <input type="text" name="snip_uri"
+               value="https://www.overleaf.com/project/5fc5e20d68ac8afa4295f3f2"><br>
+        <input type="submit" value="Open in Overleaf">
     <h2 class="text-danger"></h2>
     <table class="table">
         <table class="table">
@@ -49,7 +53,7 @@
                 <td>
                     <button type="button" id="edit-button" data-toggle="modal" class="btn-default"
                             th:value="${tasks.getId()}" th:onclick="'editTask(\'' + ${tasks.getId()} + '\');'">
-                    <span class="glyphicon glyphicon-pencil"></span> Редактировать
+                        <span class="glyphicon glyphicon-pencil"></span> Редактировать
                     </button>
                     <button type="button" id="delete-button" data-toggle="modal" class="btn-default"
                             th:value="${tasks.getId()}" th:onclick="'deleteTask(\'' + ${tasks.getId()} + '\');'">

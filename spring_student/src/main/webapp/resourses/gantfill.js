@@ -33,14 +33,13 @@ var myData = [{
     }]
 
 }];
-
+// console.log(myData)
 var demoSource = [{
     desc: "Инструктаж",
     values: [{
         from: new Date(2021, 0, 18),
         to: new Date(2021, 0, 18),
-        label: "Инструктаж по технике безопасности. Знакомство со структурой организации",
-        customClass: "ganttGreen"
+        label: "Инструктаж по технике безопасности. Знакомство со структурой организации"
     }]
 }, {
     desc: "Проектирование",
@@ -58,24 +57,71 @@ var demoSource = [{
     }]
 }];
 
-$(function () {
-    var jsonParams;
 
+let myJson;
+
+$(function () {
     $.ajax({
         type: "POST",
-        url: window.location.pathname+"\/1",
-        success: function (result){
-            console.log(result)
-            jsonParams = result;
+        url: window.location.pathname + "\/1",
+        success: function (result) {
+            // console.log(result[1].desc);
+            // console.log(result[1].values[0].label);
+            // console.log(result[1].values[0].from);
+            // console.log(result[1].values[0].to);
+
+            // var params = [];
+            // /* Парсинг возвращённого массива */
+            // for(var i=0; i<result.length; i++){
+            //     params[i]= []
+            //     params[i][0]= result[i].desc;
+            //     params[i][1]= result[i].values[0].from;
+            //     params[i][2]= result[i].values[0].to;
+            //     params[i][3]= result[i].values[0].label;
+            // }
+
+            // console.log(params);
+            //
+            // var json = JSON.parse(params);
+            // myJsonString = JSON.stringify(result);
+            console.log(result);
+            myJson = getJson(result, myJson);
+            // myJson = result;
+            console.log(myJson);
         },
         error: function (e) {
             console.log(e);
         }
     })
 
+    // arrayJson = [{
+    //     desc: "Изучение Spring.",
+    //     values: [{from: myJson[1].values[0].from, to: myJson[1].values[0].to, label: myJson[1].values[0].label}]
+    // }]
+    // }, {
+    //     "name": "Изучение Spring.",
+    //     "desc": "Заполнение дневника практики.",
+    //     "values": [{"from": 1613059200000, "to": 1613836800000, "label": "Заполнение дневника практики."}]
+    // }, {
+    //     "desc": "Инструктаж по технике безопасности. Знакомство с организацией.",
+    //     "values": [{
+    //         "from": 1613145600000,
+    //         "to": 1612800000000,
+    //         "label": "Инструктаж по технике безопасности. Знакомство с организацией."
+    //     }]
+    // }, {
+    //     "desc": "Изучение JAVA.",
+    //     "values": [{"from": 1614355200000, "to": 1613404800000, "label": "Изучение JAVA."}]
+    // }, {
+    //     "desc": "Изучение JAVA.",
+    //     "values": [{"from": 1615996800000, "to": 1616083200000, "label": "Изучение JAVA."}]
+    // }, {
+    //     "desc": "Изучение JAVA.", "values": [{"from": 1616169600000, "to": 1614960000000, "label": "Изучение JAVA."}]}]
+    // console.log(arrayJson)
+
 
     $(".gantt").gantt({
-        source: demoSource,
+        source: myJson,
         navigate: "scroll",
         scale: "days",
         maxScale: "weeks",
@@ -83,6 +129,7 @@ $(function () {
         months: ["Январь", "Февраль", "Март", "Апрель", "Май", "Июнь", "Июль", "Август", "Сентябрь", "Октябрь", "Ноябрь", "Декабрь"],
         dow: ["Пн", "Вт", "Ср", "Чт", "Пт", "Сб", "Вс"],
         customClass: "ganttRed",
+        waitText: "Пожалуйста, подождите...",
         itemsPerPage: 10,
         scrollToToday: false,
         useCookie: false,
@@ -96,6 +143,11 @@ $(function () {
         }
     });
 
+    // $(".gantt").gantt({
+    //     // or 'data/data.json'
+    //     source: myJson
+    // });
+
     $(".gantt").popover({
         selector: ".bar",
         title: function _getItemText() {
@@ -105,13 +157,18 @@ $(function () {
         trigger: "hover",
         placement: "auto right"
     });
+
+
 });
 
-//
-// $(".gantt").gantt({
-//     // or 'data/data.json'
-//     source: myData
-// });
+function getJson(arrayJson, returnJson) {
+    returnJson = [{
+        desc: "Изучение Spring.",
+        values: [{from: arrayJson[1].values[0].from, to: arrayJson[1].values[0].to, label: arrayJson[1].values[0].label}]
+    }]
+    return returnJson;
+}
+
 //
 // $(".gantt").gantt({
 //
