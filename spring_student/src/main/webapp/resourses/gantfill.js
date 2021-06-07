@@ -59,52 +59,53 @@ var demoSource = [{
 }];
 
 $(function () {
-    var jsonParams;
 
     $.ajax({
         type: "POST",
         url: window.location.pathname+"\/1",
         success: function (result){
             console.log(result)
+
             jsonParams = result;
+
+            $(".gantt").gantt({
+                source: jsonParams,
+                navigate: "scroll",
+                scale: "days",
+                maxScale: "weeks",
+                minScale: "days",
+                months: ["Январь", "Февраль", "Март", "Апрель", "Май", "Июнь", "Июль", "Август", "Сентябрь", "Октябрь", "Ноябрь", "Декабрь"],
+                dow: ["Пн", "Вт", "Ср", "Чт", "Пт", "Сб", "Вс"],
+                customClass: "ganttRed",
+                itemsPerPage: 10,
+                scrollToToday: false,
+                useCookie: false,
+                onItemClick: function (data) {
+                    console.log(data);
+                },
+                onRender: function () {
+                    if (window.console && typeof console.log === "function") {
+                        console.log("chart rendered");
+                    }
+                }
+            });
+
+            $(".gantt").popover({
+                selector: ".bar",
+                title: function _getItemText() {
+                    return this.textContent;
+                },
+                container: '.gantt',
+                trigger: "hover",
+                placement: "auto right"
+            });
+
         },
+
         error: function (e) {
             console.log(e);
         }
     })
-
-
-    $(".gantt").gantt({
-        source: demoSource,
-        navigate: "scroll",
-        scale: "days",
-        maxScale: "weeks",
-        minScale: "days",
-        months: ["Январь", "Февраль", "Март", "Апрель", "Май", "Июнь", "Июль", "Август", "Сентябрь", "Октябрь", "Ноябрь", "Декабрь"],
-        dow: ["Пн", "Вт", "Ср", "Чт", "Пт", "Сб", "Вс"],
-        customClass: "ganttRed",
-        itemsPerPage: 10,
-        scrollToToday: false,
-        useCookie: false,
-        onItemClick: function (data) {
-            console.log(data);
-        },
-        onRender: function () {
-            if (window.console && typeof console.log === "function") {
-                console.log("chart rendered");
-            }
-        }
-    });
-
-    $(".gantt").popover({
-        selector: ".bar",
-        title: function _getItemText() {
-            return this.textContent;
-        },
-        container: '.gantt',
-        trigger: "hover",
-        placement: "auto right"
-    });
 });
 
 //
