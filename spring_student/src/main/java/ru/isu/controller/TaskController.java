@@ -1,5 +1,6 @@
 package ru.isu.controller;
 
+import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,6 +13,8 @@ import ru.isu.repository.PracticeRepository;
 import ru.isu.repository.StudentRepository;
 import ru.isu.repository.TaskRepository;
 
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -115,7 +118,6 @@ public class TaskController {
 
             gantCustomClassArrayList.add(gantCustomClass);
         }
-
 //        System.out.println(gantCustomClassArrayList.toString());
 
         return gantCustomClassArrayList;

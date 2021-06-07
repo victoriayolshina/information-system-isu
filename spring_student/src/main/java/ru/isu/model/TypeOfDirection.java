@@ -3,27 +3,22 @@ package ru.isu.model;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
+import org.hibernate.validator.constraints.NotBlank;
 
 import javax.persistence.*;
 
-@Data
 @Entity
+@Table(name = "typeofdirection")
 @Getter
 @Setter
-@Table(name = "faculty")
-public class Faculty {
+@ToString
+@Data
+public class TypeOfDirection {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+    @NotBlank(message = "Fill in the field.")
     private String name;
-
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "direction")
-    private Direction direction;
-
-    private Integer year;
-
-
 }
-
