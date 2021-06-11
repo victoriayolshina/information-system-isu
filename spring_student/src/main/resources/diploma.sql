@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1
--- Время создания: Июн 11 2021 г., 16:44
+-- Время создания: Июн 11 2021 г., 18:12
 -- Версия сервера: 10.4.18-MariaDB
 -- Версия PHP: 8.0.3
 
@@ -39,7 +39,7 @@ CREATE TABLE `auto_user` (
 --
 
 INSERT INTO `auto_user` (`id`, `username`, `role`, `password`) VALUES
-(1, 'nataliasemicheva', 'ROLE_USER', 'pass'),
+(1, 'nataliasemicheva', 'ROLE_ADMIN', 'pass'),
 (2, 'leonidriabets', 'ROLE_USER', 'pass'),
 (3, 'victoriayolshina', 'ROLE_USER', 'pass');
 
