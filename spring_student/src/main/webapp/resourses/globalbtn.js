@@ -43,6 +43,7 @@ $(document).ready(function () {
         $("#logout-form").submit();
     });
 
+
     /* Обработчик кнопки формы регистрации */
     $("#btn-registr").click(function (e){
         e.preventDefault()

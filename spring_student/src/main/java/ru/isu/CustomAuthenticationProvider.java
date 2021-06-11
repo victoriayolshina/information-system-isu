@@ -22,6 +22,8 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
     @SneakyThrows
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
+        System.out.println("custom");
+        System.out.println(authentication);
         UsernamePasswordAuthenticationToken token = (UsernamePasswordAuthenticationToken) authentication;
         AutoUser user = autoUserRepository.findAutoUserByUsername(token.getName());
         if(user==null) {

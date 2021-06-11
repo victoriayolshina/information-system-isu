@@ -14,9 +14,6 @@ import java.util.Collection;
 
 @Entity
 @Table(name = "auto_user")
-@Getter
-@Setter
-@ToString
 @Data
 public class AutoUser {
     @Id

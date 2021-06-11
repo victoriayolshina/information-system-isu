@@ -35,6 +35,7 @@ public class MainController {
     //Переход на авторизацию
     @RequestMapping(value = "/login")
     public String login(){
+        System.out.println("Login");
         return "login";
     }
 
@@ -47,6 +48,7 @@ public class MainController {
     //После регистирования с сохранением информации о пользовании
     @RequestMapping(value = "/register", method=RequestMethod.POST)
     public String register(@ModelAttribute AutoUser user){
+        System.out.println(user);
         autoUserRepository.save(user);
 
         Authentication auth = new UsernamePasswordAuthenticationToken(
