@@ -10,7 +10,7 @@ function deleteTask(taskId){
 
 
     $.ajax({
-        type : "POST",
+        type : "DELETE",
         url: window.location.pathname + "\/" + taskId,
         success: function (result) {
             console.log(result)

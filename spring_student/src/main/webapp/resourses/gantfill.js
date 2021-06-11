@@ -34,39 +34,46 @@ var myData = [{
 
 }];
 
-var demoSource = [{
-    desc: "Инструктаж",
-    values: [{
-        from: new Date(2021, 0, 18),
-        to: new Date(2021, 0, 18),
-        label: "Инструктаж по технике безопасности. Знакомство со структурой организации",
-        customClass: "ganttGreen"
+var jsonParams = [{
+        desc: "Инструктаж по технике безопасности. Знакомство с организацией",
+        values: [{
+            from: new Date(2021, 1, 12),
+            to: new Date(2021, 1, 13),
+            label: "Инструктаж по технике безопасности. Знакомство со структурой организации",
+        }]
+    }, {
+        desc: "Знакомство с проектной документацией и устройством компании.",
+        values: [{
+            from: new Date(2021, 1, 15),
+            to: new Date(2021, 1, 16),
+            label: "Знакомство с проектной документацией и устройством компании."
+        }]
+    }, {
+        desc: "Изучение скриптов, имеющихся у компании.",
+        values: [{
+            from: new Date(2021, 1, 17),
+            to: new Date(2021, 1, 19),
+            label: "Изучение скриптов, имеющихся у компании."
+        }]
+    }, {
+        desc: "Написание методов визуализации системного времени и среднего значения загрузки системы за заданный период времени.",
+        values: [{
+            from: new Date(2021, 1, 20),
+            to: new Date(2021, 1, 25),
+            label: "Написание методов визуализации системного времени и среднего значения загрузки системы за заданный период времени."
+        }]
     }]
-}, {
-    desc: "Проектирование",
-    values: [{
-        from: new Date(2021, 0, 19),
-        to: new Date(2021, 0, 21),
-        label: "Проектирование приложения, написание технического задания"
-    }]
-}, {
-    desc: "Сервер",
-    values: [{
-        from: new Date(2021, 1, 21),
-        to: new Date(2021, 1, 25),
-        label: "Реализация сервера, основных сервисов, контроллеров и моделей"
-    }]
-}];
+;
 
 $(function () {
-
     $.ajax({
         type: "POST",
-        url: window.location.pathname+"\/1",
-        success: function (result){
+        url: window.location.pathname + "\/1",
+        success: function (result) {
             console.log(result)
 
             jsonParams = result;
+            console.log(jsonParams)
 
             $(".gantt").gantt({
                 source: jsonParams,

@@ -1,0 +1,60 @@
+\pagestyle{empty}
+\gfontsize
+\section{ПУТЕВКА}
+1. \quad Фамилия \uline{Иванов \hfill}
+
+2. \quad Имя и Отчество \uline{Иван Иванович \hfill}
+
+3. \quad Курс \uline{4 \hfill}
+
+4. \quad Форма обучения \uline{очная \hfill}
+
+5. \quad Направление \uline{09.03.03. Прикладная информатика \hfill}
+
+6. \quad Профиль \uline{Информационная сфера \hfill}
+
+7. \quad Место прохождении практики \uline{ООО <<Тест>> \hfill}
+
+8. \quad Сроки прохождения практики с \uline{18.01.2021 г.} по \uline{14.02.2021} г.
+
+9. \quad Руководитель практики от кафедры \uline{Петров Петр Петрович, \hfill}
+
+\qquad\uline{test@gmail.com \hfill}
+
+\hspace{4cm}{\scriptsize (фамилия, имя, отчество, e-mail)}
+
+\vspace{1.5cm}
+С программой ознакомлен \uline{\hspace{3cm}} 16 декабря 2020 г.
+
+\hspace{5.7cm}{\tiny (подпись студента)}
+
+\vspace{1cm}
+Зав. кафедрой \uline{\hspace{4.5cm}} Пантелеев В.И.
+
+\section{ОТМЕТКА О ПРОХОЖДЕНИИ ПРАКТИКИ}
+1. Прибыл на место прохождения практики \uline{\quad 18.01.2021 г. \hspace{1cm}} \uline{\hfill}
+
+\hspace{10cm}{\tiny Дата}
+\hspace{2.7cm}{\tiny Подпись, печать}
+
+2. Руководитель по месту прохождения практики \uline{Сидоров Сидор Сидорович, \hfill}
+
+\hspace{11cm}{\tiny Фамилия, имя, отчество, должность}
+
+\uline{такая-то должность \hfill}
+
+\vspace{0.5cm}
+3. Назначен \uline{такая-то должность \hfill}
+
+\hspace{8cm}{\tiny Должность}
+
+4. Переведен \uline{\hfill}
+
+\hspace{8cm}{\tiny Должность}
+
+5. Убыл с места прохождения практики \uline{\quad 12.02.2021 г. \hspace{1cm}} \uline{\hfill}
+
+\hspace{9.3cm}{\tiny Дата}
+\hspace{3.4cm}{\tiny Подпись, печать}
+
+\end{document}

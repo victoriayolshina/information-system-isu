@@ -36,4 +36,16 @@ $(document).ready(function () {
         location.href = window.location.pathname + "/addStudent";
         //console.log(window.location.pathname);
     });
+
+    /* Выход из учётной записи */
+    $("#logout").click(function(e){
+        e.preventDefault();
+        $("#logout-form").submit();
+    });
+
+    /* Обработчик кнопки формы регистрации */
+    $("#btn-registr").click(function (e){
+        e.preventDefault()
+        $("#register-form").submit();
+    });
 });

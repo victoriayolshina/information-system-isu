@@ -29,4 +29,7 @@ public class DeansEmployee {
     private String patronymic;
 
     private String post;
+
+    private String username;
+    private String password;
 }

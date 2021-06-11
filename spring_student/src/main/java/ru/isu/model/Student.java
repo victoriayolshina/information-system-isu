@@ -2,9 +2,14 @@ package ru.isu.model;
 
 import lombok.*;
 import org.hibernate.validator.constraints.NotBlank;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.AuthorityUtils;
+//import org.springframework.security.core.GrantedAuthority;
+//import org.springframework.security.core.authority.AuthorityUtils;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.Collection;
 
 @Entity
 @Table(name = "student")
@@ -27,6 +32,7 @@ public class Student {
     private String patronymic;
 
     private String username;
+    private String password;
 
     @NotNull
     @ManyToOne(fetch = FetchType.EAGER)
@@ -35,11 +41,21 @@ public class Student {
 
     @Override
     public String toString() {
-        return "Student{" + "studentId=" + id
-                + ", surname=" + surname
-                + ", name=" + name
-                + ", patronymic=" + patronymic
-                + ", username=" + username
-                + ", faculty=" + faculty + '}';
+        return "Student{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", surname='" + surname + '\'' +
+                ", patronymic='" + patronymic + '\'' +
+                ", username='" + username + '\'' +
+                ", faculty=" + faculty +
+                '}';
     }
+
+
+
+//    public Collection<? extends GrantedAuthority> getAuthorities() {
+//        return AuthorityUtils.createAuthorityList();
+//    }
+
+
 }

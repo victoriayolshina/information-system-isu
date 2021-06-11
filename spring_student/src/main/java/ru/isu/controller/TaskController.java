@@ -118,7 +118,8 @@ public class TaskController {
 
             gantCustomClassArrayList.add(gantCustomClass);
         }
-//        System.out.println(gantCustomClassArrayList.toString());
+
+       System.out.println(gantCustomClassArrayList.toString());
 
         return gantCustomClassArrayList;
     }

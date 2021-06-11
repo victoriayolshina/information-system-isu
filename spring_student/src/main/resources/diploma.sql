@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1
--- Время создания: Июн 06 2021 г., 18:59
+-- Время создания: Июн 11 2021 г., 16:44
 -- Версия сервера: 10.4.18-MariaDB
 -- Версия PHP: 8.0.3
 
@@ -24,6 +24,28 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Структура таблицы `auto_user`
+--
+
+CREATE TABLE `auto_user` (
+  `id` int(11) NOT NULL,
+  `username` varchar(225) NOT NULL,
+  `role` varchar(225) NOT NULL,
+  `password` varchar(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Дамп данных таблицы `auto_user`
+--
+
+INSERT INTO `auto_user` (`id`, `username`, `role`, `password`) VALUES
+(1, 'nataliasemicheva', 'ROLE_USER', 'pass'),
+(2, 'leonidriabets', 'ROLE_USER', 'pass'),
+(3, 'victoriayolshina', 'ROLE_USER', 'pass');
+
+-- --------------------------------------------------------
+
+--
 -- Структура таблицы `curator`
 --
 
@@ -33,16 +55,18 @@ CREATE TABLE `curator` (
   `name` varchar(225) NOT NULL,
   `patronymic` varchar(225) NOT NULL,
   `degree` varchar(225) NOT NULL,
-  `email` varchar(225) NOT NULL
+  `email` varchar(225) NOT NULL,
+  `username` varchar(225) NOT NULL,
+  `password` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `curator`
 --
 
-INSERT INTO `curator` (`id`, `surname`, `name`, `patronymic`, `degree`, `email`) VALUES
-(1, 'Рябец', 'Леонид ', 'Владимирович', 'доцент', 'riabets@gmail.com'),
-(2, 'Семичева', 'Наталья', 'Леонидовна', 'доцент', 'leonidovna_natalia@gmail.com');
+INSERT INTO `curator` (`id`, `surname`, `name`, `patronymic`, `degree`, `email`, `username`, `password`) VALUES
+(1, 'Рябец', 'Леонид ', 'Владимирович', 'доцент', 'riabets@gmail.com', 'leonidriabets', 'pass'),
+(2, 'Семичева', 'Наталья', 'Леонидовна', 'доцент', 'semicheva@gmail.com', 'nataliasemicheva', 'pass');
 
 -- --------------------------------------------------------
 
@@ -55,15 +79,17 @@ CREATE TABLE `deansemployee` (
   `surname` varchar(225) NOT NULL,
   `name` varchar(225) NOT NULL,
   `patronymic` varchar(225) NOT NULL,
-  `post` varchar(225) NOT NULL
+  `post` varchar(225) NOT NULL,
+  `username` varchar(225) NOT NULL,
+  `password` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `deansemployee`
 --
 
-INSERT INTO `deansemployee` (`id`, `surname`, `name`, `patronymic`, `post`) VALUES
-(1, 'Семичева', 'Наталья', 'Леонидовна', 'доцент');
+INSERT INTO `deansemployee` (`id`, `surname`, `name`, `patronymic`, `post`, `username`, `password`) VALUES
+(1, 'Семичева', 'Наталья', 'Леонидовна', 'доцент', 'nataliasemicheva', 'pass');
 
 -- --------------------------------------------------------
 
@@ -161,18 +187,17 @@ CREATE TABLE `student` (
   `name` varchar(225) NOT NULL,
   `patronymic` varchar(225) NOT NULL,
   `faculty` int(11) NOT NULL,
-  `username` varchar(225) NOT NULL
+  `username` varchar(225) NOT NULL,
+  `password` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `student`
 --
 
-INSERT INTO `student` (`id`, `surname`, `name`, `patronymic`, `faculty`, `username`) VALUES
-(1, 'Ёлшина', 'Виктория', 'Евгеньевна', 1, 'yolshina2017'),
-(2, 'Кислянников ', 'Марк', 'Александрович', 3, 'kislyannikov2018'),
-(9, 'Иванов', 'Иван', 'Иванович', 3, 'ivanivanovich2014'),
-(10, 'Ёлшина', 'Виктория', 'Евгеньевна', 1, 'victoria__yolshina');
+INSERT INTO `student` (`id`, `surname`, `name`, `patronymic`, `faculty`, `username`, `password`) VALUES
+(1, 'Ёлшина', 'Виктория', 'Евгеньевна', 1, 'victoriayolshina', 'pass'),
+(2, 'Кислянников ', 'Марк', 'Александрович', 3, 'markkislyannikov', 'pass');
 
 -- --------------------------------------------------------
 
@@ -215,12 +240,10 @@ CREATE TABLE `tasks` (
 --
 
 INSERT INTO `tasks` (`id`, `datastart`, `dataend`, `task`, `description`, `practice`) VALUES
-(19, '2021-03-20', '2021-03-06', 'Изучение JAVA.', 'JAVAJAVA', 1),
-(20, '2021-02-12', '2021-02-21', 'Заполнение дневника практики.', 'По инструкции ручками заполнили дневник.', 1),
-(21, '2021-02-27', '2021-02-16', 'Изучение JAVA.', '', 1),
-(22, '2021-02-13', '2021-02-09', 'Инструктаж по технике безопасности. Знакомство с организацией.', '', 1),
-(24, '2021-03-18', '2021-03-19', 'Изучение JAVA.', 'JAVA', 1),
-(25, '2021-02-07', '2021-02-11', 'Изучение Spring.', '', 1);
+(29, '2021-02-15', '2021-02-16', 'Знакомство с проектной документацией и устройством компании.', '', 1),
+(33, '2021-02-17', '2021-02-18', 'Инструктаж по технике безопасности. Знакомство с организацией.', 'По инструкции ручками заполнили дневник.', 1),
+(34, '2021-02-19', '2021-02-23', 'Изучение скриптов, имеющихся у компании.', 'JAVA', 1),
+(36, '2021-02-24', '2021-03-01', 'Написание методов визуализации системного времени и среднего значения загрузки системы за заданный период времени.', '', 1);
 
 -- --------------------------------------------------------
 
@@ -264,6 +287,12 @@ INSERT INTO `typeofpractice` (`id`, `name`, `curator`) VALUES
 --
 -- Индексы сохранённых таблиц
 --
+
+--
+-- Индексы таблицы `auto_user`
+--
+ALTER TABLE `auto_user`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Индексы таблицы `curator`
@@ -336,6 +365,12 @@ ALTER TABLE `typeofpractice`
 --
 
 --
+-- AUTO_INCREMENT для таблицы `auto_user`
+--
+ALTER TABLE `auto_user`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
 -- AUTO_INCREMENT для таблицы `curator`
 --
 ALTER TABLE `curator`
@@ -387,7 +422,7 @@ ALTER TABLE `supervisior`
 -- AUTO_INCREMENT для таблицы `tasks`
 --
 ALTER TABLE `tasks`
-  MODIFY `id` bigint(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `id` bigint(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
 
 --
 -- AUTO_INCREMENT для таблицы `typeofdirection`

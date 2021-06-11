@@ -1,17 +1,59 @@
 package ru.isu.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
+//import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+//import org.springframework.security.core.Authentication;
+//import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import ru.isu.model.AutoUser;
+import ru.isu.model.Student;
+import ru.isu.repository.AutoUserRepository;
+import ru.isu.repository.StudentRepository;
 
 @Controller
 public class MainController {
 
+    public String gant(){
+        return "gant";
+    }
+
+    @Autowired
+    AutoUserRepository autoUserRepository;
+
+    //Первичная страница
     @RequestMapping(value = "/")
     public String home() {
         return "home";
     }
 
-    public String gant(){
-        return "gant";
+    //Переход на авторизацию
+    @RequestMapping(value = "/login")
+    public String login(){
+        return "login";
     }
+
+    //Переход на логирование
+    @RequestMapping(value = "/register", method= RequestMethod.GET)
+    public String goRegister(){
+        return "register";
+    }
+
+    //После регистирования с сохранением информации о пользовании
+    @RequestMapping(value = "/register", method=RequestMethod.POST)
+    public String register(@ModelAttribute AutoUser user){
+        autoUserRepository.save(user);
+
+        Authentication auth = new UsernamePasswordAuthenticationToken(
+                user, user.getPassword(), user.getAuthorities());
+        SecurityContextHolder.getContext().setAuthentication(auth);
+        return "home";
+    }
+
+
 }
