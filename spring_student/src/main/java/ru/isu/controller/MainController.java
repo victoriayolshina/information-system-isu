@@ -34,13 +34,28 @@ public class MainController {
         return "home";
     }
 
-    //Первичная страница
-    @RequestMapping(value = "/home")
+    @RequestMapping(value = "/")
     public String home(Authentication authentication) {
-        System.out.println(authentication.isAuthenticated());
+        AutoUser autoUser = autoUserRepository.findAutoUserByUsername(authentication.getName());
+        switch (autoUser.getRole()){
+            case ("ROLE_STUDENT"):
+                return "redirect:/student/{studentId}";
+            case ("ROLE_CURATOR"):
+                return "redirect:/curator/{curatorId}";
+            case ("ROLE_DEANSOFFICE"):
+                return "redirect:/deansoffice/{deansofficeId}";
+        }
         System.out.println("home");
         return "home";
     }
+
+//    //Первичная страница
+//    @RequestMapping(value = "/home")
+//    public String home(Authentication authentication) {
+//        System.out.println(authentication.isAuthenticated());
+//        System.out.println("home");
+//        return "home";
+//    }
 
     //Переход на авторизацию
     @RequestMapping(value = "/login")

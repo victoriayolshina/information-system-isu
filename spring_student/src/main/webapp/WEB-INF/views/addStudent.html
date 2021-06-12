@@ -46,11 +46,18 @@
             </select>
         </div>
         <div class="form-group">
-            <label for="student-year">Имя пользователя</label>
-            <input id="student-year" class="form-control"
+            <label for="student-username">Имя пользователя</label>
+            <input id="student-username" class="form-control"
                    th:field="*{username}"/>
             <span th:if="${#fields.hasErrors('username')}"
-                  th:errors="${student.username}" class="badge badge-danger"></span>
+                  th:errors="${student.username}" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label for="student-password">Пароль</label>
+            <input id="student-password" class="form-control"
+                   th:field="*{password}"/>
+            <span th:if="${#fields.hasErrors('password')}"
+                  th:errors="${student.password}" class="text-danger"></span>
         </div>
         <button type="submit" id="btnsavestudents">Сохранить</button>
     </form>

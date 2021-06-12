@@ -21,8 +21,15 @@
 
     <bean id="templateEngine"
           class="org.thymeleaf.spring4.SpringTemplateEngine">
-        <property name="templateResolver" ref="templateResolver"/>
-        <property name="enableSpringELCompiler" value="true"/>
+        <property name="templateResolver" ref="templateResolver" />
+        <property name="enableSpringELCompiler" value="true" />
+<!--        &lt;!&ndash;Security addon &ndash;&gt;-->
+<!--        <property name="additionalDialects">-->
+<!--            <set>-->
+<!--                &lt;!&ndash; Note the package would change to 'springsecurity[3|4]' if you are using that version &ndash;&gt;-->
+<!--                <bean class="org.thymeleaf.extras.springsecurity4.dialect.SpringSecurityDialect"/>-->
+<!--            </set>-->
+<!--        </property>-->
     </bean>
 
     <bean id="viewResolver" class="org.thymeleaf.spring4.view.ThymeleafViewResolver">

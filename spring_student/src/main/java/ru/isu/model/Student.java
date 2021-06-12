@@ -32,6 +32,7 @@ public class Student {
     private String patronymic;
 
     private String username;
+
     private String password;
 
     @NotNull
@@ -47,15 +48,8 @@ public class Student {
                 ", surname='" + surname + '\'' +
                 ", patronymic='" + patronymic + '\'' +
                 ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
                 ", faculty=" + faculty +
                 '}';
     }
-
-
-
-//    public Collection<? extends GrantedAuthority> getAuthorities() {
-//        return AuthorityUtils.createAuthorityList();
-//    }
-
-
 }

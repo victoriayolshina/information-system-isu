@@ -1,4 +1,4 @@
-package ru.isu.model;
+package ru.isu.model.Custom;
 
 import lombok.Data;
 import lombok.Getter;
@@ -23,4 +23,6 @@ public class CustomClass {
     private String patronymic;
 
     private String username;
+
+    private String password;
 }

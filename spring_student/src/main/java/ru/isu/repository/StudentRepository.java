@@ -21,11 +21,16 @@ public interface StudentRepository extends CrudRepository<Student, Long> {
 
     @Query("SELECT s FROM Student s WHERE s.id= :id")
     Student findStudentById(
-            @Param("id") int studentId
+            @Param("id") long studentId
     );
 
     @Query("SELECT s FROM Student s WHERE s.username= :username")
     Student findByUsername(
             @Param("username") String username
     );
+
+//    @Query("SELECT s FROM Student s WHERE s.surname= :surname AND s.name = :name AND s.patronymic = :patronymic")
+//    Student findByFullName(
+//            @Param("fullname") String surname, String name, String patronymic
+//    );
 }
