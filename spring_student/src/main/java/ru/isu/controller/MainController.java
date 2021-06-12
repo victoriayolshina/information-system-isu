@@ -1,9 +1,6 @@
 package ru.isu.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-//import org.springframework.security.core.Authentication;
-//import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -13,9 +10,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import ru.isu.model.AutoUser;
-import ru.isu.model.Student;
+
 import ru.isu.repository.AutoUserRepository;
-import ru.isu.repository.StudentRepository;
+
 
 @Controller
 public class MainController {
@@ -34,18 +31,20 @@ public class MainController {
         return "home";
     }
 
-    @RequestMapping(value = "/")
+    @RequestMapping(value = "/enter")
     public String home(Authentication authentication) {
         AutoUser autoUser = autoUserRepository.findAutoUserByUsername(authentication.getName());
+        System.out.println(autoUser.getRole());
+
         switch (autoUser.getRole()){
             case ("ROLE_STUDENT"):
-                return "redirect:/student/{studentId}";
+                return String.format("redirect:/student");
             case ("ROLE_CURATOR"):
-                return "redirect:/curator/{curatorId}";
+                return String.format("redirect:/curator");
             case ("ROLE_DEANSOFFICE"):
-                return "redirect:/deansoffice/{deansofficeId}";
+                return String.format("redirect:/deansoffise");
         }
-        System.out.println("home");
+
         return "home";
     }
 
@@ -58,8 +57,15 @@ public class MainController {
 //    }
 
     //Переход на авторизацию
-    @RequestMapping(value = "/login")
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
     public String login(Model model){
+        System.out.println("Login");
+        return "login";
+    }
+
+    //Переход на авторизацию
+    @RequestMapping(value = "/login", method = RequestMethod.GET)
+    public String getlogin(Model model){
         System.out.println("Login");
         return "login";
     }
