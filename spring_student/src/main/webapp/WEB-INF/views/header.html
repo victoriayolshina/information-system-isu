@@ -3,7 +3,7 @@
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=cp1251">
-    <script th:src="@{/resources/globalbtn.js}"></script>
+    <script th:src="@{/resourses/globalbtn.js}"></script>
 </head>
 
 <body>
@@ -15,34 +15,33 @@
 
 
             <ul class="nav navbar-nav" >
-                <li sec:authorize="hasRole('STAD')"><a
-                        th:href="@{/students/}">Students</a></li>
                 <li><a
-                        sec:authentication="isAuthenticated()"
+                        th:href="@{/students}">Students</a></li>
+                <li><a
+
                         th:href="@{/practice}">Practice</a></li>
                 <li><a
-                        sec:authentication="isFullyAuthenticated()"
+
                         th:href="@{/tasks/1}">Tasks</a></li>
 
 
-                <li sec:authentication="isAuthenticated()">
+                <li>
                     <p class="navbar-text">
                         Welcome
-                        <span id="userinfo" sec:authentication="name"></span>
+                        <span id="userinfo"></span>
                     </p>
                 </li>
-                <li sec:authorize="isAuthenticated()">
-                    <p class="navbar-text"><a id="logout" href="#">Logout</a></p>
-                    <form id="logout-form" th:action="@{/logout}" method="post">
+                <li>
+                    <p class="navbar-text"><a id="logout">Logout</a></p>
+                    <form id="logout-form" th:action="@{/logout}" method="POST">
                     </form>
                 </li>
-                <li  sec:authorize="isAnonymous()">
+                <li sec:authorize="!isAuthenticated()">
                     <a th:href="@{/login}">Sign In</a>
                 </li>
-                <li sec:authorize="isFullyAuthenticated()">
+                <li sec:authorize="!isAuthenticated()">
                     <a th:href="@{/register}">Register</a>
                 </li>
-
             </ul>
         </div>
 </nav>

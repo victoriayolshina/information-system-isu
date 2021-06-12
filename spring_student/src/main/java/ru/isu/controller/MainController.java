@@ -8,6 +8,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -29,12 +30,21 @@ public class MainController {
     //Первичная страница
     @RequestMapping(value = "/")
     public String home() {
+        System.out.println("home");
+        return "home";
+    }
+
+    //Первичная страница
+    @RequestMapping(value = "/home")
+    public String home(Authentication authentication) {
+        System.out.println(authentication.isAuthenticated());
+        System.out.println("home");
         return "home";
     }
 
     //Переход на авторизацию
     @RequestMapping(value = "/login")
-    public String login(){
+    public String login(Model model){
         System.out.println("Login");
         return "login";
     }

@@ -40,6 +40,7 @@ $(document).ready(function () {
     /* Выход из учётной записи */
     $("#logout").click(function(e){
         e.preventDefault();
+        console.log("elem")
         $("#logout-form").submit();
     });
 

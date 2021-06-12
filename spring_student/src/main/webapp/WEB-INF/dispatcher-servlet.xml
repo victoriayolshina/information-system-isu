@@ -33,4 +33,17 @@
     </bean>
 
     <mvc:resources location="/resourses/" mapping="/resourses/**"/>
+
+    <mvc:interceptors>
+        <bean class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
+            <property name="paramName" value="lang" />
+        </bean>
+    </mvc:interceptors>
+
+    <bean id="localeResolver"
+          class="org.springframework.web.servlet.i18n.CookieLocaleResolver">
+        <property name="defaultLocale" value="en" />
+        <property name="cookieName" value="bookLocaleCookie"></property>
+        <property name="cookieMaxAge" value="3600"></property>
+    </bean>
 </beans>

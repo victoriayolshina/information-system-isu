@@ -23,7 +23,7 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
         System.out.println("custom");
-        System.out.println(authentication);
+        System.out.println(authentication.getPrincipal());
         UsernamePasswordAuthenticationToken token = (UsernamePasswordAuthenticationToken) authentication;
         AutoUser user = autoUserRepository.findAutoUserByUsername(token.getName());
         if(user==null) {
