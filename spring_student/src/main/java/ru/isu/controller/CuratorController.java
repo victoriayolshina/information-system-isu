@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import ru.isu.model.Custom.CustomClass;
 import ru.isu.model.Faculty;
+import ru.isu.model.Practice;
 import ru.isu.model.Student;
 import ru.isu.repository.CuratorRepository;
 import ru.isu.repository.FacultyRepository;
@@ -53,25 +54,24 @@ public class CuratorController {
     }
 
     @RequestMapping(value = "/faculty/{facultyId}/new", method = RequestMethod.POST)
-    public String newFaculty(@ModelAttribute Faculty faculty, @PathVariable("facultyId") int facultyId, Model model) {
+    public String addFaculty(@ModelAttribute Faculty faculty, @PathVariable("facultyId") long facultyId, Model model) {
         facultyRepository.save(faculty);
         return String.format("redirect:/faculty/%d", facultyId);
     }
 
     @RequestMapping(value = "/faculty/{facultyId}", method = RequestMethod.POST)
-    public String editFaculty(@ModelAttribute Faculty faculty, @PathVariable("facultyId") int facultyId, Model model) {
-        facultyRepository.delete(faculty);
-
+    public String editFaculty(@ModelAttribute Faculty faculty, @PathVariable("facultyId") long facultyId, Model model) {
+        facultyRepository.delete(facultyId);
+        //
         return String.format("redirect:/faculty/%d", facultyId);
     }
 
     @RequestMapping(value = "/faculty/{facultyId}", method = RequestMethod.DELETE)
     @ResponseBody
-    public String deleteTask(@ModelAttribute Faculty faculty, @PathVariable("facultyId") long facultyId, Model model) {
+    public String deleteFaculty(@ModelAttribute Faculty faculty, @PathVariable("facultyId") long facultyId, Model model) {
         facultyRepository.delete(facultyId);
         return String.format("redirect:/faculty/%d", facultyId);
     }
-
 
     @RequestMapping(value = "/faculty/{facultyId}/students", method = RequestMethod.GET)
     public String getAllStudent(@PathVariable("facultyId") int facultyId, Model model) {
@@ -97,7 +97,7 @@ public class CuratorController {
         return "addStudent";
     }
 
-    @RequestMapping(value = "/add", method = RequestMethod.POST)
+    @RequestMapping(value = "/faculty/{facultyId}/students/new", method = RequestMethod.POST)
     public String saveStudent(@ModelAttribute CustomClass customClassStudent) {
         Student student = new Student();
         student.setUsername(customClassStudent.getUsername());
@@ -112,6 +112,22 @@ public class CuratorController {
         return String.format("redirect:/students/students");
     }
 
+    @RequestMapping(value = "/faculty/{facultyId}/students/{studentId}", method = RequestMethod.POST)
+    public String editStudent(@ModelAttribute Student student, @PathVariable int facultyId, @PathVariable int studentId) {
+        studentRepository.delete((long)studentId);
+        Faculty faculty = facultyRepository.findFacultyById(facultyId);
+        student.setFaculty(faculty);
+        student.setId(studentId);
+        studentRepository.save(student);
+        return String.format("redirect:/faculty/%d/students/%d", facultyId, studentId);
+    }
+
+    @RequestMapping(value = "/faculty/{facultyId}/students/{studentId}", method = RequestMethod.POST)
+    public String deleteStudent(@ModelAttribute Student student, @PathVariable int facultyId, @PathVariable long studentId) {
+        studentRepository.delete(studentId);
+        return String.format("redirect:/faculty/%d/students/%d", facultyId, studentId);
+    }
+
     @RequestMapping(value = "/practice", method = RequestMethod.GET)
     public String getAllPractice(@PathVariable("studentId") int studentId, Model model) {
         model.addAttribute("practices", practiceRepository.findPracticeByIdStudent(studentId));
@@ -123,5 +139,25 @@ public class CuratorController {
         model.addAttribute("practice", practiceRepository.findPracticeById(studentId));
         return "practice";
     }
+
+    @RequestMapping(value = "/practice/{practiceId}", method = RequestMethod.POST)
+    public String editPractice(@ModelAttribute Practice practice, @PathVariable("studentId") int studentId, @PathVariable int practiceId, Model model) {
+        practiceRepository.delete((long)practiceId);
+        //
+        return "editpractice";
+    }
+
+    @RequestMapping(value = "/practice/{practiceId}", method = RequestMethod.DELETE)
+    public String deletePractice(@PathVariable("studentId") int studentId, @PathVariable long practiceId, Model model) {
+        practiceRepository.delete(practiceId);
+        return String.format("redirect:/practice/%d",practiceId);
+    }
+
+    @RequestMapping(value = "/practice/new", method = RequestMethod.GET)
+    public String addPractice(@ModelAttribute Practice practice, @PathVariable("practiceId") long practiceId, Model model) {
+        practiceRepository.save(practice);
+        return "redirect:/practice/new";
+    }
+
 
 }
