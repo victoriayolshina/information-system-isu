@@ -29,4 +29,8 @@ public class Supervisor {
     private String patronymic;
 
     private String post;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "placeofpractice")
+    private PlaceOfPractice placeOfPractice;
 }

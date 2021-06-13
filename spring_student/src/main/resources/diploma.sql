@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1
--- Время создания: Июн 11 2021 г., 18:12
+-- Время создания: Июн 13 2021 г., 10:27
 -- Версия сервера: 10.4.18-MariaDB
 -- Версия PHP: 8.0.3
 
@@ -40,8 +40,8 @@ CREATE TABLE `auto_user` (
 
 INSERT INTO `auto_user` (`id`, `username`, `role`, `password`) VALUES
 (1, 'nataliasemicheva', 'ROLE_ADMIN', 'pass'),
-(2, 'leonidriabets', 'ROLE_CURATOR', 'pass'),
-(3, 'victoriayolshina', 'ROLE_STUDENT', 'pass');
+(2, 'leonidriabets', 'ROLE_USER', 'pass'),
+(3, 'victoriayolshina', 'ROLE_USER', 'pass');
 
 -- --------------------------------------------------------
 
@@ -210,15 +210,16 @@ CREATE TABLE `supervisior` (
   `surname` varchar(225) NOT NULL,
   `name` varchar(225) NOT NULL,
   `patronymic` varchar(225) NOT NULL,
-  `post` varchar(225) NOT NULL
+  `post` varchar(225) NOT NULL,
+  `placeofpractice` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `supervisior`
 --
 
-INSERT INTO `supervisior` (`id`, `surname`, `name`, `patronymic`, `post`) VALUES
-(1, 'Журавлёв', 'Павел', 'Александрович', 'руководитель отдела внедрения и развития информационных систем');
+INSERT INTO `supervisior` (`id`, `surname`, `name`, `patronymic`, `post`, `placeofpractice`) VALUES
+(1, 'Журавлёв', 'Павел', 'Александрович', 'руководитель отдела внедрения и развития информационных систем', 1);
 
 -- --------------------------------------------------------
 

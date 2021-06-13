@@ -1,10 +1,10 @@
 package ru.isu.repository;
 
-import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
+import ru.isu.model.Faculty;
 import ru.isu.model.Student;
 
 import java.util.List;
@@ -24,13 +24,8 @@ public interface StudentRepository extends CrudRepository<Student, Long> {
             @Param("id") int studentId
     );
 
-    @Query("SELECT s FROM Student s WHERE s.username= :username")
-    Student findByUsername(
-            @Param("username") String username
+    @Query("SELECT s FROM Student s WHERE s.id= :id")
+    List<Student> findStudentsByFacultyId(
+            @Param("faculty") int faculty
     );
-
-//    @Query("SELECT s FROM Student s WHERE s.surname= :surname AND s.name = :name AND s.patronymic = :patronymic")
-//    Student findByFullName(
-//            @Param("fullname") String surname, String name, String patronymic
-//    );
 }

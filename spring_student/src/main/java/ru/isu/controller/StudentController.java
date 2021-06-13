@@ -41,46 +41,36 @@ public class StudentController {
         return "students";
     }
 
-    @RequestMapping(value = "/add")
-    public String addStudent(Model model) {
-        Student student = new Student();
-        CustomClass customClass = new CustomClass();
-        List<Faculty> faculties = facultyRepository.findAll();
-        System.out.println(faculties);
-        model.addAttribute("student", student);
-        model.addAttribute("customsStudent", customClass);
-        model.addAttribute("faculty", faculties);
-        return "addStudent";
-    }
-
-    @RequestMapping(value = "/add", method = RequestMethod.POST)
-    public String saveStudent(@ModelAttribute CustomClass customClassStudent) {
-        Student student = new Student();
-        student.setUsername(customClassStudent.getUsername());
-        student.setPassword(customClassStudent.getPassword());
-        student.setSurname(customClassStudent.getSurname());
-        student.setPatronymic(customClassStudent.getPatronymic());
-        student.setName(customClassStudent.getName());
-        student.setFaculty(facultyRepository.findGroupById(customClassStudent.getFaculty()));
-        System.out.println(student);
-        //System.out.println(group_students);
-        studentRepository.save(student);
-        return "redirect:/students/students";
-    }
-
-    //Удаление записи из общего списка
-    @RequestMapping(value = "/{page}/{taskId}", method = RequestMethod.DELETE)
-    @ResponseBody
-    public String deleteTask(@PathVariable("taskId") long taskId) {
-        taskRepository.delete(taskId);
-        return "redirect:/tasks/{practiceId}/task";
-    }
-
+//    @RequestMapping(value = "/add")
+//    public String addStudent(Model model) {
+//        Student student = new Student();
+//        CustomClass customClass = new CustomClass();
+//        List<Faculty> faculties = facultyRepository.findAll();
+//        System.out.println(faculties);
+//        model.addAttribute("student", student);
+//        model.addAttribute("customsStudent", customClass);
+//        model.addAttribute("faculty", faculties);
+//        return "addStudent";
+//    }
+//
+//    @RequestMapping(value = "/add", method = RequestMethod.POST)
+//    public String saveStudent(@ModelAttribute CustomClass customClassStudent) {
+//        Student student = new Student();
+//        student.setUsername(customClassStudent.getUsername());
+//        student.setPassword(customClassStudent.getPassword());
+//        student.setSurname(customClassStudent.getSurname());
+//        student.setPatronymic(customClassStudent.getPatronymic());
+//        student.setName(customClassStudent.getName());
+//        student.setFaculty(facultyRepository.findFacultyById(customClassStudent.getFaculty()));
+//        System.out.println(student);
+//        //System.out.println(group_students);
+//        studentRepository.save(student);
+//        return "redirect:/students/students";
+//    }
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String getStudent(Model model, Authentication authentication) {
         UsernamePasswordAuthenticationToken token = (UsernamePasswordAuthenticationToken) authentication;
-
         System.out.println(token.getName());
         model.addAttribute("student", studentRepository.findStudentById(1));
         return "studentInfo";
@@ -88,15 +78,13 @@ public class StudentController {
 
     @RequestMapping(value = "/{studentId}/practice", method = RequestMethod.GET)
     public String getAllPractice(@PathVariable("studentId") int studentId, Model model) {
-        Student student = studentRepository.findStudentById(studentId);
-        model.addAttribute("practices", practiceRepository.findPracticeByIdStudent(student));
+        model.addAttribute("practices", practiceRepository.findPracticeByIdStudent(studentId));
         return "practices";
     }
 
     @RequestMapping(value = "/{studentId}/practice/{practiceId}", method = RequestMethod.GET)
     public String getPractice(@PathVariable("studentId") int studentId, @PathVariable int practiceId, Model model) {
-        Student student = studentRepository.findStudentById(studentId);
-        model.addAttribute("practices", practiceRepository.findPracticeByIdStudent(student));
+        model.addAttribute("practice", practiceRepository.findPracticeById(studentId));
         return "practice";
     }
 
@@ -107,12 +95,34 @@ public class StudentController {
         return "tasks";
     }
 
+    @RequestMapping(value = "/{studentId}/practice/{practiceId}/tasks/{taskId}", method = RequestMethod.GET)
+    public String getTask(@PathVariable long taskId, Model model) {
+        model.addAttribute("task", taskRepository.findTaskById(taskId));
+        return "task";
+    }
 
     @RequestMapping(value = "/{studentId}/practice/{practiceId}/tasks/new", method = RequestMethod.POST)
-    public String addTask(@ModelAttribute Task task, @PathVariable("practiceId") int practiceId) {
+    public String addTask(@ModelAttribute Task task, @PathVariable("practiceId") int practiceId, @PathVariable int studentId) {
         task.setPractice(practiceRepository.findPracticeById(practiceId));
+        return String.format("redirect:/%d/practice/%d/tasks", studentId, practiceId);
+    }
 
-        return "redirect:";
+    @RequestMapping(value = "/{studentId}/practice/{practiceId}/tasks/{taskId}", method = RequestMethod.POST)
+    public String editTask(@ModelAttribute Task task, @PathVariable int practiceId, @PathVariable long taskId, @PathVariable String studentId) {
+        taskRepository.delete(taskId);
+        Practice practice = practiceRepository.findPracticeById(practiceId);
+        task.setPractice(practice);
+        task.setId(taskId);
+        taskRepository.save(task);
+//        return "redirect:/task/{practiceId}";
+        return String.format("redirect:/%d/practice/%d/tasks", studentId, practiceId);
+    }
+
+    @RequestMapping(value = "/{studentId}/practice/{practiceId}/tasks/{taskId}", method = RequestMethod.DELETE)
+    @ResponseBody
+    public String deleteTask(@ModelAttribute Task task, @PathVariable long taskId, @PathVariable String studentId, @PathVariable String practiceId) {
+        taskRepository.delete(taskId);
+        return String.format("redirect:/%d/practice/%d/tasks", studentId, practiceId);
     }
 
     @RequestMapping(value = "/{studentId}/practice/{practiceId}/tasks/gant", method = RequestMethod.GET)
@@ -145,33 +155,4 @@ public class StudentController {
 
         return gantCustomClassArrayList;
     }
-
-
-    @RequestMapping(value = "/{studentId}/practice/{practiceId}/tasks/{taskId}", method = RequestMethod.GET)
-    public String getTask(@PathVariable long taskId, Model model) {
-        model.addAttribute("task", taskRepository.findTaskById(taskId));
-        return "task";
-    }
-
-
-    @RequestMapping(value = "/{studentId}/practice/{practiceId}/tasks/{taskId}", method = RequestMethod.POST)
-    public String editTask(@ModelAttribute Task task, @PathVariable int practiceId, @PathVariable long taskId) {
-        taskRepository.delete(taskId);
-
-        Practice practice = practiceRepository.findPracticeById(practiceId);
-        task.setPractice(practice);
-        task.setId(taskId);
-        taskRepository.save(task);
-
-        return "redirect:/task/{practiceId}";
-    }
-
-
-    @RequestMapping(value = "/{studentId}/practice/{practiceId}/tasks/{taskId}", method = RequestMethod.DELETE)
-    @ResponseBody
-    public String deleteTask(@ModelAttribute Task task, @PathVariable long taskId) {
-        taskRepository.delete(taskId);
-        return "ok";
-    }
-
 }
