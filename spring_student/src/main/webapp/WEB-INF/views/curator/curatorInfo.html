@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html
+        xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=cp1251">
+    <title>Информация о кураторе:</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    <script th:src="@{/resourses/globalbtn.js}"></script>
+
+</head>
+<!-- Страница информации о пользователе -->
+<body id = "body">
+<div th:replace="../views/header :: header"></div>
+<div class = "container">
+    <div class="row">
+        <h1>Фамилия</h1>
+        <p th:text="${curator.getSurname()}"></p>
+        <h2>Имя</h2>
+        <p th:text="${curator.getName()}"></p>
+        <h2>Отчество</h2>
+        <p th:text="${curator.getPatronymic()}"></p>
+        <h2>Преподавательская должность</h2>
+        <p th:text="${curator.getDegree()}"></p>
+        <h2>Email</h2>
+        <p th:text="${curator.getEmail()}"></p>
+        <h2>Имя пользователя</h2>
+        <p th:text="${curator.getUsername()}"></p>
+    </div>
+</div>
+</body>
+</html>

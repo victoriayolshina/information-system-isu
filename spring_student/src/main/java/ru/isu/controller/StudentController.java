@@ -7,7 +7,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import ru.isu.model.*;
-import ru.isu.model.Custom.CustomClass;
 import ru.isu.model.Custom.GantCustomClass;
 import ru.isu.model.Custom.Values;
 import ru.isu.repository.FacultyRepository;
@@ -38,7 +37,7 @@ public class StudentController {
     @RequestMapping("/students")
     public String all(Model model) {
         model.addAttribute("students", studentRepository.findAll());
-        return "students";
+        return "curator/students";
     }
 
 //    @RequestMapping(value = "/add")
@@ -73,32 +72,32 @@ public class StudentController {
         UsernamePasswordAuthenticationToken token = (UsernamePasswordAuthenticationToken) authentication;
         System.out.println(token.getName());
         model.addAttribute("student", studentRepository.findStudentById(1));
-        return "studentInfo";
+        return "students/studentInfo";
     }
 
     @RequestMapping(value = "/{studentId}/practice", method = RequestMethod.GET)
     public String getAllPractice(@PathVariable("studentId") int studentId, Model model) {
         model.addAttribute("practices", practiceRepository.findPracticeByIdStudent(studentId));
-        return "practices";
+        return "curator/practices";
     }
 
     @RequestMapping(value = "/{studentId}/practice/{practiceId}", method = RequestMethod.GET)
     public String getPractice(@PathVariable("studentId") int studentId, @PathVariable int practiceId, Model model) {
         model.addAttribute("practice", practiceRepository.findPracticeById(studentId));
-        return "practice";
+        return "curator/practice";
     }
 
     @RequestMapping(value = "/{studentId}/practice/{practiceId}/tasks", method = RequestMethod.GET)
     public String getAllTask(@PathVariable("practiceId") int practiceId, Model model) {
         Practice practice = practiceRepository.findPracticeById(practiceId);
         model.addAttribute("tasks", taskRepository.findTasksByIdPractice(practice));
-        return "tasks";
+        return "students/tasks";
     }
 
     @RequestMapping(value = "/{studentId}/practice/{practiceId}/tasks/{taskId}", method = RequestMethod.GET)
     public String getTask(@PathVariable long taskId, Model model) {
         model.addAttribute("task", taskRepository.findTaskById(taskId));
-        return "task";
+        return "students/task";
     }
 
     @RequestMapping(value = "/{studentId}/practice/{practiceId}/tasks/new", method = RequestMethod.POST)
@@ -127,7 +126,7 @@ public class StudentController {
 
     @RequestMapping(value = "/{studentId}/practice/{practiceId}/tasks/gant", method = RequestMethod.GET)
     public String getGantHTML() {
-        return "gant";
+        return "students/gant";
     }
 
     @RequestMapping(value = "/{studentId}/practice/{practiceId}/tasks/gant", method = RequestMethod.POST)

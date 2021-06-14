@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=cp1251">
+    <title>Все места по прохождению практик</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<div th:replace="../views/header :: header"></div>
+
+<div class="container">
+    <h2 class="text-danger">Все студенты:</h2>
+    <table class="table">
+        <table class="table">
+            <thead>
+            <th>Название</th>
+            <th>Направление</th>
+            <th>Местоположение</th>
+            </thead>
+            <tbody>
+            <tr th:each="place:${places}">
+                <td th:text="${place.name}">
+                </td>
+                <td th:text="${place.typeofdirection}">
+                </td>
+                <td th:text="${place.location}">
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </table>
+</div>
+</body>
+</html>

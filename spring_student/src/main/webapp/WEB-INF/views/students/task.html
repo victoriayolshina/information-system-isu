@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html
+        xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=cp1251">
+    <title>Информация о пользователе:</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    <script th:src="@{/resourses/globalbtn.js}"></script>
+
+</head>
+<!-- Страница информации о пользователе -->
+<body id = "body">
+<div th:replace="../views/header :: header"></div>
+<div class = "container">
+    <div class="row">
+        <h1>Задание</h1>
+        <p th:text="${task.getTask()}"></p>
+        <h2>Дата начала</h2>
+        <p th:text="${task.getDatastart()}"></p>
+        <h2>Дата конца</h2>
+        <p th:text="${task.getDataend()}"></p>
+        <h2>Описание</h2>
+        <p th:text="${task.getDescription()}"></p>
+    </div>
+</div>
+</body>
+</html>

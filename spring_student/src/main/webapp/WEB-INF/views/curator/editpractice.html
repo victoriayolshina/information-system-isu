@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ru"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=cp1251">
+    <link rel="stylesheet" type="text/css" th:href="@{/resources/header.css}">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    <script th:src="@{/resourses/globalbtn.js}"></script>
+    <script th:src="@{/resourses/task.js}"></script>
+    <script th:src="@{/resourses/style.css}"></script>
+    <script th:inline="javascript">
+        /*<![CDATA[*/
+        var root = /*[[@{/}]]*/ 'default';
+        console.log(root);
+        /*]]>*/
+    </script>
+</head>
+<body>
+<div th:replace="../views/header :: header"></div>
+<!-- Таблица, в которой необходимо заполнить строки для добавления записи -->
+<div class="container">
+    <div class="row">
+        <table id="book-table" class="table">
+            <form id="edit-task-form" action="editTask"
+<!--                  th:action="@{/tasks/{practicId}/editTask/{taskId}/save(practicId = ${practiceId}, taskId = ${taskId})}"-->
+                  method="POST">
+                <thead>
+                <tr>
+                    <label for="Datastart">Дата начала</label>
+                    <input id="Datastart" name="Datastart" class="form-control" type="date"
+                           th:value="${practice.getStarttime()}"
+                    />
+                </tr>
+                <tr>
+                    <label for="Dataend">Дата конца</label>
+                    <input id="Dataend" name="Dataend" class="form-control" type="date"
+                           th:value="${practice.getEndtime()}"
+                    />
+                </tr>
+<!--                возможно сюда ещё лучше пихнуть возможность для того, чтобы поменять тип практики (учебная, производственая)-->
+                <p>
+                    <button type="submit" id="btn-edit" class="btn btn-primary">Сохранить</button>
+                </p>
+                </thead>
+            </form>
+        </table>
+    </div>
+</div>
+</body>
+</html>

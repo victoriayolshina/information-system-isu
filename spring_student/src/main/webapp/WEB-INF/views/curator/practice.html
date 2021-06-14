@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=cp1251">
+    <title>Все практики</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<div th:replace="../views/header :: header"></div>
+
+<!--<div class="container">-->
+<!--    <h2 class="text-danger">Все практики:</h2>-->
+<!--    <table class="table">-->
+<!--        <table class="table">-->
+<!--            <thead>-->
+<!--            <th>Начало практики</th>-->
+<!--            <th>Конец практики</th>-->
+<!--            <th>Должность</th>-->
+<!--            </thead>-->
+<!--            <tbody>-->
+<!--            <tr th:each="practices:${practice}">-->
+<!--                <td th:text="${practices.getStarttime()}">-->
+<!--                </td>-->
+<!--                <td th:text="${practices.getEndtime()}">-->
+<!--                </td>-->
+<!--                <td th:text="${practices.getPost()}">-->
+<!--                </td>-->
+<!--            </tr>-->
+<!--            </tbody>-->
+<!--        </table>-->
+<!--    </table>-->
+<!--</div>-->
+<div class="container">
+    <div class="row">
+        <h1>Начало практики</h1>
+        <p th:text="${practice.getStarttime()}"></p>
+        <h2>Конец практики</h2>
+        <p th:text="${practice.getEndtime()}"></p>
+    </div>
+</div>
+</body>
+</html>

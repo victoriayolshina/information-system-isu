@@ -40,8 +40,8 @@ CREATE TABLE `auto_user` (
 
 INSERT INTO `auto_user` (`id`, `username`, `role`, `password`) VALUES
 (1, 'nataliasemicheva', 'ROLE_ADMIN', 'pass'),
-(2, 'leonidriabets', 'ROLE_USER', 'pass'),
-(3, 'victoriayolshina', 'ROLE_USER', 'pass');
+(2, 'leonidriabets', 'ROLE_CURATOR', 'pass'),
+(3, 'victoriayolshina', 'ROLE_STUDENT', 'pass');
 
 -- --------------------------------------------------------
 
