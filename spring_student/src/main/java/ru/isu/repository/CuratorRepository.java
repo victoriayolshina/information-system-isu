@@ -19,4 +19,8 @@ public interface CuratorRepository extends JpaRepository<Curator, Long> {
     Curator findCuratorById(
             @Param("id") int curatorId
     );
+
+    @Query("SELECT c FROM Curator c WHERE c.username= ?1")
+    Curator findCuratorByUsername(String username);
+
 }

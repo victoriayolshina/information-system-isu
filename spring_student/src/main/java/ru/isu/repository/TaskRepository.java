@@ -17,9 +17,6 @@ public interface TaskRepository extends JpaRepository<Task, Long> {
     @Query("SELECT t FROM Task t WHERE t.id= ?1")
     Task findTaskById(long id);
 
-    @Query("SELECT t FROM Task t WHERE t.practice= ?1 and t.id= ?2")
-    Task findTaskByIdAndStudent(Practice practiceId, int taskId);
-
-    @Query("SELECT t FROM Task t WHERE t.practice= ?1 and t.id= ?2")
-    Task findTaskByIdAndStudent(int practiceId, int taskId);
+    @Query("SELECT p.id FROM Practice p WHERE p.student= ?1")
+    List<Integer> countTaskByPractice(Practice practice);
 }

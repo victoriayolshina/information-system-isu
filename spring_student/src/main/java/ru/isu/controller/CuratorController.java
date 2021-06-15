@@ -6,6 +6,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import ru.isu.model.Curator;
 import ru.isu.model.Custom.CustomClass;
 import ru.isu.model.Faculty;
 import ru.isu.model.Practice;
@@ -14,8 +15,6 @@ import ru.isu.repository.CuratorRepository;
 import ru.isu.repository.FacultyRepository;
 import ru.isu.repository.PracticeRepository;
 import ru.isu.repository.StudentRepository;
-
-import java.util.List;
 
 @Controller
 @RequestMapping("/curator")
@@ -33,45 +32,54 @@ public class CuratorController {
     @Autowired
     PracticeRepository practiceRepository;
 
+
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String getCurator(Model model, Authentication authentication) {
         UsernamePasswordAuthenticationToken token = (UsernamePasswordAuthenticationToken) authentication;
-        System.out.println(token.getName());
-        model.addAttribute("curator", curatorRepository.findCuratorById(1));
+        Curator curator = curatorRepository.findCuratorByUsername(token.getName());
+
+        model.addAttribute("curator", curator);
         return "curatorhtml/curatorInfo";
     }
 
     @RequestMapping(value = "/faculty", method = RequestMethod.GET)
     public String allFaculty(Model model) {
         model.addAttribute("faculties", facultyRepository.findAll());
+
         return "curatorhtml/allfaculties";
     }
 
     @RequestMapping(value = "/faculty/new", method = RequestMethod.GET)
-    public String addFaculty(@PathVariable("facultyId") long facultyId, Model model) {
+    public String addFaculty() {
         return "curatorhtml/addfaculty";
     }
 
     @RequestMapping(value = "/faculty/new", method = RequestMethod.POST)
-    public String saveFaculty(@ModelAttribute Faculty faculty, @PathVariable("facultyId") long facultyId, Model model) {
-        facultyRepository.save(faculty);
+    public String saveFaculty(@ModelAttribute Faculty faculty, Model model) {
+        System.out.println(faculty.toString());
+//        facultyRepository.save(faculty);
         return "redirect:/curator/faculty";
     }
 
     @RequestMapping(value = "/faculty/{facultyId}", method = RequestMethod.GET)
     public String getFaculty(@PathVariable("facultyId") int facultyId, Model model) {
+        if(facultyRepository.existsFacultyById(facultyId).isEmpty()){
+            return String.format("redirect:/curator/faculty");
+        }
+
         model.addAttribute("faculty", facultyRepository.findFacultyById(facultyId));
         return "curatorhtml/faculty";
     }
 
     @RequestMapping(value = "/faculty/{facultyId}", method = RequestMethod.POST)
     public String editFaculty(@ModelAttribute Faculty faculty, @PathVariable("facultyId") long facultyId, Model model) {
-        Faculty newfaculty = facultyRepository.findFacultyById((int) facultyId);
-        facultyRepository.delete(facultyId);
-        newfaculty.setName(faculty.getName());
-        newfaculty.setDirection(faculty.getDirection());
-        newfaculty.setYear(faculty.getYear());
-        facultyRepository.save(newfaculty);
+        System.out.println(faculty);
+//        Faculty newfaculty = facultyRepository.findFacultyById((int) facultyId);
+//        facultyRepository.delete(facultyId);
+//        newfaculty.setName(faculty.getName());
+//        newfaculty.setDirection(faculty.getDirection());
+//        newfaculty.setYear(faculty.getYear());
+//        facultyRepository.save(newfaculty);
 //        !!!!!!!!!!!!!!
         return String.format("redirect:/curator/faculty");
     }

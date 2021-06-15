@@ -4,9 +4,6 @@ window.onload = function () {
 }
 
 function deleteTask(taskId){
-    // console.log(taskId)
-    // var json = {id: taskId} JSON.stringify
-    //
 
 
     $.ajax({

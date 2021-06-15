@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    <script th:src="@{/resourses/globalbtn.js}"></script>
 </head>
 <body>
 
@@ -19,14 +20,21 @@
             <th>Начало практики</th>
             <th>Конец практики</th>
             <th>Должность</th>
+            <th>Переход на задачи</th>
+
             </thead>
             <tbody>
-            <tr th:each="practices:${practices}">
-                <td th:text="${practices.getStarttime()}">
+            <tr th:each="practice:${practices}">
+                <td th:text="${practice.getStarttime()}">
                 </td>
-                <td th:text="${practices.getEndtime()}">
+                <td th:text="${practice.getEndtime()}">
                 </td>
-                <td th:text="${practices.getPost()}">
+                <td th:text="${practice.getPost()}">
+                </td>
+                <td> <button type="button" id="goToTasks" data-toggle="modal" class="btn-default"
+                             th:value="${practice.getId()}" th:onclick="'goToTask(\'' + ${practice.getId()} + '\');'">
+                    <span class="glyphicon glyphicon-pencil"></span> Задачи
+                </button>
                 </td>
             </tr>
             </tbody>

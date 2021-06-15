@@ -51,3 +51,9 @@ $(document).ready(function () {
         $("#register-form").submit();
     });
 });
+
+function goToTask(id) {
+    var str = "/" + id + "/tasks"
+    console.log(str)
+    location.href = window.location.pathname + str;
+}
