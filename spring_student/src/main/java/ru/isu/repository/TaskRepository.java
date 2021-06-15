@@ -12,12 +12,14 @@ import java.util.List;
 
 public interface TaskRepository extends JpaRepository<Task, Long> {
     @Query("SELECT t FROM Task t WHERE t.practice= ?1 ORDER BY t.datastart")
-    List<Task> findTasksByIdPractice(Practice practice);
-
-//    @Modifying(clearAutomatically = true)
-//    @Query("UPDATE Task t SET t.data = ?1, t.task = ?2, t.description = ?3 WHERE t.id = ?4")
-//    void updateTaskById(Date data, String task, String description, long id);
+    List<Task> findTasksByPractice(Practice practice);
 
     @Query("SELECT t FROM Task t WHERE t.id= ?1")
     Task findTaskById(long id);
+
+    @Query("SELECT t FROM Task t WHERE t.practice= ?1 and t.id= ?2")
+    Task findTaskByIdAndStudent(Practice practiceId, int taskId);
+
+    @Query("SELECT t FROM Task t WHERE t.practice= ?1 and t.id= ?2")
+    Task findTaskByIdAndStudent(int practiceId, int taskId);
 }

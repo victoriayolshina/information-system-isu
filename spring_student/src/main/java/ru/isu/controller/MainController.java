@@ -44,7 +44,6 @@ public class MainController {
             case ("ROLE_DEANSOFFICE"):
                 return String.format("redirect:/deansoffise");
         }
-
         return "home";
     }
 
@@ -78,7 +77,7 @@ public class MainController {
 
     //После регистирования с сохранением информации о пользовании
     @RequestMapping(value = "/register", method=RequestMethod.POST)
-    public String register(@ModelAttribute AutoUser user){
+    public String register(@ModelAttribute AutoUser user) {
         System.out.println(user);
         autoUserRepository.save(user);
 
@@ -87,6 +86,5 @@ public class MainController {
         SecurityContextHolder.getContext().setAuthentication(auth);
         return "home";
     }
-
 
 }

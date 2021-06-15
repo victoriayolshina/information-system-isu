@@ -34,11 +34,11 @@ public class StudentController {
     TaskRepository taskRepository;
 
 
-    @RequestMapping("/students")
-    public String all(Model model) {
-        model.addAttribute("students", studentRepository.findAll());
-        return "curator/students";
-    }
+//    @RequestMapping("/students")
+//    public String all(Model model) {
+//        model.addAttribute("students", studentRepository.findAll());
+//        return "curator/students";
+//    }
 
 //    @RequestMapping(value = "/add")
 //    public String addStudent(Model model) {
@@ -70,70 +70,134 @@ public class StudentController {
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String getStudent(Model model, Authentication authentication) {
         UsernamePasswordAuthenticationToken token = (UsernamePasswordAuthenticationToken) authentication;
-        System.out.println(token.getName());
-        model.addAttribute("student", studentRepository.findStudentById(1));
+        Student student = studentRepository.findStudentByUsername(token.getName());
+        model.addAttribute("student", student);
         return "students/studentInfo";
     }
 
-    @RequestMapping(value = "/{studentId}/practice", method = RequestMethod.GET)
-    public String getAllPractice(@PathVariable("studentId") int studentId, Model model) {
-        model.addAttribute("practices", practiceRepository.findPracticeByIdStudent(studentId));
+    @RequestMapping(value = "/practice", method = RequestMethod.GET)
+    public String getAllPractice(Model model, Authentication authentication) {
+        UsernamePasswordAuthenticationToken token = (UsernamePasswordAuthenticationToken) authentication;
+        Student student = studentRepository.findStudentByUsername(token.getName());
+
+        model.addAttribute("practices", practiceRepository.findPracticeByStudent(student));
         return "curator/practices";
     }
 
-    @RequestMapping(value = "/{studentId}/practice/{practiceId}", method = RequestMethod.GET)
-    public String getPractice(@PathVariable("studentId") int studentId, @PathVariable int practiceId, Model model) {
-        model.addAttribute("practice", practiceRepository.findPracticeById(studentId));
+    @RequestMapping(value = "/practice/{practiceId}", method = RequestMethod.GET)
+    public String getPractice(@PathVariable int practiceId, Model model, Authentication authentication) {
+        UsernamePasswordAuthenticationToken token = (UsernamePasswordAuthenticationToken) authentication;
+        Student student = studentRepository.findStudentByUsername(token.getName());
+
+        model.addAttribute("practice", practiceRepository.findPracticeByStudent(student));
         return "curator/practice";
     }
 
-    @RequestMapping(value = "/{studentId}/practice/{practiceId}/tasks", method = RequestMethod.GET)
-    public String getAllTask(@PathVariable("practiceId") int practiceId, Model model) {
-        Practice practice = practiceRepository.findPracticeById(practiceId);
-        model.addAttribute("tasks", taskRepository.findTasksByIdPractice(practice));
+    @RequestMapping(value = "/practice/{practiceId}/tasks", method = RequestMethod.GET)
+    public String getAllTask(@PathVariable("practiceId") int practiceId, Model model, Authentication authentication) {
+        UsernamePasswordAuthenticationToken token = (UsernamePasswordAuthenticationToken) authentication;
+        Student student = studentRepository.findStudentByUsername(token.getName());
+
+        Practice practice = practiceRepository.findPracticeByIdAndStudent(student.getId(), practiceId);
+        if(practice==null){
+            return String.format("redirect:/student/practice");
+        }
+
+        model.addAttribute("tasks", taskRepository.findTasksByPractice(practice));
         return "students/tasks";
     }
 
-    @RequestMapping(value = "/{studentId}/practice/{practiceId}/tasks/{taskId}", method = RequestMethod.GET)
-    public String getTask(@PathVariable long taskId, Model model) {
+
+    @RequestMapping(value = "/practice/{practiceId}/tasks/new", method = RequestMethod.GET)
+    public String addTaskGet(@PathVariable("practiceId") int practiceId, Authentication authentication, Model model) {
+        UsernamePasswordAuthenticationToken token = (UsernamePasswordAuthenticationToken) authentication;
+        Student student = studentRepository.findStudentByUsername(token.getName());
+
+        Practice practice = practiceRepository.findPracticeByIdAndStudent(student.getId(), practiceId);
+        if(practice==null){
+            return String.format("redirect:/student/practice");
+        }
+        model.addAttribute("practice", practice);
+        return "students/addTask";
+    }
+
+    @RequestMapping(value = "/practice/{practiceId}/tasks/new", method = RequestMethod.POST)
+    public String addTaskPOST(@ModelAttribute Task task, @PathVariable("practiceId") int practiceId, Authentication authentication) {
+        UsernamePasswordAuthenticationToken token = (UsernamePasswordAuthenticationToken) authentication;
+        Student student = studentRepository.findStudentByUsername(token.getName());
+
+        Practice practice = practiceRepository.findPracticeByIdAndStudent(student.getId(), practiceId);
+        if(practice==null){
+            return String.format("redirect:/student/practice");
+        }
+
+        task.setPractice(practice);
+        taskRepository.save(task);
+        return String.format("redirect:/student/practice/%d/tasks",practiceId);
+    }
+
+
+    @RequestMapping(value = "/practice/{practiceId}/tasks/{taskId}", method = RequestMethod.GET)
+    public String getTaskGET(@PathVariable("taskId") int taskId, @PathVariable("practiceId") int practiceId,
+                          Model model, Authentication authentication) {
+        UsernamePasswordAuthenticationToken token = (UsernamePasswordAuthenticationToken) authentication;
+        Student student = studentRepository.findStudentByUsername(token.getName());
+
+        Practice practice = practiceRepository.findPracticeByIdAndStudent(student, practiceId);
+        if(practice==null){
+            return String.format("redirect:/student/practice");
+        }
+        Task task = taskRepository.findTaskByIdAndStudent(practice, taskId);
+        if(task==null){
+            return String.format("redirect:/student/practice/%d",practiceId);
+        }
+
         model.addAttribute("task", taskRepository.findTaskById(taskId));
         return "students/task";
     }
 
-    @RequestMapping(value = "/{studentId}/practice/{practiceId}/tasks/new", method = RequestMethod.POST)
-    public String addTask(@ModelAttribute Task task, @PathVariable("practiceId") int practiceId, @PathVariable int studentId) {
-        task.setPractice(practiceRepository.findPracticeById(practiceId));
-        return String.format("redirect:/%d/practice/%d/tasks", studentId, practiceId);
-    }
+    @RequestMapping(value = "/practice/{practiceId}/tasks/{taskId}", method = RequestMethod.POST)
+    public String editTask(@ModelAttribute Task task, @PathVariable("practiceId") int practiceId, @PathVariable("taskId") long taskId, Authentication authentication) {
+        UsernamePasswordAuthenticationToken token = (UsernamePasswordAuthenticationToken) authentication;
+        Student student = studentRepository.findStudentByUsername(token.getName());
 
-    @RequestMapping(value = "/{studentId}/practice/{practiceId}/tasks/{taskId}", method = RequestMethod.POST)
-    public String editTask(@ModelAttribute Task task, @PathVariable int practiceId, @PathVariable long taskId, @PathVariable String studentId) {
+        Practice practice = practiceRepository.findPracticeByIdAndStudent(student, practiceId);
+        if(practice==null){
+            return String.format("redirect:/student/practice");
+        }
+
         taskRepository.delete(taskId);
-        Practice practice = practiceRepository.findPracticeById(practiceId);
         task.setPractice(practice);
         task.setId(taskId);
         taskRepository.save(task);
-//        return "redirect:/task/{practiceId}";
-        return String.format("redirect:/%d/practice/%d/tasks", studentId, practiceId);
+        return String.format("redirect:/student/practice/%d/tasks", practiceId);
     }
 
-    @RequestMapping(value = "/{studentId}/practice/{practiceId}/tasks/{taskId}", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/practice/{practiceId}/tasks/{taskId}", method = RequestMethod.DELETE)
     @ResponseBody
-    public String deleteTask(@ModelAttribute Task task, @PathVariable long taskId, @PathVariable String studentId, @PathVariable String practiceId) {
+    public String deleteTask(@PathVariable("taskId") long taskId, @PathVariable("practiceId") int practiceId, Authentication authentication) {
+        UsernamePasswordAuthenticationToken token = (UsernamePasswordAuthenticationToken) authentication;
+        Student student = studentRepository.findStudentByUsername(token.getName());
+
+        Practice practice = practiceRepository.findPracticeByIdAndStudent(student, practiceId);
+        if(practice==null){
+            return String.format("redirect:/student/practice");
+        }
+
         taskRepository.delete(taskId);
-        return String.format("redirect:/%d/practice/%d/tasks", studentId, practiceId);
+        return "ok";
     }
 
-    @RequestMapping(value = "/{studentId}/practice/{practiceId}/tasks/gant", method = RequestMethod.GET)
+    @RequestMapping(value = "/practice/{practiceId}/tasks/gant", method = RequestMethod.GET)
     public String getGantHTML() {
         return "students/gant";
     }
 
-    @RequestMapping(value = "/{studentId}/practice/{practiceId}/tasks/gant", method = RequestMethod.POST)
+    @RequestMapping(value = "/practice/{practiceId}/tasks/gant", method = RequestMethod.POST)
     @ResponseBody
-    public List<GantCustomClass> gantGetData(@PathVariable("practiceId") int practiceId) {
+    public List<GantCustomClass> gantGetData(@PathVariable("practiceId") int practiceId, Authentication authentication) {
         Practice practice = practiceRepository.findPracticeById(practiceId);
-        List<Task> arrayList = taskRepository.findTasksByIdPractice(practice);
+        List<Task> arrayList = taskRepository.findTasksByPractice(practice);
         ArrayList<GantCustomClass> gantCustomClassArrayList = new ArrayList<>();
 
         for (int i = 0; i < arrayList.size(); i++) {
@@ -144,14 +208,12 @@ public class StudentController {
             values.setFrom(task.getDatastart());
             values.setTo(task.getDataend());
             values.setLabel(task.getTask());
-            System.out.println(values);
 
             gantCustomClass.setDesc(task.getTask());
             gantCustomClass.setValues(values);
 
             gantCustomClassArrayList.add(gantCustomClass);
         }
-
         return gantCustomClassArrayList;
     }
 }

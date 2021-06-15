@@ -1,5 +1,6 @@
 package ru.isu.repository;
 
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
@@ -10,7 +11,7 @@ import ru.isu.model.Student;
 import java.util.List;
 
 @Repository
-public interface CuratorRepository extends CrudRepository<Curator, Long> {
+public interface CuratorRepository extends JpaRepository<Curator, Long> {
     @Query("SELECT c FROM Curator c")
     List<Curator> findAll();
 

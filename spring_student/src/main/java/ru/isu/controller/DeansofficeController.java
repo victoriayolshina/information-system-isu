@@ -30,7 +30,7 @@ public class DeansofficeController {
     DeansOfficeRepository deansOfficeRepository;
 
     @Autowired
-    PlaceOfPractice placeOfPractice;
+    PlaceOfPracticeRepositoty placeOfPractice;
 
     @Autowired
     SupervisorRepository supervisorRepository;

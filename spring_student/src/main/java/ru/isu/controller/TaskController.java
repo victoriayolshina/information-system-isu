@@ -95,7 +95,7 @@ public class TaskController {
     @PostMapping("/{practiceId}/gant/{if}")
     public @ResponseBody List<GantCustomClass> gantDiagrammGetData(@PathVariable("practiceId") int practiceId) {
         Practice practice = practiceRepository.findPracticeById(practiceId);
-        List<Task> arrayList = taskRepository.findTasksByIdPractice(practice);
+        List<Task> arrayList = taskRepository.findTasksByPractice(practice);
         ArrayList<GantCustomClass> gantCustomClassArrayList = new ArrayList<>();
         System.out.println(arrayList);
 
