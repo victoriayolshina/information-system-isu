@@ -9,6 +9,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
     <script th:src="@{/resourses/globalbtn.js}"></script>
     <script th:src="@{/resourses/task.js}"></script>
+    <script th:src="@{/resourses/textarea.css}"></script>
     <script th:inline="javascript">
         /*<![CDATA[*/
         var root = /*[[@{/}]]*/ 'default';
@@ -31,9 +32,9 @@
         <span class="glyphicon glyphicon"></span> Диаграмма Ганта
     </button>
     <form action="https://www.overleaf.com/docs" method="post" target="_blank">
-        <input type="text" name="snip_uri"
+        <input type="hidden" name="snip_uri"
                value="https://www.overleaf.com/project/5fc5e20d68ac8afa4295f3f2"><br>
-        <input type="submit" value="Open in Overleaf">
+        <input type="submit" value="Сгенерировать отчёт">
     <h2 class="text-danger"></h2>
     <table class="table">
         <table class="table">
@@ -43,20 +44,20 @@
             <th>Задание</th>
             </thead>
             <tbody id="taskstbody">
-            <tr th:each="tasks:${task}" th:id="'taskRow' + ${tasks.getId()}">
-                <td th:text="${#dates.format(tasks.getDatastart(), 'dd.MM.yyyy')}">
+            <tr th:each="task:${tasks}" th:id="'taskRow' + ${task.getId()}">
+                <td th:text="${#dates.format(task.getDatastart(), 'dd.MM.yyyy')}">
                 </td>
-                <td th:text="${#dates.format(tasks.getDataend(), 'dd.MM.yyyy')}">
+                <td th:text="${#dates.format(task.getDataend(), 'dd.MM.yyyy')}">
                 </td>
-                <td th:text="${tasks.getTask()} " maxlength="225">
+                <td th:text="${task.getTask()} " maxlength="225">
                 </td>
                 <td>
                     <button type="button" id="edit-button" data-toggle="modal" class="btn-default"
-                            th:value="${tasks.getId()}" th:onclick="'editTask(\'' + ${tasks.getId()} + '\');'">
+                            th:value="${task.getId()}" th:onclick="'editTask(\'' + ${task.getId()} + '\');'">
                         <span class="glyphicon glyphicon-pencil"></span> Редактировать
                     </button>
                     <button type="button" id="delete-button" data-toggle="modal" class="btn-default"
-                            th:value="${tasks.getId()}" th:onclick="'deleteTask(\'' + ${tasks.getId()} + '\');'">
+                            th:value="${task.getId()}" th:onclick="'deleteTask(\'' + ${task.getId()} + '\');'">
                         <span class="glyphicon glyphicon-trash"></span> Удалить
                     </button>
                 </td>

@@ -3,7 +3,7 @@
         xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=cp1251">
-    <title>Информация о студенте:</title>
+    <title>Информация о месте прохождения практики:</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
@@ -11,20 +11,16 @@
 
 </head>
 <!-- Страница информации о пользователе -->
-<body id="body">
+<body id = "body">
 <div th:replace="../views/header :: header"></div>
-<div class="container">
+<div class = "container">
     <div class="row">
-        <h1>Фамилия</h1>
-        <p th:text="${student.getSurname()}"></p>
-        <h2>Имя</h2>
-        <p th:text="${student.getName()}"></p>
-        <h2>Отчество</h2>
-        <p th:text="${student.getPatronymic()}"></p>
-        <h2>Группа</h2>
-        <p th:text="${student.getFaculty()}"></p>
-        <h2>Имя пользователя</h2>
-        <p th:text="${student.getUsername()}"></p>
+        <h1>Название</h1>
+        <p th:text="${placesofpractice.getName()}"></p>
+        <h2>Направление</h2>
+        <p th:text="${placesofpractice.getTypeOfDirection()}"></p>
+        <h2>Местоположение</h2>
+        <p th:text="${placesofpractice.getLocation()}"></p>
     </div>
 </div>
 </body>

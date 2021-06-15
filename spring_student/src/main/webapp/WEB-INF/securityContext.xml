@@ -7,10 +7,9 @@
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.2.xsd">
 
 
+    <context:component-scan base-package="ru.isu"/>
 
-<context:component-scan base-package="ru.isu"/>
-
-<!--    <bean class="org.springframework.security.web.access.expression.DefaultWebSecurityExpressionHandler"/>-->
+    <!--    <bean class="org.springframework.security.web.access.expression.DefaultWebSecurityExpressionHandler"/>-->
 
     <security:http auto-config="true" use-expressions="false">
         <security:form-login login-page="/login" login-processing-url="/login"
@@ -21,24 +20,21 @@
                              authentication-failure-url="/login?error=true"/>
 
         <security:logout logout-url="/logout" logout-success-url="/login?logout=true"/>
-
-
-<!--        <security:intercept-url pattern="/**"/>-->
-<!--        <security:intercept-url pattern="/"/>-->
         <security:intercept-url pattern="/login" method="GET" access="ROLE_ANONYMOUS"/>
-        <security:intercept-url pattern="/login" method="POST" access="ROLE_STUDENT, ROLE_ADMIN, ROLE_CURATOR, ROLE_OFFICE"/>
+        <security:intercept-url pattern="/login" method="POST"
+                                access="ROLE_STUDENT, ROLE_ADMIN, ROLE_CURATOR, ROLE_OFFICE"/>
+        <security:intercept-url pattern="/studenthtml/**" access="ROLE_STUDENT , ROLE_ADMIN"/>
+        <security:intercept-url pattern="/curatorhtml/**" access="ROLE_CURATOR , ROLE_ADMIN"/>
+        <security:intercept-url pattern="/deansofficehtml/**" access="ROLE_DEANSOFFICE , ROLE_ADMIN"/>
+        <security:intercept-url pattern="/**" access="ROLE_ADMIN"/>
 
-        <security:intercept-url pattern="/student**" access="ROLE_STUDENT , ROLE_ADMIN"/>
-        <security:intercept-url pattern="/curator/**" access="ROLE_CURATOR , ROLE_ADMIN"/>
-        <security:intercept-url pattern="/deansoffice**" access="ROLE_DEANSOFFICE , ROLE_ADMIN"/>
 
+        <!--        <security:intercept-url pattern="/practice/**" access="ROLE_STUDENT, ROLE_ADMIN, ROLE_CURATOR"/>-->
+        <!--        <security:intercept-url pattern="/tasks/**" access="ROLE_STUDENT, ROLE_ADMIN"/>-->
 
-<!--        <security:intercept-url pattern="/practice/**" access="ROLE_STUDENT, ROLE_ADMIN, ROLE_CURATOR"/>-->
-<!--        <security:intercept-url pattern="/tasks/**" access="ROLE_STUDENT, ROLE_ADMIN"/>-->
-
-<!--        <security:intercept-url pattern="/" access="ROLE_USER, ROLE_ADMIN, ROLE_CURATOR, ROLE_STUDENT"/>-->
-<!--        <security:intercept-url pattern="/logout" access="ROLE_USER, ROLE_ADMIN, ROLE_CURATOR, ROLE_STUDENT"/>-->
-<!--        <security:intercept-url pattern="/**" access="ROLE_USER, ROLE_ADMIN, ROLE_CURATOR, ROLE_STUDENT"/>-->
+        <!--        <security:intercept-url pattern="/" access="ROLE_USER, ROLE_ADMIN, ROLE_CURATOR, ROLE_STUDENT"/>-->
+        <!--        <security:intercept-url pattern="/logout" access="ROLE_USER, ROLE_ADMIN, ROLE_CURATOR, ROLE_STUDENT"/>-->
+        <!--        <security:intercept-url pattern="/**" access="ROLE_USER, ROLE_ADMIN, ROLE_CURATOR, ROLE_STUDENT"/>-->
 
     </security:http>
 

@@ -24,23 +24,24 @@
 <div class="container">
     <div class="row">
         <table id="book-table" class="table">
-            <form id="edit-task-form" action="editTask"
-<!--                  th:action="@{/tasks/{practicId}/editTask/{taskId}/save(practicId = ${practiceId}, taskId = ${taskId})}"-->
+            <form id="edit-practice-form" action="editPractice"
+                  th:action="@{/practice/{practiceId}(practiceId = ${practiceId})}"
                   method="POST">
                 <thead>
                 <tr>
-                    <label for="Datastart">Дата начала</label>
-                    <input id="Datastart" name="Datastart" class="form-control" type="date"
-                           th:value="${practice.getStarttime()}"
+                    <label for="Starttime">Дата начала</label>
+                    <input id="Starttime" name="Starttime" class="form-control" type="date"
+                           th:value="${prac}"
                     />
                 </tr>
                 <tr>
-                    <label for="Dataend">Дата конца</label>
-                    <input id="Dataend" name="Dataend" class="form-control" type="date"
+                    <label for="Endtime">Дата конца</label>
+                    <input id="Endtime" name="Endtime" class="form-control" type="date"
                            th:value="${practice.getEndtime()}"
                     />
                 </tr>
 <!--                возможно сюда ещё лучше пихнуть возможность для того, чтобы поменять тип практики (учебная, производственая)-->
+
                 <p>
                     <button type="submit" id="btn-edit" class="btn btn-primary">Сохранить</button>
                 </p>

@@ -38,19 +38,18 @@ public class CuratorController {
         UsernamePasswordAuthenticationToken token = (UsernamePasswordAuthenticationToken) authentication;
         System.out.println(token.getName());
         model.addAttribute("curator", curatorRepository.findCuratorById(1));
-        return "curator/curatorInfo";
+        return "curatorhtml/curatorInfo";
     }
 
     @RequestMapping(value = "/faculty", method = RequestMethod.GET)
     public String allFaculty(Model model) {
         model.addAttribute("faculties", facultyRepository.findAll());
-        return "curator/allfaculties";
+        return "curatorhtml/allfaculties";
     }
 
     @RequestMapping(value = "/faculty/new", method = RequestMethod.GET)
     public String addFaculty(@PathVariable("facultyId") long facultyId, Model model) {
-
-        return "curator/addfaculty";
+        return "curatorhtml/addfaculty";
     }
 
     @RequestMapping(value = "/faculty/new", method = RequestMethod.POST)
@@ -62,12 +61,18 @@ public class CuratorController {
     @RequestMapping(value = "/faculty/{facultyId}", method = RequestMethod.GET)
     public String getFaculty(@PathVariable("facultyId") int facultyId, Model model) {
         model.addAttribute("faculty", facultyRepository.findFacultyById(facultyId));
-        return "curator/faculty";
+        return "curatorhtml/faculty";
     }
 
     @RequestMapping(value = "/faculty/{facultyId}", method = RequestMethod.POST)
     public String editFaculty(@ModelAttribute Faculty faculty, @PathVariable("facultyId") long facultyId, Model model) {
-
+        Faculty newfaculty = facultyRepository.findFacultyById((int) facultyId);
+        facultyRepository.delete(facultyId);
+        newfaculty.setName(faculty.getName());
+        newfaculty.setDirection(faculty.getDirection());
+        newfaculty.setYear(faculty.getYear());
+        facultyRepository.save(newfaculty);
+//        !!!!!!!!!!!!!!
         return String.format("redirect:/curator/faculty");
     }
 
@@ -82,13 +87,13 @@ public class CuratorController {
     public String getAllStudent(@PathVariable("facultyId") int facultyId, Model model) {
         //Faculty faculty = facultyRepository.findFacultyById(facultyId);
         model.addAttribute("students", studentRepository.findStudentsByFacultyId(facultyId));
-        return "curator/students";
+        return "curatorhtml/students";
     }
 
     @RequestMapping(value = "/faculty/{facultyId}/students/new", method = RequestMethod.GET)
     public String setNewStudentByCurator(@PathVariable("facultyId") int facultyId, Model model) {
         model.addAttribute("students", studentRepository.findStudentsByFacultyId(facultyId));
-        return "curator/students";
+        return "curatorhtml/students";
     }
 
     @RequestMapping(value = "/faculty/{facultyId}/students/new", method = RequestMethod.POST)
@@ -102,13 +107,13 @@ public class CuratorController {
         student.setFaculty(facultyRepository.findFacultyById(customClassStudent.getFaculty()));
         System.out.println(student);
         studentRepository.save(student);
-        return String.format("redirect:/curator/faculty/{%s}/students/",facultyId);
+        return String.format("redirect:/curator/faculty/{%s}/students/", facultyId);
     }
 
     @RequestMapping(value = "/faculty/{facultyId}/students/{studentId}", method = RequestMethod.GET)
     public String getStudent(@PathVariable("facultyId") int facultyId, @PathVariable int studentId, Model model) {
         model.addAttribute("student", studentRepository.findStudentById(studentId));
-        return "students/studentInfo";
+        return "studenthtml/studentInfo";
     }
 
     @RequestMapping(value = "/faculty/{facultyId}/students/{studentId}", method = RequestMethod.POST)
@@ -122,7 +127,7 @@ public class CuratorController {
     }
 
     @RequestMapping(value = "/faculty/{facultyId}/students/{studentId}", method = RequestMethod.DELETE)
-    public String deleteSrudentById(@ModelAttribute Student student, @PathVariable int facultyId, @PathVariable int studentId) {
+    public String deleteStudentById(@ModelAttribute Student student, @PathVariable int facultyId, @PathVariable int studentId) {
         studentRepository.delete((long) studentId);
         Faculty faculty = facultyRepository.findFacultyById(facultyId);
         student.setFaculty(faculty);
@@ -134,7 +139,7 @@ public class CuratorController {
     @RequestMapping(value = "/practice", method = RequestMethod.GET)
     public String getAllPractice(@PathVariable("studentId") int studentId, Model model) {
         model.addAttribute("practices", practiceRepository.findPracticeByIdStudent(studentId));
-        return "curator/practices";
+        return "curatorhtml/practices";
     }
 
     @RequestMapping(value = "/practice/new", method = RequestMethod.GET)
@@ -153,13 +158,18 @@ public class CuratorController {
     @RequestMapping(value = "/practice/{practiceId}", method = RequestMethod.GET)
     public String getPractice(@PathVariable("studentId") int studentId, @PathVariable int practiceId, Model model) {
         model.addAttribute("practice", practiceRepository.findPracticeById(studentId));
-        return "curator/practice";
+        return "curatorhtml/practice";
     }
 
     @RequestMapping(value = "/practice/{practiceId}", method = RequestMethod.POST)
-    public String editPractice(@ModelAttribute Practice practice, @PathVariable("studentId") int studentId, @PathVariable int practiceId, Model model) {
-        practiceRepository.delete((long) practiceId);
-        return "curator/editpractice";
+    public String editPractice(@ModelAttribute Practice practice, @PathVariable long practiceId, Model model) {
+        Practice newpractice = practiceRepository.findPracticeById((int) practiceId);
+        practiceRepository.delete(practiceId);
+        newpractice.setStarttime(practice.getStarttime());
+        newpractice.setEndtime(practice.getEndtime());
+        practiceRepository.save(newpractice);
+        //        !!!!!!!!!!!!!!
+        return "redirect:/curatorhtml/editpractice";
     }
 
     @RequestMapping(value = "/practice/{practiceId}", method = RequestMethod.DELETE)
@@ -167,11 +177,6 @@ public class CuratorController {
         practiceRepository.delete(practiceId);
         return String.format("redirect:/curator/practice/%d", practiceId);
     }
-
-
-
-
-
 
 
 }

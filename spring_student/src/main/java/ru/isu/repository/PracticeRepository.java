@@ -3,7 +3,6 @@ package ru.isu.repository;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
-import ru.isu.model.Faculty;
 import ru.isu.model.Practice;
 import ru.isu.model.Student;
 

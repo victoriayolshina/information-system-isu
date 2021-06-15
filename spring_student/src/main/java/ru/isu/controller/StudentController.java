@@ -1,6 +1,7 @@
 package ru.isu.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
@@ -72,7 +73,7 @@ public class StudentController {
         UsernamePasswordAuthenticationToken token = (UsernamePasswordAuthenticationToken) authentication;
         Student student = studentRepository.findStudentByUsername(token.getName());
         model.addAttribute("student", student);
-        return "students/studentInfo";
+        return "studenthtml/studentInfo";
     }
 
     @RequestMapping(value = "/practice", method = RequestMethod.GET)
@@ -81,7 +82,7 @@ public class StudentController {
         Student student = studentRepository.findStudentByUsername(token.getName());
 
         model.addAttribute("practices", practiceRepository.findPracticeByStudent(student));
-        return "curator/practices";
+        return "curatorhtml/practices";
     }
 
     @RequestMapping(value = "/practice/{practiceId}", method = RequestMethod.GET)
@@ -90,7 +91,7 @@ public class StudentController {
         Student student = studentRepository.findStudentByUsername(token.getName());
 
         model.addAttribute("practice", practiceRepository.findPracticeByStudent(student));
-        return "curator/practice";
+        return "curatorhtml/practice";
     }
 
     @RequestMapping(value = "/practice/{practiceId}/tasks", method = RequestMethod.GET)
@@ -104,7 +105,7 @@ public class StudentController {
         }
 
         model.addAttribute("tasks", taskRepository.findTasksByPractice(practice));
-        return "students/tasks";
+        return "studenthtml/tasks";
     }
 
 
@@ -118,7 +119,7 @@ public class StudentController {
             return String.format("redirect:/student/practice");
         }
         model.addAttribute("practice", practice);
-        return "students/addTask";
+        return "studenthtml/addTask";
     }
 
     @RequestMapping(value = "/practice/{practiceId}/tasks/new", method = RequestMethod.POST)
@@ -153,7 +154,7 @@ public class StudentController {
         }
 
         model.addAttribute("task", taskRepository.findTaskById(taskId));
-        return "students/task";
+        return "studenthtml/task";
     }
 
     @RequestMapping(value = "/practice/{practiceId}/tasks/{taskId}", method = RequestMethod.POST)

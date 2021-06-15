@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html
+        xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=cp1251">
+    <title>Информация о студенте:</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    <script th:src="@{/resourses/globalbtn.js}"></script>
+    <link rel="stylesheet" type="text/css" th:href="@{/resourses/textarea.css}">
+
+</head>
+<!-- Страница информации о пользователе -->
+<body id="body">
+<div th:replace="../views/header :: header"></div>
+<div class="container">
+    <div class="row">
+        <h3>ФИО</h3>
+        <p class="inline" th:text="${student.getSurname()}"></p>
+        <p class="inline" th:text="${student.getName()}"></p>
+        <p class="inline" th:text="${student.getPatronymic()}"></p>
+        <h3>Группа</h3>
+        <p class="inline" th:text="${student.getFaculty().getName()}"></p>
+        <p class="inline" th:text="${student.getFaculty().getDirection().getName()}">
+        <h3>Направление</h3>
+        </p> <p th:text="${student.getFaculty().getDirection().getCode()}"></p>
+        <h3>Год поступления</h3>
+        <p th:text="${student.getFaculty().getYear()}"></p>
+        <h3>Имя пользователя</h3>
+        <p th:text="${student.getUsername()}"></p>
+    </div>
+</div>
+</body>
+</html>

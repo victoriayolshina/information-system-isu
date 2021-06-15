@@ -2,7 +2,7 @@
 <html lang="ru" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=cp1251">
-    <title>Все места по прохождению практик</title>
+    <title>Все кураторы по местам праткик</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
@@ -12,21 +12,27 @@
 <div th:replace="../views/header :: header"></div>
 
 <div class="container">
-    <h2 class="text-danger">Все студенты:</h2>
+    <h2 class="text-danger">Все кураторы:</h2>
     <table class="table">
         <table class="table">
             <thead>
-            <th>Название</th>
-            <th>Направление</th>
-            <th>Местоположение</th>
+            <th>Фамилия</th>
+            <th>Имя</th>
+            <th>Отчество</th>
+            <th>Должность</th>
+            <th>Компания</th>
             </thead>
             <tbody>
-            <tr th:each="place:${places}">
-                <td th:text="${place.name}">
+            <tr th:each="supervisors:${allsupervisors}">
+                <td th:text="${supervisors.getSurname()}">
                 </td>
-                <td th:text="${place.typeofdirection}">
+                <td th:text="${supervisors.getName()}">
                 </td>
-                <td th:text="${place.location}">
+                <td th:text="${supervisors.getPatronymic()}">
+                </td>
+                <td th:text="${supervisors.getPost()}">
+                </td>
+                <td th:text="${supervisors.getPlaceOfPractice()}">
                 </td>
             </tr>
             </tbody>
