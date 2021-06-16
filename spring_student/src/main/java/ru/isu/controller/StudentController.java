@@ -15,6 +15,10 @@ import ru.isu.repository.PracticeRepository;
 import ru.isu.repository.StudentRepository;
 import ru.isu.repository.TaskRepository;
 
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -68,7 +72,7 @@ public class StudentController {
     }
 
     @RequestMapping(value = "/practice/{practiceId}/tasks", method = RequestMethod.GET)
-    public String getAllTask(@PathVariable("practiceId") int practiceId, Model model, Authentication authentication) {
+    public String getAllTask(@PathVariable("practiceId") int practiceId, Model model, Authentication authentication) throws IOException {
         UsernamePasswordAuthenticationToken token = (UsernamePasswordAuthenticationToken) authentication;
         Student student = studentRepository.findStudentByUsername(token.getName());
 
@@ -76,6 +80,35 @@ public class StudentController {
         if (integerList.isEmpty() || !integerList.contains(practiceId)) {
             return String.format("redirect:/student/practice");
         }
+
+//        StringBuffer sb = new StringBuffer();
+//        String templ = "[!*&^ ^&*!]";
+//
+//        int count = 0;
+//        BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream("text.txt")));
+//
+//        String line;
+//        while ((line = reader.readLine()) != null) {
+//            for (int i = 0; i < line.length(); i++) {
+//                if (line.indexOf(templ, i) != -1) {
+//                    count++;
+//                    i += templ.length();
+//                }
+//            }
+//            sb.append("\n")
+//                    .append(line);
+//        }
+//        System.out.println(sb);
+//
+//
+//        for (int i = 0; i < count; i++) {
+//            int elem = sb.indexOf(templ, 0);
+//            String textTempl = String.format("%d вхождение текста", i);
+//            sb.replace(elem, elem + templ.length(), "");
+//            sb.insert(elem, textTempl);
+//        }
+//        System.out.println(sb);
+
 
         Practice practice = practiceRepository.findPracticeById(practiceId);
         model.addAttribute("tasks", taskRepository.findTasksByPractice(practice));
@@ -122,7 +155,7 @@ public class StudentController {
         integerList = taskRepository.countTaskByPractice(practice);
 
         if (integerList.isEmpty() || !integerList.contains(taskId)) {
-            return String.format("redirect:/student/practice/%d/tasks",practiceId);
+            return String.format("redirect:/student/practice/%d/tasks", practiceId);
         }
 
         Task task = taskRepository.findTaskById(taskId);
@@ -161,6 +194,7 @@ public class StudentController {
         return "students/gant";
     }
 
+
     @RequestMapping(value = "/practice/{practiceId}/tasks/gant", method = RequestMethod.POST)
     @ResponseBody
     public List<GantCustomClass> gantGetData(@PathVariable("practiceId") int practiceId, Authentication authentication) {
@@ -185,3 +219,4 @@ public class StudentController {
         return gantCustomClassArrayList;
     }
 }
+

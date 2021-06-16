@@ -12,28 +12,27 @@
         <div class="navbar-header">
             <a class="navbar-brand" href="#">ИМИТ</a>
         </div>
-<!--        <div id="forme" th:href="@{/forme/}" sec:authorize="isAuthenticated()">-->
-<!--            <a th:href="@{/forme/}" class="navbar-brand">Пользователь</a>-->
-<!--        </div>-->
-        <ul class="nav navbar-nav">
-            <li><a sec:authorize="hasRole('ADMIN')"
-                    th:href="@{studentInfo}">О пользователе</a></li>
-            <li><a sec:authorize="hasRole('CURATOR')"
-                    th:href="@{/practice}">Практика</a></li>
-            <li><a sec:authorize="hasRole('STUDENT')"
-                    th:href="@{/tasks}">Задания</a></li>
+        <div sec:authorize="isAuthenticated()">
+            <ul class="nav navbar-nav" >
+            <li><a
+                   th:href="@{studentInfo}">О пользователе</a></li>
+            <li><a
+                   th:href="@{/practice}">Практика</a></li>
+            <li><a
+                   th:href="@{/tasks}">Задания</a></li>
             <li>
                 <p class="navbar-text"><a id="logout">Выйти</a></p>
                 <form id="logout-form" th:action="@{/logout}" method="POST">
                 </form>
             </li>
-            <li sec:authorize="!isAuthenticated()">
+            <li>
                 <a th:href="@{/login}">Войти</a>
             </li>
-<!--            <li sec:authorize="!isAuthenticated()">-->
-<!--                <a th:href="@{/register}">Register</a>-->
-<!--            </li>-->
-        </ul>
+            <!--            <li sec:authorize="!isAuthenticated()">-->
+            <!--                <a th:href="@{/register}">Register</a>-->
+            <!--            </li>-->
+            </ul>
+        </div>
     </div>
 </nav>
 <!--<nav class="navbar navbar-default" th:fragment="header">-->
