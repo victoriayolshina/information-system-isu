@@ -130,6 +130,8 @@ public class StudentController {
         String templName = "[!*&^ИмяСтудента^&*!]";
         String templPatronymic = "[!*&^ОтчествоСтудента^&*!]";
 
+        String templStartDate = putDataInTemplate(practice.getStarttime().toString());
+
         InputStream inputStream = getClass().getResourceAsStream("/overleaf.txt");
         BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream,StandardCharsets.UTF_8));
 
@@ -263,5 +265,9 @@ public class StudentController {
         //stringBuffer.insert(elem, data);
 
         return stringBuffer;
+    }
+
+    private String putDataInTemplate(String str){
+        return String.format("[!*&^%s^&*!]", str);
     }
 }
