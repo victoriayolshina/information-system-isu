@@ -5,7 +5,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=cp1251">
     <meta name="_csrf" th:content="${_csrf.token}"/>
     <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
-    <script th:src="@{/resourses/globalbtn.js}"></script>
+    <script th:src="@{/resources/globalbtn.js}"></script>
 </head>
 
 <body>
@@ -21,7 +21,7 @@
             <!--                <li><a-->
             <!--                        th:href="@{/practice}">Практика</a></li>-->
 <!--            <li><a sec:authorize="hasRole('STUDENT')" th:href="@{/student/practice/1/tasks/overleaf}">Студент</a></li>-->
-            <li><a sec:authorize="hasRole('STUDENT')" th:href="@{/practice/1/tasks/new}">Студент</a></li>
+            <li><a sec:authorize="hasRole('STUDENT')" th:href="@{/student/practice/1/tasks/overleaf}">Студент</a></li>
             <li><a sec:authorize="hasRole('CURATOR')" th:href="@{/deansofficehtml/statistics}">Задания</a></li>
 
             <li>

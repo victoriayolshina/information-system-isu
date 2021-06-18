@@ -16,6 +16,7 @@ import ru.isu.repository.StudentRepository;
 import ru.isu.repository.TaskRepository;
 
 import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -126,16 +127,19 @@ public class StudentController {
 
         StringBuffer sb = new StringBuffer();
 
-        String templ = "[!*&^ ^&*!]";
-        String file = "template.txt";
+        String templSurname = "[!*&^ФамилияСтудента^&*!]";
+        String templName = "[!*&^ИмяСтудента^&*!]";
+        String templPatronymic = "[!*&^ОтчествоСтудента^&*!]";
+        String file = "overleaf.txt";
 
-        BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(file)));
+        BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(file), StandardCharsets.UTF_8));
 
         String line;
         while ((line = reader.readLine()) != null) {
             sb.append("\n")
                     .append(line);
         }
+        System.out.println(line);
 
 //        while (sb.indexOf(templ, 0) != -1) {
 //            int elem = sb.indexOf(templ, 0);
@@ -150,7 +154,15 @@ public class StudentController {
 //        sb.replace(elem, elem + templ.length(), "");
 //        sb.insert(elem, textTempl);
 
-        sb = putData(sb, student.getSurname(), templ);
+//        System.out.println(sb.toString());
+//        System.out.println(putData(sb, templ+ templ.length(), textTempl));
+
+        sb = putData(sb, student.getSurname(), templSurname);
+        sb = putData(sb, student.getName(), templName);
+        sb = putData(sb, student.getPatronymic(), templPatronymic);
+
+        System.out.println(sb);
+
         model.addAttribute("template", sb.toString());
 
         return "studenthtml/overleaf";
@@ -265,7 +277,7 @@ public class StudentController {
 
     private StringBuffer putData(StringBuffer stringBuffer, String data, String template){
         int elem = stringBuffer.indexOf(template, 0);
-        stringBuffer.replace(elem, elem + template.length(), "");
+        stringBuffer.replace(elem, elem + template.length()+1, "");
         stringBuffer.insert(elem, data);
 
         return stringBuffer;

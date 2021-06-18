@@ -26,6 +26,16 @@
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
     </listener>
 
+<!--    <servlet>-->
+<!--        <servlet-name>FileServlet</servlet-name>-->
+<!--        <servlet-class>ru.isu.controller.StudentController</servlet-class>-->
+<!--        &lt;!&ndash; Параметр инициализации сервлета &ndash;&gt;-->
+<!--        <init-param>-->
+<!--            <param-name>uploadFilesPath</param-name>-->
+<!--            <param-value>/srv/uploads</param-value>-->
+<!--        </init-param>-->
+<!--    </servlet>-->
+
     <servlet>
         <servlet-name>dispatcher</servlet-name>
         <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>

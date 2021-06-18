@@ -52,4 +52,6 @@
         <property name="cookieName" value="bookLocaleCookie"></property>
         <property name="cookieMaxAge" value="3600"></property>
     </bean>
+
+
 </beans>

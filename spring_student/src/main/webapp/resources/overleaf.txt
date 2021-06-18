@@ -101,9 +101,9 @@
 \pagestyle{empty}
 \gfontsize
 \section{ПУТЕВКА}
-1. \quad Фамилия \uline{ [!*&^ ^&*!] \hfill}
+1. \quad Фамилия \uline{ [!*&^ФамилияСтудента^&*!] \hfill}
 
-2. \quad Имя и Отчество \uline{ [!*&^ ^&*!] [!*&^ ^&*!] \hfill}
+2. \quad Имя и Отчество \uline{ [!*&^ИмяСтудента^&*!] [!*&^ОтчествоСтудента^&*!] \hfill}
 
 3. \quad Курс \uline{ \hfill}
 
