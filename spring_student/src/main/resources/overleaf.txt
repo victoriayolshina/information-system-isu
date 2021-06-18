@@ -1,0 +1,220 @@
+\documentclass[a4paper,fontsize=14bp]{article}
+\usepackage[russian]{babel}
+\usepackage[T2A]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[left=3cm,right=1.5cm,top=2cm,bottom=2cm]{geometry}
+\usepackage{fontspec}
+\usepackage{scrextend}
+\usepackage{titlesec}
+\usepackage{titletoc}
+\usepackage{fancyhdr}
+\usepackage{indentfirst}
+% \usepackage{amssymb}
+% \usepackage{amsmath}
+% \usepackage{amsfonts}
+% \usepackage{amssymb}
+% \usepackage{amsthm}
+\usepackage{icomma}
+\usepackage{graphicx}
+% \usepackage{wrapfig}
+\usepackage[normalem]{ulem}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{dcolumn}
+\usepackage{tabularx}
+\usepackage{hyperref}
+\usepackage{enumitem}
+\usepackage[labelsep=period,figurewithin=none,tablewithin=none]{caption}
+
+% \newcommand{\gfontsize}[0]{\small}
+\newcommand{\gfontsize}[0]{\normalsize}
+
+% \newenvironment{dayy}[1]{{\small\bfseries #1.\par}}{\par\vspace{0.5cm}}
+\newenvironment{dayy}[1]{{\normalsize\bfseries #1.\par}}{\par\vspace{0.5cm}}
+
+% ==================== ШРИФТ ====================
+\setmainfont{Times New Roman}
+
+% ==================== МЕЖСТРОЧНЫЙ ИНТЕРВАЛ ====================
+\linespread{1.15}
+
+% ==================== КОЛОНТИТУЛЫ ====================
+% \fancyhf{}
+% \fancyfoot[C]{\thepage}
+% \renewcommand{\headrulewidth}{0pt}
+% \renewcommand{\footrulewidth}{0.5pt}
+
+% ==================== SECTIONS ====================
+\titleformat{\section}[block]{\normalsize\centering\bfseries}{\thetitle.\vspace{24pt}}{1ex}{}
+\titleformat{\subsection}[block]{\normalsize\bfseries}{\thetitle.}{1ex}{}
+
+% ==================== ПУТЬ К ИЗОБРАЖЕНИЯМ ====================
+% \graphicspath{{./images/}}
+
+% ==================== ТАБЛИЦЫ ====================
+\newcolumntype{t}{>{\raggedright\centering}p{2cm}}
+
+% ==================== ПОДПИСИ К ИЗОБРАЖЕНИЯМ ====================
+\captionsetup{figurename=Рисунок}
+
+
+\begin{document}
+\pagestyle{empty}
+\gfontsize
+\begin{center}
+    \textbf{МИНИСТЕРСТВО НАУКИ И ВЫСШЕГО ОБРАЗОВАНИЯ}
+
+    \textbf{РОССИЙСКОЙ ФЕДЕРАЦИИ}
+
+    \textbf{Федеральное государственное бюджетное образовательное учреждение}
+
+    \textbf{высшего образования}
+
+    \textbf{<<Иркутский государственный университет>>}
+
+    \textbf{(ФГБОУ ВО <<ИГУ>>)}
+
+    \vspace{6cm}
+    {\large \textbf{ДНЕВНИК ПРОХОЖДЕНИЯ}}
+
+    {\large \textbf{ПРОИЗВОДСТВЕННОЙ ПРАКТИКИ}}
+\end{center}
+
+\vspace{3cm}
+\begin{flushright}
+    \begin{minipage}[pos]{6cm}
+        Студента Иванова\\Ивана Ивановича
+
+        Направление подготовки
+
+        09.03.03 <<Прикладная\\информатика>>
+    \end{minipage}
+\end{flushright}
+
+\vspace{3cm}
+\begin{center}
+    \textbf{Иркутск, 2021 г.}
+\end{center}
+
+
+\newpage
+\pagestyle{empty}
+\gfontsize
+\section{ПУТЕВКА}
+1. \quad Фамилия \uline{ [!*&^ФамилияСтудента^&*!] \hfill}
+
+2. \quad Имя и Отчество \uline{ [!*&^ИмяСтудента^&*!] [!*&^ОтчествоСтудента^&*!] \hfill}
+
+3. \quad Курс \uline{ \hfill}
+
+4. \quad Форма обучения \uline{очная \hfill}
+
+5. \quad Направление \uline{ [!*&^ ^&*!] [!*&^ ^&*!] \hfill}
+
+6. \quad Профиль \uline{Информационная сфера \hfill}
+
+7. \quad Место прохождении практики \uline{ [!*&^ ^&*!] \hfill}
+
+8. \quad Сроки прохождения практики с \uline{ [!*&^ ^&*!] г.} по \uline{[!*&^ ^&*!]} г.
+
+9. \quad Руководитель практики от кафедры \uline{ [!*&^ ^&*!], \hfill}
+
+\qquad\uline{[!*&^ ^&*!] \hfill}
+
+\hspace{4cm}{\scriptsize (фамилия, имя, отчество, e-mail)}
+
+\vspace{1.5cm}
+С программой ознакомлен \uline{\hspace{3cm}} 16 декабря 2020 г.
+
+\hspace{5.7cm}{\tiny (подпись студента)}
+
+\vspace{1cm}
+Зав. кафедрой \uline{\hspace{4.5cm}} Пантелеев В.И.
+
+\section{ОТМЕТКА О ПРОХОЖДЕНИИ ПРАКТИКИ}
+1. Прибыл на место прохождения практики \uline{\quad 18.01.2021 г. \hspace{1cm}} \uline{\hfill}
+
+\hspace{10cm}{\tiny Дата}
+\hspace{2.7cm}{\tiny Подпись, печать}
+
+2. Руководитель по месту прохождения практики \uline{[!*&^ ^&*!], \hfill}
+
+\hspace{11cm}{\tiny Фамилия, имя, отчество, должность}
+
+\uline{[!*&^ ^&*!] \hfill}
+
+\vspace{0.5cm}
+3. Назначен \uline{[!*&^ ^&*!] \hfill}
+
+\hspace{8cm}{\tiny Должность}
+
+4. Переведен \uline{\hfill}
+
+\hspace{8cm}{\tiny Должность}
+
+5. Убыл с места прохождения практики \uline{\quad 12.02.2021 г. \hspace{1cm}} \uline{\hfill}
+
+\hspace{9.3cm}{\tiny Дата}
+\hspace{3.4cm}{\tiny Подпись, печать}
+
+\newpage
+\gfontsize
+\section{ЗАПИСИ О РАБОТЕ, ВЫПОЛНЕННОЙ НА ПРАКТИКЕ}
+\begin{tabularx}{\textwidth}{|t|X|}
+    \hline
+    Дата & \multicolumn{1}{c|}{Краткое содержание работы} \\ \hline
+    18.01 &  \\ \hline
+    19.01 &  \\ \hline
+    20.01 &  \\ \hline
+    ... & ...\\ \hline
+\end{tabularx}
+
+\vspace{1.5cm}
+\uline{\hspace{10cm} 12.02.2021 г. \hfill}
+
+\hspace{3cm}{\scriptsize Подпись руководителя по месту прохождения практики, дата и печать}
+
+\vspace{1.5cm}
+\begin{tabularx}{\textwidth}{|t|X|}
+    \hline
+    13.02 & Завершение отчета практики. Подготовка к защите производственной практики \\ \hline
+\end{tabularx}
+
+\vspace{1.5cm}
+\uline{\hspace{10cm} 13.02.2021 г. \hfill}
+
+\hspace{4cm}{\scriptsize Подпись руководителя практики от кафедры, дата }
+
+\newpage
+\gfontsize
+\section{СПИСОК МАТЕРИАЛОВ, СОБРАННЫХ ВО ВРЕМЯ ПРОХОЖДЕНИЯ ПРАКТИКИ}
+\begin{enumerate}
+    \item Инструкция по технике безопасности.
+    \item ...
+\end{enumerate}
+
+\newpage
+\gfontsize
+\section{ХАРАКТЕРИСТИКА РАБОТЫ СТУДЕНТА}
+\begin{sloppypar}
+    Иванов Иван Иванович проходил производственную практику на предприятии ...
+\end{sloppypar}
+
+В течение практики Иванов И. И. проявил ...
+
+\vspace{2cm}
+\uline{\hspace{10cm} 12.02.2021 г. \hfill}
+
+\hspace{3cm}{\scriptsize Подпись руководителя по месту прохождения практики, дата и печать}
+
+\newpage
+\gfontsize
+\section{ОТЧЕТ ПО ИТОГАМ ПРАКТИКИ}
+
+Текст отчета
+
+\hfill\uline{\hspace{4.5cm}}
+
+\hspace{13cm}{\scriptsize Подпись студента}
+
+\end{document}
