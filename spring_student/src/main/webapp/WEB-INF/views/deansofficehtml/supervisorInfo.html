@@ -8,21 +8,20 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
     <script th:src="@{/resourses/globalbtn.js}"></script>
+    <link rel="stylesheet" type="text/css" th:href="@{/resourses/textarea.css}">
 </head>
 <!-- Страница информации о пользователе -->
 <body id="body">
 <div th:replace="../views/header :: header"></div>
 <div class="container">
     <div class="row">
-        <h1>Фамилия</h1>
+        <h3>ФИО</h3>
         <p th:text="${supervisor.getSurname()}"></p>
-        <h2>Имя</h2>
         <p th:text="${supervisor.getName()}"></p>
-        <h2>Отчество</h2>
         <p th:text="${supervisor.getPatronymic()}"></p>
-        <h2>Должность</h2>
+        <h3>Должность</h3>
         <p th:text="${supervisor.getPost()}"></p>
-        <h2>Компания</h2>
+        <h3>Компания</h3>
         <p th:text="${supervisor.getPlaceOfPractice}"></p>
     </div>
 </div>

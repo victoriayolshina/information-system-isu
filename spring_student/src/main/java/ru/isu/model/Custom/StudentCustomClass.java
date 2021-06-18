@@ -11,7 +11,7 @@ import javax.persistence.Id;
 import javax.swing.*;
 
 @Data
-public class CustomClass {
+public class StudentCustomClass {
     private int faculty;
 
     private int id;

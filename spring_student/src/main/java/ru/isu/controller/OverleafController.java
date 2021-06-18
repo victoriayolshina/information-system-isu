@@ -1,18 +1,18 @@
-package ru.isu.controller;
-
-
-import org.springframework.http.converter.json.GsonBuilderUtils;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-
-import java.io.*;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Paths;
-import java.util.Scanner;
-
-@Controller
-@RequestMapping("/")
-public class OverleafController {
+//package ru.isu.controller;
+//
+//
+//import org.springframework.http.converter.json.GsonBuilderUtils;
+//import org.springframework.stereotype.Controller;
+//import org.springframework.web.bind.annotation.RequestMapping;
+//
+//import java.io.*;
+//import java.nio.charset.StandardCharsets;
+//import java.nio.file.Paths;
+//import java.util.Scanner;
+//
+//@Controller
+//@RequestMapping("/")
+//public class OverleafController {
 //
 //
 //    // в этом классе показаны разные способы скопировать содержимое файла в строку
@@ -20,7 +20,7 @@ public class OverleafController {
 //        // построчное считывание файла
 //        public static void main(String[] args) {
 //            try {
-//                File file = new File("**/src/java/overleafTemplate.txt");
+//                File file = new File("**/src/java/template.txt");
 //                //создаем объект FileReader для объекта File
 //                FileReader fr = new FileReader(file);
 //                //создаем BufferedReader с существующего FileReader для построчного считывания
@@ -39,4 +39,4 @@ public class OverleafController {
 //            }
 //        }
 //    }
-}
+//}

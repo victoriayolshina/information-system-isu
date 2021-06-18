@@ -20,7 +20,7 @@
             <th>Начало практики</th>
             <th>Конец практики</th>
             <th>Должность</th>
-            <th>Переход на задачи</th>
+            <th> </th>
 
             </thead>
             <tbody>
@@ -33,7 +33,7 @@
                 </td>
                 <td> <button type="button" id="goToTasks" data-toggle="modal" class="btn-default"
                              th:value="${practice.getId()}" th:onclick="'goToTask(\'' + ${practice.getId()} + '\');'">
-                    <span class="glyphicon glyphicon-pencil"></span> Задачи
+                    <span class="glyphicon glyphicon-pencil"></span> Перейти к дневнику
                 </button>
                 </td>
             </tr>

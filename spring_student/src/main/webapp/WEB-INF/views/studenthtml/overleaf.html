@@ -2,24 +2,20 @@
 <html lang="ru" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=cp1251">
-    <title>Все практики</title>
+    <title>Задания</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    <script th:src="@{/resourses/globalbtn.js}"></script>
+    <script th:src="@{/resourses/task.js}"></script>
+    <script th:src="@{/resourses/statistics.js}"></script>
+    <script th:src="@{/resourses/textarea.css}"></script>
+    <meta charset="UTF-8">
+    <title>Title</title>
 </head>
 <body>
+<textarea rows="500" cols="90" name="snip" th:value="${template}">
 
-<div th:replace="../views/header :: header"></div>
-
-<div class="container">
-    <div class="row">
-        <h1>Название</h1>
-        <p th:text="${faculty.getName()}"></p>
-        <h2>Направление</h2>
-        <p th:text="${faculty.getDirection().getName()}"></p>
-        <h2>Год поступления</h2>
-        <p th:text="${faculty.getYear()}"></p>
-    </div>
-</div>
+</textarea>
 </body>
 </html>

@@ -101,25 +101,25 @@
 \pagestyle{empty}
 \gfontsize
 \section{ПУТЕВКА}
-1. \quad Фамилия \uline{ \hfill}
+1. \quad Фамилия \uline{ [!*&^ ^&*!] \hfill}
 
-2. \quad Имя и Отчество \uline{Student_name Student_patronymic \hfill}
+2. \quad Имя и Отчество \uline{ [!*&^ ^&*!] [!*&^ ^&*!] \hfill}
 
-3. \quad Курс \uline{Curse \hfill}
+3. \quad Курс \uline{ \hfill}
 
 4. \quad Форма обучения \uline{очная \hfill}
 
-5. \quad Направление \uline{09.03.03. Прикладная информатика \hfill}
+5. \quad Направление \uline{ [!*&^ ^&*!] [!*&^ ^&*!] \hfill}
 
 6. \quad Профиль \uline{Информационная сфера \hfill}
 
-7. \quad Место прохождении практики \uline{ООО <<Тест>> \hfill}
+7. \quad Место прохождении практики \uline{ [!*&^ ^&*!] \hfill}
 
-8. \quad Сроки прохождения практики с \uline{18.01.2021 г.} по \uline{14.02.2021} г.
+8. \quad Сроки прохождения практики с \uline{ [!*&^ ^&*!] г.} по \uline{[!*&^ ^&*!]} г.
 
-9. \quad Руководитель практики от кафедры \uline{Петров Петр Петрович, \hfill}
+9. \quad Руководитель практики от кафедры \uline{ [!*&^ ^&*!], \hfill}
 
-\qquad\uline{test@gmail.com \hfill}
+\qquad\uline{[!*&^ ^&*!] \hfill}
 
 \hspace{4cm}{\scriptsize (фамилия, имя, отчество, e-mail)}
 
@@ -137,14 +137,14 @@
 \hspace{10cm}{\tiny Дата}
 \hspace{2.7cm}{\tiny Подпись, печать}
 
-2. Руководитель по месту прохождения практики \uline{Сидоров Сидор Сидорович, \hfill}
+2. Руководитель по месту прохождения практики \uline{[!*&^ ^&*!], \hfill}
 
 \hspace{11cm}{\tiny Фамилия, имя, отчество, должность}
 
-\uline{такая-то должность \hfill}
+\uline{[!*&^ ^&*!] \hfill}
 
 \vspace{0.5cm}
-3. Назначен \uline{такая-то должность \hfill}
+3. Назначен \uline{[!*&^ ^&*!] \hfill}
 
 \hspace{8cm}{\tiny Должность}
 

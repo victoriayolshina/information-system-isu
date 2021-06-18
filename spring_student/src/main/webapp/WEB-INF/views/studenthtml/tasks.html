@@ -3,19 +3,19 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=cp1251">
     <title>Задания</title>
-
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
     <script th:src="@{/resourses/globalbtn.js}"></script>
     <script th:src="@{/resourses/task.js}"></script>
+    <script th:src="@{/resourses/statistics.js}"></script>
     <script th:src="@{/resourses/textarea.css}"></script>
-    <script th:inline="javascript">
-        /*<![CDATA[*/
-        var root = /*[[@{/}]]*/ 'default';
-        console.log(root);
-        /*]]>*/
-    </script>
+<!--    <script th:inline="javascript">-->
+<!--        /*<![CDATA[*/-->
+<!--        var root = /*[[@{/}]]*/ 'default';-->
+<!--        console.log(root);-->
+<!--        /*]]>*/-->
+<!--    </script>-->
 </head>
 <body>
 
@@ -32,8 +32,9 @@
         <span class="glyphicon glyphicon"></span> Диаграмма Ганта
     </button>
     <form action="https://www.overleaf.com/docs" method="post" target="_blank">
-        <input type="hidden" name="snip_uri"
-               value="https://www.overleaf.com/project/5fc5e20d68ac8afa4295f3f2"><br>
+
+        <input type="hidden" name="snip_uri" type="file" accept=".txt" id="btn1"
+               value=""><br>
         <input type="submit" value="Сгенерировать отчёт">
     <h2 class="text-danger"></h2>
     <table class="table">

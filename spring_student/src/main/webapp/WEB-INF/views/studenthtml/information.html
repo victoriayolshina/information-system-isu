@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=cp1251">
+    <!--    <title>All Students</title>-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    <script th:src="@{/resourses/globalbtn.js}"></script>
+</head>
+
+<body>
+<div th:replace="../views/header :: header"></div>
+<div class="container">
+    <h2 class="text-danger">Добавление дополнительной информации о студенте</h2>
+    <form action="savestudent" th:action="@{/practice/information/new}" method="post" th:object="${student}">
+        <div class="form-group">
+            <label for="student-surname-case">Фамилия в родительном падеже:</label>
+            <input id="student-surname-case" class="form-control"
+                   th:field="*{surnameCase}"/>
+            <span th:if="${#fields.hasErrors('surnameCase')}"
+                  th:errors="${student.surnameCase}" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label for="student-name-case">Имя в родительном падеже:</label>
+            <input id="student-name-case" class="form-control"
+                   th:field="*{nameCase}"/>
+            <span th:if="${#fields.hasErrors('nameCase')}"
+                  th:errors="${student.nameCase}" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label for="student-patronymic-case">Отчество в родительном падеже:</label>
+            <input id="student-patronymic-case" class="form-control"
+                   th:field="*{patronymicCase}"/>
+            <span th:if="${#fields.hasErrors('patronymicCase')}"
+                  th:errors="${student.patronymicCase}" class="text-danger"></span>
+        </div>
+        <button type="submit" id="btnsavestudents">Сохранить</button>
+    </form>
+</div>
+</body>
+</html>

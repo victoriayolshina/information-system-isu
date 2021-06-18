@@ -1,13 +1,10 @@
 window.onload = function () {
     setMinDateInDateInput()
-
 }
 
-function deleteTask(taskId){
-
-
+function deleteTask(taskId) {
     $.ajax({
-        type : "DELETE",
+        type: "DELETE",
         url: window.location.pathname + "\/" + taskId,
         success: function (result) {
             console.log(result)
@@ -21,10 +18,10 @@ function deleteTask(taskId){
     })
 }
 
-function setMinDateInDateInput(){
+function setMinDateInDateInput() {
     var dateStart = document.getElementById("Datastart")
     var dateEnd = document.getElementById("Dataend")
-    if(dateStart!=null && dateStart.value!=null) {
+    if (dateStart != null && dateStart.value != null) {
         dateEnd.min = dateStart.value;
         if (new Date(dateStart.value) > new Date(dateEnd.value)) {
             dateEnd.value = dateStart.value

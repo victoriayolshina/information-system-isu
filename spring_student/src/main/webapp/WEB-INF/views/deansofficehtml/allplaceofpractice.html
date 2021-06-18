@@ -21,12 +21,12 @@
             <th>Местоположение</th>
             </thead>
             <tbody>
-            <tr th:each="place:${allplacesofpractice}">
-                <td th:text="${place.name}">
+            <tr th:each="placeofpractice:${allplaceofpractice}">
+                <td th:text="${placeofpractice.getName()}">
                 </td>
-                <td th:text="${place.typeofdirection}">
+                <td th:text="${placeofpractice.getTypeOfDirection()}">
                 </td>
-                <td th:text="${place.location}">
+                <td th:text="${placeofpractice.getLocation()}">
                 </td>
             </tr>
             </tbody>

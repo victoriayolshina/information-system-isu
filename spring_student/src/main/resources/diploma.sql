@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1
--- Время создания: Июн 13 2021 г., 10:27
+-- Время создания: Июн 16 2021 г., 14:57
 -- Версия сервера: 10.4.18-MariaDB
 -- Версия PHP: 8.0.3
 
@@ -39,7 +39,7 @@ CREATE TABLE `auto_user` (
 --
 
 INSERT INTO `auto_user` (`id`, `username`, `role`, `password`) VALUES
-(1, 'nataliasemicheva', 'ROLE_ADMIN', 'pass'),
+(1, 'nataliasemicheva', 'ROLE_DEANSOFFICE', 'pass'),
 (2, 'leonidriabets', 'ROLE_CURATOR', 'pass'),
 (3, 'victoriayolshina', 'ROLE_STUDENT', 'pass');
 
@@ -165,15 +165,20 @@ CREATE TABLE `practice` (
   `student` int(11) NOT NULL,
   `starttime` date NOT NULL,
   `endtime` date NOT NULL,
-  `post` varchar(225) NOT NULL
+  `post` varchar(225) NOT NULL,
+  `placeofpractice` int(11) NOT NULL,
+  `typeofpractice` int(11) NOT NULL,
+  `supervisor` int(11) NOT NULL,
+  `curator` int(11) NOT NULL,
+  `mark` varchar(25) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `practice`
 --
 
-INSERT INTO `practice` (`id`, `student`, `starttime`, `endtime`, `post`) VALUES
-(1, 1, '2021-02-07', '2021-03-20', 'Практикант');
+INSERT INTO `practice` (`id`, `student`, `starttime`, `endtime`, `post`, `placeofpractice`, `typeofpractice`, `supervisor`, `curator`, `mark`) VALUES
+(1, 1, '2021-02-07', '2021-03-20', 'Практикант', 1, 3, 1, 1, '5');
 
 -- --------------------------------------------------------
 
@@ -188,16 +193,20 @@ CREATE TABLE `student` (
   `patronymic` varchar(225) NOT NULL,
   `faculty` int(11) NOT NULL,
   `username` varchar(225) NOT NULL,
-  `password` varchar(20) NOT NULL
+  `password` varchar(20) NOT NULL,
+  `surnameCase` varchar(225) NOT NULL,
+  `nameCase` varchar(225) NOT NULL,
+  `patronymicCase` varchar(225) NOT NULL,
+  `CuratorFullNameByDepartment` varchar(225) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `student`
 --
 
-INSERT INTO `student` (`id`, `surname`, `name`, `patronymic`, `faculty`, `username`, `password`) VALUES
-(1, 'Ёлшина', 'Виктория', 'Евгеньевна', 1, 'victoriayolshina', 'pass'),
-(2, 'Кислянников ', 'Марк', 'Александрович', 3, 'markkislyannikov', 'pass');
+INSERT INTO `student` (`id`, `surname`, `name`, `patronymic`, `faculty`, `username`, `password`, `surnameCase`, `nameCase`, `patronymicCase`, `CuratorFullNameByDepartment`) VALUES
+(1, 'Ёлшина', 'Виктория', 'Евгеньевна', 1, 'victoriayolshina', 'pass', 'Ёлшиной', 'Виктории', 'Евгеньевны', 'Зинченко Анна Сергеевна'),
+(2, 'Кислянников ', 'Марк', 'Александрович', 3, 'markkislyannikov', 'pass', 'Кислянникова', 'Марка', 'Александровича', 'Казимиров Алексей Сергеевич');
 
 -- --------------------------------------------------------
 
@@ -283,7 +292,8 @@ CREATE TABLE `typeofpractice` (
 
 INSERT INTO `typeofpractice` (`id`, `name`, `curator`) VALUES
 (1, 'Учебная', 1),
-(2, 'Преддипломная', 2);
+(2, 'Преддипломная', 2),
+(3, 'Производственная', 1);
 
 --
 -- Индексы сохранённых таблиц
@@ -435,7 +445,7 @@ ALTER TABLE `typeofdirection`
 -- AUTO_INCREMENT для таблицы `typeofpractice`
 --
 ALTER TABLE `typeofpractice`
-  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

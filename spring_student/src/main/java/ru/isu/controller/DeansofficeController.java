@@ -80,13 +80,13 @@ public class DeansofficeController {
     }
 
     @RequestMapping(value = "/placeofpractice", method = RequestMethod.GET)
-    public String getAllPlaceOfPractice(@PathVariable("placesofpractice") int placeofpracticeId, Model model) {
-        model.addAttribute("allplacesofpractice", practiceRepository.findAll());
-        return "deansofficehtml/allplacesofpractice";
+    public String getAllPlaceOfPractice(Model model) {
+        model.addAttribute("allplaceofpractice", placeOfPractice.findAll());
+        return "deansofficehtml/allplaceofpractice";
     }
 
     @RequestMapping(value = "/placeofpractice/{placeofpracticeId}", method = RequestMethod.GET)
-    public String getPlaceOfPractice(@PathVariable("placesofpractice") int placeofpracticeId, Model model) {
+    public String getPlaceOfPractice(@PathVariable("placesofpracticeId") int placeofpracticeId, Model model) {
         model.addAttribute("placesofpractice", placeOfPractice.findPlaceOfPracticeById(placeofpracticeId));
         return "deansofficehtml/placeofpracticeInfo";
     }
@@ -98,7 +98,7 @@ public class DeansofficeController {
     }
 
     @RequestMapping(value = "/placeofpractice/{placeofpracticeId}/supervisor/{supervisorId}", method = RequestMethod.GET)
-    public String getSupervisor(@PathVariable("supervisor") int placeofpracticeId, Model model) {
+    public String getSupervisor(@PathVariable("placeofpracticeId") int placeofpracticeId, Model model) {
         model.addAttribute("supervisor", supervisorRepository.findSupervisorById(placeofpracticeId));
         return "deansofficehtml/supervisorInfo";
     }

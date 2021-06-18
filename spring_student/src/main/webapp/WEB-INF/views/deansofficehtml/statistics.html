@@ -1,15 +1,43 @@
 <!DOCTYPE html>
-<html lang="en">
+<html  lang="ru" xmlns:th="http://www.thymeleaf.org">
+
 <head>
-    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=cp1251">
     <title>Title</title>
     <script src="/jquery/jquery.min.js"></script>
     <script src="https://code.highcharts.com/highcharts.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+
+    <script type="text/javascript">
+        $(function () {
+            $('#container').highcharts({//Chart display container, consistent with the div id
+                chart: {
+                    Type: 'column' // Specify the chart type, the default is line chart (line)
+                },
+                title: {
+                    Text: 'My first Highcharts chart' // Specify chart title
+                },
+                xAxis: {
+                    Categories: ['my', 'first', 'chart'] //Specify x-axis grouping
+                },
+                yAxis: {
+                    title: {
+                        Text: 'something' // Specify the title of the y-axis
+                    }
+                },
+                Series: [{//Specified data column
+                    Name: 'Jane', //Data column name
+                    Data: [1, 0, 4] //Data
+                }, {
+                    name: 'John',
+                    data: [5, 7, 3]
+                }]
+            });
+        });
+    </script>
 </head>
 <body>
-<div id="container" style="width: 550px; height: 400px; margin: 0 auto"></div>
-
-
+<!-- Define the container of the chart-->
+<div id="container" style="width: 100%; height: 400px;"></div>
 </body>
 </html>

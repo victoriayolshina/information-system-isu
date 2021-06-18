@@ -3,6 +3,8 @@
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=cp1251">
+    <meta name="_csrf" th:content="${_csrf.token}"/>
+    <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
     <script th:src="@{/resourses/globalbtn.js}"></script>
 </head>
 
@@ -12,27 +14,28 @@
         <div class="navbar-header">
             <a class="navbar-brand" href="#">ИМИТ</a>
         </div>
-        <div sec:authorize="isAuthenticated()">
-            <ul class="nav navbar-nav" >
-            <li><a
-                   th:href="@{studentInfo}">О пользователе</a></li>
-            <li><a
-                   th:href="@{/practice}">Практика</a></li>
-            <li><a
-                   th:href="@{/tasks}">Задания</a></li>
+
+        <ul class="nav navbar-nav">
+            <!--                <li><a-->
+            <!--                        th:href="@{/studentInfo}">О пользователе</a></li>-->
+            <!--                <li><a-->
+            <!--                        th:href="@{/practice}">Практика</a></li>-->
+<!--            <li><a sec:authorize="hasRole('STUDENT')" th:href="@{/student/practice/1/tasks/overleaf}">Студент</a></li>-->
+            <li><a sec:authorize="hasRole('STUDENT')" th:href="@{/practice/1/tasks/new}">Студент</a></li>
+            <li><a sec:authorize="hasRole('CURATOR')" th:href="@{/deansofficehtml/statistics}">Задания</a></li>
+
             <li>
-                <p class="navbar-text"><a id="logout">Выйти</a></p>
-                <form id="logout-form" th:action="@{/logout}" method="POST">
-                </form>
-            </li>
+                <div sec:authorize="isAuthenticated()">
+                    <p class="navbar-text"><a id="logout">Выйти</a></p>
+                    <form id="logout-form" th:action="@{/logout}" method="POST">
+                    </form>
             <li>
                 <a th:href="@{/login}">Войти</a>
             </li>
             <!--            <li sec:authorize="!isAuthenticated()">-->
             <!--                <a th:href="@{/register}">Register</a>-->
             <!--            </li>-->
-            </ul>
-        </div>
+        </ul>
     </div>
 </nav>
 <!--<nav class="navbar navbar-default" th:fragment="header">-->

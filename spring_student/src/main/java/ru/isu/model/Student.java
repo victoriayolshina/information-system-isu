@@ -31,6 +31,11 @@ public class Student {
     @NotBlank(message = "Fill in the field.")
     private String patronymic;
 
+    private String surnameCase;
+    private String nameCase;
+    private String patronymicCase;
+    private String CuratorFullNameByDepartment;
+
     private String username;
 
     private String password;

@@ -23,7 +23,7 @@
         <security:intercept-url pattern="/login" method="GET" access="ROLE_ANONYMOUS"/>
         <security:intercept-url pattern="/login" method="POST"
                                 access="ROLE_STUDENT, ROLE_ADMIN, ROLE_CURATOR, ROLE_OFFICE"/>
-        <security:intercept-url pattern="/studenthtml/**" access="ROLE_STUDENT , ROLE_ADMIN"/>
+        <security:intercept-url pattern="/studenthtml/*/studentInfo" access="ROLE_STUDENT , ROLE_ADMIN"/>
         <security:intercept-url pattern="/curatorhtml/**" access="ROLE_CURATOR , ROLE_ADMIN"/>
         <security:intercept-url pattern="/deansofficehtml/**" access="ROLE_DEANSOFFICE , ROLE_ADMIN"/>
 

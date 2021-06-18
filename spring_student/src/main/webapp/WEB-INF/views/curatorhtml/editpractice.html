@@ -25,13 +25,12 @@
     <div class="row">
         <table id="book-table" class="table">
             <form id="edit-practice-form" action="editPractice"
-                  th:action="@{/practice/{practiceId}(practiceId = ${practiceId})}"
-                  method="POST">
+                  th:action="@{/curator/practice/{practiceId}(practiceId = ${practiceId})}" method="POST">
                 <thead>
                 <tr>
                     <label for="Starttime">Дата начала</label>
                     <input id="Starttime" name="Starttime" class="form-control" type="date"
-                           th:value="${prac}"
+                           th:value="${}"
                     />
                 </tr>
                 <tr>
@@ -40,10 +39,9 @@
                            th:value="${practice.getEndtime()}"
                     />
                 </tr>
-<!--                возможно сюда ещё лучше пихнуть возможность для того, чтобы поменять тип практики (учебная, производственая)-->
-
+                <!--      возможно сюда ещё лучше пихнуть возможность для того, чтобы поменять тип практики (учебная, производственая)-->
                 <p>
-                    <button type="submit" id="btn-edit" class="btn btn-primary">Сохранить</button>
+                    <button type="submit" id="btn-edit-practice" class="btn btn-primary">Сохранить</button>
                 </p>
                 </thead>
             </form>

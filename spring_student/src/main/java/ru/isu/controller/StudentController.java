@@ -15,10 +15,7 @@ import ru.isu.repository.PracticeRepository;
 import ru.isu.repository.StudentRepository;
 import ru.isu.repository.TaskRepository;
 
-import java.io.BufferedReader;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -85,7 +82,7 @@ public class StudentController {
 //        String templ = "[!*&^ ^&*!]";
 //
 //        int count = 0;
-//        BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream("text.txt")));
+//        BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream("/ru.isu/text.txt")));
 //
 //        String line;
 //        while ((line = reader.readLine()) != null) {
@@ -109,10 +106,54 @@ public class StudentController {
 //        }
 //        System.out.println(sb);
 
-
         Practice practice = practiceRepository.findPracticeById(practiceId);
         model.addAttribute("tasks", taskRepository.findTasksByPractice(practice));
         return "studenthtml/tasks";
+    }
+
+
+    @RequestMapping(value = "/practice/{practiceId}/tasks/overleaf", method = RequestMethod.GET)
+    public String overleafTemplate(@PathVariable int practiceId, Model model, Authentication authentication) throws IOException {
+
+        UsernamePasswordAuthenticationToken token = (UsernamePasswordAuthenticationToken) authentication;
+        Student student = studentRepository.findStudentByUsername(token.getName());
+
+        Faculty faculty = student.getFaculty();
+        Practice practice = practiceRepository.findPracticeById(practiceId);
+        PlaceOfPractice placeOfPractice = practice.getPlaceOfPractice();
+
+//        File file = new File;
+
+        StringBuffer sb = new StringBuffer();
+
+        String templ = "[!*&^ ^&*!]";
+        String file = "template.txt";
+
+        BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(file)));
+
+        String line;
+        while ((line = reader.readLine()) != null) {
+            sb.append("\n")
+                    .append(line);
+        }
+
+//        while (sb.indexOf(templ, 0) != -1) {
+//            int elem = sb.indexOf(templ, 0);
+//            String textTempl = String.format(" вхождение текста");
+//            sb.replace(elem, elem + templ.length(), "");
+//            sb.insert(elem, textTempl);
+//        }
+
+        String textTempl = String.format("%s", student.getSurname());
+
+//        int elem = sb.indexOf(templ, 0);
+//        sb.replace(elem, elem + templ.length(), "");
+//        sb.insert(elem, textTempl);
+
+        sb = putData(sb, student.getSurname(), templ);
+        model.addAttribute("template", sb.toString());
+
+        return "studenthtml/overleaf";
     }
 
 
@@ -167,7 +208,6 @@ public class StudentController {
     @RequestMapping(value = "/practice/{practiceId}/tasks/{taskId}", method = RequestMethod.POST)
     public String editTask(@ModelAttribute Task task, @PathVariable("practiceId") int practiceId, @PathVariable("taskId") long taskId, Authentication authentication) {
         Practice practice = practiceRepository.findPracticeById(practiceId);
-
         taskRepository.delete(taskId);
         task.setPractice(practice);
         task.setId(taskId);
@@ -191,9 +231,8 @@ public class StudentController {
         if (integerList.isEmpty() || !integerList.contains(practiceId)) {
             return String.format("redirect:/student/practice");
         }
-        return "students/gant";
+        return "studenthtml/gant";
     }
-
 
     @RequestMapping(value = "/practice/{practiceId}/tasks/gant", method = RequestMethod.POST)
     @ResponseBody
@@ -218,5 +257,17 @@ public class StudentController {
         }
         return gantCustomClassArrayList;
     }
-}
 
+    @RequestMapping(value = "/practice/information/new", method = RequestMethod.GET)
+    public String addInformationForTemplate(@PathVariable("practiceId") int practiceId, Authentication authentication, Model model) {
+        return "studenthtml/information";
+    }
+
+    private StringBuffer putData(StringBuffer stringBuffer, String data, String template){
+        int elem = stringBuffer.indexOf(template, 0);
+        stringBuffer.replace(elem, elem + template.length(), "");
+        stringBuffer.insert(elem, data);
+
+        return stringBuffer;
+    }
+}

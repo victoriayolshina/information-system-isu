@@ -26,6 +26,7 @@ public class AutoUser implements UserDetails {
 
     @NotBlank(message = "Fill in the field.")
     private String password;
+    
     private String role;
 
     public Collection<? extends GrantedAuthority> getAuthorities() {

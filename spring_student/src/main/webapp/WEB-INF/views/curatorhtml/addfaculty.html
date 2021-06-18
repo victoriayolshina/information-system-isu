@@ -2,7 +2,7 @@
 <html lang="ru" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=cp1251">
-<!--    <title>All Students</title>-->
+    <!--    <title>All Students</title>-->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
@@ -13,7 +13,7 @@
 <div th:replace="../views/header :: header"></div>
 <div class="container">
     <h2 class="text-danger">Добавление группы</h2>
-    <form action="savestudent" th:action="@{/faculty/add}" method="post" th:object="${}">
+    <form action="savestudent" th:action="@{/faculty/new}" method="post" th:object="${faculty}">
         <div class="form-group">
             <label for="faculty-name">Название</label>
             <input id="faculty-name" class="form-control"
@@ -38,5 +38,30 @@
         <button type="submit" id="btnsavestudents">Сохранить</button>
     </form>
 </div>
+<!--<div class="container">-->
+<!--    <div class="row">-->
+<!--        <table id="book-table" class="table">-->
+<!--            <form id="add-faculty-form" th:action="@{/faculty/new}" method="post" th:method="POST">-->
+
+<!--                <thead>-->
+<!--                <tr>-->
+<!--                    <label for="faculty">Название</label>-->
+<!--                    <input id="faculty" name="faculty" class="form-control" type="text"/>-->
+<!--                </tr>-->
+<!--                <tr>-->
+<!--                    <label for="direction">Направление</label>-->
+<!--                    <input id="direction" name="direction" class="form-control" type="text"/>-->
+<!--                </tr>-->
+<!--                <tr>-->
+<!--                    <label for="year">Год</label>-->
+<!--                    <input id="year" name="year" class="form-control" type="text"/>-->
+<!--                </tr>-->
+<!--                <p>-->
+<!--                    <button type="submit" id="btn-add" class="btn btn-primary">Сохранить</button>-->
+<!--                </p>-->
+<!--                </thead>-->
+<!--            </form>-->
+<!--        </table>-->
+<!--    </div>-->
 </body>
 </html>

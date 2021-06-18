@@ -24,4 +24,6 @@ public interface PracticeRepository extends JpaRepository<Practice, Long> {
 
     @Query("SELECT p.id FROM Practice p WHERE p.student= ?1")
     List<Integer> countPracticeByStudent(Student student);
+
+
 }

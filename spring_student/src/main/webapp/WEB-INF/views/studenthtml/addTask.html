@@ -24,11 +24,12 @@
 <div class="container">
     <div class="row">
         <table id="book-table" class="table">
-            <form id="add-task-form" th:action="@{/tasks/{practicId}/addTask/save(practicId=${practice.getId()})}" method="POST">
+            <form id="add-task-form" th:action="@{/practice/{practiceId}/tasks/new(practiceId=${practice.getId()})}"
+                  method="POST">
                 <thead>
                 <tr>
                     <label for="Datastart">Дата начала</label>
-                    <input id="Datastart" name="Datastart"  class="form-control" type="date"
+                    <input id="Datastart" name="Datastart" class="form-control" type="date"
                            th:value="${practice.getStarttime()}"
                            th:min="${practice.getStarttime()}"
                            th:max="${practice.getEndtime()}"
@@ -37,7 +38,7 @@
                 </tr>
                 <tr>
                     <label for="Dataend">Дата конца</label>
-                    <input id="Dataend" name="Dataend"  class="form-control" type="date"
+                    <input id="Dataend" name="Dataend" class="form-control" type="date"
                            th:value="${practice.getStarttime()}"
                            th:min="${practice.getStarttime()}"
                            th:max="${practice.getEndtime()}"
@@ -45,21 +46,20 @@
                 </tr>
                 <tr>
                     <label for="Task">Задание</label>
-                    <input id="Task" name="Task"  class="form-control" type="text"/>
+                    <input id="Task" name="Task" class="form-control" type="text"/>
                 </tr>
                 <tr>
                     <label for="Description">Описание</label>
                     <p><textarea id="Description" rows="10" cols="45" name="Description"></textarea></p>
                     <!--<input id="Description" name="Description"  class="form-control"  type="text"/>-->
                 </tr>
-            <p>
-                <button type="submit"  id="btn-add" class="btn btn-primary">Сохранить</button>
-            </p>
+                <p>
+                    <button type="submit" id="btn-add" class="btn btn-primary">Сохранить</button>
+                </p>
                 </thead>
             </form>
         </table>
     </div>
 </div>
-
 </body>
 </html>

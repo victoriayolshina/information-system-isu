@@ -41,4 +41,22 @@ public class Practice {
 
     @JsonIgnore
     private String post;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "placeofpractice")
+    private PlaceOfPractice placeOfPractice;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "typeofpractice")
+    private TypeOfPractice typeOfPractice;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "supervisor")
+    private Supervisor supervisor;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "curator")
+    private Curator curator;
+
+    private String mark;
 }

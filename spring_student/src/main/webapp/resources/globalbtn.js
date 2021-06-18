@@ -24,10 +24,14 @@ $(document).ready(function () {
         //console.log(window.location.pathname);
     });
 
-    $("#btn-edit").click(function (e) {
+    $("#btn-edit-task").click(function (e) {
         e.preventDefault();
-
         $("#edit-task-form").submit();
+    });
+
+    $("#btn-edit-practice").click(function (e) {
+        e.preventDefault();
+        $("#edit-practice-form").submit();
     });
 
 
@@ -42,13 +46,6 @@ $(document).ready(function () {
         e.preventDefault();
         console.log("elem")
         $("#logout-form").submit();
-    });
-
-
-    /* Обработчик кнопки формы регистрации */
-    $("#btn-registr").click(function (e){
-        e.preventDefault()
-        $("#register-form").submit();
     });
 });
 
