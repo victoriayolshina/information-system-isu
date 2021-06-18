@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1
--- Время создания: Июн 16 2021 г., 14:57
+-- Время создания: Июн 18 2021 г., 13:38
 -- Версия сервера: 10.4.18-MariaDB
 -- Версия PHP: 8.0.3
 
@@ -41,7 +41,8 @@ CREATE TABLE `auto_user` (
 INSERT INTO `auto_user` (`id`, `username`, `role`, `password`) VALUES
 (1, 'nataliasemicheva', 'ROLE_DEANSOFFICE', 'pass'),
 (2, 'leonidriabets', 'ROLE_CURATOR', 'pass'),
-(3, 'victoriayolshina', 'ROLE_STUDENT', 'pass');
+(3, 'victoriayolshina', 'ROLE_USER', 'pass'),
+(4, 'markkislyannikov', 'ROLE_ADMIN', 'pass');
 
 -- --------------------------------------------------------
 
@@ -66,7 +67,9 @@ CREATE TABLE `curator` (
 
 INSERT INTO `curator` (`id`, `surname`, `name`, `patronymic`, `degree`, `email`, `username`, `password`) VALUES
 (1, 'Рябец', 'Леонид ', 'Владимирович', 'доцент', 'riabets@gmail.com', 'leonidriabets', 'pass'),
-(2, 'Семичева', 'Наталья', 'Леонидовна', 'доцент', 'semicheva@gmail.com', 'nataliasemicheva', 'pass');
+(2, 'Семичева', 'Наталья', 'Леонидовна', 'доцент', 'semicheva@gmail.com', 'nataliasemicheva', 'pass'),
+(3, 'Зинченко', 'Анна ', 'Сергеевна', 'доцент', 'azinchenko@gmail.ru', 'annazinchenko', 'pass'),
+(4, 'Кислянников', 'Марк', 'Александрович', 'старший преподаватель ', 'markkisyannikov@gmail.com', 'markkisyannikov', 'pass');
 
 -- --------------------------------------------------------
 
@@ -89,7 +92,8 @@ CREATE TABLE `deansemployee` (
 --
 
 INSERT INTO `deansemployee` (`id`, `surname`, `name`, `patronymic`, `post`, `username`, `password`) VALUES
-(1, 'Семичева', 'Наталья', 'Леонидовна', 'доцент', 'nataliasemicheva', 'pass');
+(1, 'Семичева', 'Наталья', 'Леонидовна', 'доцент', 'nataliasemicheva', 'pass'),
+(2, 'Кислянников', 'Марк', 'Александрович', 'старший преподаватель ', 'markkisyannikov', 'pass');
 
 -- --------------------------------------------------------
 
@@ -109,8 +113,7 @@ CREATE TABLE `direction` (
 
 INSERT INTO `direction` (`id`, `name`, `code`) VALUES
 (1, 'Прикладная Информатика', '09.03.03'),
-(2, 'Фундаментальная Информатика', '03.03.03'),
-(3, 'КРАСАВЧИК', '03.09.02');
+(2, 'Фундаментальная Информатика', '03.03.03');
 
 -- --------------------------------------------------------
 
@@ -131,8 +134,7 @@ CREATE TABLE `faculty` (
 
 INSERT INTO `faculty` (`id`, `name`, `direction`, `year`) VALUES
 (1, '2461', 1, 2017),
-(2, '2471', 2, 2018),
-(3, 'КРАСАВЧИКGROUP', 3, 2021);
+(2, '2471', 2, 2018);
 
 -- --------------------------------------------------------
 
@@ -152,7 +154,9 @@ CREATE TABLE `placeofpractice` (
 --
 
 INSERT INTO `placeofpractice` (`id`, `name`, `location`, `typeofdirection`) VALUES
-(1, 'ZEON', 'Партизанская, 65', 2);
+(1, 'ZEON', 'Партизанская, 65', 2),
+(2, 'Форус', 'Ямская, 1', 1),
+(3, 'Адикт', 'Бурлова, 2', 3);
 
 -- --------------------------------------------------------
 
@@ -178,7 +182,8 @@ CREATE TABLE `practice` (
 --
 
 INSERT INTO `practice` (`id`, `student`, `starttime`, `endtime`, `post`, `placeofpractice`, `typeofpractice`, `supervisor`, `curator`, `mark`) VALUES
-(1, 1, '2021-02-07', '2021-03-20', 'Практикант', 1, 3, 1, 1, '5');
+(1, 1, '2021-02-07', '2021-03-20', 'практикант', 1, 3, 1, 1, '5'),
+(2, 2, '2021-02-25', '2021-03-15', 'программист', 3, 3, 3, 2, '5');
 
 -- --------------------------------------------------------
 
@@ -228,7 +233,9 @@ CREATE TABLE `supervisior` (
 --
 
 INSERT INTO `supervisior` (`id`, `surname`, `name`, `patronymic`, `post`, `placeofpractice`) VALUES
-(1, 'Журавлёв', 'Павел', 'Александрович', 'руководитель отдела внедрения и развития информационных систем', 1);
+(1, 'Журавлёв', 'Павел', 'Александрович', 'руководитель отдела внедрения и развития информационных систем', 1),
+(2, 'Иванов', 'Иван', 'Иванович', 'директор', 2),
+(3, 'Петров', 'Петр', 'Петрович', 'программист', 2);
 
 -- --------------------------------------------------------
 
@@ -253,7 +260,11 @@ INSERT INTO `tasks` (`id`, `datastart`, `dataend`, `task`, `description`, `pract
 (29, '2021-02-15', '2021-02-16', 'Знакомство с проектной документацией и устройством компании.', '', 1),
 (33, '2021-02-17', '2021-02-18', 'Инструктаж по технике безопасности. Знакомство с организацией.', 'По инструкции ручками заполнили дневник.', 1),
 (34, '2021-02-19', '2021-02-23', 'Изучение скриптов, имеющихся у компании.', 'JAVA', 1),
-(36, '2021-02-24', '2021-03-01', 'Написание методов визуализации системного времени и среднего значения загрузки системы за заданный период времени.', '', 1);
+(36, '2021-02-24', '2021-03-01', 'Написание методов визуализации системного времени и среднего значения загрузки системы за заданный период времени.', '', 1),
+(39, '2021-02-25', '2021-03-01', 'Тестирование методов.', 'Тестирование методов.', 2),
+(40, '2021-03-02', '2021-03-04', 'Рефакторинг написанных методов для работы на\r\nсервере.', 'Рефакторинг написанных методов для работы на\r\nсервере.', 2),
+(41, '2021-03-08', '2021-03-12', 'Изучение преобразования данных, получаемых из\r\nсистемы мониторинга формата JSON, в необходимый\r\nвид.\r\n', 'Изучение преобразования данных, получаемых из\r\nсистемы мониторинга формата JSON, в необходимый\r\nвид.', 2),
+(42, '2021-03-14', '2021-03-15', 'Правки в методах для корректного отображения\r\nданных.\r\n', 'Правки в методах для корректного отображения\r\nданных.\r\n', 2);
 
 -- --------------------------------------------------------
 
@@ -272,7 +283,9 @@ CREATE TABLE `typeofdirection` (
 
 INSERT INTO `typeofdirection` (`id`, `name`) VALUES
 (1, '1С'),
-(2, 'Back-end');
+(2, 'Back-end'),
+(3, 'Front-end'),
+(4, 'Data science');
 
 -- --------------------------------------------------------
 
@@ -379,19 +392,19 @@ ALTER TABLE `typeofpractice`
 -- AUTO_INCREMENT для таблицы `auto_user`
 --
 ALTER TABLE `auto_user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT для таблицы `curator`
 --
 ALTER TABLE `curator`
-  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT для таблицы `deansemployee`
 --
 ALTER TABLE `deansemployee`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT для таблицы `direction`
@@ -409,13 +422,13 @@ ALTER TABLE `faculty`
 -- AUTO_INCREMENT для таблицы `placeofpractice`
 --
 ALTER TABLE `placeofpractice`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT для таблицы `practice`
 --
 ALTER TABLE `practice`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT для таблицы `student`
@@ -427,19 +440,19 @@ ALTER TABLE `student`
 -- AUTO_INCREMENT для таблицы `supervisior`
 --
 ALTER TABLE `supervisior`
-  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT для таблицы `tasks`
 --
 ALTER TABLE `tasks`
-  MODIFY `id` bigint(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
+  MODIFY `id` bigint(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
 
 --
 -- AUTO_INCREMENT для таблицы `typeofdirection`
 --
 ALTER TABLE `typeofdirection`
-  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT для таблицы `typeofpractice`
