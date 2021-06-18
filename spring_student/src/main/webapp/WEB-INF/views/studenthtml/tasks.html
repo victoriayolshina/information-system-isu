@@ -8,14 +8,14 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
     <script th:src="@{/resources/globalbtn.js}"></script>
     <script th:src="@{/resources/task.js}"></script>
-    <script th:src="@{/resources/statistics.js}"></script>
+    <!--    <script th:src="@{/resources/statistics.js}"></script>-->
     <script th:src="@{/resources/textarea.css}"></script>
-<!--    <script th:inline="javascript">-->
-<!--        /*<![CDATA[*/-->
-<!--        var root = /*[[@{/}]]*/ 'default';-->
-<!--        console.log(root);-->
-<!--        /*]]>*/-->
-<!--    </script>-->
+    <!--    <script th:inline="javascript">-->
+    <!--        /*<![CDATA[*/-->
+    <!--        var root = /*[[@{/}]]*/ 'default';-->
+    <!--        console.log(root);-->
+    <!--        /*]]>*/-->
+    <!--    </script>-->
 </head>
 <body>
 
@@ -23,19 +23,40 @@
 
 <div class="container">
     <h2 class="text-danger">Все задания на практику:</h2>
-    <button id="add-task-btn" type="button"
-            class="btn-default" data-toggle="modal">
-        <span class="glyphicon glyphicon-plus"></span> Добавить
-    </button>
-    <button id="getGant" type="button"
-            class="btn-default" data-toggle="modal">
-        <span class="glyphicon glyphicon"></span> Диаграмма Ганта
-    </button>
-    <form action="https://www.overleaf.com/docs" method="post" target="_blank">
+<!--    <button id="add-task-btn" type="button"-->
+<!--            class="btn-default" data-toggle="modal">-->
+<!--        <span class="glyphicon glyphicon-plus"></span> Добавить-->
+<!--    </button>-->
+<!--    <button  type="button"-->
+<!--            class="btn-default" data-toggle="modal">-->
+<!--        <span class="glyphicon glyphicon"></span> Диаграмма Ганта-->
+<!--    </button>-->
 
-        <input type="hidden" name="snip_uri" type="file" accept=".txt" id="btn1"
-               value=""><br>
-        <input type="submit" value="Сгенерировать отчёт">
+    <!--    <form action="https://www.overleaf.com/docs" method="post" target="_blank">-->
+
+    <!--        <input type="hidden" name="snip_uri" type="file" accept=".txt" id="btn1"-->
+    <!--               value=""><br>-->
+    <!--        <input type="submit" value="Сгенерировать отчёт">-->
+
+    <form action="https://www.overleaf.com/docs" method="post" target="_blank">
+        <input type="submit" id="add-task-btn"  value="Добавить задание">
+        <input type="submit" id="getGant"  value="Диаграмма Ганта">
+        <textarea style="display:none;" rows="500" cols="90" name="snip" th:text="${template.toString()}">
+
+</textarea>
+        <!--        <button id="button" type="button"-->
+        <!--                class="btn-default" data-toggle="modal">-->
+        <!--            <span class="glyphicon glyphicon"></span> Сгенерировать отчёт-->
+        <!--        </button>-->
+        <input type="submit" value="Open in Overleaf">
+    </form>
+
+<!--    <div class="text-container">-->
+<!--        <input type="submit" id="add-task-btn"  value="Добавить">-->
+<!--        <span class="glyphicon glyphicon-plus"></span> -->
+
+<!--    </div>-->
+
     <h2 class="text-danger"></h2>
     <table class="table">
         <table class="table">

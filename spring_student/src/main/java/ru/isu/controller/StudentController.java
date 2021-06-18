@@ -109,19 +109,11 @@ public class StudentController {
 
         Practice practice = practiceRepository.findPracticeById(practiceId);
         model.addAttribute("tasks", taskRepository.findTasksByPractice(practice));
-        return "studenthtml/tasks";
-    }
 
-
-    @RequestMapping(value = "/practice/{practiceId}/tasks/overleaf", method = RequestMethod.GET)
-    public String overleafTemplate(@PathVariable int practiceId, Model model, Authentication authentication) throws IOException {
-
-        UsernamePasswordAuthenticationToken token = (UsernamePasswordAuthenticationToken) authentication;
-        Student student = studentRepository.findStudentByUsername(token.getName());
 
         Faculty faculty = student.getFaculty();
-        Practice practice = practiceRepository.findPracticeById(practiceId);
-        PlaceOfPractice placeOfPractice = practice.getPlaceOfPractice();
+        Practice practicetempl = practiceRepository.findPracticeById(practiceId);
+        PlaceOfPractice placeOfPractice = practicetempl.getPlaceOfPractice();
 
 
         StringBuffer sb = new StringBuffer();
@@ -130,7 +122,7 @@ public class StudentController {
         String templName = "[!*&^ИмяСтудента^&*!]";
         String templPatronymic = "[!*&^ОтчествоСтудента^&*!]";
 
-        String templStartDate = putDataInTemplate(practice.getStarttime().toString());
+        String templStartDate = putDataInTemplate(practicetempl.getStarttime().toString());
 
         InputStream inputStream = getClass().getResourceAsStream("/overleaf.txt");
         BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream,StandardCharsets.UTF_8));
@@ -147,8 +139,47 @@ public class StudentController {
         sb = putData(sb, student.getPatronymic(), templPatronymic);
 
         model.addAttribute("template", sb.toString());
-        return "studenthtml/overleaf";
+
+        return "studenthtml/tasks";
     }
+
+
+//    @RequestMapping(value = "/practice/{practiceId}/tasks", method = RequestMethod.GET)
+//    public String overleafTemplate(@PathVariable int practiceId, Model model, Authentication authentication) throws IOException {
+//
+//        UsernamePasswordAuthenticationToken token = (UsernamePasswordAuthenticationToken) authentication;
+//        Student student = studentRepository.findStudentByUsername(token.getName());
+//
+//        Faculty faculty = student.getFaculty();
+//        Practice practice = practiceRepository.findPracticeById(practiceId);
+//        PlaceOfPractice placeOfPractice = practice.getPlaceOfPractice();
+//
+//
+//        StringBuffer sb = new StringBuffer();
+//
+//        String templSurname = "[!*&^ФамилияСтудента^&*!]";
+//        String templName = "[!*&^ИмяСтудента^&*!]";
+//        String templPatronymic = "[!*&^ОтчествоСтудента^&*!]";
+//
+//        String templStartDate = putDataInTemplate(practice.getStarttime().toString());
+//
+//        InputStream inputStream = getClass().getResourceAsStream("/overleaf.txt");
+//        BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream,StandardCharsets.UTF_8));
+//
+//
+//        String line;
+//        while ((line = reader.readLine()) != null) {
+//            sb.append("\n")
+//                    .append(line);
+//        }
+//
+//        sb = putData(sb, student.getSurname(), templSurname);
+//        sb = putData(sb, student.getName(), templName);
+//        sb = putData(sb, student.getPatronymic(), templPatronymic);
+//
+//        model.addAttribute("template", sb.toString());
+//        return "studenthtml/tasks";
+//    }
 
 
     @RequestMapping(value = "/practice/{practiceId}/tasks/new", method = RequestMethod.GET)

@@ -54,3 +54,13 @@ function goToTask(id) {
     console.log(str)
     location.href = window.location.pathname + str;
 }
+
+function checkInput(text) {
+
+    if (text) {
+        $("#clearBtn1").addClass("show");
+    } else {
+        $("#clearBtn1").removeClass("show");
+    }
+
+}
