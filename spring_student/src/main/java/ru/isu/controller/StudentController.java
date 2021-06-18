@@ -123,48 +123,28 @@ public class StudentController {
         Practice practice = practiceRepository.findPracticeById(practiceId);
         PlaceOfPractice placeOfPractice = practice.getPlaceOfPractice();
 
-//        File file = new File;
 
         StringBuffer sb = new StringBuffer();
 
         String templSurname = "[!*&^ФамилияСтудента^&*!]";
         String templName = "[!*&^ИмяСтудента^&*!]";
         String templPatronymic = "[!*&^ОтчествоСтудента^&*!]";
-        String file = "overleaf.txt";
 
-        BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(file), StandardCharsets.UTF_8));
+        InputStream inputStream = getClass().getResourceAsStream("/overleaf.txt");
+        BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream,StandardCharsets.UTF_8));
+
 
         String line;
         while ((line = reader.readLine()) != null) {
             sb.append("\n")
                     .append(line);
         }
-        System.out.println(line);
-
-//        while (sb.indexOf(templ, 0) != -1) {
-//            int elem = sb.indexOf(templ, 0);
-//            String textTempl = String.format(" вхождение текста");
-//            sb.replace(elem, elem + templ.length(), "");
-//            sb.insert(elem, textTempl);
-//        }
-
-        String textTempl = String.format("%s", student.getSurname());
-
-//        int elem = sb.indexOf(templ, 0);
-//        sb.replace(elem, elem + templ.length(), "");
-//        sb.insert(elem, textTempl);
-
-//        System.out.println(sb.toString());
-//        System.out.println(putData(sb, templ+ templ.length(), textTempl));
 
         sb = putData(sb, student.getSurname(), templSurname);
         sb = putData(sb, student.getName(), templName);
         sb = putData(sb, student.getPatronymic(), templPatronymic);
 
-        System.out.println(sb);
-
         model.addAttribute("template", sb.toString());
-
         return "studenthtml/overleaf";
     }
 
@@ -276,9 +256,11 @@ public class StudentController {
     }
 
     private StringBuffer putData(StringBuffer stringBuffer, String data, String template){
+
         int elem = stringBuffer.indexOf(template, 0);
-        stringBuffer.replace(elem, elem + template.length()+1, "");
-        stringBuffer.insert(elem, data);
+        System.out.println(elem);
+        stringBuffer.replace(elem, elem + template.length(), data);
+        //stringBuffer.insert(elem, data);
 
         return stringBuffer;
     }

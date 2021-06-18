@@ -29,7 +29,6 @@
 
 
     </security:http>
-
     <security:authentication-manager>
         <security:authentication-provider ref="CustomAuthenticationProvider"/>
     </security:authentication-manager>
