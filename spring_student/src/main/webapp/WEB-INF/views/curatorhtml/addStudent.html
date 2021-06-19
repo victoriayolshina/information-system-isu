@@ -15,7 +15,7 @@
 
 <div class="container">
     <h2 class="text-danger">Добавление студента</h2>
-    <form action="savestudent" th:action="@{/faculty/{facultyId}/students/new(facultyId = ${facultyId})}" method="post" th:object="${customsStudent}">
+    <form action="savestudent" th:action="@{/curator/faculty/{facultyId}/students/new(facultyId = ${facultyId})}" method="post" th:object="${customsStudent}">
         <div class="form-group">
             <label for="student-surname">Фамилия</label>
             <input id="student-surname" class="form-control"

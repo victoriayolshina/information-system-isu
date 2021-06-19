@@ -1,5 +1,6 @@
 package ru.isu.controller;
 
+import net.bytebuddy.implementation.bind.annotation.Super;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -17,7 +18,9 @@ import ru.isu.repository.TaskRepository;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -74,11 +77,12 @@ public class StudentController {
         UsernamePasswordAuthenticationToken token = (UsernamePasswordAuthenticationToken) authentication;
         Student student = studentRepository.findStudentByUsername(token.getName());
 
+        //нужен для проерки url
+        //есть ли у студента практика с таким id
         List<Integer> integerList = practiceRepository.countPracticeByStudent(student);
         if (integerList.isEmpty() || !integerList.contains(practiceId)) {
             return String.format("redirect:/student/practice");
         }
-
 //        StringBuffer sb = new StringBuffer();
 //        String templ = "[!*&^ ^&*!]";
 //
@@ -106,27 +110,37 @@ public class StudentController {
 //            sb.insert(elem, textTempl);
 //        }
 //        System.out.println(sb);
-
         Practice practice = practiceRepository.findPracticeById(practiceId);
         model.addAttribute("tasks", taskRepository.findTasksByPractice(practice));
-
 
         Faculty faculty = student.getFaculty();
         Practice practicetempl = practiceRepository.findPracticeById(practiceId);
         PlaceOfPractice placeOfPractice = practicetempl.getPlaceOfPractice();
-
+        Supervisor supervisor = practicetempl.getSupervisor();
 
         StringBuffer sb = new StringBuffer();
 
         String templSurname = "[!*&^ФамилияСтудента^&*!]";
         String templName = "[!*&^ИмяСтудента^&*!]";
         String templPatronymic = "[!*&^ОтчествоСтудента^&*!]";
+        String templCode = "[!*&^Код_направления^&*!]";
+        String templDirection = "[!*&^Название_направления^&*!]";
+        String templTypeOfStudy = "[!*&^Форма_обучения^&*!]";
+        String templProfile = "[!*&^Профиль^&*!]";
+        String templPlaceOfPractice = "[!*&^Место_практики^&*!]";
+        String templStartTime = "[!*&^Дата_начала^&*!]";
+        String templEndTime = "[!*&^Дата_конца^&*!]";
+        String templCurator = "[!*&^Руководитель_кафедры^&*!]";
+        String templEmail = "[!*&^Почта_руководителя^&*!]";
+        String templSupervisor = "[!*&^Руководитель_По_Месту_Практики^&*!]";
+        String templSupervisorPost = "[!*&^Должность_Руководителя_По_Месту_Практики^&*!]";
+        String templPost = "[!*&^Должность^&*!]";
 
-        String templStartDate = putDataInTemplate(practicetempl.getStarttime().toString());
+//        String templStartDate = putDataInTemplate(practicetempl.getStarttime().toString());
+//        String templEndDate = putDataInTemplate(practicetempl.getEndtime().toString());
 
         InputStream inputStream = getClass().getResourceAsStream("/overleaf.txt");
-        BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream,StandardCharsets.UTF_8));
-
+        BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream, StandardCharsets.UTF_8));
 
         String line;
         while ((line = reader.readLine()) != null) {
@@ -134,15 +148,31 @@ public class StudentController {
                     .append(line);
         }
 
+        SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy");
+
         sb = putData(sb, student.getSurname(), templSurname);
         sb = putData(sb, student.getName(), templName);
         sb = putData(sb, student.getPatronymic(), templPatronymic);
+        sb = putData(sb, faculty.getDirection().getCode(), templCode);
+        sb = putData(sb, faculty.getDirection().getName(), templDirection);
+        sb = putData(sb, student.getFormOfStudy(), templTypeOfStudy);
+        sb = putData(sb, placeOfPractice.getName(), templPlaceOfPractice);
+        sb = putData(sb, student.getProfile(), templProfile);
+        sb = putData(sb, sdf.format(practice.getStarttime()), templStartTime);
+        sb = putData(sb, sdf.format(practice.getEndtime()), templEndTime);
+//        sb = putData(sb, student.getCuratorFullNameByDepartment(), templCurator);
+        sb = putData(sb, student.getCuratorEmail(), templEmail);
+        sb = putData(sb, student.getCuratorFullNameByDepartment(), templCurator);
+//        sb = putData(sb, supervisor.getSurname(), templSupervisor);
+        sb = putData(sb, supervisor.getPost(), templSupervisorPost);
+        sb = putData(sb, practice.getPost(), templPost);
+
+        System.out.println(sb);
 
         model.addAttribute("template", sb.toString());
 
         return "studenthtml/tasks";
     }
-
 
 //    @RequestMapping(value = "/practice/{practiceId}/tasks", method = RequestMethod.GET)
 //    public String overleafTemplate(@PathVariable int practiceId, Model model, Authentication authentication) throws IOException {
@@ -180,7 +210,6 @@ public class StudentController {
 //        model.addAttribute("template", sb.toString());
 //        return "studenthtml/tasks";
 //    }
-
 
     @RequestMapping(value = "/practice/{practiceId}/tasks/new", method = RequestMethod.GET)
     public String addTaskGet(@PathVariable("practiceId") int practiceId, Authentication authentication, Model model) {
@@ -231,13 +260,14 @@ public class StudentController {
     }
 
     @RequestMapping(value = "/practice/{practiceId}/tasks/{taskId}", method = RequestMethod.POST)
-    public String editTask(@ModelAttribute Task task, @PathVariable("practiceId") int practiceId, @PathVariable("taskId") long taskId, Authentication authentication) {
+    public String editTask(Model model, @ModelAttribute Task task, @PathVariable("practiceId") int practiceId, @PathVariable("taskId") long taskId, Authentication authentication) {
         Practice practice = practiceRepository.findPracticeById(practiceId);
         taskRepository.delete(taskId);
         task.setPractice(practice);
         task.setId(taskId);
         taskRepository.save(task);
         return String.format("redirect:/student/practice/%d/tasks", practiceId);
+//        return "studenthtml/editTask";
     }
 
     @RequestMapping(value = "/practice/{practiceId}/tasks/{taskId}", method = RequestMethod.DELETE)
@@ -288,7 +318,7 @@ public class StudentController {
         return "studenthtml/information";
     }
 
-    private StringBuffer putData(StringBuffer stringBuffer, String data, String template){
+    private StringBuffer putData(StringBuffer stringBuffer, String data, String template) {
 
         int elem = stringBuffer.indexOf(template, 0);
         System.out.println(elem);
@@ -298,7 +328,7 @@ public class StudentController {
         return stringBuffer;
     }
 
-    private String putDataInTemplate(String str){
+    private String putDataInTemplate(String str) {
         return String.format("[!*&^%s^&*!]", str);
     }
 }

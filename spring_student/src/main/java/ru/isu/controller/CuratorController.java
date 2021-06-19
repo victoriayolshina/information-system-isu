@@ -39,7 +39,7 @@ public class CuratorController {
         Curator curator = curatorRepository.findCuratorByUsername(token.getName());
 
         model.addAttribute("curator", curator);
-        return "curatorhtml/curatorInfo";
+        return "curator/curatorInfo";
     }
 
     @RequestMapping(value = "/faculty", method = RequestMethod.GET)

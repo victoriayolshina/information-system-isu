@@ -13,7 +13,7 @@
 <div th:replace="../views/header :: header"></div>
 <div class="container">
     <h2 class="text-danger">Добавление дополнительной информации о студенте</h2>
-    <form action="savestudent" th:action="@{/practice/information/new}" method="post" th:object="${student}">
+    <form action="savestudent" th:action="@{/student/practice/information/new}" method="post" th:object="${student}">
         <div class="form-group">
             <label for="student-surname-case">Фамилия в родительном падеже:</label>
             <input id="student-surname-case" class="form-control"

@@ -13,7 +13,7 @@
 <div th:replace="../views/header :: header"></div>
 <div class="container">
     <h2 class="text-danger">Добавление группы</h2>
-    <form action="savestudent" th:action="@{/faculty/new}" method="post" th:object="${faculty}">
+    <form action="savestudent" th:action="@{/curator/faculty/new}" method="post" th:object="${faculty}">
         <div class="form-group">
             <label for="faculty-name">Название</label>
             <input id="faculty-name" class="form-control"

@@ -9,6 +9,7 @@ import lombok.ToString;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.sql.Date;
 
 @Entity
@@ -26,6 +27,7 @@ public class Practice {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "student")
     @JsonProperty("student")
+    @NotNull
     private Student student;
 
     /*@ManyToOne( fetch = FetchType.EAGER)

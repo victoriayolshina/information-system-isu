@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1
--- Время создания: Июн 18 2021 г., 13:38
+-- Время создания: Июн 19 2021 г., 12:54
 -- Версия сервера: 10.4.18-MariaDB
 -- Версия PHP: 8.0.3
 
@@ -202,16 +202,17 @@ CREATE TABLE `student` (
   `surnameCase` varchar(225) NOT NULL,
   `nameCase` varchar(225) NOT NULL,
   `patronymicCase` varchar(225) NOT NULL,
-  `CuratorFullNameByDepartment` varchar(225) NOT NULL
+  `curatorFullNameByDepartment` varchar(225) NOT NULL,
+  `formOfStudy` varchar(225) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `student`
 --
 
-INSERT INTO `student` (`id`, `surname`, `name`, `patronymic`, `faculty`, `username`, `password`, `surnameCase`, `nameCase`, `patronymicCase`, `CuratorFullNameByDepartment`) VALUES
-(1, 'Ёлшина', 'Виктория', 'Евгеньевна', 1, 'victoriayolshina', 'pass', 'Ёлшиной', 'Виктории', 'Евгеньевны', 'Зинченко Анна Сергеевна'),
-(2, 'Кислянников ', 'Марк', 'Александрович', 3, 'markkislyannikov', 'pass', 'Кислянникова', 'Марка', 'Александровича', 'Казимиров Алексей Сергеевич');
+INSERT INTO `student` (`id`, `surname`, `name`, `patronymic`, `faculty`, `username`, `password`, `surnameCase`, `nameCase`, `patronymicCase`, `curatorFullNameByDepartment`, `formOfStudy`) VALUES
+(1, 'Ёлшина', 'Виктория', 'Евгеньевна', 1, 'victoriayolshina', 'pass', 'Ёлшиной', 'Виктории', 'Евгеньевны', 'Зинченко Анна Сергеевна', 'очная'),
+(2, 'Кислянников ', 'Марк', 'Александрович', 3, 'markkislyannikov', 'pass', 'Кислянникова', 'Марка', 'Александровича', 'Казимиров Алексей Сергеевич', 'очная');
 
 -- --------------------------------------------------------
 

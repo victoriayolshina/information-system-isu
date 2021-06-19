@@ -25,15 +25,15 @@
     <div class="row">
         <table id="book-table" class="table">
             <form id="edit-task-form" action="editTask"
-                  th:action="@{/student/practice/{practiceId}/tasks(practicId = ${practiceId})}"
+                  th:action="@{/student/practice/{practiceId}/tasks/{taskId}(practiceId = ${practiceId}, taskId = ${taskId})}"
                   method="POST">
                 <thead>
                 <tr>
                     <label for="Datastart">Дата начала</label>
                     <input id="Datastart" name="Datastart" class="form-control" type="date"
-                           th:min="${}"
-                           th:max="${task.getPractice().getEndtime()}"
-                           th:value="${task.getDatastart()}"
+                           th:min="${tasks.}"
+                           th:max="${tasks.getPractice().getEndtime()}"
+                           th:value="${tasks.getDatastart()}"
                            th:onchange="'setMinDateInDateInput()'"
                     />
                 </tr>
