@@ -122,6 +122,8 @@ public class StudentController {
 
         StringBuffer sb = new StringBuffer();
 
+        List<Task> tasks = taskRepository.findTasksByPractice(practice);
+
         //Блоки в файле шаблона, которые необходимо заменить
         String templYear = "[!*&^Год^&*!]";
         String templSurname = "[!*&^ФамилияСтудента^&*!]";
@@ -131,9 +133,9 @@ public class StudentController {
         String templPatronymic = "[!*&^ОтчествоСтудента^&*!]";
         String templPatronymicRP = "[!*&^ОтчествоСтудентаРП^&*!]";
         String templCode = "[!*&^Код_направления^&*!]";
-        String templCodeTitul = "[!*&^Код_направленияТитул^&*!]";
+//        String templCodeTitul = "[!*&^Код_направленияТитул^&*!]";
         String templDirection = "[!*&^Название_направления^&*!]";
-        String templDirectionTitul = "[!*&^Название_направленияТитул^&*!]";
+//        String templDirectionTitul = "[!*&^Название_направленияТитул^&*!]";
         String templCourse = "[!*&^Курс^&*!]";
         String templTypeOfStudy = "[!*&^Форма_Обучения^&*!]";
         String templProfile = "[!*&^Профиль^&*!]";
@@ -145,6 +147,7 @@ public class StudentController {
 //        String templSupervisor = "[!*&^Руководитель_По_Месту_Практики^&*!]";
 //        String templSupervisorPost = "[!*&^Должность_Руководителя_По_Месту_Практики^&*!]";
         String templPost = "[!*&^Должность^&*!]";
+        String templTasks = "[!*&^ДатаИЗадача^&*!]";
 
 //        String templStartDate = putDataInTemplate(practicetempl.getStarttime().toString());
 //        String templEndDate = putDataInTemplate(practicetempl.getEndtime().toString());
@@ -179,9 +182,7 @@ public class StudentController {
         sb = putData(sb, student.getPatronymic(), templPatronymic);
         sb = putData(sb, student.getPatronymicCase(), templPatronymicRP);
         sb = putData(sb, faculty.getDirection().getCode(), templCode);
-        sb = putData(sb, faculty.getDirection().getCode(), templCodeTitul);
         sb = putData(sb, faculty.getDirection().getName(), templDirection);
-        sb = putData(sb, faculty.getDirection().getName(), templDirectionTitul);
         sb = putData(sb, date, templCourse);
         sb = putData(sb, practice.getFormOfStudy(), templTypeOfStudy);
         sb = putData(sb, placeOfPractice.getName(), templPlaceOfPractice);
@@ -195,7 +196,6 @@ public class StudentController {
         sb = putData(sb, practice.getPost(), templPost);
 
 //        System.out.println(sb);
-
 
         model.addAttribute("template", sb.toString());
 
@@ -371,12 +371,14 @@ public class StudentController {
         return "studenthtml/information";
     }
 
-    private StringBuffer putData(StringBuffer stringBuffer, String data, String template) {
 
+    private StringBuffer putData(StringBuffer stringBuffer, String data, String template) {
         int elem = stringBuffer.indexOf(template, 0);
-        System.out.println(elem);
-        stringBuffer.replace(elem, elem + template.length(), data);
-        //stringBuffer.insert(elem, data);
+
+        while(elem != -1){
+            stringBuffer.replace(elem, elem + template.length(), data);
+            elem = stringBuffer.indexOf(template, 0);
+        }
 
         return stringBuffer;
     }
