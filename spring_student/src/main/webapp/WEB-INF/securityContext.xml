@@ -6,7 +6,6 @@
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.2.xsd">
 
-
     <context:component-scan base-package="ru.isu"/>
 
     <!--    <bean class="org.springframework.security.web.access.expression.DefaultWebSecurityExpressionHandler"/>-->
@@ -23,15 +22,12 @@
         <security:intercept-url pattern="/login" method="GET" access="ROLE_ANONYMOUS"/>
         <security:intercept-url pattern="/login" method="POST"
                                 access="ROLE_STUDENT, ROLE_ADMIN, ROLE_CURATOR, ROLE_OFFICE"/>
-        <security:intercept-url pattern="/studenthtml/**" access="ROLE_STUDENT , ROLE_ADMIN"/>
-        <security:intercept-url pattern="/curatorhtml/**" access="ROLE_CURATOR , ROLE_ADMIN"/>
-        <security:intercept-url pattern="/deansofficehtml/**" access="ROLE_DEANSOFFICE , ROLE_ADMIN"/>
-
+        <security:intercept-url pattern="/student/**" access="ROLE_STUDENT , ROLE_ADMIN"/>
+        <security:intercept-url pattern="/curator/**" access="ROLE_CURATOR , ROLE_ADMIN"/>
+        <security:intercept-url pattern="/deansoffice/**" access="ROLE_DEANSOFFICE , ROLE_ADMIN"/>
 
     </security:http>
     <security:authentication-manager>
         <security:authentication-provider ref="CustomAuthenticationProvider"/>
     </security:authentication-manager>
-
-
 </beans>

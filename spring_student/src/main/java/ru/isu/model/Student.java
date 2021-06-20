@@ -34,10 +34,6 @@ public class Student {
     private String surnameCase;
     private String nameCase;
     private String patronymicCase;
-    private String CuratorFullNameByDepartment;
-    private String CuratorEmail;
-    private String formOfStudy;
-    private String profile;
 
     private String username;
 

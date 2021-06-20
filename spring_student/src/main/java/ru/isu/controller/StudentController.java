@@ -19,6 +19,8 @@ import ru.isu.repository.TaskRepository;
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.Period;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -77,8 +79,7 @@ public class StudentController {
         UsernamePasswordAuthenticationToken token = (UsernamePasswordAuthenticationToken) authentication;
         Student student = studentRepository.findStudentByUsername(token.getName());
 
-        //нужен для проерки url
-        //есть ли у студента практика с таким id
+        //Проверка на наличие практики у студента практика с таким id
         List<Integer> integerList = practiceRepository.countPracticeByStudent(student);
         if (integerList.isEmpty() || !integerList.contains(practiceId)) {
             return String.format("redirect:/student/practice");
@@ -110,6 +111,7 @@ public class StudentController {
 //            sb.insert(elem, textTempl);
 //        }
 //        System.out.println(sb);
+        //
         Practice practice = practiceRepository.findPracticeById(practiceId);
         model.addAttribute("tasks", taskRepository.findTasksByPractice(practice));
 
@@ -120,25 +122,34 @@ public class StudentController {
 
         StringBuffer sb = new StringBuffer();
 
+        //Блоки в файле шаблона, которые необходимо заменить
+        String templYear = "[!*&^Год^&*!]";
         String templSurname = "[!*&^ФамилияСтудента^&*!]";
+        String templSurnameRP = "[!*&^ФамилияСтудентаРП^&*!]";
         String templName = "[!*&^ИмяСтудента^&*!]";
+        String templNameRP = "[!*&^ИмяСтудентаРП^&*!]";
         String templPatronymic = "[!*&^ОтчествоСтудента^&*!]";
+        String templPatronymicRP = "[!*&^ОтчествоСтудентаРП^&*!]";
         String templCode = "[!*&^Код_направления^&*!]";
+        String templCodeTitul = "[!*&^Код_направленияТитул^&*!]";
         String templDirection = "[!*&^Название_направления^&*!]";
-        String templTypeOfStudy = "[!*&^Форма_обучения^&*!]";
+        String templDirectionTitul = "[!*&^Название_направленияТитул^&*!]";
+        String templCourse = "[!*&^Курс^&*!]";
+        String templTypeOfStudy = "[!*&^Форма_Обучения^&*!]";
         String templProfile = "[!*&^Профиль^&*!]";
         String templPlaceOfPractice = "[!*&^Место_практики^&*!]";
         String templStartTime = "[!*&^Дата_начала^&*!]";
         String templEndTime = "[!*&^Дата_конца^&*!]";
         String templCurator = "[!*&^Руководитель_кафедры^&*!]";
         String templEmail = "[!*&^Почта_руководителя^&*!]";
-        String templSupervisor = "[!*&^Руководитель_По_Месту_Практики^&*!]";
-        String templSupervisorPost = "[!*&^Должность_Руководителя_По_Месту_Практики^&*!]";
+//        String templSupervisor = "[!*&^Руководитель_По_Месту_Практики^&*!]";
+//        String templSupervisorPost = "[!*&^Должность_Руководителя_По_Месту_Практики^&*!]";
         String templPost = "[!*&^Должность^&*!]";
 
 //        String templStartDate = putDataInTemplate(practicetempl.getStarttime().toString());
 //        String templEndDate = putDataInTemplate(practicetempl.getEndtime().toString());
 
+        //Чтение шаблона по строкам
         InputStream inputStream = getClass().getResourceAsStream("/overleaf.txt");
         BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream, StandardCharsets.UTF_8));
 
@@ -148,26 +159,43 @@ public class StudentController {
                     .append(line);
         }
 
+        //Изменения формата выводимой даты
         SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy");
 
+        //Получение года поступления студента и вычисление его курса с помощью этой даты
+        int localDate = faculty.getYear();
+        int diff = getCourse(localDate);
+        String date = Integer.toString(diff);
+        LocalDate todaydate = LocalDate.now();
+        int todaydateYear = todaydate.getYear();
+        String year = Integer.toString(todaydateYear);
+
+        //Подстановка данных на места блоков
+        sb = putData(sb, year, templYear);
         sb = putData(sb, student.getSurname(), templSurname);
+        sb = putData(sb, student.getSurnameCase(), templSurnameRP);
         sb = putData(sb, student.getName(), templName);
+        sb = putData(sb, student.getNameCase(), templNameRP);
         sb = putData(sb, student.getPatronymic(), templPatronymic);
+        sb = putData(sb, student.getPatronymicCase(), templPatronymicRP);
         sb = putData(sb, faculty.getDirection().getCode(), templCode);
+        sb = putData(sb, faculty.getDirection().getCode(), templCodeTitul);
         sb = putData(sb, faculty.getDirection().getName(), templDirection);
-        sb = putData(sb, student.getFormOfStudy(), templTypeOfStudy);
+        sb = putData(sb, faculty.getDirection().getName(), templDirectionTitul);
+        sb = putData(sb, date, templCourse);
+        sb = putData(sb, practice.getFormOfStudy(), templTypeOfStudy);
         sb = putData(sb, placeOfPractice.getName(), templPlaceOfPractice);
-        sb = putData(sb, student.getProfile(), templProfile);
+        sb = putData(sb, practice.getProfile(), templProfile);
         sb = putData(sb, sdf.format(practice.getStarttime()), templStartTime);
         sb = putData(sb, sdf.format(practice.getEndtime()), templEndTime);
-//        sb = putData(sb, student.getCuratorFullNameByDepartment(), templCurator);
-        sb = putData(sb, student.getCuratorEmail(), templEmail);
-        sb = putData(sb, student.getCuratorFullNameByDepartment(), templCurator);
+        sb = putData(sb, practice.getCuratorByDepartment(), templCurator);
+        sb = putData(sb, practice.getСuratorEmail(), templEmail);
 //        sb = putData(sb, supervisor.getSurname(), templSupervisor);
-        sb = putData(sb, supervisor.getPost(), templSupervisorPost);
+//        sb = putData(sb, supervisor.getPost(), templSupervisorPost);
         sb = putData(sb, practice.getPost(), templPost);
 
-        System.out.println(sb);
+//        System.out.println(sb);
+
 
         model.addAttribute("template", sb.toString());
 
@@ -210,6 +238,31 @@ public class StudentController {
 //        model.addAttribute("template", sb.toString());
 //        return "studenthtml/tasks";
 //    }
+
+    public int getCourse(int start_date) {
+        // Дата поступления
+        LocalDate date = LocalDate.of(start_date, 9, 1);
+
+        // Дата сегодняшнего дня
+        LocalDate end_date = LocalDate.now();
+
+        //Период между этими датами
+        Period diff = Period.between(date, end_date);
+
+        //Получение года и месяцев разницы между датами
+        int year = diff.getYears();
+        int months = diff.getMonths();
+
+        //Инициализация переменной для записи курса
+        int datebetween = 0;
+
+        if (months > 0) {
+            datebetween = year + 1;
+        } else {
+            datebetween = year;
+        }
+        return datebetween;
+    }
 
     @RequestMapping(value = "/practice/{practiceId}/tasks/new", method = RequestMethod.GET)
     public String addTaskGet(@PathVariable("practiceId") int practiceId, Authentication authentication, Model model) {

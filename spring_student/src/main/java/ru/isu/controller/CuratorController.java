@@ -39,7 +39,7 @@ public class CuratorController {
         Curator curator = curatorRepository.findCuratorByUsername(token.getName());
 
         model.addAttribute("curator", curator);
-        return "curator/curatorInfo";
+        return "curatorhtml/curatorInfo";
     }
 
     @RequestMapping(value = "/faculty", method = RequestMethod.GET)
@@ -98,9 +98,9 @@ public class CuratorController {
     }
 
     @RequestMapping(value = "/faculty/{facultyId}/students/new", method = RequestMethod.GET)
-    public String setNewStudentByCurator(@PathVariable("facultyId") int facultyId, Model model) {
+    public String setNewStudentByCurator(@ModelAttribute Student student, @PathVariable("facultyId") int facultyId, Model model) {
         model.addAttribute("students", studentRepository.findStudentsByFacultyId(facultyId));
-        return "curatorhtml/students";
+        return "curatorhtml/addStudent";
     }
 
     @RequestMapping(value = "/faculty/{facultyId}/students/new", method = RequestMethod.POST)

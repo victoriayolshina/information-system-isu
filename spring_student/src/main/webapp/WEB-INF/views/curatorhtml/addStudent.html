@@ -7,21 +7,19 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
     <script th:src="@{/resources/globalbtn.js}"></script>
-
 </head>
+
 <body>
-
 <div th:replace="../views/header :: header"></div>
-
 <div class="container">
     <h2 class="text-danger">Добавление студента</h2>
-    <form action="savestudent" th:action="@{/curator/faculty/{facultyId}/students/new(facultyId = ${facultyId})}" method="post" th:object="${customsStudent}">
+    <form action="savestudent" th:action="@{/curator/faculty/{facultyId}/students/new(facultyId = ${facultyId})}" method="post" th:object="${students}">
         <div class="form-group">
             <label for="student-surname">Фамилия</label>
             <input id="student-surname" class="form-control"
                    th:field="*{surname}"/>
             <span th:if="${#fields.hasErrors('surname')}"
-                  th:errors="${student.surname}" class="text-danger"></span>
+                  th:errors="${students.}" class="text-danger"></span>
         </div>
         <div class="form-group">
             <label for="student-name">Имя</label>

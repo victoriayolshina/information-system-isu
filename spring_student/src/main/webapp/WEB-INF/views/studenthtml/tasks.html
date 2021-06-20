@@ -32,20 +32,25 @@
 <!--        <span class="glyphicon glyphicon"></span> Диаграмма Ганта-->
 <!--    </button>-->
 
-    <!--    <form action="https://www.overleaf.com/docs" method="post" target="_blank">-->
+        <form action="https://www.overleaf.com/docs" method="post" target="_blank">
+            <input type="submit" id="add-task-btn"  value="Добавить задание">
+            <input type="submit" id="getGant"  value="Диаграмма Ганта">
+            <textarea rows="500" cols="90" name="snip" th:text="${template.toString()}">
 
-    <!--        <input type="hidden" name="snip_uri" type="file" accept=".txt" id="btn1"-->
+            </textarea>
+<!--            <input type="hidden" name="snip_uri" type="file" accept=".txt" id="btn1"-->
 
-    <!--               value=""><br>-->
-    <!--        <input type="submit" value="Сгенерировать отчёт">-->
-
-    <form action="https://www.overleaf.com/docs" method="post" target="_blank">
-        <input type="submit" id="add-task-btn"  value="Добавить задание">
-        <input type="submit" id="getGant"  value="Диаграмма Ганта">
-        <textarea style="display:none;" rows="500" cols="90" name="snip" th:text="${template.toString()}">
-        </textarea>
+<!--                   value=""><br>-->
+            <input type="submit" value="Сгенерировать отчёт">
     </form>
 
+
+<!--    <form action="https://www.overleaf.com/docs" method="post" target="_blank">-->
+<!--<textarea rows="8" cols="60" name="snip">-->
+
+<!--</textarea>-->
+<!--        <input type="submit" value="Open in Overleaf">-->
+<!--    </form>-->
 
 <!--</textarea>-->
         <!--        <button id="button" type="button"-->

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1
--- Время создания: Июн 19 2021 г., 12:54
+-- Время создания: Июн 20 2021 г., 11:02
 -- Версия сервера: 10.4.18-MariaDB
 -- Версия PHP: 8.0.3
 
@@ -41,7 +41,7 @@ CREATE TABLE `auto_user` (
 INSERT INTO `auto_user` (`id`, `username`, `role`, `password`) VALUES
 (1, 'nataliasemicheva', 'ROLE_DEANSOFFICE', 'pass'),
 (2, 'leonidriabets', 'ROLE_CURATOR', 'pass'),
-(3, 'victoriayolshina', 'ROLE_USER', 'pass'),
+(3, 'victoriayolshina', 'ROLE_STUDENT', 'pass'),
 (4, 'markkislyannikov', 'ROLE_ADMIN', 'pass');
 
 -- --------------------------------------------------------
@@ -174,16 +174,20 @@ CREATE TABLE `practice` (
   `typeofpractice` int(11) NOT NULL,
   `supervisor` int(11) NOT NULL,
   `curator` int(11) NOT NULL,
-  `mark` varchar(25) NOT NULL
+  `mark` varchar(25) NOT NULL,
+  `curatorByDepartment` varchar(225) NOT NULL,
+  `сuratorEmail` varchar(225) NOT NULL,
+  `formOfStudy` varchar(225) NOT NULL,
+  `profile` varchar(225) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `practice`
 --
 
-INSERT INTO `practice` (`id`, `student`, `starttime`, `endtime`, `post`, `placeofpractice`, `typeofpractice`, `supervisor`, `curator`, `mark`) VALUES
-(1, 1, '2021-02-07', '2021-03-20', 'практикант', 1, 3, 1, 1, '5'),
-(2, 2, '2021-02-25', '2021-03-15', 'программист', 3, 3, 3, 2, '5');
+INSERT INTO `practice` (`id`, `student`, `starttime`, `endtime`, `post`, `placeofpractice`, `typeofpractice`, `supervisor`, `curator`, `mark`, `curatorByDepartment`, `сuratorEmail`, `formOfStudy`, `profile`) VALUES
+(1, 1, '2021-02-07', '2021-03-20', 'практикант', 1, 3, 1, 1, '5', 'Зинченко Анна Сергеевна', 'azinchenko@gmail.com', 'очная', ' Информационная сфера'),
+(2, 2, '2021-02-25', '2021-03-15', 'программист', 3, 3, 3, 2, '5', 'Казимиров Алексей Сергеевич', 'kazimirov@gamil.com', 'очная', ' Информационная сфера');
 
 -- --------------------------------------------------------
 
@@ -201,18 +205,16 @@ CREATE TABLE `student` (
   `password` varchar(20) NOT NULL,
   `surnameCase` varchar(225) NOT NULL,
   `nameCase` varchar(225) NOT NULL,
-  `patronymicCase` varchar(225) NOT NULL,
-  `curatorFullNameByDepartment` varchar(225) NOT NULL,
-  `formOfStudy` varchar(225) NOT NULL
+  `patronymicCase` varchar(225) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `student`
 --
 
-INSERT INTO `student` (`id`, `surname`, `name`, `patronymic`, `faculty`, `username`, `password`, `surnameCase`, `nameCase`, `patronymicCase`, `curatorFullNameByDepartment`, `formOfStudy`) VALUES
-(1, 'Ёлшина', 'Виктория', 'Евгеньевна', 1, 'victoriayolshina', 'pass', 'Ёлшиной', 'Виктории', 'Евгеньевны', 'Зинченко Анна Сергеевна', 'очная'),
-(2, 'Кислянников ', 'Марк', 'Александрович', 3, 'markkislyannikov', 'pass', 'Кислянникова', 'Марка', 'Александровича', 'Казимиров Алексей Сергеевич', 'очная');
+INSERT INTO `student` (`id`, `surname`, `name`, `patronymic`, `faculty`, `username`, `password`, `surnameCase`, `nameCase`, `patronymicCase`) VALUES
+(1, 'Ёлшина', 'Виктория', 'Евгеньевна', 1, 'victoriayolshina', 'pass', 'Ёлшиной', 'Виктории', 'Евгеньевны'),
+(2, 'Кислянников ', 'Марк', 'Александрович', 2, 'markkislyannikov', 'pass', 'Кислянникова', 'Марка', 'Александровича');
 
 -- --------------------------------------------------------
 

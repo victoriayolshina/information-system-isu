@@ -61,4 +61,9 @@ public class Practice {
     private Curator curator;
 
     private String mark;
+
+    private String curatorByDepartment;
+    private String сuratorEmail;
+    private String formOfStudy;
+    private String profile;
 }
