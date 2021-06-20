@@ -25,7 +25,6 @@
         <security:intercept-url pattern="/student/**" access="ROLE_STUDENT , ROLE_ADMIN"/>
         <security:intercept-url pattern="/curator/**" access="ROLE_CURATOR , ROLE_ADMIN"/>
         <security:intercept-url pattern="/deansoffice/**" access="ROLE_DEANSOFFICE , ROLE_ADMIN"/>
-
     </security:http>
     <security:authentication-manager>
         <security:authentication-provider ref="CustomAuthenticationProvider"/>
