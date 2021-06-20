@@ -342,7 +342,6 @@ public class StudentController {
         return "studenthtml/information";
     }
 
-
     private StringBuffer putData(StringBuffer stringBuffer, String data, String template) {
         int elem = stringBuffer.indexOf(template, 0);
         while (elem != -1) {

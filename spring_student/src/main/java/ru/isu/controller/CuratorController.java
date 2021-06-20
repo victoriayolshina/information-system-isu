@@ -59,10 +59,8 @@ public class CuratorController {
 
     @RequestMapping(value = "/faculty/new", method = RequestMethod.POST)
     public String saveFaculty(@ModelAttribute Faculty faculty, Model model) {
-
         System.out.println(faculty.toString());
 //        facultyRepository.save(faculty);
-
         return "redirect:/curator/faculty";
     }
 
@@ -99,13 +97,14 @@ public class CuratorController {
     @RequestMapping(value = "/faculty/{facultyId}/students", method = RequestMethod.GET)
     public String getAllStudent(@PathVariable("facultyId") int facultyId, Model model) {
         //Faculty faculty = facultyRepository.findFacultyById(facultyId);
+        System.out.println(facultyId);
         model.addAttribute("students", studentRepository.findStudentsByFacultyId(facultyId));
         return "curatorhtml/students";
     }
 
     @RequestMapping(value = "/faculty/{facultyId}/students/new", method = RequestMethod.GET)
-    public String setNewStudentByCurator(@ModelAttribute Student student, @PathVariable("facultyId") int facultyId, Model model) {
-        model.addAttribute("students", studentRepository.findStudentsByFacultyId(facultyId));
+    public String setNewStudentByCurator(@PathVariable("facultyId") int facultyId, Model model) {
+        model.addAttribute("student", studentRepository.findStudentsByFacultyId(facultyId));
         return "curatorhtml/addStudent";
     }
 

@@ -6,6 +6,11 @@ $(document).ready(function () {
         $("#btnSaveFaculty").submit();
     });
 
+    $("#saveCurator-form").click(function (e) {
+        e.preventDefault();
+        $("#btnSaveCurator").submit();
+    });
+
     // $("#btnSaveFaculty").click(function (e) {
     //     e.preventDefault();
     //     $("#saveFaculty-form").submit();

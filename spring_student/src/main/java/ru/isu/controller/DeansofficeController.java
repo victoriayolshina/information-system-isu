@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import ru.isu.model.Curator;
 import ru.isu.repository.*;
 
 @Controller
@@ -53,6 +54,16 @@ public class DeansofficeController {
     public String getCurator(@PathVariable("curatorId") int curatorId, Model model) {
         model.addAttribute("curator", curatorRepository.findCuratorById(curatorId));
         return "curatorhtml/curatorInfo";
+    }
+
+    @RequestMapping(value = "/curators/new", method = RequestMethod.GET)
+    public String addCurator(Model model) {
+        return "curatorhtml/addCurator";
+    }
+
+    @RequestMapping(value = "/curators/new", method = RequestMethod.POST)
+    public String saveCurator(Model model) {
+        return "redirect:/curator/curators";
     }
 
     @RequestMapping(value = "/faculty", method = RequestMethod.GET)
