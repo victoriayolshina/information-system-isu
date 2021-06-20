@@ -39,6 +39,11 @@ $(document).ready(function () {
         $("#edit-task-form").submit();
     });
 
+    $("#btn-extra-inform").click(function (e) {
+        e.preventDefault();
+        $("#form-extra-information").submit();
+    });
+
     $("#btn-edit-practice").click(function (e) {
         e.preventDefault();
         $("#edit-practice-form").submit();

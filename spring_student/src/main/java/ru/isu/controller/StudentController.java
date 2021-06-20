@@ -9,12 +9,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import ru.isu.model.*;
+import ru.isu.model.Custom.CuratorSupervisorCustom;
 import ru.isu.model.Custom.GantCustomClass;
 import ru.isu.model.Custom.Values;
-import ru.isu.repository.FacultyRepository;
-import ru.isu.repository.PracticeRepository;
-import ru.isu.repository.StudentRepository;
-import ru.isu.repository.TaskRepository;
+import ru.isu.repository.*;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
@@ -40,6 +38,13 @@ public class StudentController {
 
     @Autowired
     TaskRepository taskRepository;
+
+    @Autowired
+    CuratorRepository curatorRepository;
+
+    @Autowired
+    TypeOfDirectionRepository typeOfDirectionRepository;
+
 
     //>>>
     @RequestMapping(value = "/", method = RequestMethod.GET)
@@ -319,18 +324,33 @@ public class StudentController {
     }
 
 
+    @RequestMapping(value = "/practice/{practiceId}/tasks/information", method = RequestMethod.GET)
+    public String getInformationCuratorAndPlaseOfPractice(@PathVariable("practiceId") int practiceId, Authentication authentication, Model model) {
+        List<Curator> curatorList = curatorRepository.findAll();
+        List<TypeOfDirection> typeOfDirectionList = typeOfDirectionRepository.findAll();
+        model.addAttribute("curators", curatorList);
+        model.addAttribute("directions", typeOfDirectionList);
+        return "studenthtml/addCuratorForm";
+    }
+
+
+    @RequestMapping(value = "/practice/{practiceId}/tasks/information", method = RequestMethod.POST)
+    public String addInformationCuratorAndPlaseOfPractice(
+            @ModelAttribute CuratorSupervisorCustom curatorSupervisorCustom,
+            @PathVariable("practiceId") int practiceId, Authentication authentication) {
+        System.out.println(curatorSupervisorCustom);
+        return "studenthtml/information";
+    }
+
+
     private StringBuffer putData(StringBuffer stringBuffer, String data, String template) {
-
         int elem = stringBuffer.indexOf(template, 0);
-
         while (elem != -1) {
             stringBuffer.replace(elem, elem + template.length(), data);
             elem = stringBuffer.indexOf(template, 0);
         }
-
         return stringBuffer;
     }
-
     private String putDataInTemplate(String str) {
         return String.format("[!*&^%s^&*!]", str);
     }

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=cp1251">
+    <meta name="_csrf" th:content="${_csrf.token}"/>
+    <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
+    <title>Задания</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    <script th:src="@{/resources/globalbtn.js}"></script>
+
+    <script th:src="@{/resources/textarea.css}"></script>
+<body>
+
+<div th:replace="../views/header :: header"></div>
+<div class="container">
+    <h2 class="text-danger"></h2>
+    <table id="book-table" class="table">
+        <form id="form-extra-information" action="editTask"
+              th:action="@{/student/practice/{practiceId}/tasks/information (practiceId = ${practiceId}) }"
+              method="POST">
+            <thead>
+            <tr>
+                <label for="curator">Руководитель практики от кафедры</label>
+                <select id="curator" name="curator" class="form-control">
+                    <option th:each="element: ${curators}"
+                            th:text="${element.getSurname() + " " + element.getName() + " " + element.getPatronymic()}"
+                            th:value="${element.getId()}"></option>
+                </select>
+            </tr>
+            <tr>
+                <h3>Место прохождения практики</h3>
+            </tr>
+            <tr>
+                <label for="location">Адрес</label>
+                <input id="location" name="location" class="form-control" type="text" />
+            </tr>
+            <tr>
+                <label for="name">Фамилия</label>
+                <input id="name" name="name" class="form-control" type="text" />
+            </tr>
+            <tr>
+                <label for="surname">Имя</label>
+                <input id="surname" name="surname" class="form-control" type="text" />
+            </tr>
+            <tr>
+                <label for="patronimic">Отчество</label>
+                <input id="patronimic" name="patronimic" class="form-control" type="text"/>
+            </tr>
+            <tr>
+                <label for="direction"></label>
+                <select id="direction" name="direction" class="form-control">
+                    <option th:each="element: ${directions}"
+                            th:text="${element.getName()}"
+                            th:value="${element.getId()}"></option>
+                </select>
+            </tr>
+            <p>
+                <button type="submit" id="btn-extra-inform" class="btn btn-primary">Сохранить</button>
+            </p>
+            </thead>
+        </form>
+    </table>
+
+    </table>
+</div>
+</body>
+</html>
