@@ -25,15 +25,15 @@
     <div class="row">
         <table id="book-table" class="table">
             <form id="edit-task-form" action="editTask"
-                  th:action="@{/student/practice/{practiceId}/tasks/{taskId}(practiceId = ${practiceId}, taskId = ${taskId})}"
+                  th:action="@{/student/practice/{practiceId}/tasks/{taskId}(practiceId = ${practiceId}, taskId = ${task.getId()})}"
                   method="POST">
                 <thead>
                 <tr>
                     <label for="Datastart">Дата начала</label>
                     <input id="Datastart" name="Datastart" class="form-control" type="date"
-                           th:min="${tasks.}"
-                           th:max="${tasks.getPractice().getEndtime()}"
-                           th:value="${tasks.getDatastart()}"
+                           th:min="${task.getDatastart()}"
+                           th:max="${task.getDataend()}"
+                           th:value="${task.getDatastart()}"
                            th:onchange="'setMinDateInDateInput()'"
                     />
                 </tr>
@@ -52,7 +52,7 @@
                 <tr>
                     <label for="Description">Описание</label>
                     <p><textarea id="Description" rows="10" cols="45" name="Description"
-                                 th:text="${task.getDescription()}"></textarea></p>
+                                 th:text="${task.getDescription()}" accept-charset="cp1251"></textarea></p>
                 </tr>
                 <p>
                     <button type="submit" id="btn-edit-task" class="btn btn-primary">Сохранить</button>

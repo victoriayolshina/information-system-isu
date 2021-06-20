@@ -9,10 +9,10 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
     <script th:src="@{/resources/globalbtn.js}"></script>
 </head>
-<!-- Страница информации о пользователе -->
-<body id = "body">
+<!-- Страница информации о задаче -->
+<body id="body">
 <div th:replace="../views/header :: header"></div>
-<div class = "container">
+<div class="container">
     <div class="row">
         <h1>Задание</h1>
         <p th:text="${task.getTask()}"></p>

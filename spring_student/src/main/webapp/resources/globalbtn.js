@@ -1,14 +1,24 @@
 $(document).ready(function () {
     var url = "http://localhost:8089/student_manager_war/"
 
-    $("#savestudents").click(function (e) {
+    $("#saveFaculty-form").click(function (e) {
         e.preventDefault();
-        $("#btnsavestudents").submit();
+        $("#btnSaveFaculty").submit();
+    });
+
+    // $("#btnSaveFaculty").click(function (e) {
+    //     e.preventDefault();
+    //     $("#saveFaculty-form").submit();
+    // });
+
+    $("#btn-add").click(function (e) {
+        e.preventDefault();
+        $("#add-task-form").submit();
     });
 
     $("#add-task-btn").click(function (e) {
         //$(location).attr('href');
-        location.href = window.location.pathname + "/addTask";
+        location.href = window.location.pathname + "/new";
         //console.log(window.location.pathname);
     });
 
@@ -50,8 +60,7 @@ $(document).ready(function () {
 });
 
 function goToTask(id) {
-    var str = "/" + id + "/tasks"
-    console.log(str)
+    var str = "/" + id
     location.href = window.location.pathname + str;
 }
 

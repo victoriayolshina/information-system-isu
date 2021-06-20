@@ -84,34 +84,8 @@ public class StudentController {
         if (integerList.isEmpty() || !integerList.contains(practiceId)) {
             return String.format("redirect:/student/practice");
         }
-//        StringBuffer sb = new StringBuffer();
-//        String templ = "[!*&^ ^&*!]";
-//
-//        int count = 0;
-//        BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream("/ru.isu/text.txt")));
-//
-//        String line;
-//        while ((line = reader.readLine()) != null) {
-//            for (int i = 0; i < line.length(); i++) {
-//                if (line.indexOf(templ, i) != -1) {
-//                    count++;
-//                    i += templ.length();
-//                }
-//            }
-//            sb.append("\n")
-//                    .append(line);
-//        }
-//        System.out.println(sb);
-//
-//
-//        for (int i = 0; i < count; i++) {
-//            int elem = sb.indexOf(templ, 0);
-//            String textTempl = String.format("%d вхождение текста", i);
-//            sb.replace(elem, elem + templ.length(), "");
-//            sb.insert(elem, textTempl);
-//        }
-//        System.out.println(sb);
-        //
+
+
         Practice practice = practiceRepository.findPracticeById(practiceId);
         model.addAttribute("tasks", taskRepository.findTasksByPractice(practice));
 
@@ -122,7 +96,17 @@ public class StudentController {
 
         StringBuffer sb = new StringBuffer();
 
+        SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy");
         List<Task> tasks = taskRepository.findTasksByPractice(practice);
+        StringBuffer _stringBuffer = new StringBuffer("");
+        for(Task _task: tasks){
+            _stringBuffer.append(String.format("%s-%s & %s \\\\ \\hline \n",
+                    sdf.format(_task.getDatastart()),
+                    sdf.format(_task.getDataend()),
+                    _task.getDescription()
+            ));
+        }
+
 
         //Блоки в файле шаблона, которые необходимо заменить
         String templYear = "[!*&^Год^&*!]";
@@ -163,7 +147,7 @@ public class StudentController {
         }
 
         //Изменения формата выводимой даты
-        SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy");
+
 
         //Получение года поступления студента и вычисление его курса с помощью этой даты
         int localDate = faculty.getYear();
@@ -194,6 +178,9 @@ public class StudentController {
 //        sb = putData(sb, supervisor.getSurname(), templSupervisor);
 //        sb = putData(sb, supervisor.getPost(), templSupervisorPost);
         sb = putData(sb, practice.getPost(), templPost);
+        sb = putData(sb, _stringBuffer.toString(), templTasks);
+
+
 
 //        System.out.println(sb);
 
@@ -300,16 +287,11 @@ public class StudentController {
             return String.format("redirect:/student/practice");
         }
         Practice practice = practiceRepository.findPracticeById(practiceId);
-        integerList = taskRepository.countTaskByPractice(practice);
-
-        if (integerList.isEmpty() || !integerList.contains(taskId)) {
-            return String.format("redirect:/student/practice/%d/tasks", practiceId);
-        }
 
         Task task = taskRepository.findTaskById(taskId);
 
         model.addAttribute("task", task);
-        return "studenthtml/task";
+        return "studenthtml/editTask";
     }
 
     @RequestMapping(value = "/practice/{practiceId}/tasks/{taskId}", method = RequestMethod.POST)
@@ -373,6 +355,7 @@ public class StudentController {
 
 
     private StringBuffer putData(StringBuffer stringBuffer, String data, String template) {
+
         int elem = stringBuffer.indexOf(template, 0);
 
         while(elem != -1){

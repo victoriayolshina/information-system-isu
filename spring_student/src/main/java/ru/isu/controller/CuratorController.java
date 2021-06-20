@@ -6,15 +6,11 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import ru.isu.model.Curator;
+import ru.isu.model.*;
 import ru.isu.model.Custom.StudentCustomClass;
-import ru.isu.model.Faculty;
-import ru.isu.model.Practice;
-import ru.isu.model.Student;
-import ru.isu.repository.CuratorRepository;
-import ru.isu.repository.FacultyRepository;
-import ru.isu.repository.PracticeRepository;
-import ru.isu.repository.StudentRepository;
+import ru.isu.repository.*;
+
+import java.util.List;
 
 @Controller
 @RequestMapping("/curator")
@@ -31,6 +27,9 @@ public class CuratorController {
 
     @Autowired
     PracticeRepository practiceRepository;
+
+    @Autowired
+    DirectionRepository directionRepository;
 
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
@@ -50,13 +49,20 @@ public class CuratorController {
 
     @RequestMapping(value = "/faculty/new", method = RequestMethod.GET)
     public String addFaculty(Model model) {
+        Faculty faculty = new Faculty();
+        List<Direction> directions = directionRepository.findAll();
+        model.addAttribute("faculty",faculty);
+        model.addAttribute("directions",directions);
         return "curatorhtml/addfaculty";
     }
 
+
     @RequestMapping(value = "/faculty/new", method = RequestMethod.POST)
     public String saveFaculty(@ModelAttribute Faculty faculty, Model model) {
+
         System.out.println(faculty.toString());
 //        facultyRepository.save(faculty);
+
         return "redirect:/curator/faculty";
     }
 

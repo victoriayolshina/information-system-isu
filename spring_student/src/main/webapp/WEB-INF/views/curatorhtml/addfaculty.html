@@ -13,29 +13,24 @@
 <div th:replace="../views/header :: header"></div>
 <div class="container">
     <h2 class="text-danger">Добавление группы</h2>
-    <form action="savestudent" th:action="@{/curator/faculty/new}" method="post" th:object="${faculty}">
+    <form action="saveFaculty-form" th:action="@{/curator/faculty/new}" method="POST">
         <div class="form-group">
             <label for="faculty-name">Название</label>
-            <input id="faculty-name" class="form-control"
-                   th:field="*{name}"/>
-            <span th:if="${#fields.hasErrors('name')}"
-                  th:errors="${faculty.name}" class="text-danger"></span>
+            <input id="faculty-name" class="form-control" name="name"/>
         </div>
         <div class="form-group">
             <label for="faculty-direction">Направление</label>
-            <input id="faculty-direction" class="form-control"
-                   th:field="*{direction}"/>
-            <span th:if="${#fields.hasErrors('direction')}"
-                  th:errors="${faculty.direction}" class="text-danger"></span>
+                <select id="faculty-direction" name="direction" class="form-control">
+                    <option th:each="element: ${directions}"
+                            th:text="${element.getCode()+' '+element.getName()}"
+                            th:value="${element.getId()}"></option>
+                </select>
         </div>
         <div class="form-group">
             <label for="faculty-year">Год</label>
-            <input id="faculty-year" class="form-control"
-                   th:field="*{year}"/>
-            <span th:if="${#fields.hasErrors('year')}"
-                  th:errors="${faculty.year}" class="text-danger"></span>
+            <input id="faculty-year" class="form-control" name="year"/>
         </div>
-        <button type="submit" id="btnsavestudents">Сохранить</button>
+        <button type="submit" id="btnSaveFaculty">Сохранить</button>
     </form>
 </div>
 <!--<div class="container">-->

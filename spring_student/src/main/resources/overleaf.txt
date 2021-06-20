@@ -163,11 +163,9 @@
 \begin{tabularx}{\textwidth}{|t|X|}
     \hline
     Дата & \multicolumn{1}{c|}{Краткое содержание работы} \\ \hline
-    [!*&^ДатаИЗадача^&*!] \\ \hline
-    18.01 &  \\ \hline
-    19.01 &  \\ \hline
-    20.01 &  \\ \hline
-    ... & ...\\ \hline
+    [!*&^ДатаИЗадача^&*!]
+
+
 \end{tabularx}
 
 \vspace{1.5cm}
