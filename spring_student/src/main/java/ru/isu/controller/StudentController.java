@@ -233,6 +233,7 @@ public class StudentController {
 
         Practice practice = practiceRepository.findPracticeById(practiceId);
         model.addAttribute("practice", practice);
+        System.out.println(practice);
         return "studenthtml/addTask";
     }
 
