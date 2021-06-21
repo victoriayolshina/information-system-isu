@@ -5,14 +5,11 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
-import ru.isu.model.Curator;
+import org.springframework.web.bind.annotation.*;
 import ru.isu.model.Custom.Categories;
 import ru.isu.model.Custom.Statistics;
 import ru.isu.model.Custom.StatisticsCategories;
+import ru.isu.model.Custom.TwoDates;
 import ru.isu.model.Practice;
 import ru.isu.model.TypeOfDirection;
 import ru.isu.repository.*;
@@ -133,9 +130,9 @@ public class DeansofficeController {
 
     @RequestMapping(value = "/statistics", method = RequestMethod.POST)
     @ResponseBody
-    public StatisticsCategories postStatistics() {
-        int from = 2016;
-        int to = 2021;
+    public StatisticsCategories postStatistics(@ModelAttribute TwoDates twoDates) {
+        int from = twoDates.getFirstDate();
+        int to = twoDates.getSecondDate();
         int count = to - from + 1;
 
         List<TypeOfDirection> typeOfDirectionsList = typeOfDirectionRepository.findAll();
