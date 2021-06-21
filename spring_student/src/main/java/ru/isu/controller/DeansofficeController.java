@@ -134,8 +134,8 @@ public class DeansofficeController {
     @RequestMapping(value = "/statistics", method = RequestMethod.POST)
     @ResponseBody
     public StatisticsCategories postStatistics() {
-        int from = 2018;
-        int to = 2024;
+        int from = 2016;
+        int to = 2021;
         int count = to - from + 1;
 
         List<TypeOfDirection> typeOfDirectionsList = typeOfDirectionRepository.findAll();
