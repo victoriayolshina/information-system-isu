@@ -8,7 +8,7 @@ import ru.isu.model.Practice;
 import ru.isu.model.Student;
 import ru.isu.model.Task;
 
-import java.sql.Date;
+import java.util.Date;
 import java.util.List;
 
 public interface TaskRepository extends JpaRepository<Task, Long> {
@@ -20,4 +20,8 @@ public interface TaskRepository extends JpaRepository<Task, Long> {
 
     @Query("SELECT t FROM Task t WHERE t.id= ?1")
     Task findTaskById(long id);
+
+    @Query("SELECT t FROM Task t WHERE t.datastart BETWEEN ?1 and ?2")
+    List<Task> findTasksBetweenTwoDates(Date from, Date to);
+
 }

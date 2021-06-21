@@ -44,6 +44,9 @@ public class DeansofficeController {
     @Autowired
     TypeOfDirectionRepository typeOfDirectionRepository;
 
+    @Autowired
+    TaskRepository taskRepository;
+
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String getDeansOffice(Model model, Authentication authentication) {
         UsernamePasswordAuthenticationToken token = (UsernamePasswordAuthenticationToken) authentication;
@@ -131,9 +134,14 @@ public class DeansofficeController {
     @RequestMapping(value = "/statistics", method = RequestMethod.POST)
     @ResponseBody
     public StatisticsCategories postStatistics(@ModelAttribute TwoDates twoDates) {
-        int from = twoDates.getFirstDate();
-        int to = twoDates.getSecondDate();
-        int count = to - from + 1;
+        int from, to, count;
+//        if (twoDates.getFrom() != null && twoDates.getTo() != null) {
+//
+//
+//        }
+        from = twoDates.getFirstDate();
+        to = twoDates.getSecondDate();
+        count = to - from + 1;
 
         List<TypeOfDirection> typeOfDirectionsList = typeOfDirectionRepository.findAll();
         Statistics[] arrayStatistics = new Statistics[typeOfDirectionsList.size()];
@@ -159,7 +167,6 @@ public class DeansofficeController {
             }
         }
 
-
         for (int i = 0; i < arrayStatistics.length; i++) {
             for (int j = 0; j < count; j++) {
                 arrayStatistics[i].add(j, (int) (Math.random() * 30 + 10));
@@ -168,13 +175,9 @@ public class DeansofficeController {
 
         Categories categories = new Categories(count);
         for (int j = 0; j < count; j++) {
-            categories.add(j, String.format("%d",from+j));
+            categories.add(j, String.format("%d", from + j));
         }
 
-        System.out.println("\n");
-        for (Statistics arrayStatistic : arrayStatistics) {
-            System.out.println(arrayStatistic);
-        }
 
         StatisticsCategories statisticsCategories = new StatisticsCategories(arrayStatistics, categories);
         return statisticsCategories;
