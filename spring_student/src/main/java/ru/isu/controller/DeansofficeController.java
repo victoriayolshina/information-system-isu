@@ -134,14 +134,22 @@ public class DeansofficeController {
     @RequestMapping(value = "/statistics", method = RequestMethod.POST)
     @ResponseBody
     public StatisticsCategories postStatistics(@ModelAttribute TwoDates twoDates) {
+        GregorianCalendar gc = new GregorianCalendar();
         int from, to, count;
-//        if (twoDates.getFrom() != null && twoDates.getTo() != null) {
-//
-//
-//        }
+        System.out.println(twoDates);
+
+
         from = twoDates.getFirstDate();
         to = twoDates.getSecondDate();
+
         count = to - from + 1;
+
+        System.out.println(from);
+        System.out.println(to);
+        System.out.println(count);
+        System.out.println(twoDates.getFrom());
+        System.out.println(twoDates.getTo());
+
 
         List<TypeOfDirection> typeOfDirectionsList = typeOfDirectionRepository.findAll();
         Statistics[] arrayStatistics = new Statistics[typeOfDirectionsList.size()];
@@ -151,10 +159,15 @@ public class DeansofficeController {
             arrayStatistics[_typeOfDirection.getId() - 1] = statistics;
         }
 
-        List<Practice> practicesList = practiceRepository.getAllOrderByStarttime();
+        List<Practice> practicesList = practiceRepository.getAllBetweenFromAndToOrderByStarttime(twoDates.getFrom(), twoDates.getTo());
+//        List<Practice> practicesListByTime = practiceRepository.getAllOrderByStarttime();
+
+//        for (Practice practice : practicesListByTime) {
+//            System.out.println(practice);
+//        }
+
         for (int i = 0; i < practicesList.size(); i++) {
             Date date = new Date(practicesList.get(i).getStarttime().getTime());
-            GregorianCalendar gc = new GregorianCalendar();
             gc.setTime(date);
 
             int year = gc.get(Calendar.YEAR);
@@ -178,9 +191,13 @@ public class DeansofficeController {
             categories.add(j, String.format("%d", from + j));
         }
 
+        for (Statistics arrayStatistic : arrayStatistics) {
+            System.out.println(arrayStatistic.toString());
+        }
+
 
         StatisticsCategories statisticsCategories = new StatisticsCategories(arrayStatistics, categories);
+
         return statisticsCategories;
     }
-
 }

@@ -6,54 +6,74 @@ $(document).ready(function () {
     });
 
 
-    $.ajax({
-        type: "POST",
-        url: window.location.pathname,
-        success: function (result) {
-            console.log(result.categories)
-            console.log(result.statistics)
-            Highcharts.chart('container', {
-                chart: {
-                    type: 'column'
-                },
-                title: {
-                    text: 'Статистика направлений по годам'
-                },
-                xAxis: {
-                    categories: result.categories.categories,
-                    crosshair: true
-                },
-                yAxis: {
-                    min: 0,
-                    title: {
-                        text: 'Количество'
-                    }
-                },
-                tooltip: {
-                    headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
-                    pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
-                        '<td style="padding:0"><b>{point.y:.1f} mm</b></td></tr>',
-                    footerFormat: '</table>',
-                    shared: true,
-                    useHTML: true
-                },
-                plotOptions: {
-                    column: {
-                        pointPadding: 0.2,
-                        borderWidth: 0
-                    }
-                },
-                series: result.statistics
-            });
-
-        },
-        error: function (e) {
-            console.log(e);
-        }
-    })
-
-
 });
+
+function setMinDateInStatistics() {
+    var dateStart = document.getElementById("from")
+    var dateEnd = document.getElementById("to")
+    if (dateStart != null && dateStart.value != null) {
+        dateEnd.min = dateStart.value;
+        if (new Date(dateStart.value) > new Date(dateEnd.value)) {
+            dateEnd.value = dateStart.value
+        }
+    }
+}
+
+
+function sendRequest() {
+    var _from = document.getElementById("from");
+    var _to = document.getElementById("to");
+
+    if(_from.value != null && _to.value!=null) {
+        $.ajax({
+            type: "POST",
+            data: {from: _from.value, to: _to.value},
+            url: window.location.pathname,
+            success: function (result) {
+                console.log(result.categories)
+                console.log(result.statistics)
+                Highcharts.chart('container', {
+                    chart: {
+                        type: 'column'
+                    },
+                    title: {
+                        text: 'Статистика направлений по годам'
+                    },
+                    xAxis: {
+                        categories: result.categories.categories,
+                        crosshair: true
+                    },
+                    yAxis: {
+                        min: 0,
+                        title: {
+                            text: 'Количество'
+                        }
+                    },
+                    tooltip: {
+                        headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+                        pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                            '<td style="padding:0"><b>{point.y:.1f} mm</b></td></tr>',
+                        footerFormat: '</table>',
+                        shared: true,
+                        useHTML: true
+                    },
+                    plotOptions: {
+                        column: {
+                            pointPadding: 0.2,
+                            borderWidth: 0
+                        }
+                    },
+                    series: result.statistics
+                });
+
+            },
+            error: function (e) {
+                console.log(e);
+            }
+        })
+
+    }
+}
 
 // Highcharts.chart('container', {
 //     chart: {

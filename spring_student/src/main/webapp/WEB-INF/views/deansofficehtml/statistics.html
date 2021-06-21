@@ -12,7 +12,7 @@
 </head>
 <body>
 
-<input name="from" id="from" type="date"> <input name="to" id="to" type="date"> <button onclick="sendRequest()"> Получить</button>
+<input name="from" id="from" type="date" onChange="setMinDateInStatistics()"> <input name="to" id="to" type="date"> <button onclick="sendRequest()"> Получить</button>
 <figure class="highcharts-figure">
     <div id="container"></div>
 </figure>

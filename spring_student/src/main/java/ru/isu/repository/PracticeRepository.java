@@ -5,6 +5,8 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import ru.isu.model.Practice;
 import ru.isu.model.Student;
+
+import java.sql.Date;
 import java.util.List;
 
 @Repository
@@ -23,5 +25,8 @@ public interface PracticeRepository extends JpaRepository<Practice, Long> {
 
     @Query("SELECT p FROM Practice p ORDER BY p.starttime ASC")
     List<Practice> getAllOrderByStarttime();
+
+    @Query("SELECT p FROM Practice p WHERE  p.starttime BETWEEN ?1 and ?2 ORDER BY p.starttime")
+    List<Practice> getAllBetweenFromAndToOrderByStarttime(Date from, Date to);
 
 }
