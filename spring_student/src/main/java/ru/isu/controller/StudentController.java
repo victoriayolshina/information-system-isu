@@ -208,12 +208,12 @@ public class StudentController {
 
         //Получение года и месяцев разницы между датами
         int year = diff.getYears();
-        int months = diff.getMonths();
+        int days = diff.getDays();
 
         //Инициализация переменной для записи курса
         int datebetween = 0;
 
-        if (months > 0) {
+        if (days > 0) {
             datebetween = year + 1;
         } else {
             datebetween = year;

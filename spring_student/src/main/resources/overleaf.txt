@@ -24,6 +24,7 @@
 \usepackage{tabularx}
 \usepackage{hyperref}
 \usepackage{enumitem}
+
 \usepackage[labelsep=period,figurewithin=none,tablewithin=none]{caption}
 
 % \newcommand{\gfontsize}[0]{\small}

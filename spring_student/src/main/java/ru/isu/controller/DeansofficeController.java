@@ -13,7 +13,6 @@ import ru.isu.model.Custom.TwoDates;
 import ru.isu.model.Practice;
 import ru.isu.model.TypeOfDirection;
 import ru.isu.repository.*;
-
 import java.util.*;
 
 @Controller
@@ -186,7 +185,6 @@ public class DeansofficeController {
 //        for (Statistics arrayStatistic : arrayStatistics) {
 //            System.out.println(arrayStatistic.toString());
 //        }
-
 
         StatisticsCategories statisticsCategories = new StatisticsCategories(arrayStatistics, categories);
         return statisticsCategories;

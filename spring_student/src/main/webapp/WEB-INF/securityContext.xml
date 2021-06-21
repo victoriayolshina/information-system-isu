@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:security="http://www.springframework.org/schema/security"
@@ -8,7 +9,7 @@
 
     <context:component-scan base-package="ru.isu"/>
 
-    <!--    <bean class="org.springframework.security.web.access.expression.DefaultWebSecurityExpressionHandler"/>-->
+    <bean class="org.springframework.security.web.access.expression.DefaultWebSecurityExpressionHandler"/>
 
     <security:http auto-config="true" use-expressions="false">
         <security:form-login login-page="/login" login-processing-url="/login"

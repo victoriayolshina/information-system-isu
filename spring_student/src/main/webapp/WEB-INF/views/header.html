@@ -10,31 +10,55 @@
 
 <body>
 <nav class="navbar navbar-default" th:fragment="header">
-    <div class="container-fluid">
+    <div class="container">
         <div class="navbar-header">
-            <a class="navbar-brand" href="#">ИМИТ</a>
+            <a th:href="@{/}" class="navbar-brand" href="#">ИМИТ</a>
         </div>
 
         <ul class="nav navbar-nav">
-            <!--                <li><a-->
-            <!--                        th:href="@{/studentInfo}">О пользователе</a></li>-->
-            <!--                <li><a-->
-            <!--                        th:href="@{/practice}">Практика</a></li>-->
-<!--            <li><a sec:authorize="hasRole('STUDENT')" th:href="@{/student/practice/1/tasks/overleaf}">Студент</a></li>-->
-            <li><a sec:authorize="hasRole('STUDENT')" th:href="@{/student/practice/1/tasks}">Студент</a></li>
-            <li><a sec:authorize="hasRole('CURATOR')" th:href="@{/deansofficehtml/statistics}">Задания</a></li>
+            <li><a sec:authorize-url="/student" th:href="@{/student/practice}">Практики</a></li>
+            <li><a sec:authorize-url="/student" th:href="@{/}">Студент</a></li>
 
-            <li>
-                <div sec:authorize="isAuthenticated()">
-                    <p class="navbar-text"><a id="logout">Выйти</a></p>
-                    <form id="logout-form" th:action="@{/logout}" method="POST">
-                    </form>
-            <li>
-                <a th:href="@{/login}">Войти</a>
-            </li>
+            <li><a sec:authorize-url="/curator" th:href="@{/curator/}">Куратор</a></li>
+            <li><a sec:authorize-url="/curator" th:href="@{/curator/faculty}">Группы</a></li>
+            <li><a sec:authorize-url="/curator" th:href="@{/curator/practice}">Практики</a></li>
+
+            <li><a sec:authorize-url="/deansoffice" th:href="@{/deansoffice/}">Сотрудник деканата</a></li>
+            <li><a sec:authorize-url="/deansoffice" th:href="@{/deansoffice/curators}">Кураторы</a></li>
+            <li><a sec:authorize-url="/deansoffice" th:href="@{/deansoffice/faculty}">Задания</a></li>
+            <li><a sec:authorize-url="/deansoffice" th:href="@{/deansoffice/placeofpractice}">Прохождение практики</a></li>
+            <li><a sec:authorize-url="/deansoffice" th:href="@{/deansoffice/statistics}">Статистика</a></li>
+
+<!--            <li>-->
+<!--                <div sec:authorize="isAuthenticated()">-->
+<!--                    <form id="logout-form" th:action="@{/logout}" method="post">-->
+<!--                        <li class="navbar-text"><a id="logout">Выйти</a></li>-->
+<!--                        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>-->
+<!--                    </form>-->
+<!--&lt;!&ndash;                    <p class="navbar-text"><a id="logout">Выйти</a></p>&ndash;&gt;-->
+<!--&lt;!&ndash;                    <form id="logout-form" th:action="@{/logout}" method="POST">&ndash;&gt;-->
+<!--&lt;!&ndash;                    </form>&ndash;&gt;-->
+<!--            <li sec:authorize="!isAuthenticated()">-->
+<!--                <a th:href="@{/login}">Войти</a>-->
+<!--            </li>-->
             <!--            <li sec:authorize="!isAuthenticated()">-->
             <!--                <a th:href="@{/register}">Register</a>-->
             <!--            </li>-->
+            <li sec:authorize="isAuthenticated()">
+                <p class="navbar-text">
+
+                    <a id="logout" href="#">Выйти</a>
+                </p>
+                <form id="logout-form" th:action="@{/logout}" method="post">
+                    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+                </form>
+            </li>
+
+            <li sec:authorize="!isAuthenticated()">
+                <a th:href="@{/login}">Войти</a>
+            </li>
+
+
         </ul>
     </div>
 </nav>
