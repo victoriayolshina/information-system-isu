@@ -136,19 +136,11 @@ public class DeansofficeController {
     public StatisticsCategories postStatistics(@ModelAttribute TwoDates twoDates) {
         GregorianCalendar gc = new GregorianCalendar();
         int from, to, count;
-        System.out.println(twoDates);
-
 
         from = twoDates.getFirstDate();
         to = twoDates.getSecondDate();
 
         count = to - from + 1;
-
-        System.out.println(from);
-        System.out.println(to);
-        System.out.println(count);
-        System.out.println(twoDates.getFrom());
-        System.out.println(twoDates.getTo());
 
 
         List<TypeOfDirection> typeOfDirectionsList = typeOfDirectionRepository.findAll();
@@ -160,8 +152,8 @@ public class DeansofficeController {
         }
 
         List<Practice> practicesList = practiceRepository.getAllBetweenFromAndToOrderByStarttime(twoDates.getFrom(), twoDates.getTo());
-//        List<Practice> practicesListByTime = practiceRepository.getAllOrderByStarttime();
 
+//        List<Practice> practicesListByTime = practiceRepository.getAllOrderByStarttime();
 //        for (Practice practice : practicesListByTime) {
 //            System.out.println(practice);
 //        }
@@ -171,7 +163,7 @@ public class DeansofficeController {
             gc.setTime(date);
 
             int year = gc.get(Calendar.YEAR);
-            int indexForStatistics = year - from + 1;
+            int indexForStatistics = year - from;
 
             if (year >= from && year <= to) {
                 TypeOfDirection _typeOfDirection = practicesList.get(i).getPlaceOfPractice()
@@ -191,13 +183,12 @@ public class DeansofficeController {
             categories.add(j, String.format("%d", from + j));
         }
 
-        for (Statistics arrayStatistic : arrayStatistics) {
-            System.out.println(arrayStatistic.toString());
-        }
+//        for (Statistics arrayStatistic : arrayStatistics) {
+//            System.out.println(arrayStatistic.toString());
+//        }
 
 
         StatisticsCategories statisticsCategories = new StatisticsCategories(arrayStatistics, categories);
-
         return statisticsCategories;
     }
 }
