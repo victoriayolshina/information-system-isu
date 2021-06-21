@@ -31,10 +31,6 @@ window.onload = function () {
 function deleteTask(taskId) {
     var path = window.location.pathname + "/" + taskId;
 
-    //
-    // var token = $("meta[name='_csrf']").attr("content");
-    // var header = $("meta[name='_csrf_header']").attr("content");
-
     $.ajax({
         type: "DELETE",
         url: path,

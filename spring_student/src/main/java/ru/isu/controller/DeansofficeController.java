@@ -8,8 +8,16 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import ru.isu.model.Curator;
+import ru.isu.model.Custom.Categories;
+import ru.isu.model.Custom.Statistics;
+import ru.isu.model.Custom.StatisticsCategories;
+import ru.isu.model.Practice;
+import ru.isu.model.TypeOfDirection;
 import ru.isu.repository.*;
+
+import java.util.*;
 
 @Controller
 @RequestMapping("/deansoffice")
@@ -35,6 +43,9 @@ public class DeansofficeController {
 
     @Autowired
     SupervisorRepository supervisorRepository;
+
+    @Autowired
+    TypeOfDirectionRepository typeOfDirectionRepository;
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String getDeansOffice(Model model, Authentication authentication) {
@@ -117,13 +128,59 @@ public class DeansofficeController {
     @RequestMapping(value = "/statistics", method = RequestMethod.GET)
     public String getStatistics(Model model) {
 
-        return "";
+        return "deansofficehtml/statistics";
     }
 
     @RequestMapping(value = "/statistics", method = RequestMethod.POST)
-    public String postStatistics(Model model) {
+    @ResponseBody
+    public StatisticsCategories postStatistics() {
+        int from = 2018;
+        int to = 2024;
+        int count = to - from + 1;
 
-        return "";
+        List<TypeOfDirection> typeOfDirectionsList = typeOfDirectionRepository.findAll();
+        Statistics[] arrayStatistics = new Statistics[typeOfDirectionsList.size()];
+
+        for (TypeOfDirection _typeOfDirection : typeOfDirectionsList) {
+            Statistics statistics = new Statistics(_typeOfDirection.getName(), count);
+            arrayStatistics[_typeOfDirection.getId() - 1] = statistics;
+        }
+
+        List<Practice> practicesList = practiceRepository.getAllOrderByStarttime();
+        for (int i = 0; i < practicesList.size(); i++) {
+            Date date = new Date(practicesList.get(i).getStarttime().getTime());
+            GregorianCalendar gc = new GregorianCalendar();
+            gc.setTime(date);
+
+            int year = gc.get(Calendar.YEAR);
+            int indexForStatistics = year - from + 1;
+
+            if (year >= from && year <= to) {
+                TypeOfDirection _typeOfDirection = practicesList.get(i).getPlaceOfPractice()
+                        .getTypeOfDirection();
+                arrayStatistics[_typeOfDirection.getId() - 1].add(indexForStatistics);
+            }
+        }
+
+
+        for (int i = 0; i < arrayStatistics.length; i++) {
+            for (int j = 0; j < count; j++) {
+                arrayStatistics[i].add(j, (int) (Math.random() * 30 + 10));
+            }
+        }
+
+        Categories categories = new Categories(count);
+        for (int j = 0; j < count; j++) {
+            categories.add(j, String.format("%d",from+j));
+        }
+
+        System.out.println("\n");
+        for (Statistics arrayStatistic : arrayStatistics) {
+            System.out.println(arrayStatistic);
+        }
+
+        StatisticsCategories statisticsCategories = new StatisticsCategories(arrayStatistics, categories);
+        return statisticsCategories;
     }
 
 }

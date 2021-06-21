@@ -3,41 +3,16 @@
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=cp1251">
-    <title>Title</title>
-    <script src="/jquery/jquery.min.js"></script>
-    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <meta name="_csrf" th:content="${_csrf.token}"/>
+    <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-
-    <script type="text/javascript">
-        $(function () {
-            $('#container').highcharts({//Chart display container, consistent with the div id
-                chart: {
-                    Type: 'column' // Specify the chart type, the default is line chart (line)
-                },
-                title: {
-                    Text: 'My first Highcharts chart' // Specify chart title
-                },
-                xAxis: {
-                    Categories: ['my', 'first', 'chart'] //Specify x-axis grouping
-                },
-                yAxis: {
-                    title: {
-                        Text: 'something' // Specify the title of the y-axis
-                    }
-                },
-                Series: [{//Specified data column
-                    Name: 'Jane', //Data column name
-                    Data: [1, 0, 4] //Data
-                }, {
-                    name: 'John',
-                    data: [5, 7, 3]
-                }]
-            });
-        });
-    </script>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script th:src="@{/resources/statistics.js}"></script>
+    <link rel="stylesheet" th:href="@{/resources/statistic.css}">
 </head>
 <body>
-<!-- Define the container of the chart-->
-<div id="container" style="width: 100%; height: 400px;"></div>
+<figure class="highcharts-figure">
+    <div id="container"></div>
+</figure>
 </body>
 </html>
