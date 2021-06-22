@@ -64,8 +64,9 @@ public class StudentController {
         return "studenthtml/practices";
     }
 
+    //>>>
     @RequestMapping(value = "/practice/{practiceId}", method = RequestMethod.GET)
-    public String getPractice(@PathVariable int practiceId, Model model, Authentication authentication) {
+    public String getPractice(@PathVariable("practiceId") int practiceId, Model model, Authentication authentication) {
         UsernamePasswordAuthenticationToken token = (UsernamePasswordAuthenticationToken) authentication;
         Student student = studentRepository.findStudentByUsername(token.getName());
 
@@ -74,10 +75,11 @@ public class StudentController {
             return String.format("redirect:/student/practice");
         }
 
-        model.addAttribute("studentpractice", practiceRepository.findPracticeByStudent(student));
+        model.addAttribute("studentpractice", practiceRepository.findPracticeById(practiceId));
         return "studenthtml/practice";
     }
 
+    //>>>
     @RequestMapping(value = "/practice/{practiceId}/tasks", method = RequestMethod.GET)
     public String getAllTask(@PathVariable("practiceId") int practiceId, Model model, Authentication authentication) throws IOException {
         UsernamePasswordAuthenticationToken token = (UsernamePasswordAuthenticationToken) authentication;
@@ -194,32 +196,7 @@ public class StudentController {
         return "studenthtml/tasks";
     }
 
-
-    public int getCourse(int start_date) {
-        // Дата поступления
-        LocalDate date = LocalDate.of(start_date, 9, 1);
-
-        // Дата сегодняшнего дня
-        LocalDate end_date = LocalDate.now();
-
-        //Период между этими датами
-        Period diff = Period.between(date, end_date);
-
-        //Получение года и месяцев разницы между датами
-        int year = diff.getYears();
-        int days = diff.getDays();
-
-        //Инициализация переменной для записи курса
-        int datebetween = 0;
-
-        if (days > 0) {
-            datebetween = year + 1;
-        } else {
-            datebetween = year;
-        }
-        return datebetween;
-    }
-
+    //>>>
     @RequestMapping(value = "/practice/{practiceId}/tasks/new", method = RequestMethod.GET)
     public String addTaskGet(@PathVariable("practiceId") int practiceId, Authentication authentication, Model model) {
         UsernamePasswordAuthenticationToken token = (UsernamePasswordAuthenticationToken) authentication;
@@ -236,6 +213,7 @@ public class StudentController {
         return "studenthtml/addTask";
     }
 
+    //>>>
     @RequestMapping(value = "/practice/{practiceId}/tasks/new", method = RequestMethod.POST)
     public String addTaskPOST(@ModelAttribute Task task, @PathVariable("practiceId") int practiceId, Authentication authentication) {
 
@@ -246,6 +224,7 @@ public class StudentController {
     }
 
 
+    //>>>
     @RequestMapping(value = "/practice/{practiceId}/tasks/{taskId}", method = RequestMethod.GET)
     public String getTaskGET(@PathVariable("taskId") int taskId, @PathVariable("practiceId") int practiceId,
                              Model model, Authentication authentication) {
@@ -264,6 +243,8 @@ public class StudentController {
         return "studenthtml/editTask";
     }
 
+
+    //>>>
     @RequestMapping(value = "/practice/{practiceId}/tasks/{taskId}", method = RequestMethod.POST)
     public String editTask(Model model, @ModelAttribute Task task, @PathVariable("practiceId") int practiceId, @PathVariable("taskId") long taskId, Authentication authentication) {
         Practice practice = practiceRepository.findPracticeById(practiceId);
@@ -275,12 +256,16 @@ public class StudentController {
 //        return "studenthtml/editTask";
     }
 
+
+    //>>>
     @RequestMapping(value = "/practice/{practiceId}/tasks/{taskId}", method = RequestMethod.DELETE)
     @ResponseBody
     public String deleteTask(@PathVariable("taskId") long taskId, @PathVariable("practiceId") int practiceId, Authentication authentication) {
         taskRepository.delete(taskId);
         return "ok";
     }
+
+
 
     @RequestMapping(value = "/practice/{practiceId}/tasks/gant", method = RequestMethod.GET)
     public String getGantHTML(@PathVariable String practiceId, Authentication authentication) {
@@ -318,10 +303,6 @@ public class StudentController {
         return gantCustomClassArrayList;
     }
 
-    @RequestMapping(value = "/practice/information/new", method = RequestMethod.GET)
-    public String addInformationForTemplate(@PathVariable("practiceId") int practiceId, Authentication authentication, Model model) {
-        return "studenthtml/information";
-    }
 
 
     @RequestMapping(value = "/practice/{practiceId}/tasks/information", method = RequestMethod.GET)
@@ -342,6 +323,7 @@ public class StudentController {
         return "studenthtml/information";
     }
 
+
     private StringBuffer putData(StringBuffer stringBuffer, String data, String template) {
         int elem = stringBuffer.indexOf(template, 0);
         while (elem != -1) {
@@ -350,7 +332,38 @@ public class StudentController {
         }
         return stringBuffer;
     }
+
+
     private String putDataInTemplate(String str) {
         return String.format("[!*&^%s^&*!]", str);
     }
+
+
+    public int getCourse(int start_date) {
+        // Дата поступления
+        LocalDate date = LocalDate.of(start_date, 9, 1);
+
+        // Дата сегодняшнего дня
+        LocalDate end_date = LocalDate.now();
+
+        //Период между этими датами
+        Period diff = Period.between(date, end_date);
+
+        //Получение года и месяцев разницы между датами
+        int year = diff.getYears();
+        int days = diff.getDays();
+
+        //Инициализация переменной для записи курса
+        int datebetween = 0;
+
+        if (days > 0) {
+            datebetween = year + 1;
+        } else {
+            datebetween = year;
+        }
+        return datebetween;
+    }
+
+
+
 }

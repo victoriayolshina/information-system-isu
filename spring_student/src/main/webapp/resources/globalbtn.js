@@ -81,3 +81,7 @@ function checkInput(text) {
         $("#clearBtn1").removeClass("show");
     }
 }
+
+function openTasks() {
+    location.href = window.location.href+"/tasks";
+}
