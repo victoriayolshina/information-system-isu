@@ -15,4 +15,7 @@ public interface DeansOfficeRepository extends JpaRepository<DeansEmployee, Long
     DeansEmployee findDeansEmployeeById(
             @Param("id") int deansOfficeId
     );
+
+    @Query("SELECT d FROM DeansEmployee d WHERE d.username= ?1")
+    DeansEmployee findDeansEmployeeByUsername(String username);
 }

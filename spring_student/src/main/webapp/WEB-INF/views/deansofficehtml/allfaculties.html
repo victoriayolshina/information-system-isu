@@ -2,7 +2,7 @@
 <html lang="ru" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=cp1251">
-    <title>Все студенты</title>
+    <title>Все группы</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
@@ -13,30 +13,26 @@
 <div th:replace="../views/header :: header"></div>
 
 <div class="container">
-    <h2 class="text-danger">Все студенты:</h2>
+    <h2 class="text-danger">Все группы:</h2>
     <table class="table">
         <table class="table">
             <thead>
-            <th>Фамилия</th>
-            <th>Имя</th>
-            <th>Отчество</th>
-            <th>Группа</th>
-            <th>Имя пользователя</th>
-            <th>Пароль</th>
+            <h3>Название</h3>
+            <h3>Направление</h3>
+            <h3>Год поступления</h3>
             </thead>
             <tbody>
-            <tr th:each="student:${students}">
-                <td th:text="${student.surname}">
+            <tr th:each="faculty:${deansofficefaculties}">
+                <td th:text="${faculty.name}">
                 </td>
-                <td th:text="${student.name}">
+                <td th:text="${faculty.direction.name}">
                 </td>
-                <td th:text="${student.patronymic}">
+                <td th:text="${faculty.year}">
                 </td>
-                <td th:text="${student.faculty.name}">
-                </td>
-                <td th:text="${student.username}">
-                </td>
-                <td th:text="${student.password}">
+                <td>
+                    <button type="button" id="goToTasks" data-toggle="modal" class="btn-default"
+                            th:value="${faculty.getId()}" th:onclick="'goToTask(\'' + ${faculty.getId()} + '\');'"> Подробнее
+                    </button>
                 </td>
             </tr>
             </tbody>

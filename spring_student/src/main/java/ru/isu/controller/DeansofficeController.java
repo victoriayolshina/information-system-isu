@@ -50,7 +50,7 @@ public class DeansofficeController {
     public String getDeansOffice(Model model, Authentication authentication) {
         UsernamePasswordAuthenticationToken token = (UsernamePasswordAuthenticationToken) authentication;
         System.out.println(token.getName());
-        model.addAttribute("deansoffice", deansOfficeRepository.findDeansEmployeeById(1));
+        model.addAttribute("deansoffice", deansOfficeRepository.findDeansEmployeeByUsername(token.getName()));
         return "deansofficehtml/deansofficeInfo";
     }
 
@@ -62,42 +62,42 @@ public class DeansofficeController {
 
     @RequestMapping(value = "/curators/{curatorId}", method = RequestMethod.GET)
     public String getCurator(@PathVariable("curatorId") int curatorId, Model model) {
-        model.addAttribute("curator", curatorRepository.findCuratorById(curatorId));
-        return "curatorhtml/curatorInfo";
+        model.addAttribute("deansofficecurator", curatorRepository.findCuratorById(curatorId));
+        return "deansofficehtml/curatorInfo";
     }
 
     @RequestMapping(value = "/curators/new", method = RequestMethod.GET)
     public String addCurator(Model model) {
-        return "curatorhtml/addCurator";
+        return "deansofficehtml/addCurator";
     }
 
     @RequestMapping(value = "/curators/new", method = RequestMethod.POST)
     public String saveCurator(Model model) {
-        return "redirect:/curator/curators";
+        return "redirect:/deansofficehtml/curators";
     }
 
     @RequestMapping(value = "/faculty", method = RequestMethod.GET)
     public String allFaculty(Model model) {
-        model.addAttribute("faculties", facultyRepository.findAll());
-        return "curatorhtml/allfaculties";
+        model.addAttribute("deansofficefaculties", facultyRepository.findAll());
+        return "deansofficehtml/allfaculties";
     }
 
     @RequestMapping(value = "/faculty/{facultyId}", method = RequestMethod.GET)
     public String getFaculty(@PathVariable("facultyId") int facultyId, Model model) {
-        model.addAttribute("faculty", facultyRepository.findFacultyById(facultyId));
-        return "curatorhtml/faculty";
+        model.addAttribute("deansofficefaculty", facultyRepository.findFacultyById(facultyId));
+        return "deansofficehtml/faculty";
     }
 
     @RequestMapping(value = "/faculty/{facultyId}/students", method = RequestMethod.GET)
     public String getAllStudent(@PathVariable("facultyId") int facultyId, Model model) {
-        model.addAttribute("students", studentRepository.findStudentsByFacultyId(facultyId));
-        return "curatorhtml/students";
+        model.addAttribute("deansofficestudents", studentRepository.findStudentsByFacultyId(facultyId));
+        return "deansofficehtml/students";
     }
 
     @RequestMapping(value = "/faculty/{facultyId}/students/{studentId}", method = RequestMethod.GET)
     public String getStudent(@PathVariable("facultyId") int facultyId, @PathVariable int studentId, Model model) {
-        model.addAttribute("student", studentRepository.findStudentById(studentId));
-        return "studenthtml/studentInfo";
+        model.addAttribute("deansofficestudent", studentRepository.findStudentById(studentId));
+        return "deansofficehtml/studentInfo";
     }
 
     @RequestMapping(value = "/placeofpractice", method = RequestMethod.GET)
@@ -126,7 +126,6 @@ public class DeansofficeController {
 
     @RequestMapping(value = "/statistics", method = RequestMethod.GET)
     public String getStatistics(Model model) {
-
         return "deansofficehtml/statistics";
     }
 

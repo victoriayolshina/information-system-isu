@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=cp1251">
+    <title>Информация о кураторе:</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    <script th:src="@{/resources/globalbtn.js}"></script>
+    <link rel="stylesheet" type="text/css" th:href="@{/resources/textarea.css}">
+</head>
+<!-- Страница информации о пользователе -->
+<body id = "body">
+<div th:replace="../views/header :: header"></div>
+<div class = "container">
+    <div class="row">
+        <h3>ФИО</h3>
+        <p class="inline" th:text="${deansofficecurator.getSurname()}"></p>
+        <p class="inline" th:text="${deansofficecurator.getName()}"></p>
+        <p class="inline" th:text="${deansofficecurator.getPatronymic()}"></p>
+        <h3>Преподавательская должность</h3>
+        <p th:text="${deansofficecurator.getDegree()}"></p>
+        <h3>Email</h3>
+        <p th:text="${deansofficecurator.getEmail()}"></p>
+        <h3>Имя пользователя</h3>
+        <p th:text="${deansofficecurator.getUsername()}"></p>
+    </div>
+</div>
+</body>
+</html>

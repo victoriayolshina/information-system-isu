@@ -124,8 +124,8 @@ public class CuratorController {
 
     @RequestMapping(value = "/faculty/{facultyId}/students/{studentId}", method = RequestMethod.GET)
     public String getStudent(@PathVariable("facultyId") int facultyId, @PathVariable int studentId, Model model) {
-        model.addAttribute("student", studentRepository.findStudentById(studentId));
-        return "studenthtml/studentInfo";
+        model.addAttribute("curatorstudent", studentRepository.findStudentById(studentId));
+        return "curatorhtml/studentInfo";
     }
 
     @RequestMapping(value = "/faculty/{facultyId}/students/{studentId}", method = RequestMethod.POST)

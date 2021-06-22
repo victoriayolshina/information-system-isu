@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=cp1251">
+    <title>Все практики</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    <script th:src="@{/resources/globalbtn.js}"></script>
+</head>
+<body>
+
+<div th:replace="../views/header :: header"></div>
+<div class="container">
+    <div class="row">
+        <h3>Начало практики</h3>
+        <p th:text="${#calendars.format(studentpractice.getStarttime(), 'dd.MM.yyyy')}"></p>
+        <!--        <p th:text="${thepractice.getStarttime()}"></p>-->
+        <h3>Конец практики</h3>
+        <p th:text="${#calendars.format(studentpractice.getEndtime(), 'dd.MM.yyyy')}"></p>
+        <!--        <p th:text="${thepractice.getEndtime()}"></p>-->
+        <h3>Куратор практики</h3>
+        <p th:text="${studentpractice.getCurator().getSurname() + ' ' + studentpractice.getCurator().getName() + ' ' + studentpractice.getCurator().getPatronymic() + ', ' + studentpractice.getCurator().getDegree()}"></p>
+        <h3>Тип практики</h3>
+        <p th:text="${studentpractice.getTypeOfPractice().getName()}"></p>
+    </div>
+</div>
+</body>
+</html>

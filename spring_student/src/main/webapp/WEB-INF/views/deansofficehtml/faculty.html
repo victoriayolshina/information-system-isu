@@ -14,13 +14,12 @@
 
 <div class="container">
     <div class="row">
-        <h3>Название</h3>
-        <p th:text="${faculty.getName()}"></p>
-        <h3>Направление</h3>
-        <p class="inline" th:text="${faculty.getDirection().getCode()}"></p>
-        <p class="inline" th:text="${faculty.getDirection().getName()}"></p>
-        <h3>Год поступления</h3>
-        <p th:text="${faculty.getYear()}"></p>
+        <h1>Название</h1>
+        <p th:text="${deansofficefaculty.getName()}"></p>
+        <h2>Направление</h2>
+        <p th:text="${deansofficefaculty.getDirection().getName()}"></p>
+        <h2>Год поступления</h2>
+        <p th:text="${deansofficefaculty.getYear()}"></p>
     </div>
 </div>
 </body>

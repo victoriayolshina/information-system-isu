@@ -60,9 +60,8 @@ public class StudentController {
     public String getAllPractice(Model model, Authentication authentication) {
         UsernamePasswordAuthenticationToken token = (UsernamePasswordAuthenticationToken) authentication;
         Student student = studentRepository.findStudentByUsername(token.getName());
-
-        model.addAttribute("practices", practiceRepository.findPracticeByStudent(student));
-        return "curatorhtml/practices";
+        model.addAttribute("studentpractices", practiceRepository.findPracticeByStudent(student));
+        return "studenthtml/practices";
     }
 
     @RequestMapping(value = "/practice/{practiceId}", method = RequestMethod.GET)
@@ -75,8 +74,8 @@ public class StudentController {
             return String.format("redirect:/student/practice");
         }
 
-        model.addAttribute("practice", practiceRepository.findPracticeByStudent(student));
-        return "curatorhtml/practice";
+        model.addAttribute("studentpractice", practiceRepository.findPracticeByStudent(student));
+        return "studenthtml/practice";
     }
 
     @RequestMapping(value = "/practice/{practiceId}/tasks", method = RequestMethod.GET)

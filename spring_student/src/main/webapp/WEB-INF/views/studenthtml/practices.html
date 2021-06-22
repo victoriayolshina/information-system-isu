@@ -2,7 +2,7 @@
 <html lang="ru" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=cp1251">
-    <title>Все группы</title>
+    <title>Все практики</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
@@ -13,25 +13,30 @@
 <div th:replace="../views/header :: header"></div>
 
 <div class="container">
-    <h2 class="text-danger">Все группы:</h2>
+    <h2 class="text-danger">Все практики:</h2>
     <table class="table">
         <table class="table">
             <thead>
-            <th>Название</th>
-            <th>Направление</th>
-            <th>Год поступления</th>
+            <th>Начало практики</th>
+            <th>Конец практики</th>
+            <th>Тип практики</th>
+            <th>Куратор</th>
             </thead>
             <tbody>
-            <tr th:each="faculty:${faculties}">
-                <td th:text="${faculty.name}">
+            <tr th:each="practice:${studentpractices}">
+                <td th:text="${#calendars.format(practice.getStarttime(), 'dd.MM.yyyy')}">
+                    <!--                <td th:text="${practice.getStarttime()}">-->
                 </td>
-                <td th:text="${faculty.direction.name}">
+                <td th:text="${#calendars.format(practice.getEndtime(), 'dd.MM.yyyy')}">
+                    <!--                <td th:text="${practice.getEndtime()}">-->
                 </td>
-                <td th:text="${faculty.year}">
+                <td th:text="${practice.getTypeOfPractice().getName()}">
+                </td>
+                <td th:text="${practice.getCurator().getSurname() + ' ' + practice.getCurator().getName() + ' ' + practice.getCurator().getPatronymic()} ">
                 </td>
                 <td>
                     <button type="button" id="goToTasks" data-toggle="modal" class="btn-default"
-                            th:value="${faculty.getId()}" th:onclick="'goToTask(\'' + ${faculty.getId()} + '\');'"> Подробнее
+                            th:value="${practice.getId()}" th:onclick="'goToTask(\'' + ${practice.getId()} + '\');'"> Подробнее
                     </button>
                 </td>
             </tr>

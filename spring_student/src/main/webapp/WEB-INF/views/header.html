@@ -29,24 +29,8 @@
             <li><a sec:authorize-url="/deansoffice" th:href="@{/deansoffice/placeofpractice}">Прохождение практики</a></li>
             <li><a sec:authorize-url="/deansoffice" th:href="@{/deansoffice/statistics}">Статистика</a></li>
 
-<!--            <li>-->
-<!--                <div sec:authorize="isAuthenticated()">-->
-<!--                    <form id="logout-form" th:action="@{/logout}" method="post">-->
-<!--                        <li class="navbar-text"><a id="logout">Выйти</a></li>-->
-<!--                        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>-->
-<!--                    </form>-->
-<!--&lt;!&ndash;                    <p class="navbar-text"><a id="logout">Выйти</a></p>&ndash;&gt;-->
-<!--&lt;!&ndash;                    <form id="logout-form" th:action="@{/logout}" method="POST">&ndash;&gt;-->
-<!--&lt;!&ndash;                    </form>&ndash;&gt;-->
-<!--            <li sec:authorize="!isAuthenticated()">-->
-<!--                <a th:href="@{/login}">Войти</a>-->
-<!--            </li>-->
-            <!--            <li sec:authorize="!isAuthenticated()">-->
-            <!--                <a th:href="@{/register}">Register</a>-->
-            <!--            </li>-->
             <li sec:authorize="isAuthenticated()">
                 <p class="navbar-text">
-
                     <a id="logout" href="#">Выйти</a>
                 </p>
                 <form id="logout-form" th:action="@{/logout}" method="post">
@@ -58,32 +42,8 @@
                 <a th:href="@{/login}">Войти</a>
             </li>
 
-
         </ul>
     </div>
 </nav>
-<!--<nav class="navbar navbar-default" th:fragment="header">-->
-<!--    <div class="container-fluid">-->
-<!--        <div class="navbar-header">-->
-<!--            <a class="navbar-brand" href="#">IMIT system</a>-->
-<!--        </div>-->
-<!--        <ul class="nav navbar-nav">-->
-<!--            <li><a th:href="@{/}">Домашняя страница</a></li>-->
-<!--            <li class="dropdown">-->
-<!--                <a href="#" class="dropdown-toggle"-->
-<!--                   data-toggle="dropdown" role="button"-->
-<!--                   aria-expanded="false">Студенты<span class="caret"></span></a>-->
-<!--                <ul class="dropdown-menu" role="menu">-->
-<!--                    <li><a th:href="@{/students/add}">Добавит студента</a></li>-->
-<!--                    <li><a th:href="@{/students/students}">Все студенты</a></li>-->
-<!--                    &lt;!&ndash;<li><a th:href="@{/practice/1}">Practice</a></li>-->
-<!--                    <li><a th:href="@{/tasks/1}">Task</a></li>&ndash;&gt;-->
-<!--                </ul>-->
-<!--            <li><a th:href="@{/practice/1}">Практики</a></li>-->
-<!--            <li><a th:href="@{/tasks/1}">Задания</a></li>-->
-<!--            </li>-->
-<!--        </ul>-->
-<!--    </div>-->
-<!--</nav>-->
 </body>
 </html>
