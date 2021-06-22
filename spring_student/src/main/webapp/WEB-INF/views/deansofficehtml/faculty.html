@@ -8,17 +8,16 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
     <script th:src="@{/resources/globalbtn.js}"></script>
 </head>
+
 <body>
-
 <div th:replace="../views/header :: header"></div>
-
 <div class="container">
     <div class="row">
-        <h1>Название</h1>
+        <h3>Название</h3>
         <p th:text="${deansofficefaculty.getName()}"></p>
-        <h2>Направление</h2>
+        <h3>Направление</h3>
         <p th:text="${deansofficefaculty.getDirection().getName()}"></p>
-        <h2>Год поступления</h2>
+        <h3>Год поступления</h3>
         <p th:text="${deansofficefaculty.getYear()}"></p>
     </div>
 </div>

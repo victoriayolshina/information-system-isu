@@ -14,15 +14,20 @@
 <div class="container">
     <div class="row">
         <h3>Начало практики</h3>
-        <p th:text="${#calendars.format(studentpractice.getStarttime(), 'dd.MM.yyyy')}"></p>
+        <p th:text="${#calendars.format(studentractice.get), 'dd.MM.yyyy')}"></p>
         <!--        <p th:text="${thepractice.getStarttime()}"></p>-->
         <h3>Конец практики</h3>
-        <p th:text="${#calendars.format(studentpractice.getEndtime(), 'dd.MM.yyyy')}"></p>
+        <p th:text="${#calendars.format(studentractice.getEndtime(), 'dd.MM.yyyy')}"></p>
         <!--        <p th:text="${thepractice.getEndtime()}"></p>-->
         <h3>Куратор практики</h3>
         <p th:text="${studentpractice.getCurator().getSurname() + ' ' + studentpractice.getCurator().getName() + ' ' + studentpractice.getCurator().getPatronymic() + ', ' + studentpractice.getCurator().getDegree()}"></p>
         <h3>Тип практики</h3>
         <p th:text="${studentpractice.getTypeOfPractice().getName()}"></p>
+        <td>
+            <button type="button" id="goToTasks" data-toggle="modal" class="btn-default"
+                    th:value="${faculty.getId()}" th:onclick="'goToTask(\'' + ${faculty.getId()} + '\');'"> Подробнее
+            </button>
+        </td>
     </div>
 </div>
 </body>

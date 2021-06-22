@@ -95,6 +95,7 @@ public class StudentController {
         Practice practicetempl = practiceRepository.findPracticeById(practiceId);
         PlaceOfPractice placeOfPractice = practicetempl.getPlaceOfPractice();
         Supervisor supervisor = practicetempl.getSupervisor();
+        Curator curator = practicetempl.getCurator();
 
         //Изменения формата выводимой даты
         SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy");
@@ -164,6 +165,7 @@ public class StudentController {
         }
 
         String supervisorFullName = String.format("%s %s %s", supervisor.getSurname(),supervisor.getName(), supervisor.getPatronymic());
+        String curatorFullName = String.format("%s %s %s", curator.getSurname(),curator.getName(), curator.getPatronymic());
 
         //Подстановка данных на места блоков
         sb = putData(sb, year, templYear);
@@ -176,13 +178,13 @@ public class StudentController {
         sb = putData(sb, faculty.getDirection().getCode(), templCode);
         sb = putData(sb, faculty.getDirection().getName(), templDirection);
         sb = putData(sb, date, templCourse);
-        sb = putData(sb, practice.getFormOfStudy(), templTypeOfStudy);
+        sb = putData(sb, student.getFormOfStudy(), templTypeOfStudy);
         sb = putData(sb, placeOfPractice.getName(), templPlaceOfPractice);
-        sb = putData(sb, practice.getProfile(), templProfile);
+        sb = putData(sb, faculty.getProfile(), templProfile);
         sb = putData(sb, sdf.format(practice.getStarttime()), templStartTime);
         sb = putData(sb, sdf.format(practice.getEndtime()), templEndTime);
-        sb = putData(sb, practice.getCuratorByDepartment(), templCurator);
-        sb = putData(sb, practice.getСuratorEmail(), templEmail);
+        sb = putData(sb, curatorFullName, templCurator);
+        sb = putData(sb, curator.getEmail(), templEmail);
         sb = putData(sb, supervisorFullName, templSupervisor);
         sb = putData(sb, supervisor.getPost(), templSupervisorPost);
         sb = putData(sb, practice.getPost(), templPost);
@@ -287,10 +289,6 @@ public class StudentController {
         UsernamePasswordAuthenticationToken token = (UsernamePasswordAuthenticationToken) authentication;
         Student student = studentRepository.findStudentByUsername(token.getName());
 
-        List<Integer> integerList = practiceRepository.countPracticeByStudent(student);
-        if (integerList.isEmpty() || !integerList.contains(practiceId)) {
-            return String.format("redirect:/student/practice");
-        }
         return "studenthtml/gant";
     }
 

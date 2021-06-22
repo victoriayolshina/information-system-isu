@@ -1,74 +1,79 @@
-var myData = [{
-    name: "Name 1",
-    desc: "Description 1",
-    values: [{
-        from: 1320192000000, // <a href="https://www.jqueryscript.net/time-clock/">date</a> string
-        to: 1322401600000,
-        label: "Label 1",
-        desc: "Value Description 1",
-        customClass: "custom-1",
-        dataObj: {}
-    }]
-}, {
-    name: "Name 2",
-    desc: "Description 2",
-    values: [{
-        from: 1320192000000,
-        to: 1322401600000,
-        label: "Label 2",
-        desc: "Value Description 2",
-        customClass: "custom-2",
-        dataObj: {}
-    }]
-}, {
-    name: "Name 3",
-    desc: "Description 3",
-    values: [{
-        from: 1320192000000,
-        to: 1322401600000,
-        label: "Label 3",
-        desc: "Value Description 3",
-        customClass: "custom-3",
-        dataObj: {}
-    }]
-
-}];
-
-var jsonParams = [{
-        desc: "Инструктаж по технике безопасности. Знакомство с организацией",
-        values: [{
-            from: new Date(2021, 1, 12),
-            to: new Date(2021, 1, 13),
-            label: "Инструктаж по технике безопасности. Знакомство со структурой организации",
-        }]
-    }, {
-        desc: "Знакомство с проектной документацией и устройством компании.",
-        values: [{
-            from: new Date(2021, 1, 15),
-            to: new Date(2021, 1, 16),
-            label: "Знакомство с проектной документацией и устройством компании."
-        }]
-    }, {
-        desc: "Изучение скриптов, имеющихся у компании.",
-        values: [{
-            from: new Date(2021, 1, 17),
-            to: new Date(2021, 1, 19),
-            label: "Изучение скриптов, имеющихся у компании."
-        }]
-    }, {
-        desc: "Написание методов визуализации системного времени и среднего значения загрузки системы за заданный период времени.",
-        values: [{
-            from: new Date(2021, 1, 20),
-            to: new Date(2021, 1, 25),
-            label: "Написание методов визуализации системного времени и среднего значения загрузки системы за заданный период времени."
-        }]
-    }]
-;
+// var myData = [{
+//     name: "Name 1",
+//     desc: "Description 1",
+//     values: [{
+//         from: 1320192000000, // <a href="https://www.jqueryscript.net/time-clock/">date</a> string
+//         to: 1322401600000,
+//         label: "Label 1",
+//         desc: "Value Description 1",
+//         customClass: "custom-1",
+//         dataObj: {}
+//     }]
+// }, {
+//     name: "Name 2",
+//     desc: "Description 2",
+//     values: [{
+//         from: 1320192000000,
+//         to: 1322401600000,
+//         label: "Label 2",
+//         desc: "Value Description 2",
+//         customClass: "custom-2",
+//         dataObj: {}
+//     }]
+// }, {
+//     name: "Name 3",
+//     desc: "Description 3",
+//     values: [{
+//         from: 1320192000000,
+//         to: 1322401600000,
+//         label: "Label 3",
+//         desc: "Value Description 3",
+//         customClass: "custom-3",
+//         dataObj: {}
+//     }]
+//
+// }];
+//
+// var jsonParams = [{
+//         desc: "Инструктаж по технике безопасности. Знакомство с организацией",
+//         values: [{
+//             from: new Date(2021, 1, 12),
+//             to: new Date(2021, 1, 13),
+//             label: "Инструктаж по технике безопасности. Знакомство со структурой организации",
+//         }]
+//     }, {
+//         desc: "Знакомство с проектной документацией и устройством компании.",
+//         values: [{
+//             from: new Date(2021, 1, 15),
+//             to: new Date(2021, 1, 16),
+//             label: "Знакомство с проектной документацией и устройством компании."
+//         }]
+//     }, {
+//         desc: "Изучение скриптов, имеющихся у компании.",
+//         values: [{
+//             from: new Date(2021, 1, 17),
+//             to: new Date(2021, 1, 19),
+//             label: "Изучение скриптов, имеющихся у компании."
+//         }]
+//     }, {
+//         desc: "Написание методов визуализации системного времени и среднего значения загрузки системы за заданный период времени.",
+//         values: [{
+//             from: new Date(2021, 1, 20),
+//             to: new Date(2021, 1, 25),
+//             label: "Написание методов визуализации системного времени и среднего значения загрузки системы за заданный период времени."
+//         }]
+//     }]
+// ;
 
 $(function () {
+    var token = $("meta[name='_csrf']").attr("content");
+    var header = $("meta[name='_csrf_header']").attr("content");
+    $(document).ajaxSend(function (e, xhr, options) {
+        xhr.setRequestHeader(header, token);
+    });
     $.ajax({
         type: "POST",
-        url: window.location.pathname + "\/1",
+        url: window.location.pathname,
         success: function (result) {
             console.log(result)
 

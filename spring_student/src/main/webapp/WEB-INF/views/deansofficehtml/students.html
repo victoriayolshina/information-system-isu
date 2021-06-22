@@ -38,6 +38,11 @@
                 </td>
                 <td th:text="${student.password}">
                 </td>
+                <td>
+                    <button type="button" id="goToTasks" data-toggle="modal" class="btn-default"
+                            th:value="${student.getId()}" th:onclick="'goToTask(\'' + ${student.getId()} + '\');'"> Подробнее
+                    </button>
+                </td>
             </tr>
             </tbody>
         </table>

@@ -35,6 +35,11 @@
                 </td>
                 <td th:text="${curator.email}">
                 </td>
+                <td>
+                    <button type="button" id="goToTasks" data-toggle="modal" class="btn-default"
+                            th:value="${curator.getId()}" th:onclick="'goToTask(\'' + ${curator.getId()} + '\');'"> Подробнее
+                    </button>
+                </td>
             </tr>
             </tbody>
         </table>
