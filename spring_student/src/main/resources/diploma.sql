@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1
--- Время создания: Июн 20 2021 г., 11:02
+-- Время создания: Июн 22 2021 г., 14:07
 -- Версия сервера: 10.4.18-MariaDB
--- Версия PHP: 8.0.3
+-- Версия PHP: 7.3.28
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -42,7 +42,7 @@ INSERT INTO `auto_user` (`id`, `username`, `role`, `password`) VALUES
 (1, 'nataliasemicheva', 'ROLE_DEANSOFFICE', 'pass'),
 (2, 'leonidriabets', 'ROLE_CURATOR', 'pass'),
 (3, 'victoriayolshina', 'ROLE_STUDENT', 'pass'),
-(4, 'markkislyannikov', 'ROLE_ADMIN', 'pass');
+(4, 'markkislyannikov', 'ROLE_ADMIN', 'test');
 
 -- --------------------------------------------------------
 
@@ -267,7 +267,8 @@ INSERT INTO `tasks` (`id`, `datastart`, `dataend`, `task`, `description`, `pract
 (39, '2021-02-25', '2021-03-01', 'Тестирование методов.', 'Тестирование методов.', 2),
 (40, '2021-03-02', '2021-03-04', 'Рефакторинг написанных методов для работы на\r\nсервере.', 'Рефакторинг написанных методов для работы на\r\nсервере.', 2),
 (41, '2021-03-08', '2021-03-12', 'Изучение преобразования данных, получаемых из\r\nсистемы мониторинга формата JSON, в необходимый\r\nвид.\r\n', 'Изучение преобразования данных, получаемых из\r\nсистемы мониторинга формата JSON, в необходимый\r\nвид.', 2),
-(42, '2021-03-14', '2021-03-15', 'Правки в методах для корректного отображения\r\nданных.\r\n', 'Правки в методах для корректного отображения\r\nданных.\r\n', 2);
+(42, '2021-03-14', '2021-03-15', 'Правки в методах для корректного отображения\r\nданных.\r\n', 'Правки в методах для корректного отображения\r\nданных.\r\n', 2),
+(44, '2021-02-25', '2021-02-26', 'ÐÐ½Ð¸Ð¼Ðµ', 'ÐÐ½Ð¸Ð¼Ðµ', 2);
 
 -- --------------------------------------------------------
 
@@ -288,7 +289,11 @@ INSERT INTO `typeofdirection` (`id`, `name`) VALUES
 (1, '1С'),
 (2, 'Back-end'),
 (3, 'Front-end'),
-(4, 'Data science');
+(4, 'Data science'),
+(5, 'Machine learning'),
+(6, 'AI'),
+(7, 'Game Development'),
+(8, 'Mobile ');
 
 -- --------------------------------------------------------
 
@@ -449,13 +454,13 @@ ALTER TABLE `supervisior`
 -- AUTO_INCREMENT для таблицы `tasks`
 --
 ALTER TABLE `tasks`
-  MODIFY `id` bigint(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
+  MODIFY `id` bigint(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
 
 --
 -- AUTO_INCREMENT для таблицы `typeofdirection`
 --
 ALTER TABLE `typeofdirection`
-  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT для таблицы `typeofpractice`

@@ -265,7 +265,7 @@ public class StudentController {
         return "studenthtml/editTask";
     }
 
-    @RequestMapping(value = "/practice/{practiceId}/tasks/{taskId}", produces = {"application/xml; charset=UTF-8"}, method = RequestMethod.POST)
+    @RequestMapping(value = "/practice/{practiceId}/tasks/{taskId}", method = RequestMethod.POST)
     public String editTask(Model model, @ModelAttribute Task task, @PathVariable("practiceId") int practiceId, @PathVariable("taskId") long taskId, Authentication authentication) {
         Practice practice = practiceRepository.findPracticeById(practiceId);
         taskRepository.delete(taskId);

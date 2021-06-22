@@ -8,6 +8,7 @@ $(document).ready(function () {
 
 });
 
+
 function setMinDateInStatistics() {
     var dateStart = document.getElementById("from")
     var dateEnd = document.getElementById("to")
