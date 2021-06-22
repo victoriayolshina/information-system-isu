@@ -69,7 +69,7 @@ INSERT INTO `curator` (`id`, `surname`, `name`, `patronymic`, `degree`, `email`,
 (1, 'Рябец', 'Леонид ', 'Владимирович', 'доцент', 'riabets@gmail.com', 'leonidriabets', 'pass'),
 (2, 'Семичева', 'Наталья', 'Леонидовна', 'доцент', 'semicheva@gmail.com', 'nataliasemicheva', 'pass'),
 (3, 'Зинченко', 'Анна ', 'Сергеевна', 'доцент', 'azinchenko@gmail.ru', 'annazinchenko', 'pass'),
-(4, 'Кислянников', 'Марк', 'Александрович', 'старший преподаватель ', 'markkisyannikov@gmail.com', 'markkisyannikov', 'pass');
+(4, 'Кислянников', 'Марк', 'Александрович', 'старший преподаватель ', 'markkislyannikov@gmail.com', 'markkisyannikov', 'pass');
 
 -- --------------------------------------------------------
 
@@ -93,7 +93,7 @@ CREATE TABLE `deansemployee` (
 
 INSERT INTO `deansemployee` (`id`, `surname`, `name`, `patronymic`, `post`, `username`, `password`) VALUES
 (1, 'Семичева', 'Наталья', 'Леонидовна', 'доцент', 'nataliasemicheva', 'pass'),
-(2, 'Кислянников', 'Марк', 'Александрович', 'старший преподаватель ', 'markkisyannikov', 'pass');
+(2, 'Кислянников', 'Марк', 'Александрович', 'старший преподаватель ', 'markkislyannikov', 'pass');
 
 -- --------------------------------------------------------
 
@@ -155,7 +155,7 @@ CREATE TABLE `placeofpractice` (
 --
 
 INSERT INTO `placeofpractice` (`id`, `name`, `location`, `typeofdirection`) VALUES
-(1, 'ZEON', 'Партизанская, 65', 2),
+(1, 'Зеон', 'Партизанская, 65', 2),
 (2, 'Форус', 'Ямская, 1', 1),
 (3, 'Адикт', 'Бурлова, 2', 3);
 

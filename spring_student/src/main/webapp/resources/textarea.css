@@ -1,34 +1,24 @@
-.style{
-    display:none;
-    visibility:hidden;
+.style {
+    display: none;
+    visibility: hidden;
 }
+
 .inline {
     display: inline;
 }
 
+/*.btn {*/
+/*    margin: 1em;*/
+/*}*/
 
 
-input[type=button], input[type=submit], input[type=reset], .btn-default {
-    background-color: #4CAF50;
-    border: none;
-    color: white;
-    padding: 16px 32px;
-    text-decoration: none;
-    margin: 4px 2px;
-    cursor: pointer;
-}
+/*.form-control[type="password"] {*/
+/*    width: 60%;*/
+/*    float: left;*/
+/*}*/
 
-.text-container {
-    display: inline-block;
-    position: relative;
-    overflow: hidden;
-}
-.clearBtn {
-    position: absolute;
-    top: 0;
-    right: -15px;
-    transition: right 0.2s;
-}
-.show {
-    right: 5px;
-}
+/*.btn[type="button"] {*/
+/*    width: 30%;*/
+/*    float: left;*/
+/*    margin-left: 10%;*/
+/*}*/

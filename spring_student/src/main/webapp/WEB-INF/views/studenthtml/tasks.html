@@ -10,30 +10,31 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
     <script th:src="@{/resources/globalbtn.js}"></script>
     <script th:src="@{/resources/task.js}"></script>
-    <!--    <script th:src="@{/resources/statistics.js}"></script>-->
-    <script th:src="@{/resources/textarea.css}"></script>
+    <link rel="stylesheet" type="text/css" th:src="@{/resources/textarea.css}">
 <body>
 
 <div th:replace="../views/header :: header"></div>
 
 <div class="container">
     <h2 class="text-danger">Все задания на практику:</h2>
-    <button id="add-task-btn" type="button"
-            class="btn btn-primary" data-toggle="modal">
-        <span class="glyphicon glyphicon-plus"></span> Добавить
-    </button>
-    <button type="button" id="getGant"
-            class="btn btn-primary" data-toggle="modal"> Диаграмма Ганта
-    </button>
-
     <form action="https://www.overleaf.com/docs" method="post" target="_blank">
-            <textarea rows="500" cols="90" name="snip" th:text="${template.toString()}" style="display:none">
+        <button id="add-task-btn" type="button"
+                class="btn btn-outline-primary" data-toggle="modal"> Добавить
+        </button>
+
+        <button type="button" id="getGant"
+                class="btn btn-outline-primary" data-toggle="modal"> Диаграмма Ганта
+        </button>
+
+
+        <textarea rows="500" cols="90" name="snip" th:text="${template.toString()}" style="display:none">
 
             </textarea>
         <!--            <input type="hidden" name="snip_uri" type="file" accept=".txt" id="btn1"-->
 
         <!--                   value=""><br>-->
-        <input type="submit" value="Сгенерировать отчёт">
+
+        <input type="submit" class="btn btn-outline-primary" value="Сгенерировать отчёт">
     </form>
 
 
@@ -54,14 +55,18 @@
                 <td th:text="${task.getTask()} " maxlength="225">
                 </td>
                 <td>
-                    <button type="button" id="edit-button" data-toggle="modal" class="btn btn-primary"
-                            th:value="${task.getId()}" th:onclick="'editTask(\'' + ${task.getId()} + '\');'">
-                        <span class="glyphicon glyphicon-pencil"></span> Редактировать
-                    </button>
-                    <button type="button" id="delete-button" data-toggle="modal" class="btn btn-primary"
-                            th:value="${task.getId()}" th:onclick="'deleteTask(\'' + ${task.getId()} + '\');'">
-                        <span class="glyphicon glyphicon-trash"></span> Удалить
-                    </button>
+                    <div class="d-grid gap-3">
+                        <button type="button" class="btn btn-outline-primary btn-xs" id="edit-button"
+                                data-toggle="modal"
+                                th:value="${task.getId()}" th:onclick="'editTask(\'' + ${task.getId()} + '\');'">
+                            <span class="glyphicon glyphicon-pencil"></span> Редактировать
+                        </button>
+                        <button type="button" class="btn btn-outline-primary btn-xs" id="delete-button"
+                                data-toggle="modal"
+                                th:value="${task.getId()}" th:onclick="'deleteTask(\'' + ${task.getId()} + '\');'">
+                            <span class="glyphicon glyphicon-trash"></span> Удалить
+                        </button>
+                    </div>
                 </td>
             </tr>
             </tbody>
