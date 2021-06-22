@@ -17,6 +17,8 @@ import java.util.Collection;
 @Setter
 @ToString
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class Student {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -36,7 +38,6 @@ public class Student {
     private String patronymicCase;
 
     private String username;
-
     private String password;
 
     @NotNull
@@ -45,17 +46,4 @@ public class Student {
     private Faculty faculty;
 
     private String formOfStudy;
-
-    @Override
-    public String toString() {
-        return "Student{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", surname='" + surname + '\'' +
-                ", patronymic='" + patronymic + '\'' +
-                ", username='" + username + '\'' +
-                ", password='" + password + '\'' +
-                ", faculty=" + faculty +
-                '}';
-    }
 }

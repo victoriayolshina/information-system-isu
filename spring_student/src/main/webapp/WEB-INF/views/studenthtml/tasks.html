@@ -19,11 +19,11 @@
 <div class="container">
     <h2 class="text-danger">Все задания на практику:</h2>
     <button id="add-task-btn" type="button"
-            class="btn-default" data-toggle="modal">
+            class="btn btn-primary" data-toggle="modal">
         <span class="glyphicon glyphicon-plus"></span> Добавить
     </button>
     <button type="button" id="getGant"
-            class="btn-default" data-toggle="modal"> Диаграмма Ганта
+            class="btn btn-primary" data-toggle="modal"> Диаграмма Ганта
     </button>
 
     <form action="https://www.overleaf.com/docs" method="post" target="_blank">
@@ -36,27 +36,6 @@
         <input type="submit" value="Сгенерировать отчёт">
     </form>
 
-
-    <!--    <form action="https://www.overleaf.com/docs" method="post" target="_blank">-->
-    <!--<textarea rows="8" cols="60" name="snip">-->
-
-    <!--</textarea>-->
-    <!--        <input type="submit" value="Open in Overleaf">-->
-    <!--    </form>-->
-
-    <!--</textarea>-->
-    <!--        <button id="button" type="button"-->
-    <!--                class="btn-default" data-toggle="modal">-->
-    <!--            <span class="glyphicon glyphicon"></span> Сгенерировать отчёт-->
-    <!--        </button>-->
-    <!--        <input type="submit" value="Open in Overleaf">-->
-    <!--    </form>-->
-
-    <!--    <div class="text-container">-->
-    <!--        <input type="submit" id="add-task-btn"  value="Добавить">-->
-    <!--        <span class="glyphicon glyphicon-plus"></span> -->
-
-    <!--    </div>-->
 
     <h2 class="text-danger"></h2>
     <table class="table">
@@ -75,11 +54,11 @@
                 <td th:text="${task.getTask()} " maxlength="225">
                 </td>
                 <td>
-                    <button type="button" id="edit-button" data-toggle="modal" class="btn-default"
+                    <button type="button" id="edit-button" data-toggle="modal" class="btn btn-primary"
                             th:value="${task.getId()}" th:onclick="'editTask(\'' + ${task.getId()} + '\');'">
                         <span class="glyphicon glyphicon-pencil"></span> Редактировать
                     </button>
-                    <button type="button" id="delete-button" data-toggle="modal" class="btn-default"
+                    <button type="button" id="delete-button" data-toggle="modal" class="btn btn-primary"
                             th:value="${task.getId()}" th:onclick="'deleteTask(\'' + ${task.getId()} + '\');'">
                         <span class="glyphicon glyphicon-trash"></span> Удалить
                     </button>

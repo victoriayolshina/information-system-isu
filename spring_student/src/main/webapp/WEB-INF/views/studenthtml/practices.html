@@ -35,7 +35,7 @@
                 <td th:text="${practice.getCurator().getSurname() + ' ' + practice.getCurator().getName() + ' ' + practice.getCurator().getPatronymic()} ">
                 </td>
                 <td>
-                    <button type="button" id="goToTasks" data-toggle="modal" class="btn-default"
+                    <button type="button" id="goToTasks" data-toggle="modal" class="btn btn-primary"
                             th:value="${practice.getId()}" th:onclick="'goToTask(\'' + ${practice.getId()} + '\');'"> Подробнее
                     </button>
                 </td>

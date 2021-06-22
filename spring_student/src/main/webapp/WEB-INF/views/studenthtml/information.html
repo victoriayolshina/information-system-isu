@@ -13,75 +13,32 @@
 <div th:replace="../views/header :: header"></div>
 <div class="container">
     <h2 class="text-danger">Добавление дополнительной информации о студенте</h2>
-    <table id="book-table" class="table">
-        <form id="form-extra-information" action="editTask"
-              th:action="@{/student/practice/{practiceId}/tasks/information (practiceId = ${practiceId}) }"
-              method="POST">
-            <thead>
-            <tr>
-                <label for="curator">Руководитель практики от кафедры</label>
-                <select id="curator" name="curator" class="form-control">
-                    <option th:each="element: ${curators}"
-                            th:text="${element.getSurname() + " " + element.getName() + " " + element.getPatronymic()}"
-                    th:value="${element.getId()}"></option>
-                </select>
-            </tr>
-            <tr>
-                <h3>Место прохождения практики</h3>
-            </tr>
-            <tr>
-                <label for="location">Адрес</label>
-                <input id="location" name="location" class="form-control" type="text" />
-            </tr>
-            <tr>
-                <label for="name">Фамилия</label>
-                <input id="name" name="name" class="form-control" type="text" />
-            </tr>
-            <tr>
-                <label for="surname">Имя</label>
-                <input id="surname" name="surname" class="form-control" type="text" />
-            </tr>
-            <tr>
-                <label for="patronimic">Отчество</label>
-                <input id="patronimic" name="patronimic" class="form-control" type="text"/>
-            </tr>
-            <tr>
-                <label for="direction"></label>
-                <select id="direction" name="direction" class="form-control">
-                    <option th:each="element: ${directions}"
-                            th:text="${element.getName()}"
-                            th:value="${element.getId()}"></option>
-                </select>
-            </tr>
-            <p>
-                <button type="submit" id="btn-extra-inform" class="btn btn-primary">Сохранить</button>
-            </p>
-            </thead>
-        </form>
-    </table>
-    <form action="savestudent" th:action="@{/student/practice/information/new}" method="post" th:object="${student}">
+        <form action="savestudentCase" th:action="@{/student/information}" method="post">
         <div class="form-group">
             <label for="student-surname-case">Фамилия в родительном падеже:</label>
-            <input id="student-surname-case" class="form-control"
-                   th:field="*{surnameCase}"/>
-            <span th:if="${#fields.hasErrors('surnameCase')}"
-                  th:errors="${student.surnameCase}" class="text-danger"></span>
+            <input id="student-surname-case"
+                   th:value="${studentInform.getSurnameCase()}? ${studentInform.getSurnameCase()} : #{''}"
+                   name="surnameCase"  class="form-control"/>
         </div>
         <div class="form-group">
             <label for="student-name-case">Имя в родительном падеже:</label>
-            <input id="student-name-case" class="form-control"
-                   th:field="*{nameCase}"/>
-            <span th:if="${#fields.hasErrors('nameCase')}"
-                  th:errors="${student.nameCase}" class="text-danger"></span>
+            <input id="student-name-case" name="nameCase"
+                   th:value="${studentInform.getNameCase()}? ${studentInform.getNameCase()} : #{''}"
+                   class="form-control" />
         </div>
         <div class="form-group">
             <label for="student-patronymic-case">Отчество в родительном падеже:</label>
-            <input id="student-patronymic-case" class="form-control"
-                   th:field="*{patronymicCase}"/>
-            <span th:if="${#fields.hasErrors('patronymicCase')}"
-                  th:errors="${student.patronymicCase}" class="text-danger"></span>
+            <input id="student-patronymic-case"
+                   th:value="${studentInform.getPatronymicCase()}? ${studentInform.getPatronymicCase()} : #{''}"
+                    name="patronymicCase" class="form-control"/>
         </div>
-        <button type="submit" id="btnsavestudents">Сохранить</button>
+        <div class="form-group">
+            <label for="student-patronymic-case">Форма обучения</label>
+            <input id="studentFormOfStudy"
+                   th:value="${studentInform.getFormOfStudy()}? ${studentInform.getFormOfStudy()} : #{''}"
+                   name="formOfStudy" class="form-control"/>
+        </div>
+        <button class="btn btn-primary" type="submit" id="btnsavestudentCase">Сохранить</button>
     </form>
 </div>
 </body>

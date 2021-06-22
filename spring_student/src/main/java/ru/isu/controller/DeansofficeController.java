@@ -51,6 +51,7 @@ public class DeansofficeController {
         UsernamePasswordAuthenticationToken token = (UsernamePasswordAuthenticationToken) authentication;
         System.out.println(token.getName());
         model.addAttribute("deansoffice", deansOfficeRepository.findDeansEmployeeByUsername(token.getName()));
+        System.out.println(deansOfficeRepository.findDeansEmployeeByUsername(token.getName()));
         return "deansofficehtml/deansofficeInfo";
     }
 

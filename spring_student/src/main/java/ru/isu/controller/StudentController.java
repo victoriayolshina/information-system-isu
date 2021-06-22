@@ -2,6 +2,7 @@ package ru.isu.controller;
 
 import net.bytebuddy.implementation.bind.annotation.Super;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -53,6 +54,31 @@ public class StudentController {
         Student student = studentRepository.findStudentByUsername(token.getName());
         model.addAttribute("student", student);
         return "studenthtml/studentInfo";
+    }
+
+    //>>>
+    @RequestMapping(value = "/information", method = RequestMethod.GET)
+    public String getStudentInformationGet(Model model, Authentication authentication) {
+        UsernamePasswordAuthenticationToken token = (UsernamePasswordAuthenticationToken) authentication;
+        Student student = studentRepository.findStudentByUsername(token.getName());
+        model.addAttribute("studentInform", student);
+
+        return "studenthtml/information";
+    }
+
+    //>>>
+    @RequestMapping(value = "/information", method = RequestMethod.POST)
+    public String getStudentInformationPost(@ModelAttribute Student _student, Authentication authentication) {
+        UsernamePasswordAuthenticationToken token = (UsernamePasswordAuthenticationToken) authentication;
+        Student student = studentRepository.findStudentByUsername(token.getName());
+
+        student.setPatronymicCase(_student.getPatronymicCase());
+        student.setNameCase(_student.getNameCase());
+        student.setSurnameCase(_student.getSurnameCase());
+        student.setFormOfStudy(_student.getFormOfStudy());
+
+        studentRepository.save(student);
+        return String.format("redirect:/student/practice");
     }
 
     //>>>
@@ -166,8 +192,8 @@ public class StudentController {
                     .append(line);
         }
 
-        String supervisorFullName = String.format("%s %s %s", supervisor.getSurname(),supervisor.getName(), supervisor.getPatronymic());
-        String curatorFullName = String.format("%s %s %s", curator.getSurname(),curator.getName(), curator.getPatronymic());
+        String supervisorFullName = String.format("%s %s %s", supervisor.getSurname(), supervisor.getName(), supervisor.getPatronymic());
+        String curatorFullName = String.format("%s %s %s", curator.getSurname(), curator.getName(), curator.getPatronymic());
 
         //Подстановка данных на места блоков
         sb = putData(sb, year, templYear);
@@ -250,12 +276,10 @@ public class StudentController {
     @RequestMapping(value = "/practice/{practiceId}/tasks/{taskId}", method = RequestMethod.POST)
     public String editTask(Model model, @ModelAttribute Task task, @PathVariable("practiceId") int practiceId, @PathVariable("taskId") long taskId, Authentication authentication) {
         Practice practice = practiceRepository.findPracticeById(practiceId);
-        taskRepository.delete(taskId);
         task.setPractice(practice);
         task.setId(taskId);
         taskRepository.save(task);
         return String.format("redirect:/student/practice/%d/tasks", practiceId);
-//        return "studenthtml/editTask";
     }
 
 
@@ -266,7 +290,6 @@ public class StudentController {
         taskRepository.delete(taskId);
         return "ok";
     }
-
 
 
     @RequestMapping(value = "/practice/{practiceId}/tasks/gant", method = RequestMethod.GET)
@@ -302,24 +325,23 @@ public class StudentController {
     }
 
 
-
-    @RequestMapping(value = "/practice/{practiceId}/tasks/information", method = RequestMethod.GET)
-    public String getInformationCuratorAndPlaseOfPractice(@PathVariable("practiceId") int practiceId, Authentication authentication, Model model) {
-        List<Curator> curatorList = curatorRepository.findAll();
-        List<TypeOfDirection> typeOfDirectionList = typeOfDirectionRepository.findAll();
-        model.addAttribute("curators", curatorList);
-        model.addAttribute("directions", typeOfDirectionList);
-        return "studenthtml/addCuratorForm";
-    }
-
-
-    @RequestMapping(value = "/practice/{practiceId}/tasks/information", method = RequestMethod.POST)
-    public String addInformationCuratorAndPlaseOfPractice(
-            @ModelAttribute CuratorSupervisorCustom curatorSupervisorCustom,
-            @PathVariable("practiceId") int practiceId, Authentication authentication) {
-        System.out.println(curatorSupervisorCustom);
-        return "studenthtml/information";
-    }
+//    @RequestMapping(value = "/practice/{practiceId}/tasks/information", method = RequestMethod.GET)
+//    public String getInformationCuratorAndPlaseOfPractice(@PathVariable("practiceId") int practiceId, Authentication authentication, Model model) {
+//        List<Curator> curatorList = curatorRepository.findAll();
+//        List<TypeOfDirection> typeOfDirectionList = typeOfDirectionRepository.findAll();
+//        model.addAttribute("curators", curatorList);
+//        model.addAttribute("directions", typeOfDirectionList);
+//        return "studenthtml/addCuratorForm";
+//    }
+//
+//
+//    @RequestMapping(value = "/practice/{practiceId}/tasks/information", method = RequestMethod.POST)
+//    public String addInformationCuratorAndPlaseOfPractice(
+//            @ModelAttribute CuratorSupervisorCustom curatorSupervisorCustom,
+//            @PathVariable("practiceId") int practiceId, Authentication authentication) {
+//        System.out.println(curatorSupervisorCustom);
+//        return "studenthtml/information";
+//    }
 
 
     private StringBuffer putData(StringBuffer stringBuffer, String data, String template) {
@@ -361,7 +383,6 @@ public class StudentController {
         }
         return datebetween;
     }
-
 
 
 }

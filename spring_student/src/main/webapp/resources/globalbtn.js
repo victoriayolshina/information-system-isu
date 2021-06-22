@@ -11,6 +11,11 @@ $(document).ready(function () {
         $("#btnSaveCurator").submit();
     });
 
+    $("#savestudentCase").click(function (e) {
+        e.preventDefault();
+        $("#btnsavestudentCase").submit();
+    });
+
     // $("#btnSaveFaculty").click(function (e) {
     //     e.preventDefault();
     //     $("#saveFaculty-form").submit();
@@ -84,4 +89,11 @@ function checkInput(text) {
 
 function openTasks() {
     location.href = window.location.href+"/tasks";
+}
+function goToAddInformation(){
+    location.href = window.location.href+"information";
+}
+
+function  goToPractics(){
+    location.href = window.location.href+"practice";
 }
