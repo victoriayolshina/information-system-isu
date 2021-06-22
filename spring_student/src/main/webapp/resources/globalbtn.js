@@ -1,7 +1,7 @@
 $(document).ready(function () {
     var url = "http://localhost:8089/student_manager_war/"
 
-    $("#saveFaculty-form").click(function (e) {
+    $("#saveFacultyform").click(function (e) {
         e.preventDefault();
         $("#btnSaveFaculty").submit();
     });
@@ -96,4 +96,17 @@ function goToAddInformation(){
 
 function  goToPractics(){
     location.href = window.location.href+"practice";
+}
+
+function addGroup(){
+    location.href = getPath(window.location.href, "new");
+}
+
+function getPath(path, templ) {
+    if (path[path.length - 1] == "/") {
+        path = path + "" + templ
+    } else {
+        path = path + "/" + templ
+    }
+    return path
 }

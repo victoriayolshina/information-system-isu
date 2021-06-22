@@ -22,7 +22,7 @@ public class Faculty {
     @JoinColumn(name = "direction")
     private Direction direction;
 
-    private Integer year;
+    private int year;
 
     private String profile;
 }

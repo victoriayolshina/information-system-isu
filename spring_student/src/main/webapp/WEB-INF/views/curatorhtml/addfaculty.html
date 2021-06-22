@@ -2,7 +2,6 @@
 <html lang="ru" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=cp1251">
-    <!--    <title>All Students</title>-->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
@@ -13,23 +12,24 @@
 <div th:replace="../views/header :: header"></div>
 <div class="container">
     <h2 class="text-danger">Добавление группы</h2>
-    <form action="saveFaculty-form" th:action="@{/curator/faculty/new}" method="POST">
-        <div class="form-group">
-            <label for="faculty-name">Название</label>
-            <input id="faculty-name" class="form-control" name="name"/>
-        </div>
-        <div class="form-group">
-            <label for="faculty-direction">Направление</label>
-                <select id="faculty-direction" name="direction" class="form-control">
-                    <option th:each="element: ${directions}"
-                            th:text="${element.getCode()+' '+element.getName()}"
-                            th:value="${element.getId()}"></option>
-                </select>
-        </div>
-        <div class="form-group">
-            <label for="faculty-year">Год</label>
-            <input id="faculty-year" class="form-control" name="year"/>
-        </div>
+    <form action="saveFacultyform" th:action="@{/curator/faculty/new}" method="post">
+            <label for="name">Название</label>
+            <input id="name" class="form-control" name="name"/>
+
+
+            <label for="direction">Направление</label>
+            <select id="direction" name="direction" class="form-control">
+                <option th:each="element: ${directions}"
+                        th:text="${element.getCode()+' '+element.getName()}"
+                        th:value="${element.getId()}"></option>
+            </select>
+
+            <label for="year">Год</label>
+            <input id="year" class="form-control" name="year"/>
+
+
+            <label for="profile">Профиль</label>
+            <input id="profile" class="form-control" name="profile"/>
         <button type="submit" id="btnSaveFaculty">Сохранить</button>
     </form>
 </div>

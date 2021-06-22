@@ -42,11 +42,13 @@ public class CuratorController {
         return "curatorhtml/curatorInfo";
     }
 
+
     @RequestMapping(value = "/faculty", method = RequestMethod.GET)
     public String allFaculty(Model model) {
         model.addAttribute("faculties", facultyRepository.findAll());
         return "curatorhtml/allfaculties";
     }
+
 
     @RequestMapping(value = "/faculty/new", method = RequestMethod.GET)
     public String addFaculty(Model model) {
@@ -59,7 +61,7 @@ public class CuratorController {
 
 
     @RequestMapping(value = "/faculty/new", method = RequestMethod.POST)
-    public String saveFaculty(@ModelAttribute Faculty faculty, Model model) {
+    public String saveFaculty(@ModelAttribute Faculty faculty, Authentication authentication) {
         System.out.println(faculty.toString());
 //        facultyRepository.save(faculty);
         return "redirect:/curator/faculty";
