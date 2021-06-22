@@ -35,14 +35,16 @@
 <!--</div>-->
 <div class="container">
     <div class="row">
-        <h1>Начало практики</h1>
-        <p th:text="${practice.getStarttime()}"></p>
-        <h2>Конец практики</h2>
-        <p th:text="${practice.getEndtime()}"></p>
-        <h2>Куратор практики</h2>
-        <p th:text="${practice.getCurator()}"></p>
-        <h2>Тип практики</h2>
-        <p th:text="${practice.getTypeOfPractice()}"></p>
+        <h3>Начало практики</h3>
+        <p th:text="${#calendars.format(thepractice.getStarttime(), 'dd.MM.yyyy')}"></p>
+<!--        <p th:text="${thepractice.getStarttime()}"></p>-->
+        <h3>Конец практики</h3>
+        <p th:text="${#calendars.format(thepractice.getEndtime(), 'dd.MM.yyyy')}"></p>
+<!--        <p th:text="${thepractice.getEndtime()}"></p>-->
+        <h3>Куратор практики</h3>
+        <p th:text="${thepractice.getCurator().getSurname() + ' ' + thepractice.getCurator().getName() + ' ' + thepractice.getCurator().getPatronymic() + ', ' + thepractice.getCurator().getDegree()}"></p>
+        <h3>Тип практики</h3>
+        <p th:text="${thepractice.getTypeOfPractice().getName()}"></p>
     </div>
 </div>
 </body>

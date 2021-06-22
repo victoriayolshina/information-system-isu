@@ -19,22 +19,26 @@
             <thead>
             <th>Начало практики</th>
             <th>Конец практики</th>
-            <th>Должность</th>
-            <th> </th>
+            <th>Тип практики</th>
+            <th>Куратор</th>
 
             </thead>
             <tbody>
             <tr th:each="practice:${practices}">
-                <td th:text="${practice.getStarttime()}">
+                <td th:text="${#calendars.format(practice.getStarttime(), 'dd.MM.yyyy')}">
+<!--                <td th:text="${practice.getStarttime()}">-->
                 </td>
-                <td th:text="${practice.getEndtime()}">
+                <td th:text="${#calendars.format(practice.getEndtime(), 'dd.MM.yyyy')}">
+<!--                <td th:text="${practice.getEndtime()}">-->
                 </td>
-                <td th:text="${practice.getPost()}">
+                <td th:text="${practice.getTypeOfPractice().getName()}">
                 </td>
-                <td> <button type="button" id="goToTasks" data-toggle="modal" class="btn-default"
-                             th:value="${practice.getId()}" th:onclick="'goToTask(\'' + ${practice.getId()} + '\');'">
-                    <span class="glyphicon glyphicon-pencil"></span> Перейти к дневнику
-                </button>
+                <td th:text="${practice.getCurator().getSurname() + ' ' + practice.getCurator().getName() + ' ' + practice.getCurator().getPatronymic()} ">
+                </td>
+                <td>
+                    <button type="button" id="goToTasks" data-toggle="modal" class="btn-default"
+                            th:value="${practice.getId()}" th:onclick="'goToTask(\'' + ${practice.getId()} + '\');'"> Подробнее
+                    </button>
                 </td>
             </tr>
             </tbody>

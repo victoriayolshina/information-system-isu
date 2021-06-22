@@ -17,7 +17,7 @@
 
         <ul class="nav navbar-nav">
             <li><a sec:authorize-url="/student" th:href="@{/student/practice}">Практики</a></li>
-            <li><a sec:authorize-url="/student" th:href="@{/}">Студент</a></li>
+            <li><a sec:authorize-url="/student" th:href="@{/student/}">Студент</a></li>
 
             <li><a sec:authorize-url="/curator" th:href="@{/curator/}">Куратор</a></li>
             <li><a sec:authorize-url="/curator" th:href="@{/curator/faculty}">Группы</a></li>
@@ -25,7 +25,7 @@
 
             <li><a sec:authorize-url="/deansoffice" th:href="@{/deansoffice/}">Сотрудник деканата</a></li>
             <li><a sec:authorize-url="/deansoffice" th:href="@{/deansoffice/curators}">Кураторы</a></li>
-            <li><a sec:authorize-url="/deansoffice" th:href="@{/deansoffice/faculty}">Задания</a></li>
+            <li><a sec:authorize-url="/deansoffice" th:href="@{/deansoffice/faculty}">Группы</a></li>
             <li><a sec:authorize-url="/deansoffice" th:href="@{/deansoffice/placeofpractice}">Прохождение практики</a></li>
             <li><a sec:authorize-url="/deansoffice" th:href="@{/deansoffice/statistics}">Статистика</a></li>
 

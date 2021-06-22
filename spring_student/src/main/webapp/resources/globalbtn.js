@@ -62,7 +62,7 @@ $(document).ready(function () {
     });
 
     /* Выход из учётной записи */
-    $("#logout").click(function(e){
+    $("#logout").click(function (e) {
         e.preventDefault();
         console.log("elem")
         $("#logout-form").submit();
@@ -75,11 +75,9 @@ function goToTask(id) {
 }
 
 function checkInput(text) {
-
     if (text) {
         $("#clearBtn1").addClass("show");
     } else {
         $("#clearBtn1").removeClass("show");
     }
-
 }

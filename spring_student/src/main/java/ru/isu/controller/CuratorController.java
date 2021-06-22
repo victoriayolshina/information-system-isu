@@ -10,6 +10,7 @@ import ru.isu.model.*;
 import ru.isu.model.Custom.StudentCustomClass;
 import ru.isu.repository.*;
 
+import java.sql.Date;
 import java.util.List;
 
 @Controller
@@ -69,7 +70,6 @@ public class CuratorController {
         if(facultyRepository.existsFacultyById(facultyId).isEmpty()){
             return String.format("redirect:/curator/faculty");
         }
-
         model.addAttribute("faculty", facultyRepository.findFacultyById(facultyId));
         return "curatorhtml/faculty";
     }
@@ -149,13 +149,15 @@ public class CuratorController {
     }
 
     @RequestMapping(value = "/practice", method = RequestMethod.GET)
-    public String getAllPractice(@PathVariable("studentId") int studentId, Model model) {
-        model.addAttribute("practices", practiceRepository.findPracticeByIdStudent(studentId));
+    public String getAllPractice(Model model) {
+        model.addAttribute("practices", practiceRepository.findAll());
+//        model.addAttribute("starttime", practiceRepository.findPracticeByStartTime(practiceId));
+//        model.addAttribute("endtime", practiceRepository.findPracticeByEndTime(practiceId));
         return "curatorhtml/practices";
     }
 
     @RequestMapping(value = "/practice/new", method = RequestMethod.GET)
-    public String addPracticeGet(@ModelAttribute Practice practice, @PathVariable("practiceId") long practiceId, Model model) {
+    public String addPracticeGet(@ModelAttribute Practice practice, Model model) {
         practiceRepository.save(practice);
         return "redirect:/curator/practice/new";
     }
@@ -166,10 +168,11 @@ public class CuratorController {
         return "redirect:/curator/practice/new";
     }
 
-
     @RequestMapping(value = "/practice/{practiceId}", method = RequestMethod.GET)
-    public String getPractice(@PathVariable("practiceId") int studentId, @PathVariable int practiceId, Model model) {
-        model.addAttribute("practice", practiceRepository.findPracticeById(studentId));
+    public String getPractice(@PathVariable int practiceId, Model model) {
+        model.addAttribute("thepractice", practiceRepository.findPracticeById(practiceId));
+//        model.addAttribute("starttime", practiceRepository.findPracticeByStartTime(practiceId));
+//        model.addAttribute("endtime", practiceRepository.findPracticeByEndTime(practiceId));
         return "curatorhtml/practice";
     }
 

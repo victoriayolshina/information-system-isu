@@ -8,7 +8,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
     <script th:src="@{/resources/globalbtn.js}"></script>
-    <link rel="stylesheet" type="text/css" th:href="@{/resourses/textarea.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/resources/textarea.css}">
 </head>
 <!-- Страница информации о пользователе -->
 <body id="body">
@@ -21,9 +21,9 @@
         <p class="inline" th:text="${student.getPatronymic()}"></p>
         <h3>Группа</h3>
         <p class="inline" th:text="${student.getFaculty().getName()}"></p>
-        <p class="inline" th:text="${student.getFaculty().getDirection().getName()}">
         <h3>Направление</h3>
-        </p> <p th:text="${student.getFaculty().getDirection().getCode()}"></p>
+        <p class="inline" th:text="${student.getFaculty().getDirection().getCode()}"></p>
+        <p class="inline" th:text="${student.getFaculty().getDirection().getName()}"></p>
         <h3>Год поступления</h3>
         <p th:text="${student.getFaculty().getYear()}"></p>
         <h3>Имя пользователя</h3>

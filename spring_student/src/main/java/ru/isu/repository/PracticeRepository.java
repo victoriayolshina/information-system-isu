@@ -20,6 +20,12 @@ public interface PracticeRepository extends JpaRepository<Practice, Long> {
     @Query("SELECT p FROM Practice p WHERE p.id= ?1 ")
     Practice findPracticeById(int id);
 
+    @Query("SELECT p FROM Practice p WHERE p.starttime= ?1 ")
+    Practice findPracticeByStartTime(int starttime);
+
+    @Query("SELECT p FROM Practice p WHERE p.endtime= ?1 ")
+    Practice findPracticeByEndTime(int endtime);
+
     @Query("SELECT p.id FROM Practice p WHERE p.student= ?1")
     List<Integer> countPracticeByStudent(Student student);
 
