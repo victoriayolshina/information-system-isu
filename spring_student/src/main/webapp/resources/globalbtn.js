@@ -1,9 +1,9 @@
 $(document).ready(function () {
     var url = "http://localhost:8089/student_manager_war/"
 
-    $("#saveFacultyform").click(function (e) {
+    $("#add-faculty-form").click(function (e) {
         e.preventDefault();
-        $("#btnSaveFaculty").submit();
+        $("#btnsavefaculty").submit();
     });
 
     $("#saveCurator-form").click(function (e) {
@@ -92,6 +92,10 @@ function openTasks() {
 }
 function goToAddInformation(){
     location.href = window.location.href+"information";
+}
+
+function goToStudents(){
+    location.href = window.location.href+"/students";
 }
 
 function  goToPractics(){

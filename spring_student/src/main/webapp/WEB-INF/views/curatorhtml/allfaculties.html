@@ -13,8 +13,8 @@
 <div th:replace="../views/header :: header"></div>
 
 <div class="container">
-    <h2 class="text-danger">Все группы:</h2>
-    <button type="button" onclick="addGroup()"> Добавить группу </button>
+    <h3 class="text-danger">Все группы:</h3>
+    <button class="btn btn-outline-primary" type="button" onclick="addGroup()"> Добавить группу</button>
     <table class="table">
         <table class="table">
             <thead>
@@ -31,8 +31,9 @@
                 <td th:text="${faculty.year}">
                 </td>
                 <td>
-                    <button type="button" id="goToTasks" data-toggle="modal" class="btn-default"
-                            th:value="${faculty.getId()}" th:onclick="'goToTask(\'' + ${faculty.getId()} + '\');'"> Подробнее
+                    <button type="button" id="goToTasks" data-toggle="modal" class="btn btn-outline-primary"
+                            th:value="${faculty.getId()}" th:onclick="'goToTask(\'' + ${faculty.getId()} + '\');'">
+                        Подробнее
                     </button>
                 </td>
             </tr>

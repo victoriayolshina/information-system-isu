@@ -14,7 +14,7 @@
 <div class="container">
     <h2 class="text-danger">Добавление студента</h2>
     <form action="savestudent" th:action="@{/curator/faculty/{facultyId}/students/new(facultyId = ${facultyId})}" method="post" th:object="${student}">
-<!--        <div class="form-group">-->
+        <!--        <div class="form-group">-->
 <!--            <label for="student-surname">Фамилия</label>-->
 <!--            <input id="student-surname" class="form-control"-->
 <!--                   th:field="*{surname}"/>-->
@@ -107,6 +107,7 @@
         <tr>
             <label for="faculty">Группа</label>
             <select id="faculty" name="faculty" class="form-control">
+<!--                поменять на название группы, выводит имена студентов-->
                 <option th:each="element: ${student}"
                         th:text="${element.getName()}"
                         th:value="${element.getId()}"></option>
@@ -121,7 +122,7 @@
             <input id="password" name="password" class="form-control" type="text"/>
         </tr>
         <p>
-            <button type="submit" id="btnsavestudents">Сохранить</button>
+            <button type="submit" class="btn btn-outline-primary" id="btnsavestudents">Сохранить</button>
         </p>
         </thead>
     </form>

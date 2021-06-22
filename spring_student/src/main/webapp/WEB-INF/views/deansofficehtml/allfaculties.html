@@ -30,7 +30,7 @@
                 <td th:text="${faculty.year}">
                 </td>
                 <td>
-                    <button type="button" id="goToTasks" data-toggle="modal" class="btn-default"
+                    <button type="button" id="goToTasks" data-toggle="modal" class="btn btn-outline-primary"
                             th:value="${faculty.getId()}"
                             th:onclick="'goToTask(\'' + ${faculty.getId()} + '\');'">
                         Подробнее

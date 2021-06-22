@@ -107,6 +107,7 @@ public class CuratorController {
     public String setNewStudentByCurator(@PathVariable("facultyId") int facultyId, Model model) {
         Faculty faculty = facultyRepository.findFacultyById(facultyId);
         model.addAttribute("student", studentRepository.findStudentsByFaculty(faculty));
+        model.addAttribute("faculty", faculty);
         return "curatorhtml/addStudent";
     }
 

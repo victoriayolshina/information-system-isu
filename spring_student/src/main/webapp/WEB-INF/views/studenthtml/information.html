@@ -13,24 +13,24 @@
 <div th:replace="../views/header :: header"></div>
 <div class="container">
     <h2 class="text-danger">Добавление дополнительной информации о студенте</h2>
-        <form action="savestudentCase" th:action="@{/student/information}" method="post">
+    <form action="savestudentCase" th:action="@{/student/information}" method="post">
         <div class="form-group">
             <label for="student-surname-case">Фамилия в родительном падеже:</label>
             <input id="student-surname-case"
                    th:value="${studentInform.getSurnameCase()}? ${studentInform.getSurnameCase()} : #{''}"
-                   name="surnameCase"  class="form-control"/>
+                   name="surnameCase" class="form-control"/>
         </div>
         <div class="form-group">
             <label for="student-name-case">Имя в родительном падеже:</label>
             <input id="student-name-case" name="nameCase"
                    th:value="${studentInform.getNameCase()}? ${studentInform.getNameCase()} : #{''}"
-                   class="form-control" />
+                   class="form-control"/>
         </div>
         <div class="form-group">
             <label for="student-patronymic-case">Отчество в родительном падеже:</label>
             <input id="student-patronymic-case"
                    th:value="${studentInform.getPatronymicCase()}? ${studentInform.getPatronymicCase()} : #{''}"
-                    name="patronymicCase" class="form-control"/>
+                   name="patronymicCase" class="form-control"/>
         </div>
         <div class="form-group">
             <label for="student-patronymic-case">Форма обучения</label>
@@ -38,7 +38,7 @@
                    th:value="${studentInform.getFormOfStudy()}? ${studentInform.getFormOfStudy()} : #{''}"
                    name="formOfStudy" class="form-control"/>
         </div>
-        <button class="btn btn-primary" type="submit" id="btnsavestudentCase">Сохранить</button>
+        <button class="btn btn-outline-primary" type="submit" id="btnsavestudentCase">Сохранить</button>
     </form>
 </div>
 </body>

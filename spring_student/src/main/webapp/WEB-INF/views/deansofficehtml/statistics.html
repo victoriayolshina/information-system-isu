@@ -3,6 +3,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=cp1251">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
     <meta name="_csrf" th:content="${_csrf.token}"/>
     <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
@@ -17,7 +18,7 @@
 <div class="container" style="margin:0 auto" align=center>
     <input name="from" id="from" type="date" onChange="setMinDateInStatistics()">
     <input name="to" id="to" type="date">
-    <button onclick="sendRequest()"> Получить </button>
+    <button class="btn btn-outline-primary" onclick="sendRequest()"> Получить </button>
     <figure class="highcharts-figure">
         <div id="container"></div>
     </figure>

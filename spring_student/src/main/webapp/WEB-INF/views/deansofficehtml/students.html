@@ -39,7 +39,7 @@
                 <td th:text="${student.password}">
                 </td>
                 <td>
-                    <button type="button" id="goToTasks" data-toggle="modal" class="btn-default"
+                    <button type="button" id="goToTasks" data-toggle="modal" class="btn btn-outline-primary"
                             th:value="${student.getId()}" th:onclick="'goToTask(\'' + ${student.getId()} + '\');'"> Подробнее
                     </button>
                 </td>

@@ -17,7 +17,7 @@
         <p th:text="${#calendars.format(studentpractice.getStarttime(), 'dd.MM.yyyy')}"></p>
 
         <h3>Конец практики</h3>
-         <p th:text="${#calendars.format(studentpractice.getEndtime(), 'dd.MM.yyyy')}"></p>
+        <p th:text="${#calendars.format(studentpractice.getEndtime(), 'dd.MM.yyyy')}"></p>
 
         <h3>Куратор практики</h3>
         <p th:text="${studentpractice.getCurator().getSurname() + ' ' + studentpractice.getCurator().getName() + ' ' + studentpractice.getCurator().getPatronymic() + ', ' + studentpractice.getCurator().getDegree()}"></p>
@@ -26,8 +26,7 @@
         <p th:text="${studentpractice.getTypeOfPractice().getName()}"></p>
 
         <h3>Переидти к задачам</h3>
-        <button class="btn btn-primary" onclick="openTasks()">Задачи</button>
-
+        <button class="btn btn-outline-primary" onclick="openTasks()">Задачи</button>
     </div>
 </div>
 </body>

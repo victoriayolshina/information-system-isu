@@ -36,7 +36,7 @@
                 <td th:text="${supervisors.getPlaceOfPractice()}">
                 </td>
                 <td>
-                    <button type="button" id="goToTasks" data-toggle="modal" class="btn-default"
+                    <button type="button" id="goToTasks" data-toggle="modal" class="btn btn-outline-primary"
                             th:value="${supervisors.getId()}" th:onclick="'goToTask(\'' + ${supervisors.getId()} + '\');'"> Подробнее
                     </button>
                 </td>

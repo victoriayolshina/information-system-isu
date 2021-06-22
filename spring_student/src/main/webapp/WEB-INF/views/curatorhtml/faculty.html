@@ -20,6 +20,9 @@
         <p class="inline" th:text="${faculty.getDirection().getName()}"></p>
         <h3>Год поступления</h3>
         <p th:text="${faculty.getYear()}"></p>
+        <td>
+            <button class="btn btn-outline-primary" onclick="goToStudents()"> Список студентов</button>
+        </td>
     </div>
 </div>
 </body>

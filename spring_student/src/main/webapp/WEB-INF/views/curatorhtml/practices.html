@@ -36,9 +36,22 @@
                 <td th:text="${practice.getCurator().getSurname() + ' ' + practice.getCurator().getName() + ' ' + practice.getCurator().getPatronymic()} ">
                 </td>
                 <td>
-                    <button type="button" id="goToTasks" data-toggle="modal" class="btn-default"
-                            th:value="${practice.getId()}" th:onclick="'goToTask(\'' + ${practice.getId()} + '\');'"> Подробнее
-                    </button>
+                    <div class="d-grid gap-3">
+                        <button type="button" id="goToTasks" data-toggle="modal" class="btn btn-outline-primary"
+                                th:value="${practice.getId()}"
+                                th:onclick="'goToTask(\'' + ${practice.getId()} + '\');'"> Подробнее
+                        </button>
+                        <button type="button" class="btn btn-outline-primary" id="edit-button"
+                                data-toggle="modal"
+                                th:value="${practice.getId()}" th:onclick="'editTask(\'' + ${practice.getId()} + '\');'">
+                            <span class="glyphicon glyphicon-pencil"></span>
+                        </button>
+                        <button type="button" class="btn btn-outline-primary" id="delete-button"
+                                data-toggle="modal"
+                                th:value="${practice.getId()}" th:onclick="'deleteTask(\'' + ${practice.getId()} + '\');'">
+                            <span class="glyphicon glyphicon-trash"></span>
+                        </button>
+                    </div>
                 </td>
             </tr>
             </tbody>

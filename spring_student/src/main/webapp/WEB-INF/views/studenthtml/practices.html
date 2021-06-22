@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-    <script rel="stylesheet" type="text/css" th:src="@{/resources/globalbtn.js}"></script>
+    <script th:src="@{/resources/globalbtn.js}"></script>
 </head>
 <body>
 <div th:replace="../views/header :: header"></div>
@@ -33,7 +33,7 @@
                 <td th:text="${practice.getCurator().getSurname() + ' ' + practice.getCurator().getName() + ' ' + practice.getCurator().getPatronymic()} ">
                 </td>
                 <td>
-                    <button type="button" id="goToTasks" data-toggle="modal" class="btn btn-primary"
+                    <button type="button" id="goToTasks" data-toggle="modal" class="btn btn-outline-primary"
                             th:value="${practice.getId()}" th:onclick="'goToTask(\'' + ${practice.getId()} + '\');'"> Подробнее
                     </button>
                 </td>
