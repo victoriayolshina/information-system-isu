@@ -22,42 +22,41 @@
             class="btn-default" data-toggle="modal">
         <span class="glyphicon glyphicon-plus"></span> Добавить
     </button>
-    <button  type="button"
-            class="btn-default" data-toggle="modal">
-        <span class="glyphicon glyphicon"></span> Диаграмма Ганта
+    <button type="button" id="getGant"
+            class="btn-default" data-toggle="modal"> Диаграмма Ганта
     </button>
 
     <form action="https://www.overleaf.com/docs" method="post" target="_blank">
             <textarea rows="500" cols="90" name="snip" th:text="${template.toString()}" style="display:none">
 
             </textarea>
-<!--            <input type="hidden" name="snip_uri" type="file" accept=".txt" id="btn1"-->
+        <!--            <input type="hidden" name="snip_uri" type="file" accept=".txt" id="btn1"-->
 
-<!--                   value=""><br>-->
-            <input type="submit" value="Сгенерировать отчёт">
+        <!--                   value=""><br>-->
+        <input type="submit" value="Сгенерировать отчёт">
     </form>
 
 
-<!--    <form action="https://www.overleaf.com/docs" method="post" target="_blank">-->
-<!--<textarea rows="8" cols="60" name="snip">-->
+    <!--    <form action="https://www.overleaf.com/docs" method="post" target="_blank">-->
+    <!--<textarea rows="8" cols="60" name="snip">-->
 
-<!--</textarea>-->
-<!--        <input type="submit" value="Open in Overleaf">-->
-<!--    </form>-->
+    <!--</textarea>-->
+    <!--        <input type="submit" value="Open in Overleaf">-->
+    <!--    </form>-->
 
-<!--</textarea>-->
-        <!--        <button id="button" type="button"-->
-        <!--                class="btn-default" data-toggle="modal">-->
-        <!--            <span class="glyphicon glyphicon"></span> Сгенерировать отчёт-->
-        <!--        </button>-->
-<!--        <input type="submit" value="Open in Overleaf">-->
-<!--    </form>-->
+    <!--</textarea>-->
+    <!--        <button id="button" type="button"-->
+    <!--                class="btn-default" data-toggle="modal">-->
+    <!--            <span class="glyphicon glyphicon"></span> Сгенерировать отчёт-->
+    <!--        </button>-->
+    <!--        <input type="submit" value="Open in Overleaf">-->
+    <!--    </form>-->
 
-<!--    <div class="text-container">-->
-<!--        <input type="submit" id="add-task-btn"  value="Добавить">-->
-<!--        <span class="glyphicon glyphicon-plus"></span> -->
+    <!--    <div class="text-container">-->
+    <!--        <input type="submit" id="add-task-btn"  value="Добавить">-->
+    <!--        <span class="glyphicon glyphicon-plus"></span> -->
 
-<!--    </div>-->
+    <!--    </div>-->
 
     <h2 class="text-danger"></h2>
     <table class="table">

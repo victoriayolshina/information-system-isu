@@ -29,6 +29,12 @@
                 </td>
                 <td th:text="${placeofpractice.getLocation()}">
                 </td>
+                <td>
+                    <button type="button" id="goToTasks" data-toggle="modal" class="btn-default"
+                            th:value="${placeofpractice.getId()}"
+                            th:onclick="'goToTask(\'' + ${placeofpractice.getId()} + '\');'"> Подробнее
+                    </button>
+                </td>
             </tr>
             </tbody>
         </table>

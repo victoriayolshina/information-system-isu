@@ -14,9 +14,13 @@
 <div class="container">
     <div class="row">
         <h3>Начало практики</h3>
+        <p th:text="${#calendars.format(studentractice.get), 'dd.MM.yyyy')}"></p>
+        <!--        <p th:text="${thepractice.getStarttime()}"></p>-->
         <p th:text="${#calendars.format(studentpractice.getStarttime(), 'dd.MM.yyyy')}"></p>
 
         <h3>Конец практики</h3>
+        <p th:text="${#calendars.format(studentractice.getEndtime(), 'dd.MM.yyyy')}"></p>
+        <!--        <p th:text="${thepractice.getEndtime()}"></p>-->
         <p th:text="${#calendars.format(studentpractice.getEndtime(), 'dd.MM.yyyy')}"></p>
 
         <h3>Куратор практики</h3>

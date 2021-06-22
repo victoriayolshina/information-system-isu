@@ -6,7 +6,7 @@ window.onload = function () {
     setMinDateInDateInput()
     var token = $("meta[name='_csrf']").attr("content");
     var header = $("meta[name='_csrf_header']").attr("content");
-    $(document).ajaxSend(function(e, xhr, options) {
+    $(document).ajaxSend(function (e, xhr, options) {
         xhr.setRequestHeader(header, token);
     });
 }
@@ -58,10 +58,9 @@ function setMinDateInDateInput() {
 
 function editTask(taskId) {
     var loc = window.location.pathname
-    if(loc[loc.length-1]=="/"){
+    if (loc[loc.length - 1] == "/") {
         location.href = window.location.pathname + "" + taskId
-    }
-    else{
+    } else {
         location.href = window.location.pathname + "/" + taskId
     }
 }

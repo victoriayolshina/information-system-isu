@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1
--- Время создания: Июн 22 2021 г., 14:07
+-- Время создания: Июн 22 2021 г., 16:54
 -- Версия сервера: 10.4.18-MariaDB
--- Версия PHP: 7.3.28
+-- Версия PHP: 8.0.3
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -42,7 +42,7 @@ INSERT INTO `auto_user` (`id`, `username`, `role`, `password`) VALUES
 (1, 'nataliasemicheva', 'ROLE_DEANSOFFICE', 'pass'),
 (2, 'leonidriabets', 'ROLE_CURATOR', 'pass'),
 (3, 'victoriayolshina', 'ROLE_STUDENT', 'pass'),
-(4, 'markkislyannikov', 'ROLE_ADMIN', 'test');
+(4, 'markkislyannikov', 'ROLE_ADMIN', 'pass');
 
 -- --------------------------------------------------------
 
@@ -125,16 +125,17 @@ CREATE TABLE `faculty` (
   `id` int(11) NOT NULL,
   `name` varchar(225) NOT NULL,
   `direction` int(225) NOT NULL,
-  `year` int(4) NOT NULL
+  `year` int(4) NOT NULL,
+  `profile` varchar(225) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `faculty`
 --
 
-INSERT INTO `faculty` (`id`, `name`, `direction`, `year`) VALUES
-(1, '2461', 1, 2017),
-(2, '2471', 2, 2018);
+INSERT INTO `faculty` (`id`, `name`, `direction`, `year`, `profile`) VALUES
+(1, '2461', 1, 2017, 'Информационная сфера '),
+(2, '2471', 2, 2018, 'Информационная сфера ');
 
 -- --------------------------------------------------------
 
@@ -174,20 +175,16 @@ CREATE TABLE `practice` (
   `typeofpractice` int(11) NOT NULL,
   `supervisor` int(11) NOT NULL,
   `curator` int(11) NOT NULL,
-  `mark` varchar(25) NOT NULL,
-  `curatorByDepartment` varchar(225) NOT NULL,
-  `сuratorEmail` varchar(225) NOT NULL,
-  `formOfStudy` varchar(225) NOT NULL,
-  `profile` varchar(225) NOT NULL
+  `mark` varchar(25) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `practice`
 --
 
-INSERT INTO `practice` (`id`, `student`, `starttime`, `endtime`, `post`, `placeofpractice`, `typeofpractice`, `supervisor`, `curator`, `mark`, `curatorByDepartment`, `сuratorEmail`, `formOfStudy`, `profile`) VALUES
-(1, 1, '2021-02-07', '2021-03-20', 'практикант', 1, 3, 1, 1, '5', 'Зинченко Анна Сергеевна', 'azinchenko@gmail.com', 'очная', ' Информационная сфера'),
-(2, 2, '2021-02-25', '2021-03-15', 'программист', 3, 3, 3, 2, '5', 'Казимиров Алексей Сергеевич', 'kazimirov@gamil.com', 'очная', ' Информационная сфера');
+INSERT INTO `practice` (`id`, `student`, `starttime`, `endtime`, `post`, `placeofpractice`, `typeofpractice`, `supervisor`, `curator`, `mark`) VALUES
+(1, 1, '2021-02-07', '2021-03-20', 'практикант', 1, 3, 1, 1, '5'),
+(2, 2, '2021-02-25', '2021-03-15', 'программист', 3, 3, 3, 2, '5');
 
 -- --------------------------------------------------------
 
@@ -205,16 +202,17 @@ CREATE TABLE `student` (
   `password` varchar(20) NOT NULL,
   `surnameCase` varchar(225) NOT NULL,
   `nameCase` varchar(225) NOT NULL,
-  `patronymicCase` varchar(225) NOT NULL
+  `patronymicCase` varchar(225) NOT NULL,
+  `formOfStudy` varchar(225) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `student`
 --
 
-INSERT INTO `student` (`id`, `surname`, `name`, `patronymic`, `faculty`, `username`, `password`, `surnameCase`, `nameCase`, `patronymicCase`) VALUES
-(1, 'Ёлшина', 'Виктория', 'Евгеньевна', 1, 'victoriayolshina', 'pass', 'Ёлшиной', 'Виктории', 'Евгеньевны'),
-(2, 'Кислянников ', 'Марк', 'Александрович', 2, 'markkislyannikov', 'pass', 'Кислянникова', 'Марка', 'Александровича');
+INSERT INTO `student` (`id`, `surname`, `name`, `patronymic`, `faculty`, `username`, `password`, `surnameCase`, `nameCase`, `patronymicCase`, `formOfStudy`) VALUES
+(1, 'Ёлшина', 'Виктория', 'Евгеньевна', 1, 'victoriayolshina', 'pass', 'Ёлшиной', 'Виктории', 'Евгеньевны', 'очная'),
+(2, 'Кислянников ', 'Марк', 'Александрович', 2, 'markkislyannikov', 'pass', 'Кислянникова', 'Марка', 'Александровича', 'заочная');
 
 -- --------------------------------------------------------
 
@@ -260,15 +258,14 @@ CREATE TABLE `tasks` (
 --
 
 INSERT INTO `tasks` (`id`, `datastart`, `dataend`, `task`, `description`, `practice`) VALUES
-(29, '2021-02-15', '2021-02-16', 'Знакомство с проектной документацией и устройством компании.', '', 1),
-(33, '2021-02-17', '2021-02-18', 'Инструктаж по технике безопасности. Знакомство с организацией.', 'По инструкции ручками заполнили дневник.', 1),
-(34, '2021-02-19', '2021-02-23', 'Изучение скриптов, имеющихся у компании.', 'JAVA', 1),
-(36, '2021-02-24', '2021-03-01', 'Написание методов визуализации системного времени и среднего значения загрузки системы за заданный период времени.', '', 1),
 (39, '2021-02-25', '2021-03-01', 'Тестирование методов.', 'Тестирование методов.', 2),
-(40, '2021-03-02', '2021-03-04', 'Рефакторинг написанных методов для работы на\r\nсервере.', 'Рефакторинг написанных методов для работы на\r\nсервере.', 2),
 (41, '2021-03-08', '2021-03-12', 'Изучение преобразования данных, получаемых из\r\nсистемы мониторинга формата JSON, в необходимый\r\nвид.\r\n', 'Изучение преобразования данных, получаемых из\r\nсистемы мониторинга формата JSON, в необходимый\r\nвид.', 2),
 (42, '2021-03-14', '2021-03-15', 'Правки в методах для корректного отображения\r\nданных.\r\n', 'Правки в методах для корректного отображения\r\nданных.\r\n', 2),
-(44, '2021-02-25', '2021-02-26', 'ÐÐ½Ð¸Ð¼Ðµ', 'ÐÐ½Ð¸Ð¼Ðµ', 2);
+(51, '2021-02-07', '2021-02-07', 'Тестирование методов.', 'Ð¢ÐµÑÑÐ¸ÑÐ¾Ð²Ð°Ð½Ð¸Ðµ Ð¼ÐµÑÐ¾Ð´Ð¾Ð².', 1),
+(52, '2021-02-15', '2021-02-16', 'Инструктаж по технике безопасности. Знакомство с организацией.', '', 1),
+(53, '2021-02-08', '2021-03-10', 'Написание методов визуализации системного времени и среднего значения загрузки системы за заданный период времени.', 'Ð¢ÐµÑÑÐ¸ÑÐ¾Ð²Ð°Ð½Ð¸Ðµ Ð¼ÐµÑÐ¾Ð´Ð¾Ð².', 1),
+(54, '2021-02-17', '2021-02-18', 'Знакомство с проектной документацией и устройством компании.', 'ÐÐ¾ Ð¸Ð½ÑÑÑÑÐºÑÐ¸Ð¸ ÑÑÑÐºÐ°Ð¼Ð¸ Ð·Ð°Ð¿Ð¾Ð»Ð½Ð¸Ð»Ð¸ Ð´Ð½ÐµÐ²Ð½Ð¸Ðº.', 1),
+(55, '2021-02-07', '2021-02-07', 'Написание методов визуализации системного времени и среднего значения загрузки системы за заданный период времени.', '', 1);
 
 -- --------------------------------------------------------
 
@@ -289,11 +286,7 @@ INSERT INTO `typeofdirection` (`id`, `name`) VALUES
 (1, '1С'),
 (2, 'Back-end'),
 (3, 'Front-end'),
-(4, 'Data science'),
-(5, 'Machine learning'),
-(6, 'AI'),
-(7, 'Game Development'),
-(8, 'Mobile ');
+(4, 'Data science');
 
 -- --------------------------------------------------------
 
@@ -454,13 +447,13 @@ ALTER TABLE `supervisior`
 -- AUTO_INCREMENT для таблицы `tasks`
 --
 ALTER TABLE `tasks`
-  MODIFY `id` bigint(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
+  MODIFY `id` bigint(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=64;
 
 --
 -- AUTO_INCREMENT для таблицы `typeofdirection`
 --
 ALTER TABLE `typeofdirection`
-  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT для таблицы `typeofpractice`

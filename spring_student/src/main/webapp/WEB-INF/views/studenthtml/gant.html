@@ -1,26 +1,26 @@
 <!DOCTYPE html>
-<html  lang="ru" xmlns:th="http://www.thymeleaf.org">
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=cp1251">
     <meta name="_csrf" th:content="${_csrf.token}"/>
     <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
-<!--    <title>Title</title>-->
-<!--    <script src="../../resourses/gant/js/jquery.fn.gantt.min.js"></script>-->
-<!--    <script src="../../resourses/gant/js/jquery.min.js"></script>-->
-<!--    <script src="../../resourses/gant/js/gantfill.js"></script>-->
-<!--    <link href="../../resourses/gant/css/style.css" type="text/css" rel="stylesheet">-->
-<!--    <link href="../../resourses/gant/css/bootstrap.min.css" type="text/css" rel="stylesheet">-->
-<!--    <script src="../../resourses/gant/js/bootstrap.min.js"></script>-->
+    <!--    <title>Title</title>-->
+    <!--    <script src="../../resourses/gant/js/jquery.fn.gantt.min.js"></script>-->
+    <!--    <script src="../../resourses/gant/js/jquery.min.js"></script>-->
+    <!--    <script src="../../resourses/gant/js/gantfill.js"></script>-->
+    <!--    <link href="../../resourses/gant/css/style.css" type="text/css" rel="stylesheet">-->
+    <!--    <link href="../../resourses/gant/css/bootstrap.min.css" type="text/css" rel="stylesheet">-->
+    <!--    <script src="../../resourses/gant/js/bootstrap.min.js"></script>-->
     <script th:src="@{/resources/jquery.min.js}"></script>
     <script th:src="@{/resources/jquery.fn.gantt.min.js}"></script>
     <script th:src="@{/resources/gantfill.js}"></script>
     <script th:src="@{/resources/bootstrap.min.js}"></script>
-    <link rel="stylesheet" type="text/css" th:href="@{/resourses/style.css}">
-    <link rel="stylesheet" type="text/css" th:href="@{/resourses/bootstrap.min.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/resources/style.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/resources/bootstrap.min.css}">
 </head>
 
 <body>
-    <div class="gantt"></div>
+<div class="gantt"></div>
 </body>
 </html>

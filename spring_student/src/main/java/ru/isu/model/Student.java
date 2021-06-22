@@ -44,6 +44,8 @@ public class Student {
     @JoinColumn(name = "faculty")
     private Faculty faculty;
 
+    private String formOfStudy;
+
     @Override
     public String toString() {
         return "Student{" +

@@ -23,5 +23,7 @@ public class Faculty {
     private Direction direction;
 
     private Integer year;
+
+    private String profile;
 }
 

@@ -17,9 +17,9 @@
     <table class="table">
         <table class="table">
             <thead>
-            <h3>Название</h3>
-            <h3>Направление</h3>
-            <h3>Год поступления</h3>
+            <th>Название</th>
+            <th>Направление</th>
+            <th>Год поступления</th>
             </thead>
             <tbody>
             <tr th:each="faculty:${deansofficefaculties}">
@@ -31,7 +31,9 @@
                 </td>
                 <td>
                     <button type="button" id="goToTasks" data-toggle="modal" class="btn-default"
-                            th:value="${faculty.getId()}" th:onclick="'goToTask(\'' + ${faculty.getId()} + '\');'"> Подробнее
+                            th:value="${faculty.getId()}"
+                            th:onclick="'goToTask(\'' + ${faculty.getId()} + '\');'">
+                        Подробнее
                     </button>
                 </td>
             </tr>

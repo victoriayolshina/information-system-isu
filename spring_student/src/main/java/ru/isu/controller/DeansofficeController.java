@@ -107,9 +107,9 @@ public class DeansofficeController {
     }
 
     @RequestMapping(value = "/placeofpractice/{placeofpracticeId}", method = RequestMethod.GET)
-    public String getPlaceOfPractice(@PathVariable("placesofpracticeId") int placeofpracticeId, Model model) {
-        model.addAttribute("placesofpractice", placeOfPractice.findPlaceOfPracticeById(placeofpracticeId));
-        return "deansofficehtml/placeofpracticeInfo";
+    public String getPlaceOfPractice(@PathVariable("placeofpracticeId") int placeofpracticeId, Model model) {
+        model.addAttribute("placeofpractice", placeOfPractice.findPlaceOfPracticeById(placeofpracticeId));
+        return "deansofficehtml/placeofpractice";
     }
 
     @RequestMapping(value = "/placeofpractice/{placeofpracticeId}/supervisor", method = RequestMethod.GET)
