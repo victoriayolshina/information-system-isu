@@ -11,8 +11,8 @@ import java.util.List;
 
 @Repository
 public interface PracticeRepository extends JpaRepository<Practice, Long> {
-    @Query("SELECT p FROM Practice p WHERE p.student= ?1")
-    List<Practice> findPracticeByIdStudent(int student);
+//    @Query("SELECT p FROM Practice p WHERE p.student= ?1")
+//    List<Practice> findPracticeByIdStudent(int student);
 
     @Query("SELECT p FROM Practice p WHERE p.student= ?1")
     List<Practice> findPracticeByStudent(Student student);

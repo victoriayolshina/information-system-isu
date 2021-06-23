@@ -8,7 +8,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
     <script th:src="@{/resources/globalbtn.js}"></script>
 </head>
-<!-- Страница информации о пользователе -->
+
 <body>
 <div th:replace="../views/header :: header"></div>
 <div class="container">
@@ -19,6 +19,9 @@
         <p th:text="${placeofpractice.getTypeOfDirection().getName()}"></p>
         <h3>Местоположение</h3>
         <p th:text="${placeofpractice.getLocation()}"></p>
+        <td>
+            <button class="btn btn-outline-primary" onclick="goToSupervisors()"> Список кураторов</button>
+        </td>
     </div>
 </div>
 </body>

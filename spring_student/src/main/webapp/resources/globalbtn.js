@@ -88,21 +88,26 @@ function checkInput(text) {
 }
 
 function openTasks() {
-    location.href = window.location.href+"/tasks";
-}
-function goToAddInformation(){
-    location.href = window.location.href+"information";
+    location.href = window.location.href + "/tasks";
 }
 
-function goToStudents(){
-    location.href = window.location.href+"/students";
+function goToAddInformation() {
+    location.href = window.location.href + "information";
 }
 
-function  goToPractics(){
-    location.href = window.location.href+"practice";
+function goToStudents() {
+    location.href = window.location.href + "/students";
 }
 
-function addGroup(){
+function goToSupervisors() {
+    location.href = window.location.href + "/supervisor";
+}
+
+function goToPractics() {
+    location.href = window.location.href + "practice";
+}
+
+function addGroup() {
     location.href = getPath(window.location.href, "new");
 }
 

@@ -10,6 +10,7 @@ import ru.isu.model.Custom.Categories;
 import ru.isu.model.Custom.Statistics;
 import ru.isu.model.Custom.StatisticsCategories;
 import ru.isu.model.Custom.TwoDates;
+import ru.isu.model.PlaceOfPractice;
 import ru.isu.model.Practice;
 import ru.isu.model.TypeOfDirection;
 import ru.isu.repository.*;
@@ -44,6 +45,10 @@ public class DeansofficeController {
     TypeOfDirectionRepository typeOfDirectionRepository;
 
     @Autowired
+    PlaceOfPracticeRepositoty placeOfPracticeRepositoty;
+
+
+    @Autowired
     TaskRepository taskRepository;
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
@@ -69,6 +74,7 @@ public class DeansofficeController {
 
     @RequestMapping(value = "/curators/new", method = RequestMethod.GET)
     public String addCurator(Model model) {
+
         return "deansofficehtml/addCurator";
     }
 
@@ -114,8 +120,9 @@ public class DeansofficeController {
     }
 
     @RequestMapping(value = "/placeofpractice/{placeofpracticeId}/supervisor", method = RequestMethod.GET)
-    public String getAllSupervisor(@PathVariable("supervisor") int placeofpracticeId, Model model) {
-        model.addAttribute("allsupervisors", supervisorRepository.findSupervisorsByPlaceOfPracticeId(placeofpracticeId));
+    public String getAllSupervisor(@PathVariable("placeofpracticeId") int placeofpracticeId, Model model) {
+        PlaceOfPractice placeOfPractice = placeOfPracticeRepositoty.findPlaceOfPracticeById(placeofpracticeId);
+        model.addAttribute("deansofficeallsupervisors", supervisorRepository.findSupervisorsByPlaceOfPractice(placeOfPractice));
         return "deansofficehtml/allsupervisors";
     }
 

@@ -15,6 +15,9 @@
 <div th:replace="../views/header :: header"></div>
 <div class="container">
     <div class="row">
+        <button class="btn btn-outline-primary" onclick="goToAddInformation()">Добавить дополнительную информацию
+        </button>
+        <button class="btn btn-outline-primary" onclick="goToPractics()">Переидти к практикам</button>
         <h3>ФИО</h3>
         <p class="inline" th:text="${student.getSurname()}"></p>
         <p class="inline" th:text="${student.getName()}"></p>
@@ -29,8 +32,6 @@
         <h3>Имя пользователя</h3>
         <p th:text="${student.getUsername()}"></p>
     </div>
-    <button class="btn btn-outline-primary" onclick="goToAddInformation()">Добавить дополнительную информацию</button>
-    <button class="btn btn-outline-primary" onclick="goToPractics()">Переидти к практикам</button>
 </div>
 </body>
 </html>

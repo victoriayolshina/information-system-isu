@@ -61,4 +61,6 @@ public class Practice {
     private Curator curator;
 
     private String mark;
+
+
 }

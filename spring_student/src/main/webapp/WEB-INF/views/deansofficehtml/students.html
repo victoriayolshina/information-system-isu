@@ -22,7 +22,6 @@
             <th>Отчество</th>
             <th>Группа</th>
             <th>Имя пользователя</th>
-            <th>Пароль</th>
             </thead>
             <tbody>
             <tr th:each="student:${deansofficestudents}">
@@ -35,8 +34,6 @@
                 <td th:text="${student.faculty.name}">
                 </td>
                 <td th:text="${student.username}">
-                </td>
-                <td th:text="${student.password}">
                 </td>
                 <td>
                     <button type="button" id="goToTasks" data-toggle="modal" class="btn btn-outline-primary"

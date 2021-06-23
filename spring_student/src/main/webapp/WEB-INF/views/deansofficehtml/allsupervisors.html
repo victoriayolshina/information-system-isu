@@ -8,10 +8,9 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
     <script th:src="@{/resources/globalbtn.js}"></script>
 </head>
+
 <body>
-
 <div th:replace="../views/header :: header"></div>
-
 <div class="container">
     <h2 class="text-danger">Все кураторы:</h2>
     <table class="table">
@@ -24,7 +23,7 @@
             <th>Компания</th>
             </thead>
             <tbody>
-            <tr th:each="supervisors:${allsupervisors}">
+            <tr th:each="supervisors:${deansofficeallsupervisors}">
                 <td th:text="${supervisors.getSurname()}">
                 </td>
                 <td th:text="${supervisors.getName()}">
@@ -33,11 +32,13 @@
                 </td>
                 <td th:text="${supervisors.getPost()}">
                 </td>
-                <td th:text="${supervisors.getPlaceOfPractice()}">
+                <td th:text="${supervisors.getPlaceOfPractice().getName()}">
                 </td>
                 <td>
                     <button type="button" id="goToTasks" data-toggle="modal" class="btn btn-outline-primary"
-                            th:value="${supervisors.getId()}" th:onclick="'goToTask(\'' + ${supervisors.getId()} + '\');'"> Подробнее
+                            th:value="${supervisors.getId()}"
+                            th:onclick="'goToTask(\'' + ${supervisors.getId()} + '\');'">
+                        Подробнее
                     </button>
                 </td>
             </tr>

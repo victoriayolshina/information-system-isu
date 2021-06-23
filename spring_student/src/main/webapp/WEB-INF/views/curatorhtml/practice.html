@@ -22,6 +22,9 @@
         <p th:text="${thepractice.getCurator().getSurname() + ' ' + thepractice.getCurator().getName() + ' ' + thepractice.getCurator().getPatronymic() + ', ' + thepractice.getCurator().getDegree()}"></p>
         <h3>Тип практики</h3>
         <p th:text="${thepractice.getTypeOfPractice().getName()}"></p>
+        <td>
+            <button class="btn btn-outline-primary" onclick="goToStudents()"> Список студентов</button>
+        </td>
     </div>
 </div>
 </body>

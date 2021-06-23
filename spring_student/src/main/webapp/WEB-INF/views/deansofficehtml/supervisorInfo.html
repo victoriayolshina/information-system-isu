@@ -15,13 +15,13 @@
 <div class="container">
     <div class="row">
         <h3>ФИО</h3>
-        <p th:text="${supervisor.getSurname()}"></p>
-        <p th:text="${supervisor.getName()}"></p>
-        <p th:text="${supervisor.getPatronymic()}"></p>
+        <p class="inline" th:text="${supervisor.getSurname()}"></p>
+        <p class="inline" th:text="${supervisor.getName()}"></p>
+        <p class="inline" th:text="${supervisor.getPatronymic()}"></p>
         <h3>Должность</h3>
         <p th:text="${supervisor.getPost()}"></p>
         <h3>Компания</h3>
-        <p th:text="${supervisor.getPlaceOfPractice}"></p>
+        <p th:text="${supervisor.getPlaceOfPractice().getName()}"></p>
     </div>
 </div>
 </body>
