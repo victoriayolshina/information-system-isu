@@ -1,10 +1,6 @@
 $(document).ready(function () {
     var url = "http://localhost:8089/student_manager_war/"
 
-    $("#add-faculty-form").click(function (e) {
-        e.preventDefault();
-        $("#btnsavefaculty").submit();
-    });
 
     $("#saveCurator-form").click(function (e) {
         e.preventDefault();
@@ -72,7 +68,15 @@ $(document).ready(function () {
         console.log("elem")
         $("#logout-form").submit();
     });
+
+    $("#add-faculty-formbtn").click(function (e) {
+        e.preventDefault();
+        $("#add-faculty-form").submit();
+    });
 });
+
+
+
 
 function goToTask(id) {
     var str = "/" + id

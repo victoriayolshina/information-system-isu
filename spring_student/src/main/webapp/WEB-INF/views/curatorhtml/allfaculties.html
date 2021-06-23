@@ -2,11 +2,16 @@
 <html lang="ru" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=cp1251">
+    <meta name="_csrf" th:content="${_csrf.token}"/>
+    <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
     <title>Все группы</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
     <script th:src="@{/resources/globalbtn.js}"></script>
+    <script th:src="@{/resources/curator.js}"></script>
+
+
 </head>
 <body>
 
@@ -22,8 +27,8 @@
             <th>Направление</th>
             <th>Год поступления</th>
             </thead>
-            <tbody>
-            <tr th:each="faculty:${faculties}">
+            <tbody id="tableBodyFaculties">
+            <tr th:each="faculty:${faculties}" th:id="'allFaculties'+${faculty.getId()}">
                 <td th:text="${faculty.name}">
                 </td>
                 <td th:text="${faculty.direction.name}">
@@ -31,9 +36,21 @@
                 <td th:text="${faculty.year}">
                 </td>
                 <td>
-                    <button type="button" id="goToTasks" data-toggle="modal" class="btn btn-outline-primary"
+                    <button type="button" id="goToFaculty" data-toggle="modal" class="btn btn-outline-primary"
                             th:value="${faculty.getId()}" th:onclick="'goToTask(\'' + ${faculty.getId()} + '\');'">
-                        Подробнее
+                        Список студентов
+                    </button>
+                </td>
+                <td>
+                    <button type="button" id="editFaculty" data-toggle="modal" class="btn btn-outline-primary"
+                            th:value="${faculty.getId()}" th:onclick="'goToEditFaculty(\'' + ${faculty.getId()} + '\');'">
+                        Редактирование
+                    </button>
+                </td>
+                <td>
+                    <button type="button" id="deleteFaculty" data-toggle="modal" class="btn btn-outline-primary"
+                            th:value="${faculty.getId()}" th:onclick="'deleteFaculty(\'' + ${faculty.getId()} + '\');'">
+                        Удаление
                     </button>
                 </td>
             </tr>

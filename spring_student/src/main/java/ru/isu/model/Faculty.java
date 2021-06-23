@@ -1,8 +1,6 @@
 package ru.isu.model;
 
-import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 
@@ -11,6 +9,8 @@ import javax.persistence.*;
 @Getter
 @Setter
 @Table(name = "faculty")
+@AllArgsConstructor
+@NoArgsConstructor
 public class Faculty {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

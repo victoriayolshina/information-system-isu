@@ -2,6 +2,8 @@
 <html lang="ru" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=cp1251">
+    <meta name="_csrf" th:content="${_csrf.token}"/>
+    <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
     <title>Все практики</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
@@ -13,15 +15,28 @@
 <div th:replace="../views/header :: header"></div>
 <div class="container">
     <div class="row">
-        <h3>Название</h3>
-        <p th:text="${faculty.getName()}"></p>
-        <h3>Направление</h3>
-        <p class="inline" th:text="${faculty.getDirection().getCode()}"></p>
-        <p class="inline" th:text="${faculty.getDirection().getName()}"></p>
-        <h3>Год поступления</h3>
-        <p th:text="${faculty.getYear()}"></p>
         <td>
-            <button class="btn btn-outline-primary" onclick="goToStudents()"> Список студентов</button>
+            <label>Название</label>
+            <input id="name" th:value="${faculty.getName()}"/>
+        </td>
+        <td>
+            <label for="direction">Направление</label>
+            <select id="direction" name="direction" class="form-control">
+                <option th:each="element: ${directions}"
+                        th:text="${element.getCode()+' '+element.getName()}"
+                        th:value="${element.getId()}"></option>
+            </select>
+        </td>
+        <td>
+            <label>Год поступления</label>
+            <input id="year" th:value="${faculty.getYear()}"/>
+        </td>
+        <td>
+            <label></label>
+            <input id="profile" th:value="${faculty.getProfile()}"/>
+        </td>
+        <td>
+            <button class="btn btn-outline-primary" onclick="addFaculty()"> Список студентов</button>
         </td>
     </div>
 </div>
