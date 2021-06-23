@@ -6,6 +6,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import ru.isu.model.Curator;
 import ru.isu.model.Custom.Categories;
 import ru.isu.model.Custom.Statistics;
 import ru.isu.model.Custom.StatisticsCategories;
@@ -74,12 +75,15 @@ public class DeansofficeController {
 
     @RequestMapping(value = "/curators/new", method = RequestMethod.GET)
     public String addCurator(Model model) {
-
+        Curator curator = new Curator();
+        model.addAttribute("curator", curator);
         return "deansofficehtml/addCurator";
     }
 
     @RequestMapping(value = "/curators/new", method = RequestMethod.POST)
     public String saveCurator(Model model) {
+        Curator curator = new Curator();
+        curatorRepository.save(curator);
         return "redirect:/deansofficehtml/curators";
     }
 

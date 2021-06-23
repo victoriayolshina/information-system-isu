@@ -135,7 +135,7 @@ public class CuratorController {
         student.setPatronymic(studentCustomClassStudent.getPatronymic());
         student.setName(studentCustomClassStudent.getName());
         student.setFaculty(facultyRepository.findFacultyById(studentCustomClassStudent.getFaculty()));
-        System.out.println(student);
+//        System.out.println(student);
         studentRepository.save(student);
         return String.format("redirect:/curator/faculty/{%s}/students/", facultyId);
     }

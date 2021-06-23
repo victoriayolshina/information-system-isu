@@ -108,7 +108,7 @@
             <label for="faculty">Группа</label>
             <select id="faculty" name="faculty" class="form-control">
 <!--                поменять на название группы, выводит имена студентов-->
-                <option th:each="element: ${student}"
+                <option th:each="element: ${faculty}"
                         th:text="${element.getName()}"
                         th:value="${element.getId()}"></option>
             </select>

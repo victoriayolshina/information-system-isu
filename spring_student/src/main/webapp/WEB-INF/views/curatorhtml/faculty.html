@@ -9,36 +9,39 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
     <script th:src="@{/resources/globalbtn.js}"></script>
+    <script th:src="@{/resources/task.js}"></script>
+    <link rel="stylesheet" type="text/css"  th:src="@{/resources/style.css}">
 </head>
 <body>
 
 <div th:replace="../views/header :: header"></div>
 <div class="container">
-    <div class="row">
+<!--    <div class="row">-->
+    <h3 class="text-danger">Редактирование группы</h3>
         <td>
-            <label>Название</label>
-            <input id="name" th:value="${faculty.getName()}"/>
+            <label for="name">Название</label>
+            <input id="name" class="form-control" name="name" th:value="${faculty.getName()}"/>
+        </td>
+    <td>
+        <label for="direction">Направление</label>
+        <select id="direction" name="direction" class="form-control">
+            <option th:each="element: ${directions}"
+                    th:text="${element.getCode()+' '+element.getName()}"
+                    th:value="${element.getId()}"></option>
+        </select>
+    </td>
+        <td>
+            <label for="year">Год</label>
+            <input id="year" class="form-control" name="year" th:value="${faculty.getYear()}"/>
         </td>
         <td>
-            <label for="direction">Направление</label>
-            <select id="direction" name="direction" class="form-control">
-                <option th:each="element: ${directions}"
-                        th:text="${element.getCode()+' '+element.getName()}"
-                        th:value="${element.getId()}"></option>
-            </select>
+            <label for="profile">Профиль</label>
+            <input id="profile" class="form-control" name="profile" th:value="${faculty.getProfile()}"/>
         </td>
         <td>
-            <label>Год поступления</label>
-            <input id="year" th:value="${faculty.getYear()}"/>
+            <button id="add-faculty-formbtn" class="btn btn-outline-primary" onclick="addFaculty()">Сохранить</button>
         </td>
-        <td>
-            <label></label>
-            <input id="profile" th:value="${faculty.getProfile()}"/>
-        </td>
-        <td>
-            <button class="btn btn-outline-primary" onclick="addFaculty()"> Список студентов</button>
-        </td>
-    </div>
+
 </div>
 </body>
 </html>

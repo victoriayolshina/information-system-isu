@@ -20,6 +20,5 @@ public class CustomUserDetailsService implements UserDetailsService {
         AutoUser user = repo.findAutoUserByUsername(username);
         return user;
     }
-
 }
 

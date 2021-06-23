@@ -30,12 +30,4 @@ public interface StudentRepository extends JpaRepository<Student, Long> {
 
     @Query("SELECT s FROM Student s WHERE s.id= ?1")
     List<Student> findStudentsByFacultyId(int facultyId);
-
-    @Query("UPDATE Student s SET s.surnameCase = ?1, s.nameCase = ?2, s.patronymicCase = ?3, s.formOfStudy= ?4 WHERE s.id = ?5")
-    void update(
-            String surnameCase,
-            String nameCase,
-            String patronymicCase,
-            String formOfStudy,
-            int id);
 }
