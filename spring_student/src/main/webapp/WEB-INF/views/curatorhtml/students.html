@@ -3,10 +3,13 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=cp1251">
     <title>Все студенты</title>
+    <meta name="_csrf" th:content="${_csrf.token}"/>
+    <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
     <script th:src="@{/resources/globalbtn.js}"></script>
+    <script th:src="@{/resources/curator.js}"></script>
 </head>
 <body>
 
@@ -29,8 +32,8 @@
             <th>Группа</th>
             <th>Имя пользователя</th>
             </thead>
-            <tbody>
-            <tr th:each="student:${students}">
+            <tbody id="tableBodyStudents">
+            <tr th:each="student:${students}" th:id="'student'+${student.getId()}">
                 <td th:text="${student.surname}">
                 </td>
                 <td th:text="${student.name}">
@@ -44,16 +47,18 @@
                 <td>
                     <button type="button" class="btn btn-outline-primary" id="edit-button"
                             data-toggle="modal"
-                            th:value="${student.getId()}" th:onclick="'editTask(\'' + ${student.getId()} + '\');'">
+                            th:value="${student.getId()}" th:onclick="'editStudentFromFaculty(\'' + ${student.getId()} + '\');'">
                         <span class="glyphicon glyphicon-pencil"></span>
+
                     </button>
                     <button type="button" class="btn btn-outline-primary" id="delete-button"
                             data-toggle="modal"
-                            th:value="${student.getId()}" th:onclick="'deleteTask(\'' + ${student.getId()} + '\');'">
+                            th:value="${student.getId()}" th:onclick="'deleteStudentFromFaculty(\'' + ${student.getId()} + '\');'">
                         <span class="glyphicon glyphicon-trash"></span>
+
                     </button>
                     <button type="button" id="goToTasks" data-toggle="modal" class="btn btn-outline-primary"
-                            th:value="${student.getId()}" th:onclick="'goToTask(\'' + ${student.getId()} + '\');'">
+                            th:value="${student.getId()}" th:onclick="'goToStudentFromFaculty(\'' + ${student.getId()} + '\');'">
                         Подробнее
                     </button>
                 </td>

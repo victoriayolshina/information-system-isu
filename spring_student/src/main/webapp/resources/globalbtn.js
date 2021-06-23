@@ -12,10 +12,11 @@ $(document).ready(function () {
         $("#btnsavestudentCase").submit();
     });
 
-    // $("#btnSaveFaculty").click(function (e) {
-    //     e.preventDefault();
-    //     $("#saveFaculty-form").submit();
-    // });
+    $("#savestudentFacultyEdit").click(function (e) {
+        e.preventDefault();
+        $("#btnsavestudentsInfo").submit();
+    });
+
 
     $("#btn-add").click(function (e) {
         e.preventDefault();
@@ -24,7 +25,7 @@ $(document).ready(function () {
 
     $("#add-task-btn").click(function (e) {
         //$(location).attr('href');
-        location.href = window.location.pathname + "/new";
+        location.href = getPath(window.location.pathname, "new")
         //console.log(window.location.pathname);
     });
 
@@ -99,8 +100,8 @@ function goToAddInformation() {
     location.href = window.location.href + "information";
 }
 
-function goToStudents() {
-    location.href = window.location.href + "/students";
+function goToStudents(id) {
+    location.href = getPath(window.location.href, id) + "/students";
 }
 
 function goToSupervisors() {

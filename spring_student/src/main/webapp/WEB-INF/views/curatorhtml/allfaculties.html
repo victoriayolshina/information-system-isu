@@ -36,12 +36,6 @@
                 <td th:text="${faculty.year}">
                 </td>
                 <td>
-                    <button type="button" id="goToFaculty" data-toggle="modal" class="btn btn-outline-primary"
-                            th:value="${faculty.getId()}" th:onclick="'goToTask(\'' + ${faculty.getId()} + '\');'">
-                        Список студентов
-                    </button>
-                </td>
-                <td>
                     <button type="button" id="editFaculty" data-toggle="modal" class="btn btn-outline-primary"
                             th:value="${faculty.getId()}" th:onclick="'goToEditFaculty(\'' + ${faculty.getId()} + '\');'">
                         Редактирование
@@ -53,7 +47,7 @@
                         Удаление
                     </button>
                 <td>
-                    <button class="btn btn-outline-primary" onclick="goToStudents()"> Список студентов</button>
+                    <button class="btn btn-outline-primary" th:onclick="'goToStudents(\'' + ${faculty.getId()} + '\');'"> Список студентов</button>
                 </td>
                 </td>
             </tr>

@@ -18,6 +18,7 @@ function addFaculty() {
     console.log(_year)
     console.log(_profile)
 
+
     $.ajax({
         type: "POST",
         url: window.location.pathname,
@@ -46,12 +47,49 @@ function deleteFaculty(id){
             console.log(e);
         }
     })
-
 }
 
 function goToEditFaculty(id){
     location.href = getPath(window.location.pathname, id)
 }
+
+function editStudentFromFaculty(id){
+    location.href = getPath(window.location.pathname, id)
+}
+
+function deleteStudentFromFaculty(id){
+    console.log(getPath(window.location.pathname, id))
+    $.ajax({
+        type: "DELETE",
+        url: getPath(window.location.pathname, id),
+        success: function (result) {
+            console.log("student"+id)
+            var elem = document.getElementById("student"+id)
+            var tableB = document.getElementById("tableBodyStudents")
+            tableB.removeChild(elem)
+        },
+        error: function (e) {
+            console.log(e);
+        }
+    })
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

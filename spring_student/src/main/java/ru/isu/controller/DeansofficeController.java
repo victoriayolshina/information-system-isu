@@ -73,6 +73,7 @@ public class DeansofficeController {
         return "deansofficehtml/curatorInfo";
     }
 
+
     @RequestMapping(value = "/curators/new", method = RequestMethod.GET)
     public String addCurator(Model model) {
         Curator curator = new Curator();

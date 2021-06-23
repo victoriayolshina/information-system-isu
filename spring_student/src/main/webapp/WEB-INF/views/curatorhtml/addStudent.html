@@ -14,95 +14,21 @@
 <div class="container">
     <h2 class="text-danger">Добавление студента</h2>
     <form action="savestudent" th:action="@{/curator/faculty/{facultyId}/students/new(facultyId = ${facultyId})}" method="post" th:object="${student}">
-        <!--        <div class="form-group">-->
-<!--            <label for="student-surname">Фамилия</label>-->
-<!--            <input id="student-surname" class="form-control"-->
-<!--                   th:field="*{surname}"/>-->
-<!--            <span th:if="${#fields.hasErrors('surname')}"-->
-<!--                  th:errors="${student.name}" class="text-danger"></span>-->
-<!--        </div>-->
-<!--        <div class="form-group">-->
-<!--            <label for="student-name">Имя</label>-->
-<!--            <input id="student-name" class="form-control"-->
-<!--                   th:field="*{name}"/>-->
-<!--            <span th:if="${#fields.hasErrors('name')}"-->
-<!--                  th:errors="${student}" class="text-danger"></span>-->
-<!--        </div>-->
-<!--        <div class="form-group">-->
-<!--            <label for="student-patronymic">Отчество</label>-->
-<!--            <input id="student-patronymic" class="form-control"-->
-<!--                   th:field="*{patronymic}"/>-->
-<!--            <span th:if="${#fields.hasErrors('patronymic')}"-->
-<!--                  th:errors="${students}" class="text-danger"></span>-->
-<!--        </div>-->
-<!--        <div class="form-group">-->
-<!--            <label for="faculty">Группа</label>-->
-<!--            <select id="faculty" name="faculty" class="form-control">-->
-<!--                <option th:field="*{faculty}" th:each="elements: ${faculty}"-->
-<!--                        th:text="${elements.getName()}"-->
-<!--                        th:value="${elements.getId()}"></option>-->
-<!--            </select>-->
-<!--        </div>-->
-<!--        <div class="form-group">-->
-<!--            <label for="student-username">Имя пользователя</label>-->
-<!--            <input id="student-username" class="form-control"-->
-<!--                   th:field="*{username}"/>-->
-<!--            <span th:if="${#fields.hasErrors('username')}"-->
-<!--                  th:errors="${student.username}" class="text-danger"></span>-->
-<!--        </div>-->
-<!--        <div class="form-group">-->
-<!--            <label for="student-password">Пароль</label>-->
-<!--            <input id="student-password" class="form-control"-->
-<!--                   th:field="*{password}"/>-->
-<!--            <span th:if="${#fields.hasErrors('password')}"-->
-<!--                  th:errors="${student.password}" class="text-danger"></span>-->
-<!--        </div>-->
-<!--        <div class="form-group">-->
-<!--            <label for="curator-surname">Фамилия</label>-->
-<!--            <input id="curator-surname" class="form-control" name="name"/>-->
-<!--        </div>-->
-<!--        <div class="form-group">-->
-<!--            <label for="curator-name">Имя</label>-->
-<!--            <input id="curator-name" class="form-control" name="name"/>-->
-<!--        </div>-->
-<!--        <div class="form-group">-->
-<!--            <label for="curator-patronymic">Отчество</label>-->
-<!--            <input id="curator-patronymic" class="form-control" name="name"/>-->
-<!--        </div>-->
-<!--        <div class="form-group">-->
-<!--            <label for="faculty">Группа</label>-->
-<!--            <select id="faculty" name="faculty" class="form-control">-->
-<!--                <option th:field="*{faculty}" th:each="elements: ${faculty}"-->
-<!--                        th:text="${elements.getName()}"-->
-<!--                        th:value="${elements.getId()}"></option>-->
-<!--            </select>-->
-<!--        </div>-->
-<!--        <div class="form-group">-->
-<!--            <label for="username">Имя пользователя</label>-->
-<!--            <input id="username" class="form-control" name="name"/>-->
-<!--        </div>-->
-<!--        <div class="form-group">-->
-<!--            <label for="password">Пароль</label>-->
-<!--            <input id="password" class="form-control" name="name"/>-->
-<!--        </div>-->
-<!--        <button type="submit" id="btnsavestudents">Сохранить</button>-->
-
-
         <thead>
         <tr>
             <h3>Добавление студента</h3>
         </tr>
         <tr>
             <label for="surname">Фамилия</label>
-            <input id="surname" name="curator-surname" class="form-control" type = "text"/>
+            <input id="surname" name="surname" class="form-control" type = "text"/>
         </tr>
         <tr>
             <label for="name">Имя</label>
-            <input id="name" class="form-control" name="curator-name" type = "text"/>
+            <input id="name" class="form-control" name="name" type = "text"/>
         </tr>
         <tr>
-            <label for="patronimic">Отчество</label>
-            <input id="patronimic" name="patronimic" class="form-control" type="text"/>
+            <label for="patronymic">Отчество</label>
+            <input id="patronymic" name="patronymic" class="form-control" type="text"/>
         </tr>
         <tr>
             <label for="faculty">Группа</label>

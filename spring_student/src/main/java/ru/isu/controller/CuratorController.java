@@ -11,6 +11,7 @@ import ru.isu.model.Custom.StudentCustomClass;
 import ru.isu.repository.*;
 
 import java.sql.Date;
+import java.util.Iterator;
 import java.util.List;
 
 @Controller
@@ -32,7 +33,10 @@ public class CuratorController {
     @Autowired
     DirectionRepository directionRepository;
 
+    @Autowired
+    AutoUserRepository autoUserRepository;
 
+    //>>>
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String getCurator(Model model, Authentication authentication) {
         UsernamePasswordAuthenticationToken token = (UsernamePasswordAuthenticationToken) authentication;
@@ -43,6 +47,7 @@ public class CuratorController {
     }
 
 
+    //>>>
     @RequestMapping(value = "/faculty", method = RequestMethod.GET)
     public String allFaculty(Model model) {
         model.addAttribute("faculties", facultyRepository.findAll());
@@ -50,6 +55,7 @@ public class CuratorController {
     }
 
 
+    //>>>
     @RequestMapping(value = "/faculty/new", method = RequestMethod.GET)
     public String addFaculty(Model model) {
         Faculty faculty = new Faculty();
@@ -60,6 +66,7 @@ public class CuratorController {
     }
 
 
+    //>>>
     @RequestMapping(value = "/faculty/new", method = RequestMethod.POST)
     @ResponseBody
     public String saveFaculty(
@@ -68,6 +75,7 @@ public class CuratorController {
             @ModelAttribute("profile") String profile,
             @ModelAttribute("direction") int directionId,
             Authentication authentication) {
+        System.out.println(year);
 
         Direction direction = directionRepository.findDirectionById(directionId);
         Faculty faculty = new Faculty(0, name, direction, year, profile);
@@ -76,6 +84,8 @@ public class CuratorController {
         return "/curator/faculty";
     }
 
+
+    //>>>
     @RequestMapping(value = "/faculty/{facultyId}", method = RequestMethod.GET)
     public String getFaculty(@PathVariable("facultyId") int facultyId, Model model) {
 
@@ -85,7 +95,10 @@ public class CuratorController {
         return "curatorhtml/faculty";
     }
 
+
+    //>>>
     @RequestMapping(value = "/faculty/{facultyId}", method = RequestMethod.POST)
+    @ResponseBody
     public String editFaculty(
             @ModelAttribute("year") int year,
             @ModelAttribute("name") String name,
@@ -103,14 +116,22 @@ public class CuratorController {
         return "/curator/faculty";
     }
 
+
+    //>>>
     @RequestMapping(value = "/faculty/{facultyId}", method = RequestMethod.DELETE)
     @ResponseBody
     public String deleteFaculty(@PathVariable("facultyId") int facultyId, Authentication authentication) {
         Faculty faculty = facultyRepository.findFacultyById(facultyId);
+        List<Student> list =  studentRepository.findStudentsByFaculty(faculty);
+        for (Student student : list) {
+            studentRepository.delete(student);
+        }
         facultyRepository.delete(faculty);
         return "";
     }
 
+
+    //>>>
     @RequestMapping(value = "/faculty/{facultyId}/students", method = RequestMethod.GET)
     public String getAllStudent(@PathVariable("facultyId") int facultyId, Model model) {
         Faculty faculty = facultyRepository.findFacultyById(facultyId);
@@ -118,6 +139,7 @@ public class CuratorController {
         return "curatorhtml/students";
     }
 
+    //>>>
     @RequestMapping(value = "/faculty/{facultyId}/students/new", method = RequestMethod.GET)
     public String setNewStudentByCurator(@PathVariable("facultyId") int facultyId, Model model) {
         Faculty faculty = facultyRepository.findFacultyById(facultyId);
@@ -126,45 +148,59 @@ public class CuratorController {
         return "curatorhtml/addStudent";
     }
 
+    //>>>
     @RequestMapping(value = "/faculty/{facultyId}/students/new", method = RequestMethod.POST)
-    public String saveStudent(@ModelAttribute StudentCustomClass studentCustomClassStudent, @PathVariable String facultyId) {
+    public String saveStudent(@ModelAttribute StudentCustomClass studentCustomClassStudent, @PathVariable("facultyId") int facultyId) {
+
+        AutoUser autoUser = new AutoUser();
+        autoUser.setId(0);
+        autoUser.setPassword(studentCustomClassStudent.getPassword());
+        autoUser.setRole("ROLE_STUDENT");
+        autoUser.setUsername(studentCustomClassStudent.getUsername());
+        autoUserRepository.save(autoUser);
+
         Student student = new Student();
         student.setUsername(studentCustomClassStudent.getUsername());
         student.setPassword(studentCustomClassStudent.getPassword());
         student.setSurname(studentCustomClassStudent.getSurname());
         student.setPatronymic(studentCustomClassStudent.getPatronymic());
         student.setName(studentCustomClassStudent.getName());
-        student.setFaculty(facultyRepository.findFacultyById(studentCustomClassStudent.getFaculty()));
-//        System.out.println(student);
+        student.setFaculty(facultyRepository.findFacultyById(facultyId));
         studentRepository.save(student);
-        return String.format("redirect:/curator/faculty/{%s}/students/", facultyId);
+        return String.format("redirect:/curator/faculty/%s/students", facultyId);
     }
 
+
+    //>>>
     @RequestMapping(value = "/faculty/{facultyId}/students/{studentId}", method = RequestMethod.GET)
     public String getStudent(@PathVariable("facultyId") int facultyId, @PathVariable int studentId, Model model) {
-        model.addAttribute("curatorstudent", studentRepository.findStudentById(studentId));
+
+        model.addAttribute("student", studentRepository.findStudentById(studentId));
+        model.addAttribute("faculties", facultyRepository.findAll());
         return "curatorhtml/studentInfo";
     }
 
+
+    //>>>
     @RequestMapping(value = "/faculty/{facultyId}/students/{studentId}", method = RequestMethod.POST)
     public String editStudent(@ModelAttribute Student student, @PathVariable int facultyId, @PathVariable int studentId) {
-        studentRepository.delete((long) studentId);
         Faculty faculty = facultyRepository.findFacultyById(facultyId);
-        student.setFaculty(faculty);
         student.setId(studentId);
+        student.setFaculty(faculty);
         studentRepository.save(student);
-        return String.format("redirect:/curator/faculty/%d/students/%d", facultyId, studentId);
+        return String.format("redirect:/curator/faculty/%d/students", facultyId);
     }
 
+
+    //>>>
     @RequestMapping(value = "/faculty/{facultyId}/students/{studentId}", method = RequestMethod.DELETE)
-    public String deleteStudentById(@ModelAttribute Student student, @PathVariable int facultyId, @PathVariable int studentId) {
-        studentRepository.delete((long) studentId);
-        Faculty faculty = facultyRepository.findFacultyById(facultyId);
-        student.setFaculty(faculty);
-        student.setId(studentId);
-        studentRepository.save(student);
-        return String.format("redirect:/curator/faculty/%d/students/%d", facultyId, studentId);
+    @ResponseBody
+    public String deleteStudentById(@PathVariable("studentId") int studentId) {
+        Student student = studentRepository.findStudentById(studentId);
+        studentRepository.delete(student);
+        return "";
     }
+
 
     @RequestMapping(value = "/practice", method = RequestMethod.GET)
     public String getAllPractice(Model model) {

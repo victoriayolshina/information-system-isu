@@ -3,6 +3,7 @@
         xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=cp1251">
+
     <title>Информация о студенте:</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
@@ -11,24 +12,57 @@
     <link rel="stylesheet" type="text/css" th:href="@{/resources/textarea.css}">
 </head>
 <!-- Страница информации о пользователе -->
-<body id="body">
+<body>
 <div th:replace="../views/header :: header"></div>
 <div class="container">
-    <div class="row">
-        <h3>ФИО</h3>
-        <p class="inline" th:text="${curatorstudent.getSurname()}"></p>
-        <p class="inline" th:text="${curatorstudent.getName()}"></p>
-        <p class="inline" th:text="${curatorstudent.getPatronymic()}"></p>
-        <h3>Группа</h3>
-        <p class="inline" th:text="${curatorstudent.getFaculty().getName()}"></p>
-        <h3>Направление</h3>
-        <p class="inline" th:text="${curatorstudent.getFaculty().getDirection().getCode()}"></p>
-        <p class="inline" th:text="${curatorstudent.getFaculty().getDirection().getName()}"></p>
-        <h3>Год поступления</h3>
-        <p th:text="${curatorstudent.getFaculty().getYear()}"></p>
-        <h3>Имя пользователя</h3>
-        <p th:text="${curatorstudent.getUsername()}"></p>
-    </div>
+    <h2 class="text-danger">Редактирование студента:</h2>
+    <form action="savestudentFacultyEdit"
+          th:action="@{/curator/faculty/{facultyId}/students/{studentId}(facultyId = ${facultyId}, studentId = ${studentId})}"
+          method="post">
+        <div class="form-group">
+            <label for="surname-form">Фамилия</label>
+            <input id="surname-form"
+                   th:value="${student.getSurname()}"
+                   name="surname" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label for="name-form">Имя</label>
+            <input id="name-form" class="form-control"
+                   th:value="${student.getName()}" name="name" />
+        </div>
+        <div class="form-group">
+            <label for="patronymic-form">Отчество</label>
+            <input id="patronymic-form" name="patronymic"
+                   th:value="${student.getPatronymic()}" class="form-control"/>
+        </div>
+
+        <div class="form-group">
+            <label for="username-form">Имя пользователя</label>
+            <input id="username-form" name="username"
+                   th:value="${student.getUsername()}" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label for="password-form">Пароль</label>
+            <input id="password-form" name="password" th:value="${student.getPassword()}" class="form-control" />
+        </div>
+            <button type="submit" class="btn btn-outline-primary" id="btnsavestudentsInfo">Сохранить</button>
+    </form>
+<!--    <div class="row">-->
+<!--        <h3>ФИО</h3>-->
+<!--        <p class="inline" th:text="${curatorstudent.getSurname()}"></p>-->
+<!--        <p class="inline" th:text="${curatorstudent.getName()}"></p>-->
+<!--        <p class="inline" th:text="${curatorstudent.getPatronymic()}"></p>-->
+<!--        <h3>Группа</h3>-->
+<!--        <p class="inline" th:text="${curatorstudent.getFaculty().getName()}"></p>-->
+<!--        <h3>Направление</h3>-->
+<!--        <p class="inline" th:text="${curatorstudent.getFaculty().getDirection().getCode()}"></p>-->
+<!--        <p class="inline" th:text="${curatorstudent.getFaculty().getDirection().getName()}"></p>-->
+<!--        <h3>Год поступления</h3>-->
+<!--        <p th:text="${curatorstudent.getFaculty().getYear()}"></p>-->
+<!--        <h3>Имя пользователя</h3>-->
+<!--        <p th:text="${curatorstudent.getUsername()}"></p>-->
+<!--    </div>-->
+
 </div>
 </body>
 </html>
