@@ -1,9 +1,6 @@
 package ru.isu.model;
 
-import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 import org.hibernate.validator.constraints.NotBlank;
 
 import javax.persistence.*;
@@ -14,6 +11,8 @@ import javax.persistence.*;
 @Setter
 @ToString
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class Curator {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

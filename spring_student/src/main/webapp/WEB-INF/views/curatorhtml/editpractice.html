@@ -4,13 +4,17 @@
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=cp1251">
+    <meta name="_csrf" th:content="${_csrf.token}"/>
+    <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
     <link rel="stylesheet" type="text/css" th:href="@{/resources/header.css}">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
     <script th:src="@{/resources/globalbtn.js}"></script>
     <script th:src="@{/resources/task.js}"></script>
+    <script th:src="@{/resources/curator.js}"></script>
     <script th:src="@{/resources/style.css}"></script>
+
     <script th:inline="javascript">
         /*<![CDATA[*/
         var root = /*[[@{/}]]*/ 'default';
@@ -24,27 +28,54 @@
 <div class="container">
     <div class="row">
         <table id="book-table" class="table">
-            <form id="edit-practice-form" action="editPractice"
-                  th:action="@{/curator/practice/{practiceId}(practiceId = ${practiceId})}" method="POST">
-                <thead>
-                <tr>
-                    <label for="Starttime">Дата начала</label>
-                    <input id="Starttime" name="Starttime" class="form-control" type="date"
-                           th:value="${}"
-                    />
-                </tr>
-                <tr>
-                    <label for="Endtime">Дата конца</label>
-                    <input id="Endtime" name="Endtime" class="form-control" type="date"
-                           th:value="${practice.getEndtime()}"
-                    />
-                </tr>
-                <!--      возможно сюда ещё лучше пихнуть возможность для того, чтобы поменять тип практики (учебная, производственая)-->
-                <p>
-                    <button type="submit" id="btn-edit-practice" class="btn btn-outline-primary">Сохранить</button>
-                </p>
-                </thead>
-            </form>
+            <tr>
+                <label for="Starttime">Дата начала</label>
+                <input id="Starttime" name="Starttime" class="form-control" type="date"/>
+            </tr>
+            <tr>
+                <label for="Endtime">Дата конца</label>
+                <input id="Endtime" name="Endtime" class="form-control" type="date"/>
+            </tr>
+
+            <tr>
+                <label for="typePractice">Тип практики</label>
+                <select id="typePractice" name="typePractice" class="form-control">
+                    <option th:each="element: ${typePractice}"
+                            th:text="${element.getName()}"
+                            th:value="${element.getId()}"></option>
+                </select>
+            </tr>
+            <tr>
+                <label for="students">Студент</label>
+                <select id="students" name="students" class="form-control">
+                    <option th:each="element: ${students}"
+                            th:text="${element.getSurname()+' '+element.getName()+' '+element.getPatronymic()}"
+                            th:value="${element.getId()}"></option>
+                </select>
+            </tr>
+            <tr>
+                <label for="postr">Должность</label>
+                <input id="postr" name="postr" class="form-control"/>
+            </tr>
+            <tr>
+                <label for="place">Место прохождения</label>
+                <select id="place" name="place" class="form-control">
+                    <option th:each="element: ${placeOfPractice}"
+                            th:text="${element.getName()+': '+ element.getLocation()}"
+                            th:value="${element.getId()}"></option>
+                </select>
+            </tr>
+            <tr>
+                <label for="supervisor">Куратор по месту практики</label>
+                <select id="supervisor" name="supervisor" class="form-control">
+                    <option th:each="element: ${supervisor}"
+                            th:text="${element.getSurname()+' '+element.getName()+' '+element.getPatronymic()}"
+                            th:value="${element.getId()}"></option>
+                </select>
+            </tr>
+            <tr>
+                <button id="btn-edit-practice" class="btn btn-outline-primary" onclick="savePractice()">Сохранить</button>
+            </tr>
         </table>
     </div>
 </div>

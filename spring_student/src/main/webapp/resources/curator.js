@@ -25,7 +25,7 @@ function addFaculty() {
         data:{name: _name, direction: _direction, year: _year, profile: _profile},
         success: function (result) {
             console.log(result)
-            location.href = "/student_manager_war"+result
+            location.href = getPath("/student_manager_war",result);
         },
         error: function (e) {
             console.log(e);
@@ -57,6 +57,11 @@ function editStudentFromFaculty(id){
     location.href = getPath(window.location.pathname, id)
 }
 
+function goToNewPractice() {
+    location.href = getPath(window.location.pathname, "new")
+}
+
+
 function deleteStudentFromFaculty(id){
     console.log(getPath(window.location.pathname, id))
     $.ajax({
@@ -74,10 +79,54 @@ function deleteStudentFromFaculty(id){
     })
 }
 
+function savePractice(){
+    var _starttime = document.getElementById("Starttime").value
+    var _endtime = document.getElementById("Endtime").value
+    var _typeOfPractice = document.getElementById("typePractice").value
+    var _student = document.getElementById("students").value
+    var _post = document.getElementById("postr").value
+    var _place = document.getElementById("place").value
+    var _supervisor = document.getElementById("supervisor").value
 
 
+    $.ajax({
+        type: "POST",
+        url: window.location.pathname,
+        data:{
+            starttime: _starttime,
+            endtime: _endtime,
+            typeOfPractice: _typeOfPractice,
+            student: _student,
+            post: _post,
+            place: _place,
+            supervisor: _supervisor
+        },
+        success: function (result) {
+            console.log(result)
+            location.href = getPath("/student_manager_war",result)
+        },
+        error: function (e) {
+            console.log(e);
+        }
+    })
+}
 
 
+function deletePracticeCurator(id){
+    $.ajax({
+        type: "DELETE",
+        url: getPath(window.location.pathname, id),
+        success: function (result) {
+            console.log(result)
+            var elem = document.getElementById("practice"+id)
+            var tableB = document.getElementById("tableBodyPractices")
+            tableB.removeChild(elem)
+        },
+        error: function (e) {
+            console.log(e);
+        }
+    })
+}
 
 
 

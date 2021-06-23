@@ -1,10 +1,7 @@
 package ru.isu.model;
 
 
-import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
@@ -16,6 +13,8 @@ import java.util.Collection;
 @Entity
 @Table(name = "auto_user")
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class AutoUser implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

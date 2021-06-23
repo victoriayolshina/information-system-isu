@@ -2,10 +2,7 @@ package ru.isu.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -18,6 +15,8 @@ import java.sql.Date;
 @Setter
 @ToString
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class Practice {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -61,6 +60,4 @@ public class Practice {
     private Curator curator;
 
     private String mark;
-
-
 }

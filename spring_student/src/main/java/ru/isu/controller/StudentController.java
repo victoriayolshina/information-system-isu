@@ -192,6 +192,7 @@ public class StudentController {
                     .append(line);
         }
 
+
         String supervisorFullName = String.format("%s %s %s", supervisor.getSurname(), supervisor.getName(), supervisor.getPatronymic());
         String curatorFullName = String.format("%s %s %s", curator.getSurname(), curator.getName(), curator.getPatronymic());
 

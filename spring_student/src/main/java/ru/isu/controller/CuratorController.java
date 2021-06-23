@@ -11,7 +11,6 @@ import ru.isu.model.Custom.StudentCustomClass;
 import ru.isu.repository.*;
 
 import java.sql.Date;
-import java.util.Iterator;
 import java.util.List;
 
 @Controller
@@ -35,6 +34,16 @@ public class CuratorController {
 
     @Autowired
     AutoUserRepository autoUserRepository;
+
+    @Autowired
+    TypeOfPracticeRepository typeOfPracticeRepository;
+
+    @Autowired
+    PlaceOfPracticeRepositoty placeOfPracticeRepositoty;
+
+    @Autowired
+    SupervisorRepository supervisorRepository;
+
 
     //>>>
     @RequestMapping(value = "/", method = RequestMethod.GET)
@@ -203,23 +212,54 @@ public class CuratorController {
 
 
     @RequestMapping(value = "/practice", method = RequestMethod.GET)
-    public String getAllPractice(Model model) {
-        model.addAttribute("practices", practiceRepository.findAll());
-//        model.addAttribute("starttime", practiceRepository.findPracticeByStartTime(practiceId));
-//        model.addAttribute("endtime", practiceRepository.findPracticeByEndTime(practiceId));
+    public String getAllPractice(Authentication authentication, Model model) {
+        UsernamePasswordAuthenticationToken token = (UsernamePasswordAuthenticationToken) authentication;
+        Curator curator = curatorRepository.findCuratorByUsername(token.getName());
+
+        model.addAttribute("practices", practiceRepository.findPracticesByCurator(curator));
         return "curatorhtml/practices";
     }
 
     @RequestMapping(value = "/practice/new", method = RequestMethod.GET)
-    public String addPracticeGet(@ModelAttribute Practice practice, Model model) {
-        practiceRepository.save(practice);
-        return "redirect:/curator/practice/new";
+    public String addPracticeGet(Model model) {
+        model.addAttribute("typePractice",typeOfPracticeRepository.findAll());
+        model.addAttribute("students", studentRepository.findAll());
+        model.addAttribute("placeOfPractice", placeOfPracticeRepositoty.findAll());
+        model.addAttribute("supervisor", supervisorRepository.findAll());
+        return "curatorhtml/editpractice";
     }
 
     @RequestMapping(value = "/practice/new", method = RequestMethod.POST)
-    public String addPracticePost(@ModelAttribute Practice practice, @PathVariable("practiceId") long practiceId, Model model) {
+    @ResponseBody
+    public String addPracticePost(
+            @ModelAttribute("starttime") Date starttime,
+            @ModelAttribute("endtime") Date endtime,
+            @ModelAttribute("typeOfPractice") int typeOfPracticeId,
+            @ModelAttribute("student") int studentId,
+            @ModelAttribute("post") String post,
+            @ModelAttribute("place") int placeId,
+            @ModelAttribute("supervisor") int superId,
+            Model model, Authentication authentication) {
+        UsernamePasswordAuthenticationToken token = (UsernamePasswordAuthenticationToken) authentication;
+        Curator curator = curatorRepository.findCuratorByUsername(token.getName());
+        PlaceOfPractice placeOfPractice = placeOfPracticeRepositoty.findPlaceOfPracticeById(placeId);
+        Supervisor supervisor = supervisorRepository.findSupervisorById(superId);
+        TypeOfPractice typeOfPractice = typeOfPracticeRepository.findTypeOfPracticeById(typeOfPracticeId);
+        Student student = studentRepository.findStudentById(studentId);
+
+        Practice practice = new Practice();
+        practice.setStarttime(starttime);
+        practice.setEndtime(endtime);
+        practice.setPost(post);
+        practice.setCurator(curator);
+        practice.setTypeOfPractice(typeOfPractice);
+        practice.setStudent(student);
+        practice.setPlaceOfPractice(placeOfPractice);
+        practice.setSupervisor(supervisor);
+        practice.setId(0);
+
         practiceRepository.save(practice);
-        return "redirect:/curator/practice/new";
+        return "curator/practice/";
     }
 
     @RequestMapping(value = "/practice/{practiceId}", method = RequestMethod.GET)
@@ -242,8 +282,10 @@ public class CuratorController {
     }
 
     @RequestMapping(value = "/practice/{practiceId}", method = RequestMethod.DELETE)
-    public String deletePractice(@PathVariable("practiceId") int studentId, @PathVariable long practiceId, Model model) {
-        practiceRepository.delete(practiceId);
-        return String.format("redirect:/curator/practice/%d", practiceId);
+    @ResponseBody
+    public String deletePractice(@PathVariable("practiceId") int practiceId) {
+        Practice practice = practiceRepository.findPracticeById(practiceId);
+        practiceRepository.delete(practice);
+        return " ";
     }
 }

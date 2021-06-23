@@ -3,6 +3,7 @@ package ru.isu.repository;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
+import ru.isu.model.Curator;
 import ru.isu.model.Practice;
 import ru.isu.model.Student;
 
@@ -34,5 +35,8 @@ public interface PracticeRepository extends JpaRepository<Practice, Long> {
 
     @Query("SELECT p FROM Practice p WHERE  p.starttime BETWEEN ?1 and ?2 ORDER BY p.starttime")
     List<Practice> getAllBetweenFromAndToOrderByStarttime(Date from, Date to);
+
+    @Query("SELECT p FROM Practice p WHERE p.curator= ?1 ")
+    List<Practice> findPracticesByCurator(Curator curator);
 
 }

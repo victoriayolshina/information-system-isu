@@ -6,15 +6,13 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import ru.isu.model.Curator;
+import ru.isu.model.*;
 import ru.isu.model.Custom.Categories;
 import ru.isu.model.Custom.Statistics;
 import ru.isu.model.Custom.StatisticsCategories;
 import ru.isu.model.Custom.TwoDates;
-import ru.isu.model.PlaceOfPractice;
-import ru.isu.model.Practice;
-import ru.isu.model.TypeOfDirection;
 import ru.isu.repository.*;
+
 import java.util.*;
 
 @Controller
@@ -48,9 +46,11 @@ public class DeansofficeController {
     @Autowired
     PlaceOfPracticeRepositoty placeOfPracticeRepositoty;
 
-
     @Autowired
     TaskRepository taskRepository;
+
+    @Autowired
+    AutoUserRepository autoUserRepository;
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String getDeansOffice(Model model, Authentication authentication) {
@@ -61,7 +61,7 @@ public class DeansofficeController {
         return "deansofficehtml/deansofficeInfo";
     }
 
-    @RequestMapping("/curators")
+    @RequestMapping(value = "/curators", method = RequestMethod.GET)
     public String allCurator(Model model) {
         model.addAttribute("curators", curatorRepository.findAll());
         return "deansofficehtml/allcurators";
@@ -73,6 +73,14 @@ public class DeansofficeController {
         return "deansofficehtml/curatorInfo";
     }
 
+    @RequestMapping(value = "/curators/{curatorId}", method = RequestMethod.DELETE)
+    @ResponseBody
+    public String getCurator(@PathVariable("curatorId") int curatorId) {
+        Curator curator = curatorRepository.findCuratorById(curatorId);
+        curatorRepository.delete(curator);
+        return "";
+    }
+
 
     @RequestMapping(value = "/curators/new", method = RequestMethod.GET)
     public String addCurator(Model model) {
@@ -82,10 +90,19 @@ public class DeansofficeController {
     }
 
     @RequestMapping(value = "/curators/new", method = RequestMethod.POST)
-    public String saveCurator(Model model) {
-        Curator curator = new Curator();
+    public String saveCurator(
+            @ModelAttribute("surname") String surname,
+            @ModelAttribute("name") String name,
+            @ModelAttribute("patronymic") String patronymic,
+            @ModelAttribute("degree") String degree,
+            @ModelAttribute("email") String email,
+            @ModelAttribute("username") String username,
+            @ModelAttribute("password") String password) {
+        Curator curator = new Curator(0, name, surname, patronymic, degree, email, username, password);
+        AutoUser autoUser = new AutoUser(0, username, password, "ROLE_CURATOR");
+        autoUserRepository.save(autoUser);
         curatorRepository.save(curator);
-        return "redirect:/deansofficehtml/curators";
+        return "redirect:/deansoffice/curators";
     }
 
     @RequestMapping(value = "/faculty", method = RequestMethod.GET)

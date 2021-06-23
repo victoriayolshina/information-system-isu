@@ -2,11 +2,14 @@
 <html lang="ru" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=cp1251">
+    <meta name="_csrf" th:content="${_csrf.token}"/>
+    <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
     <title>Все кураторы</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
     <script th:src="@{/resources/globalbtn.js}"></script>
+    <script th:src="@{/resources/deansOffice.js}"></script>
 </head>
 <body>
 
@@ -29,8 +32,8 @@
             <th>Преподавательская должность</th>
             <th>Email</th>
             </thead>
-            <tbody>
-            <tr th:each="curator:${curators}">
+            <tbody id="tableBodyAllCurators">
+            <tr th:each="curator:${curators}" th:id="'curator'+${curator.getId()}">
                 <td th:text="${curator.surname}">
                 </td>
                 <td th:text="${curator.name}">
@@ -51,7 +54,7 @@
                         <button type="button" class="btn btn-outline-primary" id="delete-button"
                                 data-toggle="modal"
                                 th:value="${curator.getId()}"
-                                th:onclick="'deleteTask(\'' + ${curator.getId()} + '\');'">
+                                th:onclick="'deleteCurator(\'' + ${curator.getId()} + '\');'">
                             <span class="glyphicon glyphicon-trash"></span>
                         </button>
                         <button type="button" id="goToTasks" data-toggle="modal" class="btn btn-outline-primary"

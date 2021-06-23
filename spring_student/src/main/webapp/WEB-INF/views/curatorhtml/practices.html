@@ -2,11 +2,14 @@
 <html lang="ru" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=cp1251">
+    <meta name="_csrf" th:content="${_csrf.token}"/>
+    <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
     <title>Все практики</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
     <script th:src="@{/resources/globalbtn.js}"></script>
+    <script th:src="@{/resources/curator.js}"></script>
 </head>
 <body>
 
@@ -14,17 +17,20 @@
 
 <div class="container">
     <h2 class="text-danger">Все практики:</h2>
+    <button type="button" class="btn btn-outline-primary" id="newPractice" onclick="goToNewPractice()">
+        <span class="glyphicon glyphicon-plus"></span>
+    </button>
     <table class="table">
         <table class="table">
             <thead>
             <th>Начало практики</th>
             <th>Конец практики</th>
             <th>Тип практики</th>
-            <th>Куратор</th>
+            <th>Студент</th>
 
             </thead>
-            <tbody>
-            <tr th:each="practice:${practices}">
+            <tbody id="tableBodyPractices">
+            <tr  th:each="practice:${practices}" th:id="'practice'+${practice.getId()}">
                 <td th:text="${#calendars.format(practice.getStarttime(), 'dd.MM.yyyy')}">
 <!--                <td th:text="${practice.getStarttime()}">-->
                 </td>
@@ -33,7 +39,7 @@
                 </td>
                 <td th:text="${practice.getTypeOfPractice().getName()}">
                 </td>
-                <td th:text="${practice.getCurator().getSurname() + ' ' + practice.getCurator().getName() + ' ' + practice.getCurator().getPatronymic()} ">
+                <td th:text="${practice.getStudent().getSurname() + ' ' + practice.getStudent().getName() + ' ' + practice.getStudent().getPatronymic()} ">
                 </td>
                 <td>
                     <div class="d-grid gap-3">
@@ -43,12 +49,14 @@
                         </button>
                         <button type="button" class="btn btn-outline-primary" id="edit-button"
                                 data-toggle="modal"
-                                th:value="${practice.getId()}" th:onclick="'editTask(\'' + ${practice.getId()} + '\');'">
+                                th:value="${practice.getId()}"
+                                th:onclick="'editTask(\'' + ${practice.getId()} + '\');'">
                             <span class="glyphicon glyphicon-pencil"></span>
                         </button>
                         <button type="button" class="btn btn-outline-primary" id="delete-button"
                                 data-toggle="modal"
-                                th:value="${practice.getId()}" th:onclick="'deleteTask(\'' + ${practice.getId()} + '\');'">
+                                th:value="${practice.getId()}"
+                                th:onclick="'deletePracticeCurator(\'' + ${practice.getId()} + '\');'">
                             <span class="glyphicon glyphicon-trash"></span>
                         </button>
                     </div>
